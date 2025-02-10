@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.metabolixmd.com
+
+# Sitemaps
+Sitemap: https://www.metabolixmd.com/sitemap.xml
