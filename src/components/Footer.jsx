@@ -137,12 +137,6 @@ const Footer = () => {
                             >
                                 Contact Us
                             </Link>
-                            <Link
-                                href="/privacy-policy"
-                                className="cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase"
-                            >
-                                Privacy Policy
-                            </Link>
                             </div>
 
                         <div className='flex flex-col items-center justify-center gap-2'>
