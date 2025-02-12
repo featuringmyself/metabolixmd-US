@@ -117,7 +117,7 @@ const Footer = () => {
                         <div className='gap-2 capitalize flex-col font-bold items-center justify-center text-2xl md:mt-0 mt-12 flex'>
                             <Link
                                 href="/"
-                                className={`cursor-pointer tracking-widest text-sm hover:font-bold uppercase ${
+                                className={`cursor-pointer tracking-widest text-sm hover:font-bold hover:text-[#015c04] uppercase ${
                                 pathname === "/" ? "font-bold text-primary text-lg" : ""
                                 }`}
                             >
@@ -125,7 +125,7 @@ const Footer = () => {
                             </Link>
                             <Link
                                 href="/about-us"
-                                className={`cursor-pointer text-sm tracking-widest hover:font-bold uppercase ${
+                                className={`cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase ${
                                 pathname === "/about-us" ? "font-bold text-primary text-lg" : ""
                                 }`}
                             >
@@ -133,13 +133,13 @@ const Footer = () => {
                             </Link>
                             <Link
                                 href="/contact-us"
-                                className="cursor-pointer text-sm tracking-widest hover:font-bold uppercase"
+                                className="cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase"
                             >
                                 Contact Us
                             </Link>
                             <Link
                                 href="/privacy-policy"
-                                className="cursor-pointer text-sm tracking-widest hover:font-bold uppercase"
+                                className="cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase"
                             >
                                 Privacy Policy
                             </Link>
@@ -147,17 +147,17 @@ const Footer = () => {
 
                         <div className='flex flex-col items-center justify-center gap-2'>
                             <p className='mt-1 mx-2 '>
-                                <Link href="/privacy-policy" className='font-semibold'>
+                                <Link href="/privacy-policy" className='font-semibold hover:text-[#015c04]'>
                                     Privacy Policy
                                 </Link>
                             </p>
                             <p className='md:mt-1 mt-0 mx-2 '>
-                                <Link href="/refund-policy" className='font-semibold'>
+                                <Link href="/refund-policy" className='font-semibold hover:text-[#015c04]'>
                                 Refund Policy
                                 </Link>
                             </p>
                             <p className='mt-5 md:mt-1 mx-2'>
-                                <b> Email:</b> consultant@metabolixmd.com
+                                <Link href="mailto:consultant@metabolixmd.com"><b> Email:</b> consultant@metabolixmd.com</Link>
                             </p>
                         </div>
                        

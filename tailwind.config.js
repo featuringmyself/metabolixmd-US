@@ -17,7 +17,8 @@ module.exports = {
         bigxl: "1920px"
       },
       fontFamily: {
-        // 'tt-hoves': ['"TT Hoves"', 'sans-serif'],
+        montserrat: ['var(--font-montserrat)'],
+        poppins: ['var(--font-poppins)'],
       },
       gridTemplateColumns: {
         userTable: "180px 250px 160px 100px ",

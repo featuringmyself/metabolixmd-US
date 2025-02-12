@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import NavBar from './NavBar'
 import FaqList from './Faq'
@@ -13,10 +13,71 @@ import Footer from './Footer'
 import ScrollProgressBar from './ProgressBar'
 import { getMethod } from '@/services/API/ApiMethod'
 import { toast } from 'react-toastify'
+import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+
+// Add this CSS at the top of your file or in your global CSS
+const cardContainerStyle = {
+    msOverflowStyle: 'none',  /* IE and Edge */
+    scrollbarWidth: 'none',   /* Firefox */
+    '&::-webkit-scrollbar': {
+        display: 'none'       /* Chrome, Safari and Opera */
+    }
+};
+
+const MagnifyImage = () => {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
+    const imageRef = useRef(null);
+
+    const handleMouseMove = (e) => {
+        if (!imageRef.current) return;
+        
+        const { left, top, width, height } = imageRef.current.getBoundingClientRect();
+        const x = (e.clientX - left) / width;
+        const y = (e.clientY - top) / height;
+        
+        setMousePosition({ x, y });
+    };
+
+    return (
+        <motion.div 
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className='bg-[#f5f4f2] min-h-[300px] flex-1 justify-center items-center flex overflow-hidden'
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onMouseMove={handleMouseMove}
+            ref={imageRef}
+        >
+            <div className="relative w-full h-full overflow-hidden">
+                <div
+                    className="transition-transform duration-200 ease-out"
+                    style={{
+                        transform: isHovered
+                            ? `scale(1.5) translate(${(0.5 - mousePosition.x) * 20}px, ${(0.5 - mousePosition.y) * 20}px)`
+                            : 'scale(1)',
+                        transformOrigin: `${mousePosition.x * 100}% ${mousePosition.y * 100}%`
+                    }}
+                >
+                    <Image 
+                        src="/images/medicine.webp" 
+                        width={650} 
+                        height={650}
+                        className="object-contain"
+                        alt="Medicine"
+                    />
+                </div>
+            </div>
+        </motion.div>
+    );
+};
 
 const WeightLossMedication = () => {
     let token = getAuthToken()
     const [userOrders, setUserOrders] = useState([]);
+    const [hoveredCard, setHoveredCard] = useState(null);
 
     const getOrderDetails = async () => {
         try {
@@ -33,20 +94,77 @@ const WeightLossMedication = () => {
         getOrderDetails();
     }, []);
 
+    // Add these animation variants
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    };
+
+    const staggerChildren = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2
+            }
+        }
+    };
+
+    // Add these new variants
+    const scaleIn = {
+        hidden: { scale: 0.95, opacity: 0 },
+        visible: { 
+            scale: 1, 
+            opacity: 1,
+            transition: { duration: 0.5 }
+        }
+    };
+
+    const slideInLeft = {
+        hidden: { x: -100, opacity: 0 },
+        visible: { x: 0, opacity: 1, transition: { duration: 0.6 } }
+    };
+
+    // Add this new animation variant
+    const cardVariants = {
+        hover: { scale: 1.05 },
+        initial: { scale: 1 }
+    };
+
+    // Add this function at the top of your component
+    const scrollToSafety = (e) => {
+        e.preventDefault();
+        const safetySection = document.getElementById('safety');
+        safetySection.scrollIntoView({ behavior: 'smooth' });
+    };
 
     return (
         <div className='font-tt-hoves mt-20' >
             <NavBar />
 
-            <section className='flex flex-col-reverse lg:flex-row   min-h-[600px] gap-10 sm:border-b'>
-                <div className='flex-1 flex text-center md:text-start flex-col justify-center    px-2 md:px-10'>
+            <motion.section 
+                initial="hidden"
+                animate="visible"
+                variants={staggerChildren}
+                className='flex flex-col-reverse lg:flex-row   min-h-[600px] gap-10 sm:border-b'
+            >
+                <motion.div 
+                    variants={fadeInUp}
+                    className='flex-1 flex text-center md:text-start flex-col justify-center    px-2 md:px-10'
+                >
                     <h1 className='text-4xl    font-medium text-wrap'>
                         {/* Get Access to prescription<br />
                         <b className='text-orange-500 text-wrap'>Weight Loss </b>
                         Medication Online */}
                         Unlock your metabolic health and <br /> weight loss potential with
                     </h1>
-                    <img src="/images/orange-metabolix.webp" className='max-w-[150px] md:max-w-[170px] mx-auto md:mx-0 mt-2' />
+                    <motion.img 
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        src="/images/orange-metabolix.webp" 
+                        className='max-w-[150px] md:max-w-[170px] mx-auto md:mx-0 mt-2'
+                    />
                     <p className='mt-3 text-sm  text-zinc-500'>
                         Discover our revolutionary GLP-1, GLP-1/GIP program, expertly crafted to support your journey to a healthier, happier you. Our dedicated team will guide you every step of the way.
 
@@ -57,35 +175,152 @@ const WeightLossMedication = () => {
                         (token) ?
                             (
                                 userOrders.length > 0 ?
-                                    <Link href="/profile-details" className='bg-primary hidden hover:bg-primary/90   h-[40px] md:h-fit w-fit mx-auto md:mx-0 md:flex items-center justify-center p-4 px-10 md:w-[300px] text-white  text-lg rounded-full mt-6'>
-                                        GET STARTED 
-                                    </Link>
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="relative inline-block"
+                                    >
+                                        <Link 
+                                            href="/profile-details" 
+                                            className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 h-[40px] md:h-fit w-fit mx-auto md:mx-0 md:flex items-center justify-center p-4 px-10 md:w-[300px] text-white text-lg rounded-full mt-6"
+                                        >
+                                            <motion.div
+                                                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                                                animate={{
+                                                    x: ['-100%', '100%'],
+                                                }}
+                                                transition={{
+                                                    duration: 2,
+                                                    repeat: Infinity,
+                                                    ease: "easeInOut"
+                                                }}
+                                            />
+                                            <span className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
+                                                GET STARTED
+                                                <svg 
+                                                    xmlns="http://www.w3.org/2000/svg" 
+                                                    className="h-5 w-5" 
+                                                    viewBox="0 0 20 20" 
+                                                    fill="currentColor"
+                                                >
+                                                    <path 
+                                                        fillRule="evenodd" 
+                                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+                                                        clipRule="evenodd" 
+                                                    />
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    </motion.div>
                                     :
-                                    <Link href="/get-started" className='bg-primary hidden hover:bg-primary/90   h-[40px] md:h-fit w-fit mx-auto md:mx-0 md:flex items-center justify-center p-4 px-10 md:w-[300px] text-white  text-lg rounded-full mt-6'>
-                                        GET STARTED
-                                    </Link>
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="relative inline-block"
+                                    >
+                                        <Link 
+                                            href="/get-started" 
+                                            className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 h-[40px] md:h-fit w-fit mx-auto md:mx-0 md:flex items-center justify-center p-4 px-10 md:w-[300px] text-white text-lg rounded-full mt-6"
+                                        >
+                                            <motion.div
+                                                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                                                animate={{
+                                                    x: ['-100%', '100%'],
+                                                }}
+                                                transition={{
+                                                    duration: 2,
+                                                    repeat: Infinity,
+                                                    ease: "easeInOut"
+                                                }}
+                                            />
+                                            <span className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
+                                                GET STARTED
+                                                <svg 
+                                                    xmlns="http://www.w3.org/2000/svg" 
+                                                    className="h-5 w-5" 
+                                                    viewBox="0 0 20 20" 
+                                                    fill="currentColor"
+                                                >
+                                                    <path 
+                                                        fillRule="evenodd" 
+                                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+                                                        clipRule="evenodd" 
+                                                    />
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    </motion.div>
                             )
                             :
-                            <Link href="/login" className='bg-primary hidden hover:bg-primary/90   h-[40px] md:h-fit w-fit mx-auto md:mx-0 md:flex items-center justify-center p-4 px-10 md:w-[300px] text-white  text-lg rounded-full mt-6'>
-                                GET STARTED
-                            </Link>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="relative inline-block"
+                            >
+                                <Link 
+                                    href="/login" 
+                                    className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 h-[40px] md:h-fit w-fit mx-auto md:mx-0 md:flex items-center justify-center p-4 px-10 md:w-[300px] text-white text-lg rounded-full mt-6"
+                                >
+                                    <motion.div
+                                        className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                                        animate={{
+                                            x: ['-100%', '100%'],
+                                        }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    />
+                                    <span className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
+                                        GET STARTED
+                                        <svg 
+                                            xmlns="http://www.w3.org/2000/svg" 
+                                            className="h-5 w-5" 
+                                            viewBox="0 0 20 20" 
+                                            fill="currentColor"
+                                        >
+                                            <path 
+                                                fillRule="evenodd" 
+                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+                                                clipRule="evenodd" 
+                                            />
+                                        </svg>
+                                    </span>
+                                </Link>
+                            </motion.div>
                     }
 
-                    <div className='flex justify-center md:justify-start items-center gap-4  my-5'>
-                        <Link href="#safety" className='text-sm underline text-primary '>
+                    <div className='flex justify-center md:justify-start items-center gap-4 my-5'>
+                        <Link 
+                            href="#safety" 
+                            onClick={scrollToSafety}
+                            className='text-sm underline text-primary'
+                        >
                             Important safety information
                         </Link>
 
-                        <Link href="#safety" className='bg-white border-primary border rounded-full size-10 flex items-center justify-center'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                        <Link 
+                            href="#safety" 
+                            onClick={scrollToSafety}
+                            className='bg-white border-primary border rounded-full size-10 flex items-center justify-center'
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
                         </Link>
                     </div>
-                </div>
-                <div className='bg-[#f5f4f2] min-h-[300px] flex-1  justify-center items-center flex'>
-                    <Image src="/images/medicine.webp" width={650} height={650}/>
-                </div>
-            </section>
-            <section className='px-3 md:px-10 mt-10 '>
+                </motion.div>
+                <MagnifyImage />
+            </motion.section>
+            <motion.section 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className='px-3 md:px-10 mt-10 '
+            >
                 <div className='flex  flex-wrap md:items-center md:gap-5 '>
                     <h2 className='text-3xl min-w-fit md:flex-1 text-center md:text-start md:text-4xl lg:text-5xl flex-1'>
                         <b className='text-primary'>Prescription </b>
@@ -114,161 +349,172 @@ const WeightLossMedication = () => {
 
                     </div>
                 </div>
-                <div className='mt-5 flex justify-evenly gap-10  overflow-x-scroll'>
+                <div className='mt-5 flex justify-evenly gap-10 overflow-x-scroll' style={cardContainerStyle}>
+                    <div className='flex gap-10 snap-x snap-mandatory'>
+                        {[1, 2, 3].map((cardIndex) => (
+                            <motion.div 
+                                key={cardIndex}
+                                variants={fadeInUp}
+                                className='min-w-[95vw] md:min-w-fit snap-center relative'
+                                animate={{
+                                    scale: hoveredCard === cardIndex ? 1.05 : 1,
+                                    filter: hoveredCard && hoveredCard !== cardIndex ? 'blur(2px)' : 'blur(0px)',
+                                    opacity: hoveredCard && hoveredCard !== cardIndex ? 0.7 : 1,
+                                }}
+                                onHoverStart={() => setHoveredCard(cardIndex)}
+                                onHoverEnd={() => setHoveredCard(null)}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <div className='bg-[#d8d6d3] px-5 py-7 rounded-3xl relative'>
+                                    {cardIndex === 1 && (
+                                        <>
+                                            <div className='flex flex-wrap items-center justify-between'>
+                                                <div className=''>
+                                                    <h2 className='w-fit text-primary text-4xl'>
+                                                        Semaglutide
+                                                    </h2>
+                                                    <p>Injection</p>
+                                                </div>
 
-                    <div className='min-w-full md:min-w-fit'>
-                        <div className=' bg-[#d8d6d3] px-5 py-7  rounded-3xl '>
-                            <div className='flex flex-wrap items-center justify-between'>
-                                <div className=''>
-                                    <h2 className='w-fit text-primary  text-4xl'>
-                                        Semaglutide
-                                    </h2>
-                                    <p>Injection</p>
-                                </div>
+                                                <div className='bg-primary text-xs px-5 p-2 text-white md:p-4 rounded-3xl md:px-10'>
+                                                    In Stock
+                                                </div>
+                                            </div>
+                                            <div className='h-[400px] min-w-full md:min-w-[350px]  flex  relative'>
+                                                <Image src="/images/41.webp" width={250} height={400} className='absolute z-[1] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
+                                                <div className='flex flex-col justify-between items-center'>
+                                                    <div></div>
+                                                    <div className='flex items-center bg-brown-400 gap-5  drop-shadow-2xl backdrop-filter bg-clip-padding backdrop-blur-xl bg-opacity-100 px-5 py-3  rounded-3xl absolute bottom-0 w-full left-0 z-[5]'>
+                                                        <p className='text-sm md:text-lg text-white '>See If <b className='text-primary'>GLP-1s</b> are right for you </p>
 
-                                <div className='bg-primary text-xs px-5 p-2 text-white md:p-4 rounded-3xl md:px-10'>
-                                    In Stock
-                                </div>
-                            </div>
-                            <div className='h-[400px] min-w-full md:min-w-[350px]  flex  relative'>
-                                <Image src="/images/41.webp" width={250} height={400} className='absolute z-[1] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
-                                <div className='flex flex-col justify-between items-center'>
-                                    <div></div>
-                                    <div className='flex items-center bg-brown-400 gap-5  drop-shadow-2xl backdrop-filter bg-clip-padding backdrop-blur-xl bg-opacity-100 px-5 py-3  rounded-3xl absolute bottom-0 w-full left-0 z-[5]'>
-                                        <p className='text-sm md:text-lg text-white '>See If <b className='text-primary'>GLP-1s</b> are right for you </p>
+                                                        {
+                                                            (token) ?
+                                                                (
+                                                                    userOrders.length > 0 ?
+                                                                        <Link href="/profile-details" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                                                        </Link>
+                                                                        :
+                                                                        <Link href="/get-started" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                                                        </Link>
+                                                                )
+                                                                :
+                                                                <Link href="/login" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                                                </Link>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                        {
-                                            (token) ?
-                                                (
-                                                    userOrders.length > 0 ?
-                                                        <Link href="/profile-details" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                                        </Link>
-                                                        :
-                                                        <Link href="/get-started" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                                        </Link>
-                                                )
-                                                :
-                                                <Link href="/login" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                                </Link>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
+                                        </>
+                                    )}
+                                    {cardIndex === 2 && (
+                                        <>
+                                            <div className='flex flex-wrap items-center justify-between w-full gap-10'>
+                                                <div className=''>
+                                                    <h2 className='w-fit text-primary text-4xl'>
+                                                        Tirzepatide
+                                                    </h2>
+                                                    <p>Injection</p>
+                                                </div>
 
-                        </div>
-                        <div className='flex justify-center my-2'>
-                            <Link href="#safety" className='text-sm underline text-primary '>
-                                Important safety information
-                            </Link>
-                        </div>
-                    </div>
-                    <div className='min-w-full md:w-[350px] md:min-w-fit'>
-                        <div className=' bg-[#d8d6d3] px-5 py-7  rounded-3xl '>
-                            <div className='flex flex-wrap items-center justify-between w-full  gap-10'>
-                                <div className=''>
-                                    <h2 className='w-fit text-primary  text-4xl'>
-                                        Tirzepatide
-                                    </h2>
-                                    <p>Injection </p>
-                                </div>
+                                                <div className='bg-primary text-xs px-5 p-2 text-white md:p-4 rounded-3xl md:px-10'>
+                                                    In Stock
+                                                </div>
+                                            </div>
+                                            <div className='h-[400px] min-w-full md:min-w-[350px]  flex  relative'>
+                                                <Image src="/images/medicine-2.webp" width={250} height={400} className='absolute z-[1]  left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
+                                                <div className='flex flex-col justify-between items-center'>
+                                                    <div></div>
+                                                    <div className='flex items-center bg-brown-400 gap-5  drop-shadow-2xl backdrop-filter bg-clip-padding backdrop-blur-xl bg-opacity-100 px-5 py-3  rounded-3xl absolute bottom-0 w-full left-0 z-[5] '>
+                                                        <p className='text-sm md:text-lg text-white '>See If <b className='text-primary'>GLP-1s</b> are right for you </p>
+                                                        {
+                                                            (token) ?
+                                                                (
+                                                                    userOrders.length > 0 ?
+                                                                        <Link href="/profile-details" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                                                        </Link>
+                                                                        :
+                                                                        <Link href="/get-started" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                                                        </Link>
+                                                                )
+                                                                :
+                                                                <Link href="/login" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                                                </Link>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div className='bg-primary text-xs px-5 p-2 text-white md:p-4 rounded-3xl md:px-10'>
-                                    In Stock
-                                </div>
-                            </div>
-                            <div className='h-[400px] min-w-full md:min-w-[350px]  flex  relative'>
-                                <Image src="/images/medicine-2.webp" width={250} height={400} className='absolute z-[1]  left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
-                                <div className='flex flex-col justify-between items-center'>
-                                    <div></div>
-                                    <div className='flex items-center bg-brown-400 gap-5  drop-shadow-2xl backdrop-filter bg-clip-padding backdrop-blur-xl bg-opacity-100 px-5 py-3  rounded-3xl absolute bottom-0 w-full left-0 z-[5] '>
-                                        <p className='text-sm md:text-lg text-white '>See If <b className='text-primary'>GLP-1s</b> are right for you </p>
-                                        {
-                                            (token) ?
-                                                (
-                                                    userOrders.length > 0 ?
-                                                        <Link href="/profile-details" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                                        </Link>
-                                                        :
-                                                        <Link href="/get-started" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                                        </Link>
-                                                )
-                                                :
-                                                <Link href="/login" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                                </Link>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
+                                        </>
+                                    )}
+                                    {cardIndex === 3 && (
+                                        <>
+                                            <div className='flex flex-wrap items-center justify-between w-full gap-10'>
+                                                <div className=''>
+                                                    <h2 className='w-fit text-primary text-4xl'>
+                                                        Tirzepatide
+                                                    </h2>
+                                                    <p>Injection</p>
+                                                </div>
 
-                        </div>
-                        <div className='flex justify-center my-2'>
-                            <Link href="#safety" className='text-sm underline text-primary '>
-                                Important safety information
-                            </Link>
-                        </div>
-                    </div>
-                    <div className='min-w-full md:w-[350px] md:min-w-fit'>
-                        <div className=' bg-[#d8d6d3] px-5 py-7  rounded-3xl '>
-                            <div className='flex flex-wrap items-center justify-between w-full  gap-10'>
-                                <div className=''>
-                                    <h2 className='w-fit text-primary  text-4xl'>
-                                        Tirzepatide
-                                    </h2>
-                                    <p>Injection </p>
-                                </div>
+                                                <div className='bg-primary text-xs px-5 p-2 text-white md:p-4 rounded-3xl md:px-10'>
+                                                    In Stock
+                                                </div>
+                                            </div>
+                                            <div className='h-[400px] min-w-full md:min-w-[350px]  flex relative'>
+                                                <Image src="/images/42.webp" width={300} height={400} className='absolute z-[1] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
 
-                                <div className='bg-primary text-xs px-5 p-2 text-white md:p-4 rounded-3xl md:px-10'>
-                                    In Stock
-                                </div>
-                            </div>
-                            <div className='h-[400px] min-w-full md:min-w-[350px]  flex relative'>
-                                <Image src="/images/42.webp" width={300} height={400} className='absolute z-[1] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
+                                                <div className='flex flex-col justify-between items-center'>
+                                                    <div></div>
+                                                    <div className='flex items-center bg-brown-400 gap-5  drop-shadow-2xl backdrop-filter bg-clip-padding backdrop-blur-md bg-opacity-100 px-5 py-3  rounded-3xl absolute bottom-0 w-full left-0 z-[5]'>
+                                                        <p className='text-sm md:text-lg text-white '>See If <b className='text-primary'>GLP-1s</b> are right for you </p>
+                                                        {
+                                                            (token) ?
+                                                                (
+                                                                    userOrders.length > 0 ?
+                                                                        <Link href="/profile-details" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                                                        </Link>
+                                                                        :
+                                                                        <Link href="/get-started" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                                                        </Link>
+                                                                )
+                                                                :
+                                                                <Link href="/login" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                                                </Link>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div className='flex flex-col justify-between items-center'>
-                                    <div></div>
-                                    <div className='flex items-center bg-brown-400 gap-5  drop-shadow-2xl backdrop-filter bg-clip-padding backdrop-blur-md bg-opacity-100 px-5 py-3  rounded-3xl absolute bottom-0 w-full left-0 z-[5]'>
-                                        <p className='text-sm md:text-lg text-white '>See If <b className='text-primary'>GLP-1s</b> are right for you </p>
-                                        {
-                                            (token) ?
-                                                (
-                                                    userOrders.length > 0 ?
-                                                        <Link href="/profile-details" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                                        </Link>
-                                                        :
-                                                        <Link href="/get-started" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                                        </Link>
-                                                )
-                                                :
-                                                <Link href="/login" className='bg-white rounded-full size-12 min-w-12 md:size-14 md:min-w-14 flex items-center justify-center'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                                </Link>
-                                        }
-                                    </div>
+                                        </>
+                                    )}
                                 </div>
-                            </div>
-
-                        </div>
-                        <div className='flex justify-center my-2'>
-                            <Link href="#safety" className='text-sm underline  text-primary '>
-                                Important safety information
-                            </Link>
-                        </div>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
                 <p className='mt-5 text-zinc-400'>
                     Semaglutide and Tirzepatide facilitate significant weight loss by reducing appetite and slowing gastric emptying. These medications also reduce the risk of cardiovascular events, such as heart attacks and strokes. With a low risk of hypoglycemia, they act primarily in response to elevated blood sugar levels. Additionally, they may help reduce liver fat and improve liver function, offering potential benefits.
                 </p>
                 
-            </section>
-            <section style={{ backgroundImage: "url(/images/20.webp)" }} className='h-screen   bg-clip-padding backdrop-blur-md  flex flex-col justify-center   mt-10 bg-cover bg-no-repeat bg-center bg-opacity-50 '>
+            </motion.section>
+            <motion.section 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                style={{ backgroundImage: "url(/images/20.webp)" }} 
+                className='h-screen   bg-clip-padding backdrop-blur-md  flex flex-col justify-center   mt-10 bg-cover bg-no-repeat bg-center bg-opacity-50 '
+            >
                 <div className='md:mx-20'>
                     <h2 className='text-3xl backdrop-blur-xl rounded-3xl py-3 px-5 w-fit md:text-4xl lg:text-5xl pl-5 '>
                         Looking to<b className=''> shed </b>some <br />
@@ -288,90 +534,161 @@ const WeightLossMedication = () => {
 
                     </div>
                 </div>
-            </section>
-            <section className='min-h-96 h-fit py-20 flex flex-col justify-center items-center border-b'>
-
-                <div className='flex flex-col'>
+            </motion.section>
+            <motion.section 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className='min-h-96 h-fit py-20 flex flex-col justify-center items-center border-b'
+            >
+                <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className='flex flex-col'
+                >
                     <div>
-                        <h2 className='text-2xl md:text-3xl  text-primary text-center '>
+                        <motion.h2 
+                            initial={{ x: -20, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            className='text-2xl md:text-3xl text-primary text-center'
+                        >
                             Weight loss treatment from
-                        </h2>
-                        <img src="/images/orange-metabolix.webp" className='max-w-[150px] md:max-w-[200px] mx-auto mt-2' />
+                        </motion.h2>
+                        <motion.img 
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.4 }}
+                            src="/images/orange-metabolix.webp" 
+                            className='max-w-[150px] md:max-w-[200px] mx-auto mt-2'
+                        />
                     </div>
-                    <div className='max-w-[1440px] '>
-                        <img src="/images/img-1.webp" className='object-cover max-w-full' />
-                    </div>
-                </div>
-
-            </section>
+                </motion.div>
+            </motion.section>
 
 
-            <section className='flex flex-col md:flex-row flex-wrap items-center h-fit p-2 md:px-10'>
-                <div className='flex-1  md:px-10'>
-                    <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold text-center md:text-start mt-10'>
+            <motion.section 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className='flex flex-col  flex-wrap items-center h-fit p-2 md:px-10 justify-center'
+            >
+                <div className='w-[95vw] flex justify-between items-center'>
+                    <h2 className='text-xl md:text-4xl lg:text-5xl font-bold text-center md:text-start mt-10'>
                         Frequently asked questions
                     </h2>
                     {
                         (token) ?
                             (
                                 userOrders.length > 0 ?
-                                    <Link href="/profile-details" className='bg-primary hover:bg-primary/90  mx-auto md:mx-0 flex items-center justify-center md:justify-start p-4 px-20 max-h-[80px] w-fit text-sm md:text-base  text-white  ms:text-lg rounded-xl mt-6 '>
+                                    <Link href="/profile-details" className='bg-primary hover:bg-primary/90 md:mx-0 flex items-center justify-center md:justify-start py-3 px-5 mx-3 max-h-[80px] w-fit text-sm md:text-base  text-white  ms:text-lg rounded-xl mt-6 '>
                                         GET STARTED
                                     </Link>
                                     :
-                                    <Link href="/get-started" className='bg-primary hover:bg-primary/90  mx-auto md:mx-0 flex items-center justify-center md:justify-start p-4 px-20 max-h-[80px] w-fit text-sm md:text-base  text-white  ms:text-lg rounded-xl mt-6'>
+                                    <Link href="/get-started" className='bg-primary hover:bg-primary/90 md:mx-0 flex items-center justify-center md:justify-start py-3 px-5 mx-3 max-h-[80px] w-fit text-sm md:text-base  text-white  ms:text-lg rounded-xl mt-6'>
                                         GET STARTED
                                     </Link>
                             )
                             :
-                            <Link href="/login" className='bg-primary hover:bg-primary/90  mx-auto md:mx-0 flex items-center justify-center md:justify-start p-4 px-20 max-h-[80px] w-fit text-sm md:text-base  text-white  ms:text-lg rounded-xl mt-6 '>
+                            <Link href="/login" className='bg-primary hover:bg-primary/90 md:mx-0 flex items-center justify-center md:justify-start py-3 px-5 mx-3 max-h-[80px] w-fit text-sm md:text-base  text-white  ms:text-lg rounded-xl mt-6 '>
                                 GET STARTED
                             </Link>
                     }
 
                 </div>
-                <div className='flex-1 mt-5 md mx-3'>
+                <div className='mt-7 md mx-3'>
                     <FaqList />
                 </div>
 
-            </section>
-            <section className='mt-10 bg-[#d3d2cc] p-5 mb-10 '>
-                <h2 className='text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mt-10 mb-5'>
+            </motion.section>
+            <motion.section 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className='mt-10 bg-[#d3d2cc] p-5 mb-10'
+            >
+                <motion.h2 
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className='text-3xl md:text-4xl lg:text-5xl font-extrabold text-center mt-10 mb-5'
+                >
                     Transformations
-                </h2>
+                </motion.h2>
 
-                <CompareModule
-                    img1="/images/21.webp"
-                    img2="/images/22.webp"
-                    desc="Transformation after taking GLP-1, GLP-1/GIP agonists medication" />
-
-                <CompareModule
-                    img1="/images/38.webp"
-                    img2="/images/39.webp"
-                    desc="Transformation after taking GLP-1, GLP-1/GIP agonists medication" />
-            </section>
-            <section className='flex flex-wrap p-5 gap-10 justify-between md:p-10 md:mb-20'>
-                <div className='w-[320px]'>
+                <motion.div
+                    variants={staggerChildren}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                >
+                    <motion.div variants={fadeInUp}>
+                        <CompareModule
+                            img1="/images/21.webp"
+                            img2="/images/22.webp"
+                            desc="Transformation after taking GLP-1, GLP-1/GIP agonists medication" 
+                        />
+                    </motion.div>
+                    <motion.div variants={fadeInUp}>
+                        <CompareModule
+                            img1="/images/38.webp"
+                            img2="/images/39.webp"
+                            desc="Transformation after taking GLP-1, GLP-1/GIP agonists medication" 
+                        />
+                    </motion.div>
+                </motion.div>
+            </motion.section>
+            <motion.section 
+                variants={staggerChildren}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className='flex flex-wrap p-5 gap-10 justify-between md:p-10 md:mb-20'
+            >
+                <motion.div 
+                    variants={fadeInUp}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                    className='w-[320px]'
+                >
                     <h4 className='text-primary text-2xl font-bold'>Access to licensed providers</h4>
                     <p className='mt-2'>
                         Ongoing care comes from an experienced care and vetted providers specializing in weight loss—at no extra cost.
                     </p>
-                </div>
-                <div className='w-[320px]'>
+                </motion.div>
+
+                <motion.div 
+                    variants={fadeInUp}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                    className='w-[320px]'
+                >
                     <h4 className='text-primary text-2xl font-bold'>Tailored dosage regimens</h4>
-                    {/* <p className='mt-3'>What sets you apart from your competition? Is it your offerings? Your philosophies? Or your values? </p> */}
                     <p className='mt-2'>
                         Dosage plans are tailored to your specific weight loss goals and preferences.
                     </p>
-                </div>
-                <div className='w-[320px]'>
+                </motion.div>
+
+                <motion.div 
+                    variants={fadeInUp}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                    className='w-[320px]'
+                >
                     <h4 className='text-primary text-2xl font-bold'>Fast and free shipping</h4>
-                    {/* <p className='mt-3'>What sets you apart from your competition? Is it your offerings? Your philosophies? Or your values? </p> */}
                     <p className='mt-2'>
                         Temperature-controlled shipping ensures optimal preservation of medication by maintaining the required temperature throughout transit.
                     </p>
-                </div>
-            </section>
+                </motion.div>
+            </motion.section>
 
 
             {/* <section id="safety" className='md:p-10 px-5 mt-24'>
@@ -428,7 +745,14 @@ const WeightLossMedication = () => {
                     <li>Side Effects: Common side effects (≥5% incidence) include nausea, diarrhea, vomiting, constipation, abdominal pain, headache, fatigue, dyspepsia, dizziness, abdominal distension, eructation, hypoglycemia (in type 2 diabetes patients), flatulence, gastroenteritis, gastroesophageal reflux disease, and nasopharyngitis.</li>
                 </ul>
             </section> */}
-            <section id="safety" className="md:p-10 px-5 mt-24">
+            <motion.section 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                id="safety" 
+                className="md:p-10 px-5 mt-24"
+            >
                 <h2 className="font-semibold text-primary text-3xl md:text-4xl lg:text-5xl">
                     IMPORTANT SAFETY INFORMATION
                 </h2>
@@ -489,7 +813,7 @@ const WeightLossMedication = () => {
                     <li>Due to the delayed gastric emptying associated with the use of GLP-1, GLP-1/GIP agonists, discontinue these medications at least 2 weeks prior to any elective surgery.</li>
                 </ul>
 
-            </section>
+            </motion.section>
 
             <Footer />
         </div>

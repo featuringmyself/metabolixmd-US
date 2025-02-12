@@ -26,7 +26,7 @@ export default function AdminLayout({ children }) {
 
             <aside className="bg-white hidden shadow-xl h-full z-10 lg:flex flex-col ">
                 <div className="  pt-3 pb-3 px-5">
-                    <img src="/images/logo.png" alt="Logo" className="w-[150px] md:w-[200px] " />
+                    <img src="/images/logo.webp" alt="Logo" className="w-[150px] md:w-[200px] " />
                 </div>
                 <PageNavigations />
             </aside>

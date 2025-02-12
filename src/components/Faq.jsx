@@ -1,31 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
-const FaqItem = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleFaq = () => {
-    setIsOpen(!isOpen);
-  };
+const FaqItem = ({ question, answer, isOpen, onClick }) => {
+  const contentRef = useRef(null);
 
   return (
     <div className="border-b border-gray-300 py-4">
       <button
-        onClick={toggleFaq}
-        className="w-full gap-2 text-primary text-left  flex justify-between items-center text-base  md:text-lg   focus:outline-none"
+        onClick={onClick}
+        className="w-full gap-2 text-primary text-left flex justify-between items-center text-base md:text-lg focus:outline-none"
       >
-        <span>{question}</span>
-        <span>{isOpen ? "-" : "+"}</span>
+        <span className={`transition-all duration-300 ${isOpen ? 'text-primary font-semibold' : ''}`}>
+          {question}
+        </span>
+        <span 
+          className={`transition-transform duration-300 text-xl ${isOpen ? 'rotate-45' : ''}`}
+        >
+          +
+        </span>
       </button>
-      {isOpen && (
-        <div className="mt-2 text-gray-600">
-          <p>{answer}</p>
+      <div 
+        ref={contentRef}
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ 
+          maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0",
+          opacity: isOpen ? 1 : 0,
+          transform: isOpen ? 'translateY(0)' : 'translateY(-10px)'
+        }}
+      >
+        <div className="mt-4 text-gray-600 pl-4 border-l-2 border-primary/20">
+          <p className="leading-relaxed">{answer}</p>
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
 const FaqList = () => {
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  const handleFaqClick = (index) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
   const faqs = [
     {
       question: "What are GLP-1 and GLP-1/GIP agonists used for?",
@@ -52,7 +68,7 @@ const FaqList = () => {
       answer: "Most patients begin to see noticeable weight loss within a few weeks, with more significant changes occurring over several months of consistent use.",
     },
     {
-      question: "Can I use GLP-1 or GLP-1/GIP agonists if I don’t have diabetes?",
+      question: "Can I use GLP-1 or GLP-1/GIP agonists if I don't have diabetes?",
       answer: "These medications can be prescribed off-label for weight loss in people without diabetes, but it is important to consult a healthcare provider to determine if they are appropriate for you.",
     },
     {
@@ -61,12 +77,16 @@ const FaqList = () => {
     },
   ];
 
-
-
   return (
-    <div className="w-full mx-auto  px-2">
+    <div className="w-full mx-auto px-2 space-y-2">
       {faqs.map((faq, index) => (
-        <FaqItem key={index} question={faq.question} answer={faq.answer} />
+        <FaqItem 
+          key={index} 
+          question={faq.question} 
+          answer={faq.answer}
+          isOpen={openFaqIndex === index}
+          onClick={() => handleFaqClick(index)}
+        />
       ))}
     </div>
   );

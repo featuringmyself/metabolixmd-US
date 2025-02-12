@@ -1,122 +1,175 @@
 import NavBar from '@/components/NavBar';
+import Footer from '@/components/Footer';
 import React from 'react';
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 
 const PrivacyPolicy = () => {
+    const fadeIn = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 }
+    };
+
     return (
-        <section>
+        <div className="bg-gradient-to-b from-white to-gray-50 min-h-screen flex flex-col">
             <Head><title>Privacy Policy - MetabolixMD</title></Head>
             <NavBar />
-            <div className="privacy-policy-container p-6 max-w-4xl mx-auto mt-20">
-                <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
-                <p className="text-sm text-gray-500 mb-8">Effective Date: 01/13/2025</p>
-
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">Introduction</h2>
-                    <p>
-                        MetabolixMD ("we," "our," or "us") is dedicated to safeguarding your privacy and ensuring the security of your Protected Health Information (PHI). This Privacy Policy outlines how we collect, use, disclose, and protect your information when you visit our website [www.metabolixmd.com] and utilize our telehealth services. By accessing or using our services, you agree to the terms outlined in this policy.
+            
+            {/* Hero Section */}
+            <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="relative w-full bg-primary/5 mt-20 py-16"
+            >
+                <div className="max-w-4xl mx-auto px-4">
+                    <h1 className="text-4xl md:text-5xl font-bold text-primary font-montserrat text-center">
+                        Privacy Policy
+                    </h1>
+                    <p className="text-center text-gray-600 mt-4 font-poppins">
+                        Last Updated: January 13, 2025
                     </p>
-                </section>
+                </div>
+            </motion.div>
 
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">Information We Collect</h2>
-                    <h3 className="text-lg font-medium">Personal Information:</h3>
-                    <ul className="list-disc list-inside">
-                        <li>Name, address, email, phone number, date of birth, and payment details.</li>
-                    </ul>
-                    <h3 className="text-lg font-medium mt-4">Health Information:</h3>
-                    <ul className="list-disc list-inside">
-                        <li>Medical history, treatment plans, prescriptions, and other health-related data.</li>
-                    </ul>
-                    <h3 className="text-lg font-medium mt-4">Technical Data:</h3>
-                    <ul className="list-disc list-inside">
-                        <li>IP address, browser type, access times, and pages viewed to enhance your user experience.</li>
-                    </ul>
-                </section>
+            {/* Main Content */}
+            <motion.div 
+                initial="hidden"
+                animate="visible"
+                variants={fadeIn}
+                className="max-w-4xl mx-auto px-4 py-12"
+            >
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div className="p-8 space-y-12 font-poppins">
+                        {/* Introduction */}
+                        <motion.section variants={fadeIn} className="prose max-w-none">
+                            <p className="text-gray-700 leading-relaxed">
+                                MetabolixMD ("we," "our," or "us") is dedicated to safeguarding your privacy and ensuring the security of your Protected Health Information (PHI). This Privacy Policy outlines how we collect, use, disclose, and protect your information when you visit our website [www.metabolixmd.com] and utilize our telehealth services.
+                            </p>
+                        </motion.section>
 
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">How We Use Your Information</h2>
-                    <ul className="list-disc list-inside">
-                        <li><strong>To Provide Services:</strong> Deliver telehealth consultations, process prescriptions, and manage appointments.</li>
-                        <li><strong>Communication:</strong> Send appointment reminders, health tips, and respond to inquiries.</li>
-                        <li><strong>Compliance:</strong> Adhere to legal obligations, including HIPAA regulations.</li>
-                    </ul>
-                </section>
+                        {/* Information Collection */}
+                        <motion.section variants={fadeIn} className="bg-gray-50 p-8 rounded-xl">
+                            <h2 className="text-2xl font-semibold mb-6 text-primary">Information We Collect</h2>
+                            <div className="grid md:grid-cols-3 gap-6">
+                                <div className="bg-white p-6 rounded-lg shadow-sm">
+                                    <h3 className="text-lg font-medium text-primary mb-4">Personal Information</h3>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li>Name, address, email</li>
+                                        <li>Phone number</li>
+                                        <li>Date of birth</li>
+                                        <li>Payment details</li>
+                                    </ul>
+                                </div>
+                                
+                                <div className="bg-white p-6 rounded-lg shadow-sm">
+                                    <h3 className="text-lg font-medium text-primary mb-4">Health Information</h3>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li>Medical history</li>
+                                        <li>Treatment plans</li>
+                                        <li>Prescriptions</li>
+                                        <li>Health-related data</li>
+                                    </ul>
+                                </div>
 
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">Disclosure of Your Information</h2>
-                    <ul className="list-disc list-inside">
-                        <li><strong>Healthcare Partners:</strong> Such as CASA Pharma RX and GAP (Grand Ave Pharmacy) for prescription fulfillment.</li>
-                        <li><strong>Service Providers:</strong> Entities that assist with payment processing, IT support, and other operational services.</li>
-                        <li><strong>Legal Requirements:</strong> When required by law or to protect our rights.</li>
-                        <li><strong>Authorization:</strong> With your explicit written authorization, where required under HIPAA.</li>
-                    </ul>
-                </section>
+                                <div className="bg-white p-6 rounded-lg shadow-sm">
+                                    <h3 className="text-lg font-medium text-primary mb-4">Technical Data</h3>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li>IP address</li>
+                                        <li>Browser type</li>
+                                        <li>Access times</li>
+                                        <li>Pages viewed</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </motion.section>
 
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">Data Security</h2>
-                    <p>
-                        We implement administrative, physical, and technical safeguards to protect your information, including:
-                    </p>
-                    <ul className="list-disc list-inside">
-                        <li>Encryption of data at rest and in transit.</li>
-                        <li>Secure servers and firewalls.</li>
-                        <li>Regular audits and access controls.</li>
-                    </ul>
-                    <p>
-                        Our services are hosted on Amazon Web Services (AWS), which complies with HIPAA regulations to ensure the confidentiality, integrity, and availability of your PHI.
-                    </p>
-                </section>
+                        {/* How We Use Information */}
+                        <motion.section variants={fadeIn} className="bg-primary/5 p-8 rounded-xl">
+                            <h2 className="text-2xl font-semibold mb-6 text-primary">How We Use Your Information</h2>
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="bg-white p-6 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-primary mb-3">Healthcare Services</h3>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li>Deliver telehealth consultations</li>
+                                        <li>Process prescriptions</li>
+                                        <li>Manage appointments</li>
+                                    </ul>
+                                </div>
+                                <div className="bg-white p-6 rounded-lg shadow-sm">
+                                    <h3 className="font-medium text-primary mb-3">Communication</h3>
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li>Send appointment reminders</li>
+                                        <li>Provide health tips</li>
+                                        <li>Respond to inquiries</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </motion.section>
 
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">Your Rights</h2>
-                    <ul className="list-disc list-inside">
-                        <li><strong>Access:</strong> Request access to your personal and health information.</li>
-                        <li><strong>Correction:</strong> Request corrections to any inaccurate or incomplete information.</li>
-                        <li><strong>Deletion:</strong> Request the deletion of your information, subject to legal constraints.</li>
-                        <li><strong>Accounting of Disclosures:</strong> Request a record of certain disclosures of your PHI as permitted under HIPAA.</li>
-                        <li><strong>Restrictions:</strong> Request restrictions on how we use or disclose your PHI for certain purposes.</li>
-                        <li><strong>Confidential Communications:</strong> Request communications through alternative means or locations.</li>
-                    </ul>
-                </section>
+                        {/* Data Security */}
+                        <motion.section variants={fadeIn} className="bg-white border border-gray-100 p-8 rounded-xl">
+                            <h2 className="text-2xl font-semibold mb-6 text-primary">Data Security</h2>
+                            <div className="bg-gray-50 p-6 rounded-lg">
+                                <p className="text-gray-700 mb-4">
+                                    We implement comprehensive safeguards to protect your information:
+                                </p>
+                                <div className="grid md:grid-cols-3 gap-6">
+                                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                                        <h3 className="font-medium text-primary mb-2">Technical</h3>
+                                        <ul className="text-gray-700 space-y-1">
+                                            <li>Data encryption</li>
+                                            <li>Secure servers</li>
+                                            <li>Firewalls</li>
+                                        </ul>
+                                    </div>
+                                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                                        <h3 className="font-medium text-primary mb-2">Administrative</h3>
+                                        <ul className="text-gray-700 space-y-1">
+                                            <li>Access controls</li>
+                                            <li>Staff training</li>
+                                            <li>Regular audits</li>
+                                        </ul>
+                                    </div>
+                                    <div className="bg-white p-4 rounded-lg shadow-sm">
+                                        <h3 className="font-medium text-primary mb-2">Physical</h3>
+                                        <ul className="text-gray-700 space-y-1">
+                                            <li>Secure facilities</li>
+                                            <li>Monitored access</li>
+                                            <li>Backup systems</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.section>
 
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">Cookies and Tracking Technologies</h2>
-                    <p>
-                        We use cookies to enhance user experience. You can adjust your browser settings to refuse cookies; however, this may affect the functionality of our website.
-                    </p>
-                </section>
+                        {/* Contact Section */}
+                        <motion.section variants={fadeIn} className="bg-primary/5 p-8 rounded-xl">
+                            <h2 className="text-2xl font-semibold mb-6 text-primary text-center">Contact Us</h2>
+                            <div className="max-w-2xl mx-auto text-center">
+                                <p className="text-gray-700 mb-6">
+                                    For questions about our privacy practices or to exercise your rights:
+                                </p>
+                                <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                                    <a 
+                                        href="mailto:consultant@metabolixmd.com"
+                                        className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 transition-colors"
+                                    >
+                                        <span>📧</span>
+                                        consultant@metabolixmd.com
+                                    </a>
+                                    <div className="flex items-center gap-2 text-gray-700">
+                                        <span>📍</span>
+                                        9808 Topeka Ave, Lubbock, Texas 79424
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.section>
+                    </div>
+                </div>
+            </motion.div>
 
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">Third-Party Links</h2>
-                    <p>
-                        Our website may contain links to third-party sites. We are not responsible for their privacy practices.
-                    </p>
-                </section>
-
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">Changes to This Privacy Policy</h2>
-                    <p>
-                        We may update this policy periodically. We will notify you of significant changes by posting the new policy on our website.
-                    </p>
-                </section>
-
-                <section className="mb-6">
-                    <h2 className="text-2xl font-semibold mb-2">Contact Us</h2>
-                    <p className="mt-4">
-                        For further assistance, please contact our support team:
-                    </p>
-                    <address className="not-italic">
-                        <strong>Customer Support:</strong><br />
-                        📧 Email: consultant@metabolixmd.com<br />
-                        {/* 📞 Phone: +1-800-555-1234<br /> */}
-                        📍 Address: 9808 Topeka Ave, Lubbock, Texas 79424<br />
-                    </address>
-                </section>
-
-                <p className="text-center mt-8">Thank you for trusting MetabolixMD with your health and personal information.</p>
-            </div>
-        </section>
+            <Footer />
+        </div>
     );
 };
 

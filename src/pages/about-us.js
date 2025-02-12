@@ -6,6 +6,7 @@ import NavBar from '@/components/NavBar'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 
 
 const expertDetails = [
@@ -54,10 +55,10 @@ const expertDetails = [
                     <b>Dr. Mohit Chawla, M.D.</b>, is an exceptional physician with specialized expertise in geriatric care, general medicine, pain management, and palliative care. Driven by a passion for patient-centered care, Dr. Chawla has held key roles at respected institutions, including the Pain Management Centers of America, Grand Island Pain Relief Center, and St. Bernards Healthcare, where he treated complex cases across multiple disciplines. His broad clinical experience enables him to meet the nuanced needs of aging populations while managing chronic pain and end-of-life care with empathy and precision.
                 </p>
                 <p className='mt-3'>
-                    Dr. Chawla’s educational background is extensive, marked by multiple advanced fellowships. He completed his Hospice and Palliative Care training at both Rush University and John H. Stroger, Jr. Hospital, followed by a Geriatric Medicine Fellowship at the University of Alabama at Birmingham. Prior to these, he completed his Family Medicine Residency at Creighton University School of Medicine and earned his MBBS from Manipal College of Medical Sciences, Nepal. These achievements reflect his commitment to continuous learning and clinical excellence.
+                    Dr. Chawla's educational background is extensive, marked by multiple advanced fellowships. He completed his Hospice and Palliative Care training at both Rush University and John H. Stroger, Jr. Hospital, followed by a Geriatric Medicine Fellowship at the University of Alabama at Birmingham. Prior to these, he completed his Family Medicine Residency at Creighton University School of Medicine and earned his MBBS from Manipal College of Medical Sciences, Nepal. These achievements reflect his commitment to continuous learning and clinical excellence.
                 </p>
                 <p className='mt-3'>
-                    As a consultant at <b>MetabolixMD</b>, Dr. Chawla leverages his vast knowledge and hands-on experience to optimize patient outcomes, with a focus on holistic well-being and quality of life. His ability to integrate pain management, palliative care, and geriatrics allows him to offer comprehensive, personalized solutions that address each patient’s unique needs.
+                    As a consultant at <b>MetabolixMD</b>, Dr. Chawla leverages his vast knowledge and hands-on experience to optimize patient outcomes, with a focus on holistic well-being and quality of life. His ability to integrate pain management, palliative care, and geriatrics allows him to offer comprehensive, personalized solutions that address each patient's unique needs.
                 </p>
                 <p className='mt-3'>
                     Outside his professional life, Dr. Chawla enjoys traveling and exploring new cultures, experiences that enrich his perspective and contribute to his well-rounded approach to medicine. His diverse interests, combined with his clinical expertise, make him a valuable asset to the MetabolixMD team and a trusted partner in helping patients achieve healthier, more fulfilling lives.
@@ -110,10 +111,10 @@ const expertDetails = [
                     With the help of Tirzepatide, Dr. Raj overcame the barriers that had slowed his progress, achieving remarkable, sustainable results. This personal success not only improved his physical health but also reignited his passion for helping others. Inspired by his journey, Dr. Raj joined MetabolixMD as a consultant, eager to guide patients through their own weight loss transformations with the same powerful approach.
                 </p>
                 <p className='mt-3'>
-                    Dr. Raj’s unique combination of personal experience, medical expertise, and enthusiasm for fitness makes him an invaluable asset to the MetabolixMD team. He understands firsthand the physical and emotional challenges of weight management, which allows him to offer empathetic, personalized care to his patients. Dr. Raj is committed to empowering individuals to overcome obstacles, reach their goals, and embrace healthier, more fulfilling lives.
+                    Dr. Raj's unique combination of personal experience, medical expertise, and enthusiasm for fitness makes him an invaluable asset to the MetabolixMD team. He understands firsthand the physical and emotional challenges of weight management, which allows him to offer empathetic, personalized care to his patients. Dr. Raj is committed to empowering individuals to overcome obstacles, reach their goals, and embrace healthier, more fulfilling lives.
                 </p>
                 <p className='mt-3'>
-                    In his free time, Dr. Raj enjoys cooking Indian cuisine, exploring new flavors, and sharing meals with family and friends. When he isn’t in the kitchen, you will often find him on the golf course, practicing his swing, or simply enjoying the outdoors. His well-rounded lifestyle reflects the same balance he strives to help his patients achieve—health, happiness, and personal fulfillment.
+                    In his free time, Dr. Raj enjoys cooking Indian cuisine, exploring new flavors, and sharing meals with family and friends. When he isn't in the kitchen, you will often find him on the golf course, practicing his swing, or simply enjoying the outdoors. His well-rounded lifestyle reflects the same balance he strives to help his patients achieve—health, happiness, and personal fulfillment.
                 </p>
             </div>
         )
@@ -132,13 +133,13 @@ const expertDetails = [
                 <p className='mt-3'>
                     Dr. Kurt Emil Springmann, M.D., J.D., is a seasoned consultant and the Chief Legal Officer at MetabolixMD, where he contributes a unique combination of medical, legal, and financial expertise. With a career that spans decades across multiple disciplines, Dr. Springmann holds a Juris Doctorate from Arizona State University College of Law, where he graduated magna cum laude, ranking first in his class. His outstanding legal education was highlighted by numerous awards, including the Regents Scholar award and the Order of the Coif, reflecting his dedication to excellence. He is also a licensed medical doctor, having received his Doctor of Medicine from the University of Arizona College of Medicine, where he was recognized as a top student and member of the Alpha Omega Alpha Honor Society.
                 </p> <p className='mt-3'>
-                    Dr. Springmann’s professional journey is marked by substantial roles in both law and medicine, underscoring his versatility and breadth of expertise. His early medical career included rigorous training in anesthesiology, where he practiced extensively across trauma, pediatric, ENT, neurosurgical, and general surgical anesthesia in diverse settings. Over the years, he has held prestigious positions such as Assistant Professor of Anesthesiology at Texas Tech University Health Sciences Center, where he contributed to the academic and clinical training of medical students and residents. His experience includes managing anesthesia services at leading hospitals, as well as a locum tenens practice covering a wide array of surgical cases, from trauma to complex specialty surgeries, and managing pain in acute and chronic settings.
+                    Dr. Springmann's professional journey is marked by substantial roles in both law and medicine, underscoring his versatility and breadth of expertise. His early medical career included rigorous training in anesthesiology, where he practiced extensively across trauma, pediatric, ENT, neurosurgical, and general surgical anesthesia in diverse settings. Over the years, he has held prestigious positions such as Assistant Professor of Anesthesiology at Texas Tech University Health Sciences Center, where he contributed to the academic and clinical training of medical students and residents. His experience includes managing anesthesia services at leading hospitals, as well as a locum tenens practice covering a wide array of surgical cases, from trauma to complex specialty surgeries, and managing pain in acute and chronic settings.
                 </p> <p className='mt-3'>
                     In parallel with his medical career, Dr. Springmann has cultivated a robust legal practice. After obtaining his law degree, he served as an Associate Attorney with Morrison & Foerster LLP in San Francisco, a role in which he handled corporate and technology-related litigation and arbitration, honing skills in complex litigation and negotiation on behalf of international and corporate clients. Since 2003, he has operated his own private legal practice, offering counsel on litigation, contracting, and technological issues, bridging the gap between medicine and law for healthcare organizations.
                 </p> <p className='mt-3'>
-                    Beyond his clinical and legal contributions, Dr. Springmann’s financial acumen is evidenced by his earlier career roles in financial planning and analysis for prominent firms, as well as his credentials as a Certified Public Accountant. His rich background in accounting and finance strengthens his capability to address healthcare financial planning and compliance matters with a holistic view. Dr. Springmann’s extensive list of publications, including topics on intellectual property and medical research, as well as his active certifications in anesthesia and law across multiple states, further attest to his wide-ranging expertise.
+                    Beyond his clinical and legal contributions, Dr. Springmann's financial acumen is evidenced by his earlier career roles in financial planning and analysis for prominent firms, as well as his credentials as a Certified Public Accountant. His rich background in accounting and finance strengthens his capability to address healthcare financial planning and compliance matters with a holistic view. Dr. Springmann's extensive list of publications, including topics on intellectual property and medical research, as well as his active certifications in anesthesia and law across multiple states, further attest to his wide-ranging expertise.
                 </p> <p className='mt-3'>
-                    At MetabolixMD, Dr. Springmann’s combined knowledge enables him to advise on medical, legal, and regulatory challenges, ensuring the company’s operations align with rigorous standards across multiple disciplines.
+                    At MetabolixMD, Dr. Springmann's combined knowledge enables him to advise on medical, legal, and regulatory challenges, ensuring the company's operations align with rigorous standards across multiple disciplines.
 
                 </p>
             </div>
@@ -147,62 +148,123 @@ const expertDetails = [
 ];
 
 const AboutUs = () => {
-    const router = useRouter(); // Initialize router
-    const { details } = router.query; // Destructure details from query
+    const router = useRouter();
+    const { details } = router.query;
     const [activeExpert, setActiveExpert] = useState("")
+    const [hoveredExpert, setHoveredExpert] = useState(null);
 
-    // Expert details array
-    // Find the active expert based on the details query parameter
     useEffect(() => {
         const activeExp = expertDetails.find(expert => `about-${expert.name.split(" ")[0].toLowerCase()}` === details);
         setActiveExpert(activeExp)
     }, [router])
 
-    return (
-        <div className='font-tt-hoves flex flex-col min-h-screen'>
-            <Head><title>About - MetabolixMD</title></Head>
-            <NavBar />
-            {
-                details && activeExpert ? (
-                    <div className='my-20 md:mx-10 '>
-                        <DetailsPage
-                            img={activeExpert.img}
-                            name={activeExpert.name}
-                            subName={activeExpert.subName}
-                            isApproved={activeExpert.isApproved}
-                            mainRole={activeExpert.mainRole}
-                            designation={activeExpert.designation}
-                            detailedJob={activeExpert.detailedJob}
-                        >
-                            {activeExpert.description}
-                        </DetailsPage>
-                    </div>
-                ) : (
-                    <div className=' mt-24'>
-                        <h2 className='text-3xl md:text-4xl lg:text-5xl text-primary px-5 '>
-                            MEET OUR EXPERTS
-                        </h2>
-                        <div className='flex flex-col gap-10 mt-10 p-5 '>
-                            <div className='grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 bigxl:grid-cols-4 gap-10 '>
-                                {expertDetails.map(expert => (
-                                    <MeetExpertBackground
-                                        key={expert.route}
-                                        route={expert.route}
-                                        name={expert.name}
-                                        subName={expert.subName}
-                                        isApproved={expert.isApproved}
-                                        mainRole={expert.mainRole}
-                                        designation={expert.designation}
-                                    >
-                                        <img src={expert.img} className='min-h-[600px] object-cover' />
-                                    </MeetExpertBackground>
-                                ))}
-                            </div>
-                        </div>
-                        <Introduction />
-                    </div>
-                )
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0 }
+    };
+
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2
             }
+        }
+    };
+
+    return (
+        <div className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white">
+            <Head><title>About Us - MetabolixMD</title></Head>
+            <NavBar />
+
+            {!activeExpert ? (
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={staggerContainer}
+                    className="max-w-7xl mx-auto px-4 pt-24 pb-16"
+                >
+                    {/* Hero Section */}
+                    <motion.div 
+                        variants={fadeInUp}
+                        className="text-center mb-16"
+                    >
+                        <h1 className="text-4xl md:text-5xl font-bold text-primary font-montserrat mb-6">
+                            Meet Our Expert Team
+                        </h1>
+                        <p className="text-gray-600 max-w-2xl mx-auto font-poppins">
+                            Our dedicated team of healthcare professionals is committed to helping you achieve your weight loss goals through personalized care and proven medical solutions.
+                        </p>
+                    </motion.div>
+
+                    {/* Expert Cards Grid */}
+                    <motion.div 
+                        variants={staggerContainer}
+                        className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8"
+                    >
+                        {expertDetails.map((expert, index) => (
+                            <motion.div
+                                key={expert.route}
+                                variants={fadeInUp}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ 
+                                    opacity: 1, 
+                                    y: 0,
+                                    filter: hoveredExpert && hoveredExpert !== expert.route ? 'blur(2px)' : 'blur(0px)',
+                                    scale: hoveredExpert === expert.route ? 1.01 : 1,
+                                }}
+                                transition={{ 
+                                    duration: 0.5,
+                                    delay: index * 0.1 
+                                }}
+                                onHoverStart={() => setHoveredExpert(expert.route)}
+                                onHoverEnd={() => setHoveredExpert(null)}
+                                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                            >
+                                <div className="relative h-[600px] overflow-hidden">
+                                    <motion.img 
+                                        src={expert.img} 
+                                        alt={expert.name}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                        <h3 className="text-2xl font-semibold font-montserrat mb-2">
+                                            {expert.name}
+                                        </h3>
+                                        <p className="text-gray-200 font-poppins mb-2">
+                                            {expert.subName}
+                                        </p>
+                                        <p className="text-gray-300 font-poppins">
+                                            {expert.designation}
+                                        </p>
+                                        <motion.button
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            className="mt-4 bg-primary/90 hover:bg-primary text-white px-6 py-2 rounded-full text-sm transition-colors"
+                                            onClick={() => router.push(`/about-us?details=${expert.route}`)}
+                                        >
+                                            Read More
+                                        </motion.button>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+
+                    {/* Introduction Section */}
+                    <motion.div
+                        variants={fadeInUp}
+                        className="mt-20"
+                    >
+                        <Introduction />
+                    </motion.div>
+                </motion.div>
+            ) : (
+                <DetailsPage expert={activeExpert} />
+            )}
+            
             <Footer />
         </div>
     )
