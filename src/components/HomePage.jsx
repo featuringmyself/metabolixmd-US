@@ -63,10 +63,11 @@ const MagnifyImage = () => {
                 >
                     <Image 
                         src="/images/medicine.webp" 
-                        width={650} 
-                        height={650}
-                        className="object-contain"
-                        alt="Medicine"
+                        alt="Weight loss medication"
+                        width={400}
+                        height={300}
+                        className="w-full h-auto"
+                        priority
                     />
                 </div>
             </div>
@@ -378,8 +379,17 @@ const WeightLossMedication = () => {
                                                     In Stock
                                                 </div>
                                             </div>
-                                            <div className='h-[400px] min-w-full md:min-w-[350px]  flex  relative'>
-                                                <Image src="/images/41.webp" width={250} height={400} className='absolute z-[1] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
+                                            <div className='h-[400px] min-w-full md:min-w-[350px] flex relative'>
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <Image 
+                                                        src="/images/41.webp" 
+                                                        alt="Medical consultation"
+                                                        width={250}
+                                                        height={400}
+                                                        className="object-contain max-h-[400px] w-auto"
+                                                        priority
+                                                    />
+                                                </div>
                                                 <div className='flex flex-col justify-between items-center'>
                                                     <div></div>
                                                     <div className='flex items-center bg-brown-400 gap-5  drop-shadow-2xl backdrop-filter bg-clip-padding backdrop-blur-xl bg-opacity-100 px-5 py-3  rounded-3xl absolute bottom-0 w-full left-0 z-[5]'>
@@ -422,8 +432,16 @@ const WeightLossMedication = () => {
                                                     In Stock
                                                 </div>
                                             </div>
-                                            <div className='h-[400px] min-w-full md:min-w-[350px]  flex  relative'>
-                                                <Image src="/images/medicine-2.webp" width={250} height={400} className='absolute z-[1]  left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
+                                            <div className='h-[400px] min-w-full md:min-w-[350px] flex relative'>
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <Image 
+                                                        src="/images/medicine-2.webp" 
+                                                        alt="Prescription medication"
+                                                        width={250}
+                                                        height={400}
+                                                        className="object-contain max-h-[400px] w-auto"
+                                                    />
+                                                </div>
                                                 <div className='flex flex-col justify-between items-center'>
                                                     <div></div>
                                                     <div className='flex items-center bg-brown-400 gap-5  drop-shadow-2xl backdrop-filter bg-clip-padding backdrop-blur-xl bg-opacity-100 px-5 py-3  rounded-3xl absolute bottom-0 w-full left-0 z-[5] '>
@@ -465,9 +483,16 @@ const WeightLossMedication = () => {
                                                     In Stock
                                                 </div>
                                             </div>
-                                            <div className='h-[400px] min-w-full md:min-w-[350px]  flex relative'>
-                                                <Image src="/images/42.webp" width={300} height={400} className='absolute z-[1] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
-
+                                            <div className='h-[400px] min-w-full md:min-w-[350px] flex relative'>
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <Image 
+                                                        src="/images/42.webp" 
+                                                        alt="Healthcare service"
+                                                        width={300}
+                                                        height={400}
+                                                        className="object-contain max-h-[400px] w-auto"
+                                                    />
+                                                </div>
                                                 <div className='flex flex-col justify-between items-center'>
                                                     <div></div>
                                                     <div className='flex items-center bg-brown-400 gap-5  drop-shadow-2xl backdrop-filter bg-clip-padding backdrop-blur-md bg-opacity-100 px-5 py-3  rounded-3xl absolute bottom-0 w-full left-0 z-[5]'>
@@ -749,44 +774,36 @@ const WeightLossMedication = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
                 id="safety" 
-                className="md:p-10 px-5 mt-24 max-w-[1920px] mx-auto"
+                className="px-4 md:p-10 mt-16 md:mt-24 max-w-[1920px] mx-auto"
             >
-                <div className="bg-white rounded-2xl shadow-soft p-8 lg:p-12 border border-primary/5">
+                <div className="bg-white rounded-2xl shadow-soft p-4 md:p-8 lg:p-12 border border-primary/5">
                     <div className="max-w-[1400px] mx-auto">
-                        <h2 className="font-semibold text-primary text-3xl md:text-4xl lg:text-5xl font-montserrat mb-8">
+                        <h2 className="font-semibold text-primary text-2xl md:text-4xl lg:text-5xl font-montserrat mb-6 md:mb-8">
                             IMPORTANT SAFETY INFORMATION
                         </h2>
 
-                        <div className="space-y-8 font-poppins">
+                        <div className="space-y-6 md:space-y-8 font-poppins text-[15px] md:text-base">
                             {/* Main Description */}
-                            <div className="bg-primary/5 p-6 rounded-xl">
+                            <div className="bg-primary/5 p-4 md:p-6 rounded-xl">
                                 <p className="text-gray-700">
-                                    <span className="font-semibold">COMPOUNDED SEMAGLUTIDE and TIRZEPATIDE</span> are glucagon-like peptide-1 (GLP-1), GLP-1/GIP (glucose-dependent insulinotropic polypeptide) receptor agonists indicated as an adjunct to a reduced-calorie diet and increased physical activity for chronic weight management in adults with an initial body mass index (BMI) of: 27 kg/m<sup>2</sup> or greater (overweight or obesity).
-                                </p>
-                            </div>
-
-                            {/* Limitations */}
-                            <div className="bg-accent p-6 rounded-xl">
-                                <h3 className="font-semibold text-primary text-xl mb-3">Limitations of Use:</h3>
-                                <p className="text-gray-700">
-                                    Co-administration of COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE or any other GLP-1 receptor agonists is not recommended. The safety and efficacy of co-administration with other products for weight management have not been established. COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE has not been studied in patients with a history of pancreatitis.
+                                    <span className="font-semibold">COMPOUNDED SEMAGLUTIDE and TIRZEPATIDE</span> are glucagon-like peptide-1 (GLP-1), GLP-1/GIP receptor agonists indicated as an adjunct to a reduced-calorie diet and increased physical activity for chronic weight management in adults with an initial body mass index (BMI) of: 27 kg/m<sup>2</sup> or greater.
                                 </p>
                             </div>
 
                             {/* Warning Box */}
-                            <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-r-xl">
+                            <div className="bg-red-50 border-l-4 border-red-400 p-4 md:p-6 rounded-r-xl">
                                 <div className="flex items-start gap-3">
                                     <svg className="w-6 h-6 text-red-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                     </svg>
                                     <div>
                                         <h3 className="text-red-700 font-semibold text-lg mb-2">WARNING: RISK OF THYROID C-CELL TUMORS</h3>
-                                        <ul className="list-disc ml-6 space-y-3 text-gray-700">
-                                            <li>
+                                        <ul className="list-disc ml-4 md:ml-6 space-y-2 text-gray-700">
+                                            <li className="text-pretty">
                                                 In rodents, SEMAGLUTIDE/TIRZEPATIDE causes thyroid C-cell tumors in clinically relevant exposures. It is unknown whether these medications cause thyroid C-cell tumors, including medullary thyroid carcinoma (MTC), in humans as the human relevance of SEMAGLUTIDE/TIRZEPATIDE-induced rodent thyroid C-cell tumors has not been determined.
                                             </li>
-                                            <li>
-                                                SEMAGLUTIDE/TIRZEPATIDE is contraindicated in patients with a personal or family history of MTC or in patients with Multiple Endocrine Neoplasia syndrome type 2 (MEN2). Counsel patients regarding the potential risk of MTC and symptoms of thyroid tumors.
+                                            <li className="text-pretty">
+                                                SEMAGLUTIDE/TIRZEPATIDE is contraindicated in patients with a personal or family history of MTC or in patients with Multiple Endocrine Neoplasia syndrome type 2 (MEN2).
                                             </li>
                                         </ul>
                                     </div>
@@ -794,39 +811,39 @@ const WeightLossMedication = () => {
                             </div>
 
                             {/* Do Not Take Section */}
-                            <div className="bg-gray-50 p-6 rounded-xl">
+                            <div className="bg-gray-50 p-4 md:p-6 rounded-xl">
                                 <h3 className="text-xl font-semibold text-primary mb-4">Do not take COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE if you:</h3>
-                                <ul className="list-disc ml-6 space-y-2 text-gray-700">
-                                    <li>Have a personal or family history of medullary thyroid carcinoma (MTC) or in patients with Multiple Endocrine Neoplasia syndrome type 2 (MEN2).</li>
-                                    <li>Have been diagnosed with pancreatitis or have a history of pancreatitis.</li>
-                                    <li>Have a diagnosis or history of gastroparesis. This includes problems with your stomach, such as slowed emptying or problems with digesting food.</li>
-                                    <li>Have a known allergy to semaglutide, tirzepatide, or any other GLP-1 medication. This also includes allergy to any of the inactive ingredients in COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE. Inactive ingredients include: di-sodium hydrogen phosphate dihydrate, sodium chloride, benzyl alcohol, hydrochloric acid, sodium hydroxide pellets, and water.</li>
-                                    <li>Have a history of suicidal attempts or active suicidal ideation.</li>
+                                <ul className="list-disc ml-4 md:ml-6 space-y-2 text-gray-700">
+                                    <li className="text-pretty">Have a personal or family history of medullary thyroid carcinoma (MTC) or Multiple Endocrine Neoplasia syndrome type 2 (MEN2).</li>
+                                    <li className="text-pretty">Have been diagnosed with pancreatitis or have a history of pancreatitis.</li>
+                                    <li className="text-pretty">Have a diagnosis or history of gastroparesis.</li>
+                                    <li className="text-pretty">Have a known allergy to semaglutide, tirzepatide, or any other GLP-1 medication.</li>
+                                    <li className="text-pretty">Have a history of suicidal attempts or active suicidal ideation.</li>
                                 </ul>
                             </div>
 
                             {/* Warnings and Precautions */}
-                            <div className="bg-primary/5 p-6 rounded-xl">
+                            <div className="bg-primary/5 p-4 md:p-6 rounded-xl">
                                 <h3 className="text-xl font-semibold text-primary mb-4">WARNINGS AND PRECAUTIONS</h3>
-                                <ul className="list-disc ml-6 space-y-3 text-gray-700">
-                                    <li>Acute Pancreatitis: Acute and chronic pancreatitis have been reported in clinical studies. Discontinue promptly if pancreatitis is suspected. Symptoms include persistent severe abdominal pain, sometimes radiating to the back with or without vomiting. Do not restart if pancreatitis is confirmed.</li>
-                                    <li>Acute Gallbladder Disease: Acute events of gallbladder disease such as cholelithiasis or cholecystitis have been reported in clinical trials. If cholelithiasis is suspected, gallbladder studies and clinical follow-up are indicated.</li>
-                                    <li>Gastroparesis: Uncommon, but more serious, gastrointestinal adverse effects may occur more frequently with GLP-1, GLP-1/GIP receptor agonists than with other weight loss agents.</li>
-                                    <li>Hypoglycemia: Concomitant use with an insulin secretagogue or insulin may increase the risk of hypoglycemia, including severe hypoglycemia. Reducing the dose of insulin secretagogue or insulin may be necessary. Inform all patients of the risk of hypoglycemia and educate them on the signs and symptoms of hypoglycemia.</li>
-                                    <li>Acute Kidney Injury: There have been reports of acute kidney injury in patients treated with GLP-1, GLP-1/GIP receptor agonists. Monitor renal function when initiating or escalating doses of COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE in patients reporting severe adverse gastrointestinal reactions or in those with renal impairment.</li>
-                                    <li>Hypersensitivity Reactions: Anaphylactic reactions and angioedema have been reported in postmarketing studies. Discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE if suspected and promptly seek medical advice.</li>
-                                    <li>Females and Males of Reproductive Potential: Discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE at least 2 months before a planned pregnancy because of the long half-life of these medications.</li>
-                                    <li>Pregnancy: May cause fetal harm. When pregnancy is recognized, discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE immediately.</li>
-                                    <li>Diabetic Retinopathy Complications in Patients with Type 2 Diabetes: Has been reported in trials with GLP-1, GLP-1/GIP agonists. Patients with a history of diabetic retinopathy should be monitored. Diabetic retinopathy damages blood vessels in the retina and can scar the retina. As the scars get bigger, they can pull on the retina and detach it from the back of the eye, a serious condition called retinal detachment.</li>
-                                    <li>Heart Rate Increase: Monitor heart rate at regular intervals.</li>
-                                    <li>Suicidal Behavior and Ideation: Monitor for depression or suicidal thoughts. Discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE if symptoms develop.</li>
-                                    <li>A recent study suggested a possible connection between semaglutide/tirzepatide use and increased risk for a blinding eye disease called non-arteritic anterior ischemic optic neuropathy (NAION). There isn't enough data yet to suggest patients should be concerned or stop taking their medications. Further research is necessary to confirm the hypothesis. Patients should make an informed choice based on individual risk.</li>
-                                    <li>Side Effects: Common side effects (≥5% incidence) include nausea, diarrhea, vomiting, constipation, abdominal pain, headache, fatigue, dyspepsia, dizziness, abdominal distension, eructation, hypoglycemia (in type 2 diabetes patients), flatulence, gastroenteritis, gastroesophageal reflux disease, and nasopharyngitis.</li>
-                                    <li>To report SUSPECTED ADVERSE REACTIONS, contact the FDA at 1-800-FDA-1088 or <a href="http://www.fda.gov/medwatch" target="_blank">www.fda.gov/medwatch</a>.</li>
-                                    <li>Medication Interactions: COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE delays gastric emptying. This may impact absorption of concomitantly administered oral medications. Use with caution.</li>
-                                    <li>Use in Specific Populations: Pregnancy - May cause fetal harm. When pregnancy is recognized, discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE.</li>
-                                    <li>Females and Males of Reproductive Potential: Discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE at least 2 months before a planned pregnancy because of the long half-life of these medications.</li>
-                                    <li>Due to the delayed gastric emptying associated with the use of GLP-1, GLP-1/GIP agonists, discontinue these medications at least 2 weeks prior to any elective surgery.</li>
+                                <ul className="list-disc ml-4 md:ml-6 space-y-3 text-gray-700">
+                                    <li className="text-pretty">Acute Pancreatitis: Acute and chronic pancreatitis have been reported in clinical studies. Discontinue promptly if pancreatitis is suspected. Symptoms include persistent severe abdominal pain, sometimes radiating to the back with or without vomiting. Do not restart if pancreatitis is confirmed.</li>
+                                    <li className="text-pretty">Acute Gallbladder Disease: Acute events of gallbladder disease such as cholelithiasis or cholecystitis have been reported in clinical trials. If cholelithiasis is suspected, gallbladder studies and clinical follow-up are indicated.</li>
+                                    <li className="text-pretty">Gastroparesis: Uncommon, but more serious, gastrointestinal adverse effects may occur more frequently with GLP-1, GLP-1/GIP receptor agonists than with other weight loss agents.</li>
+                                    <li className="text-pretty">Hypoglycemia: Concomitant use with an insulin secretagogue or insulin may increase the risk of hypoglycemia, including severe hypoglycemia. Reducing the dose of insulin secretagogue or insulin may be necessary. Inform all patients of the risk of hypoglycemia and educate them on the signs and symptoms of hypoglycemia.</li>
+                                    <li className="text-pretty">Acute Kidney Injury: There have been reports of acute kidney injury in patients treated with GLP-1, GLP-1/GIP receptor agonists. Monitor renal function when initiating or escalating doses of COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE in patients reporting severe adverse gastrointestinal reactions or in those with renal impairment.</li>
+                                    <li className="text-pretty">Hypersensitivity Reactions: Anaphylactic reactions and angioedema have been reported in postmarketing studies. Discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE if suspected and promptly seek medical advice.</li>
+                                    <li className="text-pretty">Females and Males of Reproductive Potential: Discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE at least 2 months before a planned pregnancy because of the long half-life of these medications.</li>
+                                    <li className="text-pretty">Pregnancy: May cause fetal harm. When pregnancy is recognized, discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE immediately.</li>
+                                    <li className="text-pretty">Diabetic Retinopathy Complications in Patients with Type 2 Diabetes: Has been reported in trials with GLP-1, GLP-1/GIP agonists. Patients with a history of diabetic retinopathy should be monitored. Diabetic retinopathy damages blood vessels in the retina and can scar the retina. As the scars get bigger, they can pull on the retina and detach it from the back of the eye, a serious condition called retinal detachment.</li>
+                                    <li className="text-pretty">Heart Rate Increase: Monitor heart rate at regular intervals.</li>
+                                    <li className="text-pretty">Suicidal Behavior and Ideation: Monitor for depression or suicidal thoughts. Discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE if symptoms develop.</li>
+                                    <li className="text-pretty">A recent study suggested a possible connection between semaglutide/tirzepatide use and increased risk for a blinding eye disease called non-arteritic anterior ischemic optic neuropathy (NAION). There isn't enough data yet to suggest patients should be concerned or stop taking their medications. Further research is necessary to confirm the hypothesis. Patients should make an informed choice based on individual risk.</li>
+                                    <li className="text-pretty">Side Effects: Common side effects (≥5% incidence) include nausea, diarrhea, vomiting, constipation, abdominal pain, headache, fatigue, dyspepsia, dizziness, abdominal distension, eructation, hypoglycemia (in type 2 diabetes patients), flatulence, gastroenteritis, gastroesophageal reflux disease, and nasopharyngitis.</li>
+                                    <li className="text-pretty">To report SUSPECTED ADVERSE REACTIONS, contact the FDA at 1-800-FDA-1088 or <a href="http://www.fda.gov/medwatch" target="_blank">www.fda.gov/medwatch</a>.</li>
+                                    <li className="text-pretty">Medication Interactions: COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE delays gastric emptying. This may impact absorption of concomitantly administered oral medications. Use with caution.</li>
+                                    <li className="text-pretty">Use in Specific Populations: Pregnancy - May cause fetal harm. When pregnancy is recognized, discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE.</li>
+                                    <li className="text-pretty">Females and Males of Reproductive Potential: Discontinue COMPOUNDED SEMAGLUTIDE/TIRZEPATIDE at least 2 months before a planned pregnancy because of the long half-life of these medications.</li>
+                                    <li className="text-pretty">Due to the delayed gastric emptying associated with the use of GLP-1, GLP-1/GIP agonists, discontinue these medications at least 2 weeks prior to any elective surgery.</li>
                                 </ul>
                             </div>
                         </div>

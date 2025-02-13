@@ -66,7 +66,14 @@ const NavBar = () => {
       }`}>
         {/* Logo */}
         <Link href="/">
-          <Image src="/images/logo.webp" width={200} height={50} quality={100} alt="Logo" className="w-[150px] md:w-[200px]" />
+          <Image 
+            src="/images/logo.webp" 
+            width={200}
+            height={50}
+            alt="MetabolixMD Logo"
+            className="w-[150px] md:w-[200px] h-auto"
+            priority
+          />
         </Link>
 
         {/* Hamburger Menu for Mobile */}
