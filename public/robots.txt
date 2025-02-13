@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.metabolixmd.com
+Host: https://www.metabolixmdindia.com
 
 # Sitemaps
-Sitemap: https://www.metabolixmd.com/sitemap.xml
+Sitemap: https://www.metabolixmdindia.com/sitemap.xml

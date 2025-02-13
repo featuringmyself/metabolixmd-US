@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import FloatingButton from './FloatingButton'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 
 const Footer = () => {
     const pathname = usePathname();
@@ -12,7 +13,17 @@ const Footer = () => {
                 <div className='flex w-full flex-col   gap-10'>
                     <div className=' text-white flex md:flex-row flex-col justify-between'>
                         <div className='flex flex-col justify-center items-center'>
-                            <img src="/images/logo-white.webp" className='w-96' />
+                            <div className="flex flex-col items-center gap-4">
+                                <Link href="/" className="cursor-pointer">
+                                    <Image 
+                                        src="/images/logo-white.webp" 
+                                        alt="MetabolixMD Logo" 
+                                        width={200} 
+                                        height={50} 
+                                        className="w-[150px] md:w-[200px] h-auto"
+                                    />
+                                </Link>
+                            </div>
 
                             <div className="mt-6 mx-2">
 

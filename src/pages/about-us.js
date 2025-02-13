@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 
 const expertDetails = [
@@ -150,13 +151,13 @@ const expertDetails = [
 const AboutUs = () => {
     const router = useRouter();
     const { details } = router.query;
-    const [activeExpert, setActiveExpert] = useState("")
+    const [activeExpert, setActiveExpert] = useState(null);
     const [hoveredExpert, setHoveredExpert] = useState(null);
 
     useEffect(() => {
-        const activeExp = expertDetails.find(expert => `about-${expert.name.split(" ")[0].toLowerCase()}` === details);
-        setActiveExpert(activeExp)
-    }, [router])
+        const expert = expertDetails.find(exp => exp.route === details);
+        setActiveExpert(expert);
+    }, [details]);
 
     const fadeInUp = {
         hidden: { opacity: 0, y: 20 },
@@ -262,7 +263,62 @@ const AboutUs = () => {
                     </motion.div>
                 </motion.div>
             ) : (
-                <DetailsPage expert={activeExpert} />
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="pt-24 pb-16 px-4"
+                >
+                    <div className="max-w-7xl mx-auto">
+                        <button 
+                            onClick={() => router.push('/about-us')}
+                            className="mb-8 flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                            </svg>
+                            Back to Team
+                        </button>
+
+                        <div className="bg-white rounded-2xl shadow-soft p-8 md:p-12">
+                            <div className="grid md:grid-cols-2 gap-8 items-start">
+                                <div className={`relative w-full ${
+                                    activeExpert.name === "Ashley Donaldson" || activeExpert.name === "Raj Sabar" 
+                                    ? "aspect-[4/5]" 
+                                    : "aspect-[3/4]"
+                                } rounded-xl overflow-hidden bg-gray-100`}>
+                                    <Image
+                                        src={activeExpert.img}
+                                        alt={activeExpert.name}
+                                        fill
+                                        className="object-contain"
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        priority
+                                        style={{ 
+                                            objectPosition: 'top',
+                                            objectFit: activeExpert.name === "Ashley Donaldson" || activeExpert.name === "Raj Sabar" 
+                                                ? "cover" 
+                                                : "contain"
+                                        }}
+                                    />
+                                </div>
+                                <div>
+                                    <h1 className="text-3xl md:text-4xl font-bold text-primary font-montserrat mb-2">
+                                        {activeExpert.name}
+                                    </h1>
+                                    <p className="text-xl text-gray-600 mb-2 font-poppins">
+                                        {activeExpert.subName}
+                                    </p>
+                                    <p className="text-lg text-primary/80 mb-6 font-poppins">
+                                        {activeExpert.designation}
+                                    </p>
+                                    <div className="prose max-w-none">
+                                        {activeExpert.description}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
             )}
             
             <Footer />
