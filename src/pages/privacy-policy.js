@@ -113,7 +113,7 @@ const PrivacyPolicy = () => {
 
                             {/* Data Security */}
                             <motion.section variants={fadeIn} className="bg-white border border-gray-100 p-8 rounded-xl">
-                                <h2 className="text-2xl font-semibold mb-6 text-primary">Data Security</h2>
+                                <h2 className="text-2xl font-semibold mb-2 text-primary">Data Security</h2>
                                 <div className="bg-gray-50 p-2 rounded-lg">
                                     <p className="text-gray-700 mb-4">
                                         We implement comprehensive safeguards to protect your information:
