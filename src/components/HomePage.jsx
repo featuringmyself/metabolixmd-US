@@ -179,7 +179,7 @@ const WeightLossMedication = () => {
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="w-full flex justify-center md:justify-start"
+                                        className="hidden md:block w-full flex justify-center md:justify-start"
                                     >
                                         <Link 
                                             href="/profile-details" 
@@ -216,7 +216,7 @@ const WeightLossMedication = () => {
                                         </Link>
                                     </motion.div>
                                     :
-                                    <motion.div className="w-full flex justify-center md:justify-start">
+                                    <motion.div className="hidden md:block w-full flex justify-center md:justify-start">
                                         <Link 
                                             href="/get-started" 
                                             className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-6"
@@ -253,7 +253,7 @@ const WeightLossMedication = () => {
                                     </motion.div>
                             )
                             :
-                            <motion.div className="w-full flex justify-center md:justify-start">
+                            <motion.div className="hidden md:block w-full flex justify-center md:justify-start">
                                 <Link 
                                     href="/login" 
                                     className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-6"
@@ -791,22 +791,17 @@ const WeightLossMedication = () => {
                             </div>
 
                             {/* Warning Box */}
-                            <div className="bg-red-50 border-l-4 border-red-400 p-4 md:p-6 rounded-r-xl">
-                                <div className="flex items-start gap-3">
-                                    <svg className="w-6 h-6 text-red-500 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                    </svg>
-                                    <div>
-                                        <h3 className="text-red-700 font-semibold text-lg mb-2">WARNING: RISK OF THYROID C-CELL TUMORS</h3>
-                                        <ul className="list-disc ml-4 md:ml-6 space-y-2 text-gray-700">
-                                            <li className="text-pretty">
-                                                In rodents, SEMAGLUTIDE/TIRZEPATIDE causes thyroid C-cell tumors in clinically relevant exposures. It is unknown whether these medications cause thyroid C-cell tumors, including medullary thyroid carcinoma (MTC), in humans as the human relevance of SEMAGLUTIDE/TIRZEPATIDE-induced rodent thyroid C-cell tumors has not been determined.
-                                            </li>
-                                            <li className="text-pretty">
-                                                SEMAGLUTIDE/TIRZEPATIDE is contraindicated in patients with a personal or family history of MTC or in patients with Multiple Endocrine Neoplasia syndrome type 2 (MEN2).
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <div className="bg-primary/5 p-4 md:p-6 rounded-xl">
+                                <div>
+                                    <h3 className="text-primary/90 font-semibold text-lg mb-2">WARNING: RISK OF THYROID C-CELL TUMORS</h3>
+                                    <ul className="list-disc ml-6 space-y-3 text-gray-700">
+                                        <li>
+                                            In rodents, SEMAGLUTIDE/TIRZEPATIDE causes thyroid C-cell tumors in clinically relevant exposures. It is unknown whether these medications cause thyroid C-cell tumors, including medullary thyroid carcinoma (MTC), in humans as the human relevance of SEMAGLUTIDE/TIRZEPATIDE-induced rodent thyroid C-cell tumors has not been determined.
+                                        </li>
+                                        <li>
+                                            SEMAGLUTIDE/TIRZEPATIDE is contraindicated in patients with a personal or family history of MTC or in patients with Multiple Endocrine Neoplasia syndrome type 2 (MEN2).
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
 

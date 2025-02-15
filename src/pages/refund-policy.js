@@ -11,7 +11,7 @@ const RefundPolicy = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white flex flex-col">
+        <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-gray-50 to-white">
             <Head><title>Return & Refund Policy - MetabolixMD</title></Head>
             <NavBar />
 
@@ -36,7 +36,7 @@ const RefundPolicy = () => {
                 initial="hidden"
                 animate="visible"
                 variants={fadeIn}
-                className="max-w-[1920px] mx-auto px-4 py-12"
+                className="flex-grow max-w-[1920px] mx-auto px-4 py-12 w-full"
             >
                 <div className="max-w-[1400px] mx-auto">
                     <div className="bg-white rounded-2xl shadow-soft p-8 lg:p-12 border border-primary/5">

@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
     };
 
     return (
-        <div className="bg-gradient-to-b from-white to-gray-50 min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-gray-50 to-white">
             <Head><title>Privacy Policy - MetabolixMD</title></Head>
             <NavBar />
             
@@ -36,7 +36,7 @@ const PrivacyPolicy = () => {
                 initial="hidden"
                 animate="visible"
                 variants={fadeIn}
-                className="max-w-4xl mx-auto px-4 py-12"
+                className="flex-grow max-w-[1920px] mx-auto px-4 py-12 w-full"
             >
                 <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div className="p-8 space-y-12 font-poppins">
