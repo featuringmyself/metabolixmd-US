@@ -171,7 +171,7 @@ const NavBar = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="fixed inset-0 bg-white z-50 mt-[72px]"
+                    className="fixed inset-0 bg-black !important z-50 mt-[72px]"
                   >
                     {/* Close Button */}
                     <motion.button
@@ -193,7 +193,7 @@ const NavBar = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
                       transition={{ duration: 0.3, delay: 0.1 }}
-                      className="flex flex-col items-center justify-center min-h-[calc(100vh-72px)] gap-8 p-4"
+                      className="flex flex-col items-center justify-center min-h-[calc(100vh-72px)] gap-8 p-4 bg-black "
                     >
                       {/* Logo at the top */}
                       <motion.div
