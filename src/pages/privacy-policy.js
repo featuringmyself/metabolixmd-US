@@ -50,11 +50,11 @@ const PrivacyPolicy = () => {
 
                             {/* Information Collection */}
                             <motion.section variants={fadeIn} className="prose max-w-none">
-                                <div className="bg-primary/5 p-4 rounded-xl">
+                                <div className="bg-primary/5 p-2 rounded-xl">
                                     <h2 className="text-2xl font-semibold text-primary mb-4">Information We Collect</h2>
                                     <div className="text-gray-700">
                                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                            <div className="bg-white p-4 rounded-lg shadow-sm">
+                                            <div className="bg-white p-1 rounded-lg shadow-sm">
                                                 <h3 className="text-lg font-medium text-primary mb-3">Personal Information</h3>
                                                 <ul className="space-y-2 text-gray-700">
                                                     <li>Name, address, email</li>
