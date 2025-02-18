@@ -9,7 +9,7 @@ const Footer = () => {
     return (
         <div className='mt-auto' >
             <FloatingButton />
-            <section id="bottom-footer" className=' bg-black p-5 md:pb-20 flex items-center '>
+            <section id="bottom-footer" className=' bg-black p-5 pb-20 flex items-center '>
                 <div className='flex w-full flex-col   gap-10'>
                     <div className=' text-white flex md:flex-row flex-col justify-evenly'>
                         
