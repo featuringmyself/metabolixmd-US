@@ -9,11 +9,54 @@ const Footer = () => {
     return (
         <div className='mt-auto' >
             <FloatingButton />
-            <section id="bottom-footer" className=' bg-black p-5 py-20 flex items-center '>
+            <section id="bottom-footer" className=' bg-black p-5 md:pb-20 flex items-center '>
                 <div className='flex w-full flex-col   gap-10'>
-                    <div className=' text-white flex md:flex-row flex-col justify-between'>
-                        <div className='flex flex-col justify-center items-center'>
-                            <div className="flex items-center gap-4">
+                    <div className=' text-white flex md:flex-row flex-col justify-evenly'>
+                        
+                        <div className='gap-2 capitalize flex-col font-bold items-center justify-center text-2xl md:mt-0 mt-12 flex'>
+                            <Link
+                                href="/"
+                                className={`cursor-pointer tracking-widest text-sm hover:font-bold hover:text-[#015c04] uppercase ${
+                                pathname === "/" ? "font-bold text-primary text-lg" : ""
+                                }`}
+                            >
+                                Home
+                            </Link>
+                            <Link
+                                href="/about-us"
+                                className={`cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase ${
+                                pathname === "/about-us" ? "font-bold text-primary text-lg" : ""
+                                }`}
+                            >
+                                About
+                            </Link>
+                            <Link
+                                href="/contact-us"
+                                className="cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase"
+                            >
+                                Contact Us
+                            </Link>
+                            </div>
+
+                        <div className='flex flex-col items-center justify-center gap-2'>
+                            <p className='mt-1 mx-2 '>
+                                <Link href="/privacy-policy" className='font-semibold hover:text-[#015c04]'>
+                                    Privacy Policy
+                                </Link>
+                            </p>
+                            <p className='md:mt-1 mt-0 mx-2 '>
+                                <Link href="/refund-policy" className='font-semibold hover:text-[#015c04]'>
+                                Refund Policy
+                                </Link>
+                            </p>
+                            <p className='mt-5 md:mt-1 mx-2'>
+                                <Link href="mailto:consultant@metabolixmd.com"><b> Email:</b> consultant@metabolixmd.com</Link>
+                            </p>
+                        </div>
+                       
+                    </div>
+                    <div className='flex flex-col justify-center items-center'>
+                            <div className="flex items-center justify-between gap-4 w-[90vw] flex-row-reverse">
                                 <a href="https://www.legitscript.com/websites/?checker_keywords=metabolixmd.com" target="_blank" title="Verify LegitScript Approval for www.metabolixmd.com" className='flex'>
                                     <img src="https://static.legitscript.com/seals/38388756.png" alt="Verify Approval for www.metabolixmd.com" width="73" height="79" />
                                 </a>
@@ -31,7 +74,7 @@ const Footer = () => {
 
                             <div className="mt-6 mx-2">
 
-                                <div className="flex  items-center  gap-2">
+                                <div className="flex items-start gap-2">
 
                                     <p className="text-white f-700"><b>Follow us</b></p>
                                     <Link href="https://www.facebook.com" target='_blank'>
@@ -129,48 +172,6 @@ const Footer = () => {
                                 </div>  
                             </div>
                         </div>
-                        <div className='gap-2 capitalize flex-col font-bold items-center justify-center text-2xl md:mt-0 mt-12 flex'>
-                            <Link
-                                href="/"
-                                className={`cursor-pointer tracking-widest text-sm hover:font-bold hover:text-[#015c04] uppercase ${
-                                pathname === "/" ? "font-bold text-primary text-lg" : ""
-                                }`}
-                            >
-                                Home
-                            </Link>
-                            <Link
-                                href="/about-us"
-                                className={`cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase ${
-                                pathname === "/about-us" ? "font-bold text-primary text-lg" : ""
-                                }`}
-                            >
-                                About
-                            </Link>
-                            <Link
-                                href="/contact-us"
-                                className="cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase"
-                            >
-                                Contact Us
-                            </Link>
-                            </div>
-
-                        <div className='flex flex-col items-center justify-center gap-2'>
-                            <p className='mt-1 mx-2 '>
-                                <Link href="/privacy-policy" className='font-semibold hover:text-[#015c04]'>
-                                    Privacy Policy
-                                </Link>
-                            </p>
-                            <p className='md:mt-1 mt-0 mx-2 '>
-                                <Link href="/refund-policy" className='font-semibold hover:text-[#015c04]'>
-                                Refund Policy
-                                </Link>
-                            </p>
-                            <p className='mt-5 md:mt-1 mx-2'>
-                                <Link href="mailto:consultant@metabolixmd.com"><b> Email:</b> consultant@metabolixmd.com</Link>
-                            </p>
-                        </div>
-                       
-                    </div>
                     <p className="text-sm text-gray-500 mt-auto text-center">&copy; {new Date().getFullYear()} MetabolixMD. All rights reserved.</p>
                     
                 </div>
