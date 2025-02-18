@@ -153,7 +153,7 @@ const WeightLossMedication = () => {
                     variants={fadeInUp}
                     className='flex-1 flex text-center md:text-start flex-col justify-center    px-2 md:px-10'
                 >
-                    <h1 className='text-4xl font-kanit font-medium text-wrap'>
+                    <h1 className='text-4xl font-kanit font-normal text-wrap'>
                         {/* Get Access to prescription<br />
                         <b className='text-orange-500 text-wrap'>Weight Loss </b>
                         Medication Online */}
