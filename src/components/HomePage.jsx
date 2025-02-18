@@ -153,11 +153,11 @@ const WeightLossMedication = () => {
                     variants={fadeInUp}
                     className='flex-1 flex text-center md:text-start flex-col justify-center    px-2 md:px-10'
                 >
-                    <h1 className='text-4xl    font-medium text-wrap'>
+                    <h1 className='text-4xl font-kanit font-medium text-wrap'>
                         {/* Get Access to prescription<br />
                         <b className='text-orange-500 text-wrap'>Weight Loss </b>
                         Medication Online */}
-                        Unlock your metabolic health and <br /> weight loss potential with
+                        <span className="">Unlock Your Metabolic Health and </span> <br /> weight loss potential with
                     </h1>
                     <motion.img 
                         initial={{ scale: 0.8, opacity: 0 }}

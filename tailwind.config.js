@@ -40,6 +40,7 @@ module.exports = {
       fontFamily: {
         montserrat: ['var(--font-montserrat)'],
         poppins: ['var(--font-poppins)'],
+        kanit: ['var(--font-kanit)']
       },
       gridTemplateColumns: {
         userTable: "180px 250px 160px 100px ",
