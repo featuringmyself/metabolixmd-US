@@ -13,7 +13,10 @@ const Footer = () => {
                 <div className='flex w-full flex-col   gap-10'>
                     <div className=' text-white flex md:flex-row flex-col justify-between'>
                         <div className='flex flex-col justify-center items-center'>
-                            <div className="flex flex-col items-center gap-4">
+                            <div className="flex items-center gap-4">
+                                <a href="https://www.legitscript.com/websites/?checker_keywords=metabolixmd.com" target="_blank" title="Verify LegitScript Approval for www.metabolixmd.com" className='flex'>
+                                    <img src="https://static.legitscript.com/seals/38388756.png" alt="Verify Approval for www.metabolixmd.com" width="73" height="79" />
+                                </a>
                                 <Link href="/" className="cursor-pointer">
                                     <Image 
                                         src="/images/logo-white.webp" 
@@ -22,6 +25,7 @@ const Footer = () => {
                                         height={50} 
                                         className="w-[150px] md:w-[200px] h-auto"
                                     />
+                                    
                                 </Link>
                             </div>
 
@@ -168,6 +172,7 @@ const Footer = () => {
                        
                     </div>
                     <p className="text-sm text-gray-500 mt-auto text-center">&copy; {new Date().getFullYear()} MetabolixMD. All rights reserved.</p>
+                    
                 </div>
                 
             </section>
