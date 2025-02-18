@@ -62,11 +62,11 @@ const Footer = () => {
                                 </a>
                                 <Link href="/" className="cursor-pointer">
                                     <Image 
-                                        src="/images/logo-white.webp" 
+                                        src="/images/orange-logo.webp" 
                                         alt="MetabolixMD Logo" 
                                         width={200} 
                                         height={50} 
-                                        className="w-[150px] md:w-[200px] h-auto"
+                                        className="w-[200px] md:w-[250px] h-auto"
                                     />
                                     
                                 </Link>
