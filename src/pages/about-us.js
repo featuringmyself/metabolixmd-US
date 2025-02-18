@@ -42,6 +42,36 @@ const expertDetails = [
         )
     },
     {
+        route: "about-gulrezguskhan",
+        img: "/images/dr6.webp",
+        name: "Gulrez Gus Khan",
+        subName: "MBA",
+        isApproved: true,
+        mainRole: "Chief Liaison Officer",
+        designation: "Board Director",
+        detailedJob: "",
+        description: (
+            <div className='text-lg'>
+                <p className='mt-3'>
+                    MetabolixMD is proud to announce the appointment of distinguished healthcare entrepreneur and political leader <strong>Dr. Gulrez Khan</strong> as its newest board director. Affectionately known as "Gus" among his peers, Khan is the co-owner of the esteemed American Star Home Health & Hospice Care, Inc., based in Lubbock, Texas. With over 15 years of expertise in healthcare management, development, operations, and entrepreneurship, he brings a wealth of knowledge and leadership to our organization.
+                </p>
+                <p className='mt-3'>
+                    Beyond his business success, Khan is an influential figure in the Republican Party, currently serving as a precinct chair and chairman of the Resolutions Committee for the Lubbock County GOP. Earlier this year, he was honored as an invitee to President Donald J. Trump’s inauguration ceremony. In 2024, he ran in the Republican primary for U.S. Congress in Texas District 32 and was elected as a National Delegate to the Republican National Convention in Milwaukee. He also campaigned for Mayor of Lubbock in 2022.
+                </p>
+                <p className='mt-3'>
+                    Khan is deeply committed to philanthropy, having played a pivotal role in fundraising efforts for organizations such as the American Heart Association, Ronald McDonald House Charities, Lubbock Monterey AMBUCS, and Boys &amp; Girls Clubs of America. His dedication extends to serving on several nonprofit boards and committees, including the Lubbock Pediatric Cancer Association, South Plains Food Bank, Center for Global Understanding, United States Global Leadership Coalition, American Premier League, Premium Aussies, and Being Sportsman.
+                </p>
+                <p className='mt-3'>
+                    In addition to his work in healthcare, politics, and philanthropy, "Gus" is a published author with multiple books available on Amazon, inspiring readers worldwide.
+                </p>
+                <p className='mt-3'>
+                    We are thrilled to welcome Gulrez Khan to MetabolixMD and are confident that his leadership and vision will drive our organization to new heights.
+                </p>
+
+            </div>
+        )
+    },
+    {
         route: "about-mohit",
         img: "/images/dr4.webp",
         name: "Mohit Chawla",
@@ -187,7 +217,7 @@ const AboutUs = () => {
                     className="max-w-7xl mx-auto px-4 pt-24 pb-16"
                 >
                     {/* Hero Section */}
-                    <motion.div 
+                    <motion.div
                         variants={fadeInUp}
                         className="text-center mb-16"
                     >
@@ -200,7 +230,7 @@ const AboutUs = () => {
                     </motion.div>
 
                     {/* Expert Cards Grid */}
-                    <motion.div 
+                    <motion.div
                         variants={staggerContainer}
                         className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8"
                     >
@@ -209,23 +239,23 @@ const AboutUs = () => {
                                 key={expert.route}
                                 variants={fadeInUp}
                                 initial={{ opacity: 0, y: 20 }}
-                                animate={{ 
-                                    opacity: 1, 
+                                animate={{
+                                    opacity: 1,
                                     y: 0,
                                     filter: hoveredExpert && hoveredExpert !== expert.route ? 'blur(2px)' : 'blur(0px)',
                                     scale: hoveredExpert === expert.route ? 1.01 : 1,
                                 }}
-                                transition={{ 
+                                transition={{
                                     duration: 0.5,
-                                    delay: index * 0.1 
+                                    delay: index * 0.1
                                 }}
                                 onHoverStart={() => setHoveredExpert(expert.route)}
                                 onHoverEnd={() => setHoveredExpert(null)}
                                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                                 <div className="relative h-[600px] overflow-hidden">
-                                    <motion.img 
-                                        src={expert.img} 
+                                    <motion.img
+                                        src={expert.img}
                                         alt={expert.name}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102"
                                     />
@@ -263,13 +293,13 @@ const AboutUs = () => {
                     </motion.div>
                 </motion.div>
             ) : (
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="pt-24 pb-16 px-4"
                 >
                     <div className="max-w-7xl mx-auto">
-                        <button 
+                        <button
                             onClick={() => router.push('/about-us')}
                             className="mb-8 flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
                         >
@@ -281,11 +311,10 @@ const AboutUs = () => {
 
                         <div className="bg-white rounded-2xl shadow-soft p-8 md:p-12">
                             <div className="grid md:grid-cols-2 gap-8 items-start">
-                                <div className={`relative w-full ${
-                                    activeExpert.name === "Ashley Donaldson" || activeExpert.name === "Raj Sabar" 
-                                    ? "aspect-[4/5]" 
-                                    : "aspect-[3/4]"
-                                } rounded-xl overflow-hidden bg-gray-100`}>
+                                <div className={`relative w-full ${activeExpert.name === "Ashley Donaldson" || activeExpert.name === "Raj Sabar"
+                                        ? "aspect-[4/5]"
+                                        : "aspect-[3/4]"
+                                    } rounded-xl overflow-hidden bg-gray-100`}>
                                     <Image
                                         src={activeExpert.img}
                                         alt={activeExpert.name}
@@ -293,10 +322,10 @@ const AboutUs = () => {
                                         className="object-contain"
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                         priority
-                                        style={{ 
+                                        style={{
                                             objectPosition: 'top',
-                                            objectFit: activeExpert.name === "Ashley Donaldson" || activeExpert.name === "Raj Sabar" 
-                                                ? "cover" 
+                                            objectFit: activeExpert.name === "Ashley Donaldson" || activeExpert.name === "Raj Sabar"
+                                                ? "cover"
                                                 : "contain"
                                         }}
                                     />
@@ -320,7 +349,7 @@ const AboutUs = () => {
                     </div>
                 </motion.div>
             )}
-            
+
             <Footer />
         </div>
     )
