@@ -61,13 +61,22 @@ const Footer = () => {
                                     <img src="https://static.legitscript.com/seals/38388756.png" alt="Verify Approval for www.metabolixmd.com" width="73" height="79" />
                                 </a>
                                 <Link href="/" className="cursor-pointer">
-                                    <Image 
-                                        src="/images/orange-logo.webp" 
-                                        alt="MetabolixMD Logo" 
-                                        width={200} 
-                                        height={50} 
-                                        className="w-[200px] md:w-[250px] h-auto"
-                                    />
+                                    <div className='flex items-center justify-center'>
+                                        <Image 
+                                            src="/images/orange-icon.webp" 
+                                            alt="MetabolixMD Icon" 
+                                            width={619} 
+                                            height={498} 
+                                            className="w-[40px] md:w-[50px] h-fit"
+                                        />
+                                        <Image 
+                                            src="/images/logo-white.webp" 
+                                            alt="MetabolixMD Logo" 
+                                            width={470} 
+                                            height={77} 
+                                            className="w-[150px] md:w-[250px] h-fit"
+                                        />
+                                    </div>
                                     
                                 </Link>
                             </div>
