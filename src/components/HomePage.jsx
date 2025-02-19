@@ -247,7 +247,7 @@ const WeightLossMedication = () => {
                                         <motion.div
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            className="hidden md:block w-full flex justify-center md:justify-start"
+                                            className="md:block w-full flex justify-center md:justify-start"
                                         >
                                             <Link 
                                                 href="/profile-details" 
@@ -284,7 +284,7 @@ const WeightLossMedication = () => {
                                             </Link>
                                         </motion.div>
                                         :
-                                        <motion.div className="hidden md:block w-full flex justify-center md:justify-start">
+                                        <motion.div className=" md:block w-full flex justify-center md:justify-start">
                                             <Link 
                                                 href="/get-started" 
                                                 className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-6"
@@ -321,7 +321,7 @@ const WeightLossMedication = () => {
                                         </motion.div>
                                 )
                                 :
-                                <motion.div className="hidden md:block w-full flex justify-center md:justify-start">
+                                <motion.div className=" md:block w-full flex justify-center md:justify-start">
                                     <Link 
                                         href="/login" 
                                         className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-6"
