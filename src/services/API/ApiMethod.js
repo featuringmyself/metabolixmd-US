@@ -4,11 +4,15 @@ import { setToken } from "../Auth/cookies";
 import { getAuthToken } from "./apiHelper";
 import { toast } from "react-toastify";
 
-
-
-
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+// Error handler for API responses
+const handleApiError = (error) => {
+    const message = error.response?.data?.message || error.message || 'An error occurred';
+    toast.error(message);
+    return { error: message };
+};
 
 
 export async function tokenValidator() {

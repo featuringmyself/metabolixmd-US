@@ -18,6 +18,7 @@ const NavBar = () => {
   const router = useRouter()
   const [token, setToken] = useState("")
   const [isOpen, setIsOpen] = useState(false);
+  const [resourcesDropdown, setResourcesDropdown] = useState(false);
 
   const handleLogout = () => {
     logOut()
@@ -85,45 +86,45 @@ const NavBar = () => {
               />
             </Link>
 
-            {/* Navigation Links - Desktop */}
-            <div className="hidden md:flex items-center gap-8 relative z-10">
-              <Link 
-                href="/" 
-                className={`cursor-pointer tracking-wider font-poppins hover:text-[#015c04] text-sm hover:font-semibold uppercase ${
-                  router.pathname == "/" ? "font-semibold text-primary text-base" : ''
-                }`}
-              >
-                Home
-              </Link>
+            {/* Spacer to push navigation to right */}
+            <div className="flex-grow"></div>
+
+            {/* Navigation Links - Desktop - Now positioned to the right */}
+            <div className="hidden md:flex items-center gap-8 relative z-10 mr-8">
               <Link 
                 href="/about-us" 
-                className={`cursor-pointer text-sm font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold uppercase ${
+                className={`cursor-pointer text-sm font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
                   router.pathname == "/about-us" ? "font-semibold text-primary text-base" : ''
                 }`}
               >
-                About
+                About Us
               </Link>
               <Link 
-                href="/contact-us" 
-                className='cursor-pointer text-sm font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold uppercase'
+                href="/services" 
+                className={`cursor-pointer text-sm font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
+                  router.pathname == "/services" ? "font-semibold text-primary text-base" : ''
+                }`}
               >
-                Contact Us
+                Services
               </Link>
-              <Link 
-                href="/privacy-policy" 
-                className='cursor-pointer text-sm font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold uppercase'
-              >
-                Privacy Policy
-              </Link>
-              {
-                user?.__t =="Admin" && 
-                <Link 
-                  href="/admin/users" 
-                  className='cursor-pointer text-sm font-poppins tracking-wider hidden lg:block hover:font-semibold uppercase'
+              <div className="relative">
+                <button 
+                  className="cursor-pointer text-sm font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold flex items-center gap-1"
+                  onClick={() => setResourcesDropdown(!resourcesDropdown)}
                 >
-                  Admin
-                </Link>
-              }
+                  Resources
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {resourcesDropdown && (
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-20">
+                    <Link href="/resources/blog" className="block px-4 py-2 text-sm hover:bg-gray-100">Blog</Link>
+                    <Link href="/resources/faq" className="block px-4 py-2 text-sm hover:bg-gray-100">FAQ</Link>
+                    <Link href="/resources/guides" className="block px-4 py-2 text-sm hover:bg-gray-100">Guides</Link>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -213,9 +214,9 @@ const NavBar = () => {
 
                       {/* Navigation Links */}
                       {[
-                        { href: "/", label: "Home" },
-                        { href: "/about-us", label: "About" },
-                        { href: "/contact-us", label: "Contact" }
+                        { href: "/about-us", label: "About Us" },
+                        { href: "/services", label: "Services" },
+                        { href: "/resources", label: "Resources" }
                       ].map((link, index) => (
                         <motion.div
                           key={link.href}
@@ -248,7 +249,7 @@ const NavBar = () => {
                             onClick={() => setIsOpen(false)}
                             className="bg-primary text-white px-8 py-3 rounded-full hover:bg-primary/90 transition-colors"
                           >
-                            Login
+                            Sign In
                           </Link>
                         </motion.div>
                       )}
@@ -258,8 +259,8 @@ const NavBar = () => {
               )}
             </AnimatePresence>
 
-            {/* User Section */}
-            <div className='hidden md:flex items-center gap-5'>
+            {/* Action Buttons */}
+            <div className='hidden md:flex items-center gap-4'>
               {(token) ? (
                 <div className="flex items-center gap-4">
                   <Link href="/profile-details" className="flex items-center gap-2 font-montserrat">
@@ -272,12 +273,20 @@ const NavBar = () => {
                   </Link>
                 </div>
               ) : (
-                <Link
-                  href="/login"
-                  className='text-lg px-8 p-2 rounded-full font-montserrat font-medium border w-fit cursor-pointer hover:border-orange-400 hover:text-orange-400 transition-colors'
-                >
-                  Login
-                </Link>
+                <>
+                  <Link
+                    href="/login"
+                    className='text-sm px-6 py-2 rounded-full font-montserrat font-medium border border-gray-300 hover:border-primary hover:text-primary transition-colors'
+                  >
+                    Sign in
+                  </Link>
+                  <Link
+                    href="/register"
+                    className='text-sm px-6 py-2 rounded-full font-montserrat font-medium bg-primary text-white hover:bg-primary/90 transition-colors'
+                  >
+                    Get Started
+                  </Link>
+                </>
               )}
             </div>
           </div>

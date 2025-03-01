@@ -169,40 +169,32 @@ const WeightLossMedication = () => {
         hidden: { x: -100, opacity: 0 },
         visible: { x: 0, opacity: 1, transition: { duration: 0.6 } }
     };
-
     // Add this new animation variant
     const cardVariants = {
         hover: { scale: 1.05 },
         initial: { scale: 1 }
     };
-
     // Add this function at the top of your component
     const scrollToSafety = (e) => {
         e.preventDefault();
         const safetySection = document.getElementById('safety');
         safetySection.scrollIntoView({ behavior: 'smooth' });
     };
-
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % testimonials.length);
         }, 5000); // Change slide every 5 seconds
-
-        return () => clearInterval(interval);
+    return () => clearInterval(interval);
     }, [testimonials.length]);
-
     // Update the slider to show 3 reviews on desktop
     const slidesPerView = isMobile ? 1 : 3;
     const maxSlide = testimonials.length - slidesPerView;
-
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev >= maxSlide ? 0 : prev + 1));
     };
-
     const prevSlide = () => {
         setCurrentSlide((prev) => (prev <= 0 ? maxSlide : prev - 1));
     };
-
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 768);
@@ -211,19 +203,17 @@ const WeightLossMedication = () => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
     // Add this function to handle weight changes
     const handleWeightChange = (weight) => {
         setCurrentWeight(weight);
         // Calculate 20% of current weight
         setWeightLoss(Math.round(weight * 0.20));
     };
-
     return (
         <div className='font-tt-hoves mt-20 overflow-x-hidden'>
             <div className='container mx-auto px-4 md:px-[10vw]'>
                 <NavBar />
-
+    
                 <motion.section 
                     initial="hidden"
                     animate="visible"
@@ -235,9 +225,9 @@ const WeightLossMedication = () => {
                         className='flex-1 flex text-center lg:text-start flex-col justify-center px-0 md:px-10'
                     >
                         <h1 className='text-4xl md:text-7xl font-medium mb-4 md:mb-5 text-wrap'>
-                            Your Personalised <br /> Weight Loss <span className='text-zinc-400'>Journey <br /> Starts Here</span>
+                        <span className='text-[#365D56]'>Your Personalised <br /> Weight Loss</span> <span className='text-zinc-800'>Journey <br /> Starts Here</span>
                         </h1>
-                        <p className='mt-2 md:mt-3 text-base md:text-lg mb-4 md:mb-5 text-zinc-800 font-medium'>
+                        <p className='mt-2 md:mt-3 font-light md:text-lg mb-4 md:mb-5 text-zinc-600 w-[80%]'>
                             Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
                         </p>
                         {
@@ -357,7 +347,7 @@ const WeightLossMedication = () => {
                                     </Link>
                                 </motion.div>
                         }
-
+    
                         <div className='flex justify-center md:justify-start items-center gap-4 my-5'>
                             <Link 
                                 href="#safety" 
@@ -366,7 +356,7 @@ const WeightLossMedication = () => {
                             >
                                 Important safety information
                             </Link>
-
+    
                             <Link 
                                 href="#safety" 
                                 onClick={scrollToSafety}
@@ -379,14 +369,15 @@ const WeightLossMedication = () => {
                             </Link>
                         </div>
                     </motion.div>
-
+    
                     {/* Static Hero Image with Floating Image */}
                     <motion.div 
                         className='min-h-[50vh] md:min-h-[85vh] flex-1 justify-center items-center flex relative'
                     >
-                        <div className="relative w-full md:w-[70%] mx-auto h-full">
+                        <div className="relative w-full md:w-[60%] mx-auto h-full">
+                            <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent z-10"></div>
                             <Image 
-                                src="/images/hero-image.webp" 
+                                src="/images/hero.jpg" 
                                 alt="Weight loss medication"
                                 width={400}
                                 height={600}
@@ -395,7 +386,7 @@ const WeightLossMedication = () => {
                             />
                             
                             {/* Floating Image overlaying the hero image */}
-                            <div className="absolute bottom-5 right-5 z-10">
+                            <div className="absolute bottom-5 right-5 z-20">
                                 <motion.div
                                     initial={{ scale: 0.9, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
@@ -437,7 +428,7 @@ const WeightLossMedication = () => {
                                     Start Your Journey Now
                                 </Link>
                             </div>
-
+    
                             {/* Steps */}
                             <div className="space-y-2">
                                 {[
@@ -461,7 +452,7 @@ const WeightLossMedication = () => {
                                 ))}
                             </div>
                         </div>
-
+    
                         {/* Right side: Image and description */}
                         <div className="flex-1">
                             <motion.div
@@ -504,7 +495,7 @@ const WeightLossMedication = () => {
                                 Why Thousands<br />Trust Us with<br />Their Weight<br />Loss Goals
                             </h2>
                         </div>
-
+    
                         {/* Right side - Grid */}
                         <div className="flex-1">
                                 <div className="grid grid-cols-2 gap-4 mt-8">
@@ -517,7 +508,7 @@ const WeightLossMedication = () => {
                                     </div>
                                         <h3 className="text-lg md:text-xl font-medium mb-2">Same-day appointment,<br />2 day delivery</h3>
                                 </div>
-
+    
                                 {/* Box 2 */}
                                     <div className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-colors h-full">
                                     <div className="bg-orange-50 w-12 h-12 rounded-full flex items-center justify-center mb-4">
@@ -527,7 +518,7 @@ const WeightLossMedication = () => {
                                     </div>
                                         <h3 className="text-lg md:text-xl font-medium mb-2">Access to US-Licensed Physicians</h3>
                                 </div>
-
+    
                                 {/* Box 3 */}
                                     <div className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-colors h-full">
                                     <div className="bg-orange-50 w-12 h-12 rounded-full flex items-center justify-center mb-4">
@@ -537,7 +528,7 @@ const WeightLossMedication = () => {
                                     </div>
                                         <h3 className="text-lg md:text-xl font-medium mb-2">Highest Quality,<br />Lab-Tested GLP-1 Medications</h3>
                                 </div>
-
+    
                                 {/* Box 4 */}
                                     <div className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-colors h-full">
                                     <div className="bg-orange-50 w-12 h-12 rounded-full flex items-center justify-center mb-4">
@@ -551,7 +542,7 @@ const WeightLossMedication = () => {
                         </div>
                     </div>
                 </motion.section>
-
+    
                     {/* Reviews Section - Now directly below the trust section */}
                     <div className="mt-20 pt-10 border-t">
                         <h2 className="text-3xl md:text-4xl font-medium text-center mb-12">
@@ -581,10 +572,10 @@ const WeightLossMedication = () => {
                                                     </svg>
                                                 ))}
                                             </div>
-
+    
                                             {/* Review Text */}
                                             <p className="text-base italic mb-6 line-clamp-4">{testimonial.review}</p>
-
+    
                                             {/* User Info */}
                                             <div className="flex items-center gap-3 mt-auto">
                                                 <div className="w-10 h-10 rounded-full overflow-hidden">
@@ -603,7 +594,7 @@ const WeightLossMedication = () => {
                                 ))}
                             </div>
                         </div>
-
+    
                         {/* Navigation Buttons */}
                         <div className="flex items-center justify-center gap-4 mt-8">
                             <button 
@@ -624,7 +615,7 @@ const WeightLossMedication = () => {
                             </button>
                         </div>
                     </div>
-
+    
                     {/* GLP-1 Drugs Section */}
                     <motion.section 
                         initial={{ opacity: 0, y: 20 }}
@@ -652,7 +643,7 @@ const WeightLossMedication = () => {
                                     What they are, how they function to support weight loss, and why they are effective.
                                 </p>
                             </div>
-
+    
                             <div className="grid md:grid-cols-2 gap-6">
                                 {/* First Card */}
                                 <div className="bg-white p-6 rounded-3xl">
@@ -677,7 +668,7 @@ const WeightLossMedication = () => {
                                         </Link>
                                     </div>
                                 </div>
-
+    
                                 {/* Second Card */}
                                 <div className="bg-white p-6 rounded-3xl">
                                     <div className="bg-[#f8faf9] p-6 rounded-3xl relative">
@@ -704,7 +695,7 @@ const WeightLossMedication = () => {
                         </div>
                     </div>
                 </motion.section>
-
+    
                 {/* Weight Loss Calculator Section */}
                 <motion.section 
                     initial={{ opacity: 0, y: 20 }}
@@ -726,7 +717,7 @@ const WeightLossMedication = () => {
                                     Get Started
                                 </Link>
                             </div>
-
+    
                             {/* Right side - Calculator Card */}
                             <div className="flex-1 font-montserrat">
                                 <div className="bg-white p-8 rounded-3xl max-w-none md:max-w-[500px] ml-auto">
@@ -778,7 +769,7 @@ const WeightLossMedication = () => {
                                                 }}
                                             />
                                         </div>
-
+    
                                         {/* Weight Loss Projection */}
                                         <div>
                                             <div className="flex justify-between items-center">
@@ -797,7 +788,7 @@ const WeightLossMedication = () => {
                         </div>
                     </div>
                 </motion.section>
-
+    
                 {/* Lab Tested Section - Moved here */}
                 <motion.section 
                     initial={{ opacity: 0, y: 20 }}
@@ -816,7 +807,7 @@ const WeightLossMedication = () => {
                                     Filled the shipped same day as your appointment
                                 </p>
                             </div>
-
+    
                             {/* Right side - Images */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden">
@@ -840,7 +831,7 @@ const WeightLossMedication = () => {
                     </div>
                 </motion.section>
             </div>
-
+    
             <Footer />
         </div>
     )
