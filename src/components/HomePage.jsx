@@ -5,7 +5,8 @@ import FaqList from './Faq'
 import MeetExpertBackground from './MeetExpertBackground'
 import CompareModule from './CompareModule'
 
-import { getAuthToken } from '@/services/API/apiHelper'
+// Removing the auth token import
+// import { getAuthToken } from '@/services/API/apiHelper'
 import Link from 'next/link'
 import Footer from './Footer'
 
@@ -26,7 +27,8 @@ const cardContainerStyle = {
 };
 
 const WeightLossMedication = () => {
-    let token = getAuthToken()
+    // Removing token check
+    // let token = getAuthToken()
     const [userOrders, setUserOrders] = useState([]);
     const [hoveredCard, setHoveredCard] = useState(null);
     const [activeStep, setActiveStep] = useState('consultation');
@@ -125,6 +127,8 @@ const WeightLossMedication = () => {
     ];
 
     const getOrderDetails = async () => {
+        // Commenting out the API call to avoid auth dependencies
+        /*
         try {
             const res = await getMethod("/order/user");
             if (res) {
@@ -133,6 +137,7 @@ const WeightLossMedication = () => {
         } catch (e) {
             toast.error(e.message);
         }
+        */
     };
 
     useEffect(() => {
@@ -230,123 +235,42 @@ const WeightLossMedication = () => {
                         <p className='mt-2 md:mt-3 font-light md:text-lg mb-4 md:mb-5 text-zinc-600 w-[80%]'>
                             Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
                         </p>
-                        {
-                            (token) ?
-                                (
-                                    userOrders.length > 0 ?
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            className="md:block w-full flex justify-center md:justify-start"
-                                        >
-                                            <Link 
-                                                href="/profile-details" 
-                                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-6 md:px-8 w-[180px] md:w-[220px] text-white text-lg rounded-full mt-6"
-                                            >
-                                                <motion.div
-                                                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                                                    animate={{
-                                                        x: ['-100%', '100%'],
-                                                    }}
-                                                    transition={{
-                                                        duration: 2,
-                                                        repeat: Infinity,
-                                                        ease: "easeInOut"
-                                                    }}
-                                                />
-                                                <motion.span
-                                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300"
-                                                >
-                                                    GET STARTED
-                                                    <svg 
-                                                        xmlns="http://www.w3.org/2000/svg" 
-                                                        className="h-5 w-5" 
-                                                        viewBox="0 0 20 20" 
-                                                        fill="currentColor"
-                                                    >
-                                                        <path 
-                                                            fillRule="evenodd" 
-                                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                                                            clipRule="evenodd" 
-                                                        />
-                                                    </svg>
-                                                </motion.span>
-                                            </Link>
-                                        </motion.div>
-                                        :
-                                        <motion.div className=" md:block w-full flex justify-center md:justify-start">
-                                            <Link 
-                                                href="/get-started" 
-                                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-6"
-                                            >
-                                                <motion.div
-                                                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                                                    animate={{
-                                                        x: ['-100%', '100%'],
-                                                    }}
-                                                    transition={{
-                                                        duration: 2,
-                                                        repeat: Infinity,
-                                                        ease: "easeInOut"
-                                                    }}
-                                                />
-                                                <motion.span
-                                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300"
-                                                >
-                                                    GET STARTED
-                                                    <svg 
-                                                        xmlns="http://www.w3.org/2000/svg" 
-                                                        className="h-5 w-5" 
-                                                        viewBox="0 0 20 20" 
-                                                        fill="currentColor"
-                                                    >
-                                                        <path 
-                                                            fillRule="evenodd" 
-                                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                                                            clipRule="evenodd" 
-                                                        />
-                                                    </svg>
-                                                </motion.span>
-                                            </Link>
-                                        </motion.div>
-                                )
-                                :
-                                <motion.div className=" md:block w-full flex justify-center md:justify-start">
-                                    <Link 
-                                        href="/login" 
-                                        className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-6"
+                        {/* Replacing the conditional rendering with a simple button */}
+                        <motion.div className="md:block w-full flex justify-center md:justify-start">
+                            <Link 
+                                href="/get-started" 
+                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-6"
+                            >
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                                    animate={{
+                                        x: ['-100%', '100%'],
+                                    }}
+                                    transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                />
+                                <motion.span
+                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300"
+                                >
+                                    GET STARTED
+                                    <svg 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        className="h-5 w-5" 
+                                        viewBox="0 0 20 20" 
+                                        fill="currentColor"
                                     >
-                                        <motion.div
-                                            className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                                            animate={{
-                                                x: ['-100%', '100%'],
-                                            }}
-                                            transition={{
-                                                duration: 2,
-                                                repeat: Infinity,
-                                                ease: "easeInOut"
-                                            }}
+                                        <path 
+                                            fillRule="evenodd" 
+                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+                                            clipRule="evenodd" 
                                         />
-                                        <motion.span
-                                            className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300"
-                                        >
-                                            GET STARTED
-                                            <svg 
-                                                xmlns="http://www.w3.org/2000/svg" 
-                                                className="h-5 w-5" 
-                                                viewBox="0 0 20 20" 
-                                                fill="currentColor"
-                                            >
-                                                <path 
-                                                    fillRule="evenodd" 
-                                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                                                    clipRule="evenodd" 
-                                                />
-                                            </svg>
-                                        </motion.span>
-                                    </Link>
-                                </motion.div>
-                        }
+                                    </svg>
+                                </motion.span>
+                            </Link>
+                        </motion.div>
     
                         <div className='flex justify-center md:justify-start items-center gap-4 my-5'>
                             <Link 
@@ -370,6 +294,8 @@ const WeightLossMedication = () => {
                         </div>
                     </motion.div>
     
+                    {/* Rest of the code remains unchanged */}
+                    
                     {/* Static Hero Image with Floating Image */}
                     <motion.div 
                         className='min-h-[50vh] md:min-h-[85vh] flex-1 justify-center items-center flex relative'
