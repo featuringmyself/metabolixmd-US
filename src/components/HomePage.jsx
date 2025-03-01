@@ -26,7 +26,7 @@ const cardContainerStyle = {
     }
 };
 
-const WeightLossMedication = () => {
+const HomePage = () => {
     // Removing token check
     // let token = getAuthToken()
     const [userOrders, setUserOrders] = useState([]);
@@ -335,76 +335,87 @@ const WeightLossMedication = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="p-6 md:p-10 bg-[#365d56] rounded-3xl mx-auto max-w-[1400px] my-16 md:my-32"
+                    className="p-6 md:p-10 bg-[#F6F6F3] rounded-3xl mx-auto max-w-[1400px] my-16 md:my-32"
                 >
-                    <div className="flex flex-col lg:flex-row gap-8 font-montserrat">
-                        {/* Left side: Title, description, button and steps */}
-                        <div className="flex-1 flex flex-col">
+                    {/* Step-by-Step Process heading and description */}
+                    <div className="flex flex-col md:flex-row items-start mb-16 font-inter">
+                        <div className="md:max-w-[50%]">
+                            <h2 className="text-4xl md:text-6xl font-semibold text-zinc-800">
+                                Step-by-Step Process
+                            </h2>
+                        </div>
+                        {/* <div className="md:max-w-[40%] mt-6 md:mt-0">
+                            <p className="text-zinc-600 mb-6">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra
+                            </p>
+                            <Link 
+                                href="/get-started"
+                                className="inline-block px-8 py-3 bg-white border border-zinc-200 text-zinc-800 rounded-full font-medium hover:bg-zinc-50 transition-colors"
+                            >
+                                Start Your Journey Now
+                            </Link>
+                        </div> */}
+                    </div>
+                    
+                    <div className="flex flex-col-reverse lg:flex-row gap-8 font-montserrat">
+                        {/* Left side: Number, Title, description */}
+                        <div className="flex-1 flex flex-col justify-center">
+                            {/* Orange numbered circle */}
+                            <div className="bg-orange-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-medium mb-6">
+                                {Object.keys(stepDetails).indexOf(activeStep) + 1}
+                            </div>
+                            
                             <div className="mb-8">
-                                <h2 className="text-4xl md:text-6xl text-white font-medium">
-                                    Step-by-Step<br />Process
+                                <h2 className="text-4xl md:text-6xl text-zinc-800 font-medium">
+                                    {stepDetails[activeStep].title}
                                 </h2>
-                                <p className="text-white/80 mt-4 max-w-xl">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra
+                                <p className="text-zinc-600 mt-4 max-w-xl">
+                                    {stepDetails[activeStep].description}
                                 </p>
                                 <Link 
                                     href="/get-started"
-                                    className="inline-block mt-8 px-8 py-3 bg-white text-[#365d56] rounded-full font-medium hover:bg-white/90 transition-colors"
+                                    className="inline-block mt-8 px-8 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-colors"
                                 >
                                     Start Your Journey Now
                                 </Link>
                             </div>
-    
-                            {/* Steps */}
-                            <div className="space-y-2">
-                                {[
-                                    { id: '01', title: 'Consultation' },
-                                    { id: '02', title: 'Rx Approval' },
-                                    { id: '03', title: 'Start Treatment' },
-                                    { id: '04', title: 'Ongoing Support' }
-                                ].map((step) => (
-                                    <motion.button
-                                        key={step.id}
-                                        onClick={() => setActiveStep(step.title.toLowerCase())}
-                                        className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
-                                            activeStep === step.title.toLowerCase()
-                                            ? "bg-[#1b3530] text-white" 
-                                            : "bg-[#2b4a44] text-white/80 hover:bg-[#1b3530]"
-                                        }`}
-                                    >
-                                        <span className="text-lg">{step.title}</span>
-                                        <span className="text-white/60 text-base">{step.id}</span>
-                                    </motion.button>
-                                ))}
-                            </div>
                         </div>
-    
-                        {/* Right side: Image and description */}
+                        {/* Right side: Image with process steps overlay */}
                         <div className="flex-1">
-                            <motion.div
-                                key={activeStep}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="bg-[#1b3530] rounded-3xl overflow-hidden h-full"
-                            >
-                                <div className="relative h-[250px] md:h-[300px]">
-                                    <Image
-                                        src={stepDetails[activeStep].image}
-                                        alt={stepDetails[activeStep].title}
-                                        fill
-                                        className="object-cover"
-                                    />
+                            <div className="relative h-[500px] rounded-3xl overflow-hidden">
+                                {/* Main image */}
+                                <Image
+                                    src={stepDetails[activeStep].image}
+                                    alt={stepDetails[activeStep].title}
+                                    fill
+                                    className="object-cover"
+                                />
+                                
+                                {/* Process steps overlay - positioned differently based on screen size */}
+                                <div className="absolute inset-0 flex md:flex-col md:justify-center md:items-start p-6">
+                                    {/* Step buttons */}
+                                    <div className="md:space-y-3 flex md:flex-col flex-row gap-2 md:gap-0 absolute md:static bottom-4 left-0 right-0 justify-center md:justify-start">
+                                        {Object.entries(stepDetails).map(([key, step], index) => (
+                                            <button
+                                                key={key}
+                                                onClick={() => setActiveStep(key)}
+                                                className={`flex items-center gap-2 px-4 py-2 rounded-full ${
+                                                    activeStep === key
+                                                    ? "bg-orange-500 text-white"
+                                                    : "bg-[#F6F6F3] text-zinc-800 hover:bg-[#F6F6F3]/80"
+                                                } transition-all duration-200 ${
+                                                    index !== Object.entries(stepDetails).length - 1 ? "md:mb-3" : ""
+                                                }`}
+                                            >
+                                                <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-xs font-medium text-primary">
+                                                    {index + 1}
+                                                </div>
+                                                <span className="hidden md:inline font-medium">{step.title}</span>
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
-                                <div className="p-4">
-                                    <h3 className="text-xl text-white mb-2">
-                                        {stepDetails[activeStep].title}
-                                    </h3>
-                                    <p className="text-white/70 text-sm">
-                                        {stepDetails[activeStep].description}
-                                    </p>
-                                </div>
-                            </motion.div>
+                            </div>
                         </div>
                     </div>
                 </motion.section>
@@ -433,7 +444,7 @@ const WeightLossMedication = () => {
                                         </svg>
                                     </div>
                                         <h3 className="text-lg md:text-xl font-medium mb-2">Same-day appointment,<br />2 day delivery</h3>
-                                </div>
+                                    </div>
     
                                 {/* Box 2 */}
                                     <div className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-colors h-full">
@@ -443,7 +454,7 @@ const WeightLossMedication = () => {
                                         </svg>
                                     </div>
                                         <h3 className="text-lg md:text-xl font-medium mb-2">Access to US-Licensed Physicians</h3>
-                                </div>
+                                    </div>
     
                                 {/* Box 3 */}
                                     <div className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-colors h-full">
@@ -453,7 +464,7 @@ const WeightLossMedication = () => {
                                         </svg>
                                     </div>
                                         <h3 className="text-lg md:text-xl font-medium mb-2">Highest Quality,<br />Lab-Tested GLP-1 Medications</h3>
-                                </div>
+                                    </div>
     
                                 {/* Box 4 */}
                                     <div className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-colors h-full">
@@ -463,8 +474,8 @@ const WeightLossMedication = () => {
                                         </svg>
                                     </div>
                                         <h3 className="text-lg md:text-xl font-medium mb-2">Personalized<br />Treatment Plans</h3>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </motion.section>
@@ -618,8 +629,8 @@ const WeightLossMedication = () => {
                                         </Link>
                                     </div>
                                 </div>
+                            </div>
                         </div>
-                    </div>
                 </motion.section>
     
                 {/* Weight Loss Calculator Section */}
@@ -763,4 +774,4 @@ const WeightLossMedication = () => {
     )
 }
 
-export default WeightLossMedication
+export default HomePage
