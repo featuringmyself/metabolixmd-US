@@ -471,73 +471,61 @@ const HomePage = () => {
                     </div>
                 </motion.section>
     
-                    {/* Reviews Section - Now directly below the trust section */}
+                    {/* Reviews Section */}
                     <div className="mt-20 pt-10 border-t">
                         <h2 className="text-3xl md:text-4xl font-medium text-center mb-12">
                             What Our Patients Say
                         </h2>
                         
-                        <div className="relative overflow-hidden">
-                            <div 
-                                className="flex transition-transform duration-500 ease-in-out"
-                                style={{ 
-                                    transform: `translateX(-${currentSlide * (100 / slidesPerView)}%)`,
-                                    width: `${(testimonials.length / slidesPerView) * 100}%`
-                                }}
-                            >
-                                {testimonials.map((testimonial) => (
-                                    <div 
-                                        key={testimonial.id}
-                                        className="px-2 md:px-3"
-                                        style={{ width: `${100 / testimonials.length}%` }}
-                                    >
-                                        <div className="bg-[#f8faf9] p-6 md:p-8 rounded-2xl h-full">
-                                            {/* Star Rating */}
-                                            <div className="flex gap-1 mb-4">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <svg key={i} className="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                    </svg>
-                                                ))}
-                                            </div>
-    
-                                            {/* Review Text */}
-                                            <p className="text-base italic mb-6 line-clamp-4">{testimonial.review}</p>
-    
-                                            {/* User Info */}
-                                            <div className="flex items-center gap-3 mt-auto">
-                                                <div className="w-10 h-10 rounded-full overflow-hidden">
-                                                    <Image 
-                                                        src={testimonial.image} 
-                                                        alt={testimonial.name}
-                                                        width={40}
-                                                        height={40}
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                </div>
-                                                <span className="font-medium text-sm">{testimonial.name}</span>
-                                            </div>
+                        <div className="relative max-w-3xl mx-auto px-4">
+                            <div className="overflow-hidden">
+                                <motion.div 
+                                    key={currentSlide}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="bg-[#f8faf9] p-6 md:p-8 rounded-2xl"
+                                >
+                                    <div className="flex flex-col items-center text-center">
+                                        <div className="mb-4">
+                                            <p className="text-lg md:text-xl text-gray-700">
+                                                {testimonials[currentSlide].review}
+                                            </p>
+                                        </div>
+                                        <div className="mt-4">
+                                            <p className="font-medium text-primary">
+                                                {testimonials[currentSlide].name}
+                                            </p>
                                         </div>
                                     </div>
+                                </motion.div>
+                            </div>
+                            
+                            {/* Progress Indicators */}
+                            <div className="flex justify-center gap-2 mt-6">
+                                {testimonials.map((_, index) => (
+                                    <div 
+                                        key={index}
+                                        className={`h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'w-8 bg-primary' : 'w-2 bg-gray-300'}`}
+                                    />
                                 ))}
                             </div>
-                        </div>
-    
-                        {/* Navigation Buttons */}
-                        <div className="flex items-center justify-center gap-4 mt-8">
+                            
+                            {/* Navigation Buttons */}
                             <button 
-                                onClick={prevSlide}
-                                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:border-orange-200 transition-colors"
+                                onClick={() => setCurrentSlide((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
+                                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md hover:bg-white transition-all"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                 </svg>
                             </button>
                             <button 
-                                onClick={nextSlide}
-                                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:border-orange-200 transition-colors"
+                                onClick={() => setCurrentSlide((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))}
+                                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md hover:bg-white transition-all"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                             </button>
