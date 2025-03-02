@@ -22,10 +22,9 @@ const MeetExpertBackground = ({route, name, subName, mainRole, designation,isApp
 
 
             </div>
-            <div className='text-primary text-right mt-2'>
-                <p className='font-semibold text-2xl flex items-center justify-end gap-2'>{name}, {subName} {isApproved && <ApproveIcon/>}</p>
-                {/* <p className='font-semibold text-2xl'></p> */}
-                <p className='text-[#ff8c2c] text-lg'>{mainRole && <b>{mainRole},</b>} {designation}</p>
+            <div className='text-primary mt-2'>
+                <p className='font-semibold text-2xl flex items-center gap-2'>{name}, {subName} {isApproved && <ApproveIcon/>}</p>
+                <p className='text-[#ff8c2c] text-lg flex items-center gap-2'>{mainRole && <b>{mainRole},</b>} {designation}</p>
             </div>
         </Link>
     )
