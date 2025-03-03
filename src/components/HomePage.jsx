@@ -5,6 +5,7 @@ import FaqList from './Faq'
 import MeetExpertBackground from './MeetExpertBackground'
 import CompareModule from './CompareModule'
 import GLP1Section from './GLP1Section'
+import TrustSection from './TrustSection'
 
 // Removing the auth token import
 // import { getAuthToken } from '@/services/API/apiHelper'
@@ -340,7 +341,7 @@ const HomePage = () => {
                     className="font-montserrat mx-auto max-w-[1600px] my-16 md:my-32"
                 >
                     {/* Step-by-Step Process heading and description */}
-                    <div className="flex flex-col md:flex-row justify-between items-start mb-16 font-inter">
+                    <div className="flex flex-col md:flex-row justify-between items-start mb-16 font-inter px-3">
                         <div className="md:max-w-[50%]">
                             <h2 className="text-4xl md:text-6xl font-semibold text-zinc-800">
                                 Step-by-Step <br />Process
@@ -363,7 +364,7 @@ const HomePage = () => {
                         {/* Left side: Number, Title, description */}
                         <div className="flex-1 flex flex-col justify-center">
                             {/* Orange numbered circle */}
-                            <div className="bg-orange-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-medium mb-6">
+                            <div className="bg-orange-500 text-white w-16 h-16 rounded-full items-center justify-center text-2xl font-medium mb-6 md:flex hidden">
                                 {Object.keys(stepDetails).indexOf(activeStep) + 1}
                             </div>
                             
@@ -416,6 +417,10 @@ const HomePage = () => {
                         </div>
                     </div>
                 </motion.section>
+                
+                {/* Why Thousands Trust Us Section */}
+                <TrustSection />
+                
                 {/* GLP-1 Information Section */}
                 <GLP1Section />
     

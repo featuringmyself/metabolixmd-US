@@ -196,22 +196,6 @@ const NavBar = () => {
                       transition={{ duration: 0.3, delay: 0.1 }}
                       className="flex flex-col items-center justify-center min-h-[calc(100vh-72px)] gap-8 p-4 bg-black "
                     >
-                      {/* Logo at the top */}
-                      <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="mb-8"
-                      >
-                        <Image 
-                          src="/images/logo-white.webp" 
-                          alt="MetabolixMD Logo" 
-                          width={150} 
-                          height={40}
-                          className="h-auto"
-                        />
-                      </motion.div>
-
                       {/* Navigation Links */}
                       {[
                         { href: "/about-us", label: "About Us" },
@@ -235,6 +219,22 @@ const NavBar = () => {
                           </Link>
                         </motion.div>
                       ))}
+
+                      {/* Logo below navigation */}
+                      <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="mt-8"
+                      >
+                        <Image 
+                          src="/images/logo-white.webp" 
+                          alt="MetabolixMD Logo" 
+                          width={150} 
+                          height={40}
+                          className="h-auto"
+                        />
+                      </motion.div>
 
                       {/* Login Button */}
                       {!token && (

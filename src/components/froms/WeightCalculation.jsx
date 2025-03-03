@@ -1,157 +1,260 @@
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const WeightCalculation = ({ data, onNext }) => {
   const router = useRouter();
-  const [lossCount, setLossCount] = useState(20)
-  const [chartValue, setChartValue] = useState("")
+  const [lossCount, setLossCount] = useState(20);
+  const [chartValue, setChartValue] = useState("");
+  const [isChartReady, setIsChartReady] = useState(false);
 
   const handleContinue = () => {
     onNext({}, "basicsUserInfo");
   };
-
   // Calculations for BMI
   const totalInches = parseInt(+data?.height.feet) * 12 + parseInt(+data?.height.inches);
   const heightInMeters = totalInches * 0.0254;
   const weightInKg = data.weight * 0.453592;
   const bmiValue = weightInKg / (heightInMeters * heightInMeters);
   const currentYear = new Date().getFullYear();
-const nextYear = currentYear + 1;
-
+  const nextYear = currentYear + 1;
   useEffect(() => {
-
-    let Count = data?.weight*.18
-    setLossCount(Count)
-
-    setChartValue(
-      {
-        series: [{
-          name: 'Weight',
-          data: [data.weight, data.weight - Count] // Example data points
-        }],
-        options: {
-          chart: {
-            type: 'area',
-            height: 350,
-            toolbar: {
-              show: false, // Disable toolbar
+    let Count = data?.weight * 0.18;
+    setLossCount(Count);
+    setChartValue({
+      series: [{
+        name: 'Weight',
+        data: [data.weight, data.weight - Count] // Example data points
+      }],
+      options: {
+        chart: {
+          type: 'area',
+          height: 350,
+          toolbar: {
+            show: false, // Disable toolbar
+          },
+          zoom: {
+            enabled: false // Disable zoom
+          },
+          animations: {
+            enabled: true,
+            easing: 'easeinout',
+            speed: 800,
+            animateGradually: {
+              enabled: true,
+              delay: 150
             },
-            zoom: {
-              enabled: false // Disable zoom
-            },
-          },
-          stroke: {
-            curve: 'smooth',
-            width: 2,
-          },
-          grid: {
-            show: false // Remove background grid lines
-          },
-          xaxis: {
-            show: true, // Show x-axis
-            title: {
-              text: 'Year' // Set x-axis title to "Year"
-            },
-            categories: [ currentYear.toString(),nextYear.toString()], // Add years as example labels
-          },
-          yaxis: {
-            show: true, // Show y-axis
-            // title: {
-            //   text: 'Weight' // Set y-axis title to "Weight"
-            // },
-          },
-          dataLabels: {
-            enabled: false // Disable data labels
-          },
-          fill: {
-            type: 'gradient',
-            gradient: {
-              shadeIntensity: 1,
-              opacityFrom: 0.6,
-              opacityTo: 0.3,
-              stops: [0, 90, 100]
+            dynamicAnimation: {
+              enabled: true,
+              speed: 350
+            }
+          }
+        },
+        stroke: {
+          curve: 'smooth',
+          width: 3,
+        },
+        grid: {
+          show: false // Remove background grid lines
+        },
+        xaxis: {
+          show: true, // Show x-axis
+          title: {
+            text: 'Year', // Set x-axis title to "Year"
+            style: {
+              fontSize: '14px',
+              fontWeight: 500,
+              fontFamily: 'inherit'
             }
           },
-          tooltip: {
-            enabled: true // Enable tooltip
+          categories: [currentYear.toString(), nextYear.toString()], // Add years as example labels
+          labels: {
+            style: {
+              fontSize: '14px',
+              fontFamily: 'inherit'
+            }
+          }
+        },
+        yaxis: {
+          show: true, // Show y-axis
+          labels: {
+            style: {
+              fontSize: '14px',
+              fontFamily: 'inherit'
+            },
+            formatter: function(val) {
+              return val.toFixed(0) + ' lbs';
+            }
+          }
+        },
+        dataLabels: {
+          enabled: false // Disable data labels
+        },
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.3,
+            stops: [0, 90, 100]
+          }
+        },
+        tooltip: {
+          enabled: true, // Enable tooltip
+          style: {
+            fontSize: '14px',
+            fontFamily: 'inherit'
           },
-          colors: ['#365d56'], // Set chart color
+          y: {
+            formatter: function(val) {
+              return val + ' lbs';
+            }
+          }
+        },
+        colors: ['#365d56'], // Set chart color
+        markers: {
+          size: 6,
+          strokeWidth: 0,
+          hover: {
+            size: 9
+          }
         }
       }
-      
-    )
+    });
     
-  }, [])
-  
-
-  // ApexCharts configuration
-
-
+    // Add a small delay to ensure smooth animation when chart renders
+    setTimeout(() => {
+      setIsChartReady(true);
+    }, 300);
+    
+  }, [data]);
+  // Animation variants
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+  const scaleIn = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
+  };
   return (
     <>
       {
-        (bmiValue > 25) ?
-          <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto">
+        (bmiValue > 25) ? (
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            className="w-full p-5 md:p-0 md:max-w-fit mx-auto"
+          >
             <div className="w-full md:w-[500px]">
-              <p className='mb-5'>
+              <motion.p 
+                variants={fadeIn}
+                className='mb-5 text-lg leading-relaxed'
+              >
                 This graph shows that with GLP-1 and GLP-1/GIP agonist medications,
                 you can expect to lose around 15 - 20% over the course of a year.
-              </p>
-              {/* <p className='mt-2 text-xl font-semibold'>Your weight</p> */}
-              <h2 className='text-5xl font-bold'>{data?.weight - lossCount} lbs</h2>
-              <p className='text-primary text-3xl font-semibold flex items-center gap-3'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-down">
-                  <path d="M12 5v14" /><path d="m19 12-7 7-7-7" />
-                </svg>
-                {lossCount} lbs
-              </p>
+              </motion.p>
+              
+              <motion.div variants={scaleIn}>
+                <h2 className='text-5xl font-bold text-zinc-800'>
+                  {data?.weight - lossCount} lbs
+                </h2>
+                <p className='text-primary text-3xl font-semibold flex items-center gap-3 mt-2'>
+                  <motion.svg 
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    xmlns="http://www.w3.org/2000/svg" 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="#365d56" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    className="lucide lucide-arrow-down"
+                  >
+                    <path d="M12 5v14" /><path d="m19 12-7 7-7-7" />
+                  </motion.svg>
+                  {lossCount} lbs
+                </p>
+              </motion.div>
 
               {/* Chart */}
-              <div className='mt-2'>
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isChartReady ? 1 : 0 }}
+                transition={{ duration: 0.8 }}
+                className='mt-6 bg-white p-4 rounded-xl shadow-sm'
+              >
                 {
                   chartValue &&
-                  <Chart  options={chartValue?.options} series={chartValue?.series} type="area" height={350} />
+                  <Chart options={chartValue?.options} series={chartValue?.series} type="area" height={350} />
                 }
-                <h3 className='text-2xl font-bold mt-6'>Your treatment options</h3>
-                <p className='text-zinc-500'>
-                  <span className='text-black font-semibold'>
+              </motion.div>
+              
+              <motion.div variants={fadeIn} className="mt-8">
+                <h3 className='text-2xl font-bold mb-3'>Your treatment options</h3>
+                <p className='text-zinc-600 leading-relaxed'>
+                  <span className='text-zinc-800 font-semibold'>
                     Semaglutide, Tirzepatide
                   </span>
                   <br />
                   If prescribed, medications will be delivered directly to you within a week.
                 </p>
 
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02, backgroundColor: "#2e4f49" }}
+                  whileTap={{ scale: 0.98 }}
                   type="button"
-                  className={`mt-6 p-3 hover:bg-primary/90  text-white w-full py-3 font-semibold rounded-full bg-primary hover:bg-primary`}
+                  className={`mt-8 p-3 text-white w-full py-3 font-semibold rounded-full bg-primary transition-all duration-300 shadow-sm hover:shadow-md`}
                   onClick={handleContinue} 
                   aria-label='continue'
                 >
                   Continue
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
             </div>
-          </div>
-          :
-          <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto">
+          </motion.div>
+        ) : (
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            className="w-full p-5 md:p-0 md:max-w-fit mx-auto"
+          >
             <div className="w-full md:w-[500px]">
-              <h1 className='text-3xl  mb-6 text-primary'>Thank you for reaching out to us.</h1>
-              <p className='mt-5 text-lg font-normal'>
+              <motion.h1 
+                variants={scaleIn} 
+                className='text-3xl mb-6 text-primary font-semibold'
+              >
+                Thank you for reaching out to us.
+              </motion.h1>
+              <motion.p variants={fadeIn} className='mt-5 text-lg font-normal leading-relaxed'>
                 We regret to inform you that, based on your current BMI, you do not meet the eligibility criteria for GLP-1 medication.
-              </p>
-              <p className='mt-5 text-lg font-normal'>
+              </motion.p>
+              <motion.p variants={fadeIn} className='mt-5 text-lg font-normal leading-relaxed'>
                 We encourage you to continue prioritizing your health and well-being. If you have any further questions or need additional guidance, please feel free to contact us.
-              </p>
-              <p className='mt-5 text-lg font-normal mb-5'>
+              </motion.p>
+              <motion.p variants={fadeIn} className='mt-5 text-lg font-normal mb-5 leading-relaxed'>
                 Wishing you the best of health, <br />
                 <b>The MetabolixMD Team</b>
-              </p>
-              <div onClick={() => router.push("/")} className='mt-6 p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary hover:bg-primary'>Continue</div>
+              </motion.p>
+              <motion.div 
+                whileHover={{ scale: 1.02, backgroundColor: "#2e4f49" }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => router.push("/")} 
+                className='mt-8 p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer'
+              >
+                Continue
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
+        )
       }
     </>
   );

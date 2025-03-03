@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 const GLP1 = ({onNext}) => {
     const [activeTab, setActiveTab] = useState("no")
@@ -6,24 +7,65 @@ const GLP1 = ({onNext}) => {
     const handleTab = (e) => {
         setActiveTab(e.currentTarget.id)
     }
+
+    // Animation variants
+    const fadeIn = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    }
+
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    }
+
     return (
-        <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto">
+        <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="w-full p-5 md:p-0 md:max-w-fit mx-auto"
+        >
             <div className="w-full md:w-[500px]">
-                <h2 className="text-2xl  mb-6 text-primary">
+                <motion.h2 
+                    variants={fadeIn}
+                    className="text-2xl mb-6 text-primary font-semibold"
+                >
                    Do you have an allergy to GLP-1 agonist medications?
-                </h2>
+                </motion.h2>
                
-
-                <div onClick={handleTab} id="yes" className={`bg-white cursor-pointer border rounded-xl p-3 text-lg font-semibold mt-3 ${activeTab==="yes"?"border-primary border-2":""}`}>
+                <motion.div 
+                    variants={fadeIn}
+                    whileHover={{ scale: activeTab === "yes" ? 1 : 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleTab} 
+                    id="yes" 
+                    className={`bg-white cursor-pointer border rounded-xl p-4 text-lg font-semibold mt-4 transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "yes" ? "border-primary border-2 bg-primary/5" : ""}`}
+                >
                     Yes
-                </div>
-                <div onClick={handleTab} id="no" className={`bg-white cursor-pointer border rounded-xl p-3 text-lg font-semibold mt-3 ${activeTab==="no"?"border-primary border-2":""}`}>
+                </motion.div>
+                <motion.div 
+                    variants={fadeIn}
+                    whileHover={{ scale: activeTab === "no" ? 1 : 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleTab} 
+                    id="no" 
+                    className={`bg-white cursor-pointer border rounded-xl p-4 text-lg font-semibold mt-4 transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "no" ? "border-primary border-2 bg-primary/5" : ""}`}
+                >
                     No
-                </div>
+                </motion.div>
 
-                <button
+                <motion.button
+                    variants={fadeIn}
+                    whileHover={{ scale: 1.02, backgroundColor: "#2e4f49" }}
+                    whileTap={{ scale: 0.98 }}
                     type="button"
-                    className={`mt-6 hover:bg-primary/90  p-3 text-white w-full py-3text-white font-semibold rounded-full bg-primary hover:bg-primary`}
+                    className="mt-8 p-3 text-white w-full py-3 font-semibold rounded-full bg-primary transition-all duration-300 shadow-sm hover:shadow-md"
                     onClick={()=>{
                         if(activeTab =="yes"){
                             onNext({allergy_GLP_1:true},"stopProcess")
@@ -35,9 +77,9 @@ const GLP1 = ({onNext}) => {
                     aria-label='Continue'
                 >
                     Continue
-                </button>
+                </motion.button>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

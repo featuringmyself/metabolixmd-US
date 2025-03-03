@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 const Type2Diabetes = ({ onNext }) => {
     const [activeTab, setActiveTab] = useState("")
@@ -11,34 +12,83 @@ const Type2Diabetes = ({ onNext }) => {
         const data = {
             type_2_diabetes: activeTab
         }
-        onNext(data, "diabeticRetinopathy")  // Pass the data and move to the next step
+        onNext(data, "diabeticRetinopathy")  // Pass the data and move to the next step
     }
 
-    return (
-        <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto">
-            <div className="w-full md:w-[500px]">
-                <h2 className="text-2xl  mb-6 text-primary">
-                    Do you currently have or have you ever been diagnosed with type 2 diabetes?
-                </h2>
-                <p className='text-zinc-500 font-semibold'>We want to make sure there is a provider overseeing your overall care</p>
+    // Animation variants
+    const fadeIn = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    }
 
-                <div onClick={handleTab} id="yes" className={`bg-white cursor-pointer border rounded-xl p-3 text-lg font-semibold mt-3 ${activeTab === "yes" ? "border-primary border-2" : ""}`}>
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    }
+
+    const isButtonDisabled = !activeTab; // Disable if no tab is selected
+
+    return (
+        <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="w-full p-5 md:p-0 md:max-w-fit mx-auto"
+        >
+            <div className="w-full md:w-[500px]">
+                <motion.h2 
+                    variants={fadeIn}
+                    className="text-2xl mb-6 text-primary font-semibold"
+                >
+                    Do you currently have or have you ever been diagnosed with type 2 diabetes?
+                </motion.h2>
+                <motion.p 
+                    variants={fadeIn}
+                    className='text-zinc-500 font-semibold mb-6'
+                >
+                    We want to make sure there is a provider overseeing your overall care
+                </motion.p>
+
+                <motion.div 
+                    variants={fadeIn}
+                    whileHover={{ scale: activeTab === "yes" ? 1 : 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleTab} 
+                    id="yes" 
+                    className={`bg-white cursor-pointer border rounded-xl p-4 text-lg font-semibold mt-4 transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "yes" ? "border-primary border-2 bg-primary/5" : ""}`}
+                >
                     Yes
-                </div>
-                <div onClick={handleTab} id="no" className={`bg-white cursor-pointer border rounded-xl p-3 text-lg font-semibold mt-3 ${activeTab === "no" ? "border-primary border-2" : ""}`}>
+                </motion.div>
+                <motion.div 
+                    variants={fadeIn}
+                    whileHover={{ scale: activeTab === "no" ? 1 : 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleTab} 
+                    id="no" 
+                    className={`bg-white cursor-pointer border rounded-xl p-4 text-lg font-semibold mt-4 transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "no" ? "border-primary border-2 bg-primary/5" : ""}`}
+                >
                     No
-                </div>
+                </motion.div>
                 
-                <button
+                <motion.button
+                    variants={fadeIn}
+                    whileHover={{ scale: isButtonDisabled ? 1 : 1.02, backgroundColor: isButtonDisabled ? "" : "#2e4f49" }}
+                    whileTap={{ scale: isButtonDisabled ? 1 : 0.98 }}
                     type="button"
-                    className={`mt-6 p-3 hover:bg-primary/90   w-full py-3 text-white font-semibold rounded-full bg-primary hover:bg-primary`}
+                    className={`mt-8 p-3 w-full py-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md ${isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-primary"}`}
                     onClick={handleContinue}
+                    disabled={isButtonDisabled}
                     aria-label='continue'
                 >
                     Continue
-                </button>
+                </motion.button>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
