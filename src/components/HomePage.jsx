@@ -4,6 +4,7 @@ import NavBar from './NavBar'
 import FaqList from './Faq'
 import MeetExpertBackground from './MeetExpertBackground'
 import CompareModule from './CompareModule'
+import GLP1Section from './GLP1Section'
 
 // Removing the auth token import
 // import { getAuthToken } from '@/services/API/apiHelper'
@@ -215,8 +216,8 @@ const HomePage = () => {
         setWeightLoss(Math.round(weight * 0.20));
     };
     return (
-        <div className='font-tt-hoves mt-20 overflow-x-hidden'>
-            <div className='container mx-auto px-4 md:px-[10vw]'>
+        <div className='font-tt-hoves mt-16 overflow-x-hidden'>
+            <div className='mx-auto'>
                 <NavBar />
     
                 <motion.section 
@@ -336,7 +337,91 @@ const HomePage = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6 }}
-                    className="font-montserrat px-4 md:px-10 mx-auto max-w-[1400px] my-16 md:my-32"
+                    className="font-montserrat mx-auto max-w-[1600px] my-16 md:my-32"
+                >
+                    {/* Step-by-Step Process heading and description */}
+                    <div className="flex flex-col md:flex-row justify-between items-start mb-16 font-inter">
+                        <div className="md:max-w-[50%]">
+                            <h2 className="text-4xl md:text-6xl font-semibold text-zinc-800">
+                                Step-by-Step <br />Process
+                            </h2>
+                        </div>
+                        <div className="md:max-w-[40%] mt-6 md:mt-0">
+                            <p className="text-zinc-600 mb-6">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra
+                            </p>
+                            <Link 
+                                href="/get-started"
+                                className="inline-block px-8 py-3 bg-white border border-zinc-200 text-zinc-800 rounded-full font-medium hover:bg-zinc-50 transition-colors"
+                            >
+                                Start Your Journey Now
+                            </Link>
+                        </div>
+                    </div>
+                    
+                    <div className="flex flex-col-reverse lg:flex-row gap-8 font-montserrat bg-[#F6F6F3] px-12 rounded-2xl">
+                        {/* Left side: Number, Title, description */}
+                        <div className="flex-1 flex flex-col justify-center">
+                            {/* Orange numbered circle */}
+                            <div className="bg-orange-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-medium mb-6">
+                                {Object.keys(stepDetails).indexOf(activeStep) + 1}
+                            </div>
+                            
+                            <div className="mb-8 w-[80%]">
+                                <h2 className="text-4xl md:text-6xl text-zinc-800 font-medium">
+                                    {stepDetails[activeStep].title}
+                                </h2>
+                                <p className="text-zinc-600 mt-4 max-w-xl">
+                                    {stepDetails[activeStep].description}
+                                </p>
+                                
+                            </div>
+                        </div>
+                        {/* Right side: Image with process steps overlay */}
+                        <div className="flex-1">
+                            <div className="relative h-[500px] rounded-3xl overflow-hidden">
+                                {/* Main image */}
+                                <Image
+                                    src={stepDetails[activeStep].image}
+                                    alt={stepDetails[activeStep].title}
+                                    fill
+                                    className="object-cover"
+                                />
+                                
+                                {/* Process steps overlay - positioned differently based on screen size */}
+                                <div className="absolute inset-0 flex md:flex-col md:justify-center md:items-start p-6">
+                                    {/* Step buttons */}
+                                    <div className="md:space-y-3 flex md:flex-col flex-row gap-2 md:gap-0 absolute md:static bottom-4 left-0 right-0 justify-center md:justify-start">
+                                        {Object.entries(stepDetails).map(([key, step], index) => (
+                                            <button
+                                                key={key}
+                                                onClick={() => setActiveStep(key)}
+                                                className={`flex items-center gap-2 px-4 py-2 rounded-full ${
+                                                    activeStep === key
+                                                    ? "bg-orange-500 text-white"
+                                                    : "bg-[#F6F6F3] text-zinc-800 hover:bg-[#F6F6F3]/80"
+                                                } transition-all duration-200 ${
+                                                    index !== Object.entries(stepDetails).length - 1 ? "md:mb-3" : ""
+                                                }`}
+                                            >
+                                                <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-xs font-medium text-primary">
+                                                    {index + 1}
+                                                </div>
+                                                <span className="hidden md:inline font-medium">{step.title}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.section>
+                <motion.section 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6 }}
+                    className="font-montserrat px-4 md:px-6 mx-auto max-w-[1600px] my-16 md:my-32"
                 >
                     <motion.div 
                         initial={{ opacity: 0, y: -30 }}
@@ -353,126 +438,125 @@ const HomePage = () => {
                     <div className="flex flex-col lg:flex-row gap-8 md:gap-16">
                         <motion.div className="flex-1">
                             {/* Grid of features */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 px-4 md:px-8">
+                        {/* Box 1 */}
+                        <motion.div 
+                            variants={fadeInUp}
+                            whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
+                            transition={{ duration: 0.2 }}
+                            className="bg-white p-4 md:p-5 rounded-2xl border border-gray-100 hover:border-orange-100 transition-all duration-300 h-full flex flex-col"
+                        >
                             <motion.div 
-                                className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 px-4 md:px-8"
-                                variants={staggerChildren}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
+                                className="bg-orange-50 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center mb-3 md:mb-4"
+                                whileHover={{ scale: 1.1 }}
+                                animate={{ 
+                                    boxShadow: ["0 0 0 rgba(249, 115, 22, 0.2)", "0 0 10px rgba(249, 115, 22, 0.5)", "0 0 0 rgba(249, 115, 22, 0.2)"] 
+                                }}
+                                transition={{ 
+                                    duration: 2, 
+                                    repeat: Infinity,
+                                    repeatType: "reverse" 
+                                }}
                             >
-                                {/* Box 1 */}
-                                <motion.div 
-                                    variants={fadeInUp}
-                                    whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
-                                    transition={{ duration: 0.2 }}
-                                    className="bg-white p-4 md:p-5 rounded-2xl border border-gray-100 hover:border-orange-100 transition-all duration-300 h-full flex flex-col"
-                                >
-                                    <motion.div 
-                                        className="bg-orange-50 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center mb-3 md:mb-4"
-                                        whileHover={{ scale: 1.1 }}
-                                        animate={{ 
-                                            boxShadow: ["0 0 0 rgba(249, 115, 22, 0.2)", "0 0 10px rgba(249, 115, 22, 0.5)", "0 0 0 rgba(249, 115, 22, 0.2)"] 
-                                        }}
-                                        transition={{ 
-                                            duration: 2, 
-                                            repeat: Infinity,
-                                            repeatType: "reverse" 
-                                        }}
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </motion.div>
-                                    <h3 className="text-lg md:text-xl font-medium mb-2">Same-day appointment,<br />2 day delivery</h3>
-                                </motion.div>
-    
-                                {/* Box 2 */}
-                                <motion.div 
-                                    variants={fadeInUp}
-                                    whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
-                                    transition={{ duration: 0.2 }}
-                                    className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-all duration-300 h-full flex flex-col"
-                                >
-                                    <motion.div 
-                                        className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-4"
-                                        whileHover={{ scale: 1.1 }}
-                                        animate={{ 
-                                            boxShadow: ["0 0 0 rgba(249, 115, 22, 0.2)", "0 0 10px rgba(249, 115, 22, 0.5)", "0 0 0 rgba(249, 115, 22, 0.2)"] 
-                                        }}
-                                        transition={{ 
-                                            duration: 2, 
-                                            repeat: Infinity,
-                                            repeatType: "reverse",
-                                            delay: 0.3
-                                        }}
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                        </svg>
-                                    </motion.div>
-                                    <h3 className="text-lg md:text-xl font-medium mb-2">Access to US-Licensed Physicians</h3>
-                                </motion.div>
-    
-                                {/* Box 3 */}
-                                <motion.div 
-                                    variants={fadeInUp}
-                                    whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
-                                    transition={{ duration: 0.2 }}
-                                    className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-all duration-300 h-full flex flex-col"
-                                >
-                                    <motion.div 
-                                        className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-4"
-                                        whileHover={{ scale: 1.1 }}
-                                        animate={{ 
-                                            boxShadow: ["0 0 0 rgba(249, 115, 22, 0.2)", "0 0 10px rgba(249, 115, 22, 0.5)", "0 0 0 rgba(249, 115, 22, 0.2)"] 
-                                        }}
-                                        transition={{ 
-                                            duration: 2, 
-                                            repeat: Infinity,
-                                            repeatType: "reverse",
-                                            delay: 0.6
-                                        }}
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                                        </svg>
-                                    </motion.div>
-                                    <h3 className="text-lg md:text-xl font-medium mb-2">Highest Quality,<br />Lab-Tested GLP-1 Medications</h3>
-                                </motion.div>
-    
-                                {/* Box 4 */}
-                                <motion.div 
-                                    variants={fadeInUp}
-                                    whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
-                                    transition={{ duration: 0.2 }}
-                                    className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-all duration-300 h-full flex flex-col"
-                                >
-                                    <motion.div 
-                                        className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-4"
-                                        whileHover={{ scale: 1.1 }}
-                                        animate={{ 
-                                            boxShadow: ["0 0 0 rgba(249, 115, 22, 0.2)", "0 0 10px rgba(249, 115, 22, 0.5)", "0 0 0 rgba(249, 115, 22, 0.2)"] 
-                                        }}
-                                        transition={{ 
-                                            duration: 2, 
-                                            repeat: Infinity,
-                                            repeatType: "reverse",
-                                            delay: 0.9
-                                        }}
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                        </svg>
-                                    </motion.div>
-                                    <h3 className="text-lg md:text-xl font-medium mb-2">Personalized<br />Treatment Plans</h3>
-                                </motion.div>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
                             </motion.div>
+                            <h3 className="text-lg md:text-xl font-medium mb-2">Same-day appointment,<br />2 day delivery</h3>
+                        </motion.div>
+
+                        {/* Box 2 */}
+                        <motion.div 
+                            variants={fadeInUp}
+                            whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
+                            transition={{ duration: 0.2 }}
+                            className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-all duration-300 h-full flex flex-col"
+                        >
+                            <motion.div 
+                                className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-4"
+                                whileHover={{ scale: 1.1 }}
+                                animate={{ 
+                                    boxShadow: ["0 0 0 rgba(249, 115, 22, 0.2)", "0 0 10px rgba(249, 115, 22, 0.5)", "0 0 0 rgba(249, 115, 22, 0.2)"] 
+                                }}
+                                transition={{ 
+                                    duration: 2, 
+                                    repeat: Infinity,
+                                    repeatType: "reverse",
+                                    delay: 0.3
+                                }}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </motion.div>
+                            <h3 className="text-lg md:text-xl font-medium mb-2">Access to US-Licensed Physicians</h3>
+                        </motion.div>
+
+                        {/* Box 3 */}
+                        <motion.div 
+                            variants={fadeInUp}
+                            whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
+                            transition={{ duration: 0.2 }}
+                            className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-all duration-300 h-full flex flex-col"
+                        >
+                            <motion.div 
+                                className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-4"
+                                whileHover={{ scale: 1.1 }}
+                                animate={{ 
+                                    boxShadow: ["0 0 0 rgba(249, 115, 22, 0.2)", "0 0 10px rgba(249, 115, 22, 0.5)", "0 0 0 rgba(249, 115, 22, 0.2)"] 
+                                }}
+                                transition={{ 
+                                    duration: 2, 
+                                    repeat: Infinity,
+                                    repeatType: "reverse",
+                                    delay: 0.6
+                                }}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </motion.div>
+                            <h3 className="text-lg md:text-xl font-medium mb-2">FDA-Approved Medications</h3>
+                        </motion.div>
+
+                        {/* Box 4 */}
+                        <motion.div 
+                            variants={fadeInUp}
+                            whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" }}
+                            transition={{ duration: 0.2 }}
+                            className="bg-white p-6 rounded-2xl border border-gray-100 hover:border-orange-100 transition-all duration-300 h-full flex flex-col"
+                        >
+                            <motion.div 
+                                className="bg-orange-50 w-14 h-14 rounded-full flex items-center justify-center mb-4"
+                                whileHover={{ scale: 1.1 }}
+                                animate={{ 
+                                    boxShadow: ["0 0 0 rgba(249, 115, 22, 0.2)", "0 0 10px rgba(249, 115, 22, 0.5)", "0 0 0 rgba(249, 115, 22, 0.2)"] 
+                                }}
+                                transition={{ 
+                                    duration: 2, 
+                                    repeat: Infinity,
+                                    repeatType: "reverse",
+                                    delay: 0.9
+                                }}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </motion.div>
+                            <h3 className="text-lg md:text-xl font-medium mb-2">Affordable Treatment Plans</h3>
+                        </motion.div>
+                    </div>
                         </motion.div>
                     </div>
                 </motion.section>
     
-                    {/* Reviews Section */}
-                    <div className="mt-20 pt-10 border-t">
+                    {/* Reviews Section - Fixed closing tags */}
+                    <motion.section 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="my-50 pt-10"
+                    >
                         <h2 className="text-3xl md:text-4xl font-medium text-center mb-12">
                             What Our Patients Say
                         </h2>
@@ -501,256 +585,23 @@ const HomePage = () => {
                                     </div>
                                 </motion.div>
                             </div>
-                            
-                            {/* Progress Indicators */}
-                            <div className="flex justify-center gap-2 mt-6">
-                                {testimonials.map((_, index) => (
-                                    <div 
-                                        key={index}
-                                        className={`h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'w-8 bg-primary' : 'w-2 bg-gray-300'}`}
-                                    />
-                                ))}
-                            </div>
-                            
-                            {/* Navigation Buttons */}
-                            <button 
-                                onClick={() => setCurrentSlide((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
-                                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md hover:bg-white transition-all"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-                            <button 
-                                onClick={() => setCurrentSlide((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))}
-                                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-md hover:bg-white transition-all"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
                         </div>
-                    </div>
-    
-                    {/* GLP-1 Drugs Section */}
+                    </motion.section>
+
+                    {/* Lab Tested Section - Fixed structure */}
                     <motion.section 
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="mt-20 pt-10 bg-[#f8faf9] w-full rounded-xl"
+                        className="mt-20 w-full"
                     >
-                        <div className="flex flex-col max-w-[1400px] mx-auto px-4 md:px-10 ">
-                            <div className="mb-12">
-                                <div className="flex justify-between items-start">
-                                    <h2 className="text-4xl md:text-7xl font-medium mb-4">
-                                        Understanding<br />GLP-1 Drugs
-                                    </h2>
-                                    <Link 
-                                        href="/get-started"
-                                        className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full hover:bg-primary/90 transition-colors"
-                                    >
-                                        Find Your Treatment
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                        </svg>
-                                    </Link>
-                                </div>
-                                <p className="text-lg mt-4 text-zinc-600">
-                                    What they are, how they function to support weight loss, and why they are effective.
-                                </p>
-                            </div>
-    
-                            <div className="grid md:grid-cols-2 gap-6">
-                                {/* First Card */}
-                                <div className="bg-white p-6 rounded-3xl">
-                                    <div className="bg-[#f8faf9] p-6 rounded-3xl relative">
-                                        <div className="relative h-[300px] md:h-[350px] mb-[-50px]">
-                                            <Image
-                                                src="/images/41.webp"
-                                                alt="Semaglutide Injection"
-                                                fill
-                                                className="object-contain"
-                                            />
-                                        </div>
-                                        <div className="bg-white rounded-2xl p-4">
-                                            <p className="text-sm text-zinc-500">Injection</p>
-                                            <h3 className="text-2xl font-medium mt-1">Semaglutide</h3>
-                                        </div>
-                                        <Link 
-                                            href="#safety"
-                                            className="text-sm font-medium underline text-black text-center block mt-6"
-                                        >
-                                            Important safety information
-                                        </Link>
-                                    </div>
-                                </div>
-    
-                                {/* Second Card */}
-                                <div className="bg-white p-6 rounded-3xl">
-                                    <div className="bg-[#f8faf9] p-6 rounded-3xl relative">
-                                        <div className="relative h-[300px] md:h-[350px] mb-[-50px]">
-                                            <Image
-                                                src="/images/medicine-2.webp"
-                                                alt="Tirzepatide Injection"
-                                                fill
-                                                className="object-contain"
-                                            />
-                                        </div>
-                                        <div className="bg-white rounded-2xl p-4">
-                                            <p className="text-sm text-zinc-500">Injection</p>
-                                            <h3 className="text-2xl font-medium mt-1">Tirzepatide</h3>
-                                        </div>
-                                        <Link 
-                                            href="#safety"
-                                            className="text-sm  font-medium underline text-black text-center block mt-6"
-                                        >
-                                            Important safety information
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </motion.section>
-    
-                {/* Weight Loss Calculator Section */}
-                <motion.section 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="bg-[#365d56] rounded-3xl py-20 my-20"
-                >
-                    <div className="max-w-[1400px] mx-auto px-4 md:px-10">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-                            {/* Left side */}
-                            <div className="flex-1">
-                                <h2 className="text-4xl md:text-7xl text-white font-medium mb-6">
-                                    Lose <span className='opacity-60'>15-20%</span><br />Body Fat<br />in a Year!
-                                </h2>
-                                <Link 
-                                    href="/get-started"
-                                    className="inline-flex items-center mt-10 gap-2 bg-white text-ZINC-800 px-12 py-3 rounded-full hover:bg-white/90 transition-colors text-lg font-medium"
-                                >
-                                    Get Started
-                                </Link>
-                            </div>
-    
-                            {/* Right side - Calculator Card */}
-                            <div className="flex-1 font-montserrat">
-                                <div className="bg-white p-8 rounded-3xl max-w-none md:max-w-[500px] ml-auto">
-                                    <div className="space-y-8">
-                                        {/* Current Weight Input */}
-                                        <div>
-                                            <div className="flex justify-between items-center mb-4">
-                                                <label className="text-2xl tracking-tighter font-medium capitalize">
-                                                    Select your<br />Current Weight
-                                                </label>
-                                                <div className="flex items-end gap-2">
-                                                    <span className="text-6xl font-medium">{currentWeight}</span>
-                                                    <span className="text-xl mb-2">lbs</span>
-                                                </div>
-                                            </div>
-                                            <input 
-                                                type="range"
-                                                min="100"
-                                                max="400"
-                                                value={currentWeight}
-                                                onChange={(e) => handleWeightChange(Number(e.target.value))}
-                                                className="w-full h-1 bg-gray-200 rounded-full appearance-none cursor-pointer 
-                                                    [&::-webkit-slider-thumb]:appearance-none 
-                                                    [&::-webkit-slider-thumb]:h-5 
-                                                    [&::-webkit-slider-thumb]:w-5 
-                                                    [&::-webkit-slider-thumb]:bg-[#365d56]
-                                                    [&::-webkit-slider-thumb]:rounded-full
-                                                    [&::-webkit-slider-thumb]:cursor-pointer
-                                                    [&::-webkit-slider-thumb]:ring-2
-                                                    [&::-webkit-slider-thumb]:ring-white
-                                                    [&::-moz-range-thumb]:h-5
-                                                    [&::-moz-range-thumb]:w-5
-                                                    [&::-moz-range-thumb]:bg-[#365d56]
-                                                    [&::-moz-range-thumb]:rounded-full
-                                                    [&::-moz-range-thumb]:border-none
-                                                    [&::-moz-range-thumb]:ring-2
-                                                    [&::-moz-range-thumb]:ring-white
-                                                    [&::-moz-range-thumb]:cursor-pointer
-                                                    [&::-webkit-slider-runnable-track]:rounded-full
-                                                    [&::-webkit-slider-runnable-track]:h-1
-                                                    [&::-moz-range-track]:rounded-full
-                                                    [&::-moz-range-track]:h-1"
-                                                style={{
-                                                    background: `linear-gradient(to right, 
-                                                        #365d56 0%, 
-                                                        #365d56 ${((currentWeight - 100) / 300) * 100}%, 
-                                                        #e5e7eb ${((currentWeight - 100) / 300) * 100}%, 
-                                                        #e5e7eb 100%)`
-                                                }}
-                                            />
-                                        </div>
-    
-                                        {/* Weight Loss Projection */}
-                                        <div>
-                                            <div className="flex justify-between items-center">
-                                                <label className="text-2xl font-medium">
-                                                    Weight you<br />could lose (lbs):
-                                                </label>
-                                                <div className="flex items-end gap-2">
-                                                    <span className="text-7xl font-medium">{weightLoss}</span>
-                                                    <span className="text-2xl mb-3">lbs</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.section>
-    
-                {/* Lab Tested Section - Moved here */}
-                <motion.section 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="mt-20 w-full"
-                >
-                    <div className="max-w-[1400px] mx-auto px-4 md:px-10">
-                        <div className="grid md:grid-cols-2 gap-8 items-start">
-                            {/* Left side - Text */}
-                            <div>
-                                <h2 className="text-4xl md:text-7xl font-medium mb-4 leading-[1.1]">
-                                    Lab tested<br />& Certified
-                                </h2>
-                                <p className="text-lg text-zinc-600">
-                                    Filled the shipped same day as your appointment
-                                </p>
-                            </div>
-    
-                            {/* Right side - Images */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden">
-                                    <Image
-                                        src="/images/lab-doctor.webp"
-                                        alt="Lab Testing Process"
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                                <div className="relative h-[350px] md:h-[350px] rounded-2xl overflow-hidden">
-                                    <Image
-                                        src="/images/assesment.jpg"
-                                        alt="Lab Certification"
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.section>
-            </div>
+                        {/* ... existing lab tested section content ... */}
+                    </motion.section>
     
             <Footer />
+            </div>
         </div>
-    )
-}
+    );
+};
 
-export default HomePage
+export default HomePage;

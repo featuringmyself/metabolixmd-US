@@ -12,6 +12,8 @@ export default function LenisProvider({ children }) {
             smooth: true,
             smoothTouch: false,
             touchMultiplier: 2,
+            normalizeWheel: true,
+            wheelMultiplier: 0.8
         })
 
         function raf(time) {
@@ -32,4 +34,4 @@ export default function LenisProvider({ children }) {
             <ScrollToTop />
         </>
     )
-} 
+}

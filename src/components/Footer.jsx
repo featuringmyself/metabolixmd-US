@@ -7,184 +7,128 @@ import Image from 'next/image'
 const Footer = () => {
     const pathname = usePathname();
     return (
-        <div className='mt-auto' >
+        <div className='mt-auto'>
             <FloatingButton />
-            <section id="bottom-footer" className=' bg-black p-5 pb-20 flex items-center '>
-                <div className='flex w-full flex-col   gap-10'>
-                    <div className=' text-white flex md:flex-row flex-col justify-evenly'>
-                        
-                        <div className='gap-2 capitalize flex-col font-bold items-center justify-center text-2xl md:mt-0 mt-12 flex'>
+            <section id="bottom-footer" className='bg-primary py-10 w-full'>
+                <div className='w-full px-4 sm:px-6 lg:px-8'>
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-12'>
+                        {/* Logo Column */}
+                        <div className='flex flex-col items-center md:items-start'>
+                            <Link href="/" className="cursor-pointer">
+                                <div className=''>
+                                    <Image 
+                                        src="/images/orange-icon.webp" 
+                                        alt="MetabolixMD Logo" 
+                                        width={200} 
+                                        height={40} 
+                                        className="w-[200px] h-auto"
+                                    />
+                                    <Image 
+                                        src="/images/23.webp" 
+                                        alt="MetabolixMD Logo" 
+                                        width={200} 
+                                        height={40} 
+                                        className="w-[200px] h-auto"
+                                    />
+                                </div>
+                            </Link>
+                        </div>
+
+                        {/* Address & Contact Column */}
+                        <div className='text-white text-center md:text-left'>
+                            <h3 className='font-semibold text-lg mb-3'>Address:</h3>
+                            <p className='mb-4'>Level 1, 12 Sample St, Sydney NSW 2000</p>
+                            
+                            <h3 className='font-semibold text-lg mb-3'>Contact:</h3>
+                            <p className='mb-2'>1800 123 4567</p>
+                            <Link href="mailto:info@metabolixmd.com" className='text-white hover:text-tertiary transition-colors'>
+                                info@metabolixmd.com
+                            </Link>
+                        </div>
+
+                        {/* Navigation Column */}
+                        <div className='text-white flex flex-col items-center md:items-end'>
                             <Link
                                 href="/"
-                                className={`cursor-pointer tracking-widest text-sm hover:font-bold hover:text-[#015c04] uppercase ${
-                                pathname === "/" ? "font-bold text-primary text-lg" : ""
+                                className={`mb-3 text-sm tracking-widest hover:text-tertiary transition-colors uppercase ${
+                                pathname === "/" ? "text-[#ff8c2c]" : ""
                                 }`}
                             >
                                 Home
                             </Link>
                             <Link
-                                href="/about-us"
-                                className={`cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase ${
-                                pathname === "/about-us" ? "font-bold text-primary text-lg" : ""
+                                href="/how-it-works"
+                                className={`mb-3 text-sm tracking-widest hover:text-tertiary transition-colors uppercase ${
+                                pathname === "/how-it-works" ? "text-[#ff8c2c]" : ""
                                 }`}
                             >
-                                About
+                                How It Works
+                            </Link>
+                            <Link
+                                href="/glp-1-information"
+                                className={`mb-3 text-sm tracking-widest hover:text-tertiary transition-colors uppercase ${
+                                pathname === "/glp-1-information" ? "text-[#ff8c2c]" : ""
+                                }`}
+                            >
+                                GLP-1 Information
+                            </Link>
+                            <Link
+                                href="/pricing"
+                                className={`mb-3 text-sm tracking-widest hover:text-tertiary transition-colors uppercase ${
+                                pathname === "/pricing" ? "text-[#ff8c2c]" : ""
+                                }`}
+                            >
+                                Pricing
                             </Link>
                             <Link
                                 href="/contact-us"
-                                className="cursor-pointer text-sm tracking-widest hover:font-bold hover:text-[#015c04] uppercase"
+                                className={`mb-3 text-sm tracking-widest hover:text-tertiary transition-colors uppercase ${
+                                pathname === "/contact-us" ? "text-[#ff8c2c]" : ""
+                                }`}
                             >
                                 Contact Us
                             </Link>
-                            </div>
-
-                        <div className='flex flex-col items-center justify-center gap-2'>
-                            <p className='mt-1 mx-2 '>
-                                <Link href="/privacy-policy" className='font-semibold hover:text-[#015c04]'>
-                                    Privacy Policy
-                                </Link>
-                            </p>
-                            <p className='md:mt-1 mt-0 mx-2 '>
-                                <Link href="/refund-policy" className='font-semibold hover:text-[#015c04]'>
-                                Refund Policy
-                                </Link>
-                            </p>
-                            <p className='mt-5 md:mt-1 mx-2'>
-                                <Link href="mailto:consultant@metabolixmd.com"><b> Email:</b> consultant@metabolixmd.com</Link>
-                            </p>
                         </div>
-                       
                     </div>
-                    <div className='flex flex-col justify-center items-center'>
-                            <div className="flex items-center justify-between gap-4 w-[90vw] flex-row-reverse">
-                                <a href="https://www.legitscript.com/websites/?checker_keywords=metabolixmd.com" target="_blank" title="Verify LegitScript Approval for www.metabolixmd.com" className='flex'>
-                                    <img src="https://static.legitscript.com/seals/38388756.png" alt="Verify Approval for www.metabolixmd.com" width="73" height="79" />
-                                </a>
-                                <Link href="/" className="cursor-pointer">
-                                    <div className='flex items-center justify-center'>
-                                        <Image 
-                                            src="/images/orange-icon.webp" 
-                                            alt="MetabolixMD Icon" 
-                                            width={619} 
-                                            height={498} 
-                                            className="w-[40px] md:w-[50px] h-fit"
-                                        />
-                                        <Image 
-                                            src="/images/logo-white.webp" 
-                                            alt="MetabolixMD Logo" 
-                                            width={470} 
-                                            height={77} 
-                                            className="w-[150px] md:w-[250px] h-fit"
-                                        />
-                                    </div>
-                                    
-                                </Link>
-                            </div>
 
-                            <div className="mt-6 mx-2">
+                    {/* Social Media Icons */}
+                    <div className='flex justify-center gap-6 mb-8'>
+                        <Link href="https://www.facebook.com" target='_blank' className='text-white hover:text-tertiary transition-colors'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12C0 17.988 4.388 22.925 10.125 23.817V15.75H7.078V12.25H10.125V9.562C10.125 6.5 11.917 4.906 14.658 4.906C15.97 4.906 17.344 5.117 17.344 5.117V8.062H15.83C14.34 8.062 13.875 8.988 13.875 9.937V12.25H17.203L16.67 15.75H13.875V23.817C19.612 22.925 24 17.988 24 12C24 5.37 18.63 0 12 0Z" />
+                            </svg>
+                        </Link>
+                        <Link href="https://www.instagram.com/metabolixmd" target='_blank' className='text-white hover:text-tertiary transition-colors'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163C15.204 2.163 15.584 2.175 16.85 2.233C18.02 2.286 18.855 2.491 19.577 2.798C20.324 3.113 20.937 3.536 21.55 4.149C22.149 4.747 22.573 5.373 22.888 6.12C23.195 6.842 23.4 7.677 23.453 8.847C23.511 10.113 23.523 10.493 23.523 13.697C23.523 16.901 23.511 17.281 23.453 18.547C23.4 19.717 23.195 20.552 22.888 21.274C22.573 22.021 22.149 22.647 21.55 23.245C20.937 23.858 20.324 24.282 19.577 24.597C18.855 24.904 18.02 25.109 16.85 25.162C15.584 25.22 15.204 25.232 12 25.232C8.796 25.232 8.416 25.22 7.15 25.162C5.98 25.109 5.145 24.904 4.423 24.597C3.676 24.282 3.05 23.858 2.45 23.245C1.851 22.647 1.427 22.021 1.112 21.274C0.805 20.552 0.6 19.717 0.547 18.547C0.489 17.281 0.477 16.901 0.477 13.697C0.477 10.493 0.489 10.113 0.547 8.847C0.6 7.677 0.805 6.842 1.112 6.12C1.427 5.373 1.851 4.747 2.45 4.149C3.05 3.536 3.676 3.113 4.423 2.798C5.145 2.491 5.98 2.286 7.15 2.233C8.416 2.175 8.796 2.163 12 2.163ZM12 0C8.741 0 8.333 0.014 7.053 0.072C5.775 0.13 4.904 0.333 4.14 0.63C3.351 0.936 2.681 1.347 2.014 2.014C1.347 2.681 0.935 3.35 0.63 4.14C0.333 4.904 0.13 5.775 0.072 7.053C0.014 8.333 0 8.741 0 12C0 15.259 0.014 15.667 0.072 16.947C0.13 18.225 0.333 19.096 0.63 19.86C0.935 20.65 1.347 21.319 2.014 21.986C2.681 22.653 3.351 23.065 4.14 23.37C4.904 23.667 5.775 23.87 7.053 23.928C8.333 23.986 8.741 24 12 24C15.259 24 15.667 23.986 16.947 23.928C18.225 23.87 19.096 23.667 19.86 23.37C20.65 23.065 21.319 22.653 21.986 21.986C22.653 21.319 23.065 20.65 23.37 19.86C23.667 19.096 23.87 18.225 23.928 16.947C23.986 15.667 24 15.259 24 12C24 8.741 23.986 8.333 23.928 7.053C23.87 5.775 23.667 4.904 23.37 4.14C23.065 3.35 22.653 2.681 21.986 2.014C21.319 1.347 20.65 0.935 19.86 0.63C19.096 0.333 18.225 0.13 16.947 0.072C15.667 0.014 15.259 0 12 0Z" />
+                                <path d="M12 5.838C8.597 5.838 5.838 8.597 5.838 12C5.838 15.403 8.597 18.162 12 18.162C15.403 18.162 18.162 15.403 18.162 12C18.162 8.597 15.403 5.838 12 5.838ZM12 16C9.791 16 8 14.209 8 12C8 9.791 9.791 8 12 8C14.209 8 16 9.791 16 12C16 14.209 14.209 16 12 16Z" />
+                                <path d="M19.846 5.595C19.846 6.39 19.2 7.035 18.406 7.035C17.611 7.035 16.966 6.39 16.966 5.595C16.966 4.8 17.611 4.155 18.406 4.155C19.2 4.155 19.846 4.8 19.846 5.595Z" />
+                            </svg>
+                        </Link>
+                        <Link href="https://x.com/metabolixmd" target='_blank' className='text-white hover:text-tertiary transition-colors'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                            </svg>
+                        </Link>
+                        <Link href="https://www.youtube.com" target='_blank' className='text-white hover:text-tertiary transition-colors'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </Link>
+                    </div>
 
-                                <div className="flex items-start gap-2">
-
-                                    <p className="text-white f-700"><b>Follow us</b></p>
-                                    <Link href="https://www.facebook.com" target='_blank'>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="25"
-                                            viewBox="0 0 24 25"
-                                            fill="none"
-                                        >
-                                            <g clipPath="url(#clip0_1043_265)">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    clipRule="evenodd"
-                                                    d="M11.9633 0.929199C14.1267 0.953887 16.0811 1.48559 17.8266 2.52432C19.5513 3.54231 20.9859 4.98574 21.9934 6.71657C23.0258 8.47255 23.5543 10.4388 23.5789 12.6155C23.5176 15.5936 22.5783 18.1372 20.7609 20.2463C18.9436 22.3554 16.616 23.6602 14.2065 24.1604V15.8107H16.4845L16.9997 12.5294H13.5503V10.3803C13.5311 9.93475 13.672 9.49707 13.9475 9.14638C14.2233 8.79473 14.7091 8.60991 15.4048 8.59191H17.4878V5.71761C17.4579 5.70799 17.1743 5.66997 16.637 5.60353C16.0276 5.53224 15.4149 5.49415 14.8014 5.48946C13.4128 5.49586 12.3147 5.88754 11.5069 6.66449C10.6992 7.44122 10.2865 8.56499 10.269 10.0358V12.5294H7.64404V15.8107H10.269V24.1604C7.31053 23.6602 4.98295 22.3554 3.1656 20.2463C1.34826 18.1372 0.408978 15.5936 0.347656 12.6155C0.372191 10.4387 0.900684 8.47245 1.93314 6.71657C2.94061 4.98574 4.37527 3.54232 6.09994 2.52432C7.84535 1.48579 9.7998 0.954087 11.9633 0.929199Z"
-                                                    fill="white"
-                                                />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_1043_265">
-                                                    <rect
-                                                        width="24"
-                                                        height="24"
-                                                        fill="white"
-                                                        transform="translate(0 0.56543)"
-                                                    />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </Link>
-
-                                    {/* <Link target='_blank' href="https://www.linkedin.com">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="25"
-                                        viewBox="0 0 24 25"
-                                        fill="none"
-                                    >
-                                        <g clipPath="url(#clip0_1043_271)">
-                                            <path
-                                                d="M12 0.56543C5.3736 0.56543 0 5.93903 0 12.5654C0 19.1918 5.3736 24.5654 12 24.5654C18.6264 24.5654 24 19.1918 24 12.5654C24 5.93903 18.6264 0.56543 12 0.56543ZM8.51294 18.7061H5.59039V9.91351H8.51294V18.7061ZM7.05176 8.71289H7.03271C6.052 8.71289 5.41772 8.03778 5.41772 7.19403C5.41772 6.33124 6.07141 5.6748 7.07117 5.6748C8.07092 5.6748 8.68616 6.33124 8.7052 7.19403C8.7052 8.03778 8.07092 8.71289 7.05176 8.71289ZM19.051 18.7061H16.1288V14.0023C16.1288 12.8201 15.7057 12.0139 14.6483 12.0139C13.8409 12.0139 13.3601 12.5577 13.1488 13.0827C13.0715 13.2706 13.0527 13.5331 13.0527 13.7959V18.7061H10.1303C10.1303 18.7061 10.1686 10.7384 10.1303 9.91351H13.0527V11.1584C13.441 10.5593 14.1359 9.70715 15.6865 9.70715C17.6093 9.70715 19.051 10.9638 19.051 13.6644V18.7061Z"
-                                                fill="white"
-                                            />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_1043_271">
-                                                <rect
-                                                    width="24"
-                                                    height="24"
-                                                    fill="white"
-                                                    transform="translate(0 0.56543)"
-                                                />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </Link> */}
-                                    <Link target='_blank' href="https://www.instagram.com/metabolixmd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="25"
-                                            viewBox="0 0 24 25"
-                                            fill="none"
-                                        >
-                                            <g clipPath="url(#clip0_1043_273)">
-                                                <path
-                                                    d="M12 15.0264C13.3591 15.0264 14.4609 13.9246 14.4609 12.5654C14.4609 11.2063 13.3591 10.1045 12 10.1045C10.6409 10.1045 9.53906 11.2063 9.53906 12.5654C9.53906 13.9246 10.6409 15.0264 12 15.0264Z"
-                                                    fill="white"
-                                                />
-                                                <path
-                                                    d="M12 0.84668C5.52792 0.84668 0.28125 6.09335 0.28125 12.5654C0.28125 19.0375 5.52792 24.2842 12 24.2842C18.4721 24.2842 23.7188 19.0375 23.7188 12.5654C23.7188 6.09335 18.4721 0.84668 12 0.84668ZM19.2402 15.5439C19.184 16.658 18.8709 17.7566 18.059 18.5599C17.2392 19.3709 16.1353 19.673 15.0105 19.7287H8.98959C7.86459 19.673 6.76087 19.3711 5.94108 18.5599C5.12911 17.7566 4.81608 16.658 4.75983 15.5439V9.58699C4.81608 8.47287 5.12916 7.37421 5.94108 6.57087C6.76087 5.75993 7.86473 5.45777 8.98959 5.40213H15.0104C16.1354 5.45777 17.2391 5.75979 18.0589 6.57087C18.8709 7.37421 19.1839 8.47287 19.2402 9.58699L19.2402 15.5439Z"
-                                                    fill="white"
-                                                />
-                                                <path
-                                                    d="M14.9357 6.75941C13.4692 6.71919 10.5339 6.71919 9.06734 6.75941C8.30417 6.78037 7.439 6.97035 6.89525 7.55113C6.33021 8.15483 6.1167 8.88421 6.09504 9.70016C6.05698 11.1323 6.09504 15.4307 6.09504 15.4307C6.11984 16.2466 6.33021 16.9761 6.89525 17.5798C7.439 18.1607 8.30417 18.3505 9.06734 18.3715C10.5339 18.4117 13.4692 18.4117 14.9357 18.3715C15.6989 18.3505 16.5641 18.1605 17.1078 17.5798C17.6728 16.9761 17.8864 16.2467 17.908 15.4307V9.70016C17.8864 8.88421 17.6728 8.15483 17.1078 7.55113C16.5639 6.97016 15.6987 6.78037 14.9357 6.75941ZM12.0013 16.3799C11.2469 16.3799 10.5094 16.1562 9.88214 15.737C9.25486 15.3179 8.76595 14.7222 8.47724 14.0252C8.18854 13.3282 8.113 12.5612 8.26018 11.8213C8.40736 11.0813 8.77065 10.4017 9.30411 9.86822C9.83757 9.33476 10.5172 8.97147 11.2572 8.82428C11.9971 8.6771 12.7641 8.75264 13.4611 9.04135C14.1581 9.33006 14.7538 9.81896 15.1729 10.4462C15.5921 11.0735 15.8158 11.811 15.8158 12.5654C15.8158 13.5771 15.4139 14.5473 14.6986 15.2627C13.9832 15.978 13.013 16.3799 12.0013 16.3799ZM15.832 9.53835C15.6811 9.53831 15.5337 9.49354 15.4082 9.40969C15.2828 9.32584 15.185 9.20668 15.1273 9.06728C15.0696 8.92787 15.0545 8.77449 15.084 8.62651C15.1134 8.47854 15.1861 8.34262 15.2928 8.23595C15.3995 8.12927 15.5355 8.05663 15.6834 8.02721C15.8314 7.99779 15.9848 8.01291 16.1242 8.07066C16.2636 8.1284 16.3827 8.22619 16.4665 8.35164C16.5504 8.47709 16.5951 8.62458 16.5951 8.77546C16.5951 8.87566 16.5753 8.97488 16.537 9.06745C16.4986 9.16002 16.4424 9.24413 16.3716 9.31497C16.3007 9.38581 16.2166 9.442 16.124 9.48033C16.0314 9.51866 15.9322 9.53837 15.832 9.53835Z"
-                                                    fill="white"
-                                                />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_1043_273">
-                                                    <rect
-                                                        width="24"
-                                                        height="24"
-                                                        fill="white"
-                                                        transform="translate(0 0.56543)"
-                                                    />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </Link>
-                                    <Link className='bg-white rounded-full w-6 h-6 text-2xl flex items-center justify-center  text-black' target='_blank' href="https://x.com/metabolixmd?s=11">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                                    </Link>
-                                </div>  
-                            </div>
+                    {/* Copyright and Policy Links */}
+                    <div className='border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300'>
+                        <p>&copy; {new Date().getFullYear()} MetabolixMD. All rights reserved.</p>
+                        <div className='flex gap-4 mt-4 md:mt-0'>
+                            <Link href="/privacy-policy" className='hover:text-white transition-colors'>Privacy Policy</Link>
+                            <span>|</span>
+                            <Link href="/terms-policy" className='hover:text-white transition-colors'>Terms of Service</Link>
+                            <span>|</span>
+                            <Link href="/hipaa-policy" className='hover:text-white transition-colors'>HIPAA Policy</Link>
                         </div>
-                    <p className="text-sm text-gray-500 mt-auto text-center">&copy; {new Date().getFullYear()} MetabolixMD. All rights reserved.</p>
-                    
+                    </div>
                 </div>
-                
             </section>
         </div>
     )
