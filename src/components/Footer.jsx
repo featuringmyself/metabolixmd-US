@@ -9,28 +9,19 @@ const Footer = () => {
     return (
         <div className='mt-auto'>
             <FloatingButton />
-            <section id="bottom-footer" className='bg-primary py-10 w-full'>
+            <section id="bottom-footer" className='bg-primary py-10 w-full px-10'>
                 <div className='w-full px-4 sm:px-6 lg:px-8'>
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-12'>
                         {/* Logo Column */}
                         <div className='flex flex-col items-center md:items-start'>
                             <Link href="/" className="cursor-pointer">
-                                <div className=''>
-                                    <Image 
-                                        src="/images/orange-icon.webp" 
+                                <Image 
+                                        src="/images/footer-logo.webp" 
                                         alt="MetabolixMD Logo" 
                                         width={200} 
                                         height={40} 
                                         className="w-[200px] h-auto"
                                     />
-                                    <Image 
-                                        src="/images/23.webp" 
-                                        alt="MetabolixMD Logo" 
-                                        width={200} 
-                                        height={40} 
-                                        className="w-[200px] h-auto"
-                                    />
-                                </div>
                             </Link>
                         </div>
 
