@@ -253,7 +253,7 @@ const HomePage = () => {
                             Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
                         </p>
                         {/* Replacing the conditional rendering with a simple button */}
-                        <motion.div className="md:block flex justify-start pl-5">
+                        <motion.div className="md:block flex justify-start pl-2">
                             <Link 
                                 href="/get-started" 
                                 className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-5 md:px-10 w-[240px] md:w-[300px] text-white text-lg rounded-full mt-6"
@@ -313,7 +313,7 @@ const HomePage = () => {
     
                     {/* Rest of the code remains unchanged */}
                     
-                    <Image src="/images/hero.png" width={4096} height={1951} className='absolute bottom-0 -z-20 -scale-x-100 h-[50vw] md:hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent),linear-gradient(to_top,white,white_90%,transparent)] object-cover' />
+                    <Image src="/images/hero.png" width={4096} height={1951} className='absolute bottom-0 right-0 -z-20 -scale-x-100 h-[50vw] md:hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent),linear-gradient(to_top,white,white_90%,transparent)] object-cover' />
                 </motion.section>
                 <motion.section 
                     initial={{ opacity: 0, y: 20 }}
