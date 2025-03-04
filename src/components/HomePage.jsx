@@ -256,7 +256,7 @@ const HomePage = () => {
                         <motion.div className="md:block flex justify-start pl-2">
                             <Link 
                                 href="/get-started" 
-                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-5 md:px-10 w-[240px] md:w-[300px] text-white text-lg rounded-full mt-6"
+                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-5 md:px-10 w-[200px] md:w-[300px] text-white text-md rounded-full mt-6"
                             >
                                 <motion.div
                                     className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
@@ -270,7 +270,7 @@ const HomePage = () => {
                                     }}
                                 />
                                 <motion.span
-                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300 "
+                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300"
                                 >
                                     GET STARTED
                                     <svg 
