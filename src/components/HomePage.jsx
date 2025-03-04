@@ -226,7 +226,7 @@ const HomePage = () => {
                     initial="hidden"
                     animate="visible"
                     variants={staggerChildren}
-                    className='flex flex-col lg:flex-row min-h-[75vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative'
+                    className='flex flex-col lg:flex-row min-h-[80vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative'
                 >
                     <div 
                         className='absolute inset-0 order-2 lg:order-none hidden lg:block'
