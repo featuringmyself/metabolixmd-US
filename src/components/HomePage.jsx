@@ -250,7 +250,7 @@ const HomePage = () => {
                             Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
                         </p>
                         {/* Replacing the conditional rendering with a simple button */}
-                        <motion.div className="md:block w-full flex justify-start">
+                        <motion.div className="md:block w-full flex justify-start pl-5">
                             <Link 
                                 href="/get-started" 
                                 className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[250px] md:w-[300px] text-white text-lg rounded-full mt-6"
@@ -267,7 +267,7 @@ const HomePage = () => {
                                     }}
                                 />
                                 <motion.span
-                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300"
+                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300 "
                                 >
                                     GET STARTED
                                     <svg 
@@ -284,11 +284,6 @@ const HomePage = () => {
                                     </svg>
                                 </motion.span>
                             </Link>
-                            <div className="absolute inset-0 -z-20 overflow-hidden md:hidden">
-                                <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent z-10"></div>
-                                <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent z-10"></div>
-                                <Image src="/images/hero.png" width={4096} height={1951} className='-scale-x-100 h-[50vw] w-full object-cover' />
-                            </div>
                         </motion.div>
     
                         {/* <div className='flex justify-center md:justify-start items-center gap-4 my-5'>
@@ -315,6 +310,7 @@ const HomePage = () => {
     
                     {/* Rest of the code remains unchanged */}
                     
+                    <Image src="/images/hero.png" width={4096} height={1951} className='absolute bottom-0 -z-20 -scale-x-100 h-[50vw] md:hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent),linear-gradient(to_top,white,white_90%,transparent)] object-cover' />
                 </motion.section>
                 <motion.section 
                     initial={{ opacity: 0, y: 20 }}

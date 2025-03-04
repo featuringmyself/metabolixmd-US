@@ -211,7 +211,7 @@ const GLP1Section = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="relative bg-gradient-to-br from-emerald-700 to-emerald-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
+                className="relative bg-[#365D56] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
                 whileHover={{ y: -5 }}
               >
                 <motion.div 
