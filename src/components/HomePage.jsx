@@ -6,6 +6,7 @@ import MeetExpertBackground from './MeetExpertBackground'
 import CompareModule from './CompareModule'
 import GLP1Section from './GLP1Section'
 import TrustSection from './TrustSection'
+import PricingSection from './PricingSection'
 
 // Removing the auth token import
 // import { getAuthToken } from '@/services/API/apiHelper'
@@ -217,7 +218,7 @@ const HomePage = () => {
         setWeightLoss(Math.round(weight * 0.20));
     };
     return (
-        <div className='font-tt-hoves mt-16 overflow-x-hidden'>
+        <div className='font-tt-hoves mt-20 overflow-x-hidden'>
             <div className='mx-auto'>
                 <NavBar />
     
@@ -225,23 +226,34 @@ const HomePage = () => {
                     initial="hidden"
                     animate="visible"
                     variants={staggerChildren}
-                    className='flex flex-col lg:flex-row min-h-[85vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20'
+                    className='flex flex-col lg:flex-row min-h-[75vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative'
                 >
+                    <div 
+                        className='absolute inset-0 order-2 lg:order-none hidden lg:block'
+                        style={{
+                            backgroundImage: 'url(/images/hero.png)',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            transform: 'scaleX(-1)'
+                        }}
+                    ></div>
+                    <div className='absolute inset-0 order-2 lg:order-none hidden lg:block'></div>
                     <motion.div 
                         variants={fadeInUp}
-                        className='flex-1 flex text-center lg:text-start flex-col justify-center px-0 md:px-10'
+                        className='flex-1 flex text-start flex-col justify-center px-0 md:px-10 relative z-10 order-1 lg:order-none'
                     >
-                        <h1 className='text-4xl md:text-7xl font-medium mb-4 md:mb-5 text-wrap'>
+                        <h1 className='text-4xl md:text-7xl font-medium mb-4 md:mb-5 text-wrap mx-5'>
                         <span className='text-[#365D56]'>Your Personalised <br /> Weight Loss</span> <span className='text-zinc-800'>Journey <br /> Starts Here</span>
                         </h1>
-                        <p className='mt-2 md:mt-3 font-light md:text-lg mb-4 md:mb-5 text-zinc-600 w-[80%]'>
+                        <p className='mt-2 md:mt-3 font-light md:text-lg mb-4 md:mb-5 text-zinc-600 md:max-w-[30%] max-w-[90%] text-start mx-5'>
                             Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
                         </p>
                         {/* Replacing the conditional rendering with a simple button */}
-                        <motion.div className="md:block w-full flex justify-center md:justify-start">
+                        <motion.div className="md:block w-full flex justify-start">
                             <Link 
                                 href="/get-started" 
-                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-6"
+                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[250px] md:w-[300px] text-white text-lg rounded-full mt-6"
                             >
                                 <motion.div
                                     className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
@@ -272,9 +284,14 @@ const HomePage = () => {
                                     </svg>
                                 </motion.span>
                             </Link>
+                            <div className="absolute inset-0 -z-20 overflow-hidden md:hidden">
+                                <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent z-10"></div>
+                                <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-transparent z-10"></div>
+                                <Image src="/images/hero.png" width={4096} height={1951} className='-scale-x-100 h-[50vw] w-full object-cover' />
+                            </div>
                         </motion.div>
     
-                        <div className='flex justify-center md:justify-start items-center gap-4 my-5'>
+                        {/* <div className='flex justify-center md:justify-start items-center gap-4 my-5'>
                             <Link 
                                 href="#safety" 
                                 onClick={scrollToSafety}
@@ -293,45 +310,11 @@ const HomePage = () => {
                                     <path d="M7 17 17 7" />
                                 </svg>
                             </Link>
-                        </div>
+                        </div> */}
                     </motion.div>
     
                     {/* Rest of the code remains unchanged */}
                     
-                    {/* Static Hero Image with Floating Image */}
-                    <motion.div 
-                        className='min-h-[50vh] md:min-h-[85vh] flex-1 justify-center items-center flex relative'
-                    >
-                        <div className="relative w-full md:w-[60%] mx-auto h-full">
-                            <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent z-10"></div>
-                            <Image 
-                                src="/images/hero.jpg" 
-                                alt="Weight loss medication"
-                                width={400}
-                                height={600}
-                                className="w-full h-[50vh] md:h-[85vh] object-cover rounded-3xl"
-                                priority
-                            />
-                            
-                            {/* Floating Image overlaying the hero image */}
-                            <div className="absolute bottom-5 right-5 z-20">
-                                <motion.div
-                                    initial={{ scale: 0.9, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.3 }}
-                                    className="bg-white/90 backdrop-blur-sm p-4 rounded-3xl shadow-soft hover:shadow-lg transition-all duration-300 border border-white/50"
-                                >
-                                    <Image 
-                                        src="/images/41.webp" 
-                                        alt="Medicine"
-                                        width={150}
-                                        height={150}
-                                        className="w-[100px] md:w-[120px] h-auto drop-shadow-xl hover:scale-105 transition-transform duration-300"
-                                    />
-                                </motion.div>
-                            </div>
-                        </div>
-                    </motion.div>
                 </motion.section>
                 <motion.section 
                     initial={{ opacity: 0, y: 20 }}
@@ -424,13 +407,16 @@ const HomePage = () => {
                 {/* GLP-1 Information Section */}
                 <GLP1Section />
     
+                {/* Pricing Section */}
+                <PricingSection />
+
                 {/* FAQ Section */}
                 <motion.section 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6 }}
-                    className="font-montserrat px-4 md:px-6 mx-auto max-w-[1600px] my-16 md:my-32 min-h-[150vh] md:min-h-[150vh] flex flex-col"
+                    className="font-montserrat px-4 md:px-6 mx-auto max-w-[1600px] my-16 md:my-32 min-h-[100vh] md:min-h-[100vh] flex flex-col"
                 >
                     <motion.div 
                         initial={{ opacity: 0, y: -30 }}
@@ -466,7 +452,7 @@ const HomePage = () => {
                         <div className="lg:w-2/3">
                             <motion.div 
                                 variants={fadeInUp}
-                                className="bg-white p-8 md:p-10 rounded-3xl shadow-sm"
+                                className="p-8 md:p-10 rounded-3xl shadow-sm"
                             >
                                 <FaqList />
                             </motion.div>

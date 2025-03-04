@@ -9,10 +9,10 @@ const Footer = () => {
     return (
         <div className='mt-auto'>
             <FloatingButton />
-            <section id="bottom-footer" className='bg-primary py-10 w-full'>
+             <section id="bottom-footer" className='bg-primary py-10 w-full'>
                 <div className='w-full px-4 sm:px-6 lg:px-8'>
-                    <div className='flex flex-col justify-evenly md:flex-row gap-8 mb-12'>
-                        {/* Logo Column with Address & Contact below it */}
+                    <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-12'>
+                        {/* Logo Column */}
                         <div className='flex flex-col items-center md:items-start'>
                             <Link href="/" className="cursor-pointer">
                                 <Image 
@@ -20,21 +20,21 @@ const Footer = () => {
                                         alt="MetabolixMD Logo" 
                                         width={200} 
                                         height={40} 
-                                        className="w-[150px] sm:w-[200px] h-auto rounded-xl"
+                                        className="w-[200px] h-auto rounded-xl"
                                     />
                             </Link>
+                        </div>
+
+                        {/* Address & Contact Column */}
+                        <div className='text-white text-center md:text-left'>
+                            <h3 className='font-semibold text-lg mb-3'>Address:</h3>
+                            <p className='mb-4'>Level 1, 12 Sample St, Sydney NSW 2000</p>
                             
-                            {/* Address & Contact Column - Now under logo in desktop */}
-                            <div className='text-white text-center md:text-left mt-6'>
-                                <h3 className='font-semibold text-lg mb-3'>Address:</h3>
-                                <p className='mb-4'>Level 1, 12 Sample St, Sydney NSW 2000</p>
-                                
-                                <h3 className='font-semibold text-lg mb-3'>Contact:</h3>
-                                <p className='mb-2'>1800 123 4567</p>
-                                <Link href="mailto:info@metabolixmd.com" className='text-white hover:text-tertiary transition-colors'>
-                                    info@metabolixmd.com
-                                </Link>
-                            </div>
+                            <h3 className='font-semibold text-lg mb-3'>Contact:</h3>
+                            <p className='mb-2'>1800 123 4567</p>
+                            <Link href="mailto:info@metabolixmd.com" className='text-white hover:text-tertiary transition-colors'>
+                                info@metabolixmd.com
+                            </Link>
                         </div>
 
                         {/* Navigation Column */}

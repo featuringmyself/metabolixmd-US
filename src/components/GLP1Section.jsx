@@ -103,35 +103,41 @@ const GLP1Section = () => {
                   {/* Floating medication image */}
                   <motion.div 
                     animate={{ 
-                      y: ["-5%", "5%", "-5%"]
+                      y: ["-2%", "2%", "-2%"],
+                      scale: [1, 1.02, 1],
+                      rotate: ["-1deg", "1deg", "-1deg"]
                     }}
                     transition={{ 
-                      duration: 6, 
+                      duration: 8,
                       repeat: Infinity,
-                      ease: "easeInOut" 
+                      ease: [0.76, 0, 0.24, 1]
                     }}
-                    className="relative w-[280px] md:w-[350px] h-[280px] md:h-[350px] bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl border border-white/50 overflow-hidden z-10"
+                    className="relative w-[280px] md:w-[350px] h-[280px] md:h-[350px] bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-xl border border-white/30 overflow-hidden z-10"
                   >
-                    <Image 
-                      src="/images/41.webp" 
-                      alt="GLP-1 Medication" 
-                      fill 
-                      className="object-contain drop-shadow-lg"
-                    />
-                    
-                    {/* Shine effect overlay */}
-                    <motion.div 
-                      animate={{ 
-                        x: ["-100%", "100%"],
-                        opacity: [0, 1, 0]
-                      }}
-                      transition={{ 
-                        duration: 3, 
-                        repeat: Infinity,
-                        ease: "easeInOut" 
-                      }}
-                      className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent"
-                    ></motion.div>
+                      <Image 
+                        src="/images/41.webp" 
+                        alt="GLP-1 Medication" 
+                        fill 
+                        className="object-contain drop-shadow-lg transition-all duration-700"
+                      />
+                      
+                      {/* Modern minimalistic gradient animation */}
+                      <motion.div 
+                        animate={{ 
+                          background: [
+                            "linear-gradient(45deg, rgba(54, 93, 86, 0.05) 0%, transparent 70%)",
+                            "linear-gradient(225deg, rgba(54, 93, 86, 0.05) 0%, transparent 70%)",
+                            "linear-gradient(45deg, rgba(54, 93, 86, 0.05) 0%, transparent 70%)"
+                          ],
+                          opacity: [0.6, 0.8, 0.6]
+                        }}
+                        transition={{ 
+                          duration: 12,
+                          repeat: Infinity,
+                          ease: "linear"
+                        }}
+                        className="absolute inset-0 mix-blend-overlay backdrop-blur-[1px] rounded-3xl"
+                      ></motion.div>
                   </motion.div>
                 </div>
               </div>
@@ -166,11 +172,11 @@ const GLP1Section = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="relative bg-gradient-to-br from-orange-400 to-orange-500 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
+                className="relative bg-[#F98F48] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
                 whileHover={{ y: -5 }}
               >
                 <motion.div 
-                  className="absolute top-0 right-0 w-[150px] h-[150px] md:w-[280px] md:h-[280px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
+                  className="absolute top-0 right-[-2vw] w-[150px] h-[150px] md:w-[280px] md:h-[280px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
                   animate={{ rotate: [0, 5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 >
