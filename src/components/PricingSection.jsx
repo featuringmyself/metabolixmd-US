@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 const PricingSection = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const cardWidth = container.firstChild?.offsetWidth || 0;
+      const scrollPosition = container.scrollLeft;
+      const index = Math.round(scrollPosition / cardWidth);
+      setActiveIndex(Math.min(index, pricingPlans.length - 1));
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Function to scroll to a specific plan when clicking on indicator dots
+  const scrollToPlan = (index) => {
+    const container = containerRef.current;
+    if (!container) return;
+    
+    const cardWidth = container.firstChild?.offsetWidth || 0;
+    container.scrollTo({
+      left: index * cardWidth,
+      behavior: 'smooth'
+    });
+    setActiveIndex(index);
+  };
+
   // Animation variants
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -134,13 +165,15 @@ const PricingSection = () => {
       </motion.div>
 
       {/* Pricing Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div 
+        ref={containerRef}
+        className="flex md:grid md:grid-cols-3 gap-12 overflow-x-auto md:overflow-visible pb-4 snap-x snap-mandatory">
         {pricingPlans.map((plan, index) => (
           <motion.div
             key={index}
+            className={`${plan.color} ${plan.textColor} rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 min-w-[85vw] md:min-w-0 flex-shrink-0 md:flex-shrink snap-center`}
             variants={fadeIn}
             whileHover={{ y: -5 }}
-            className={`${plan.color} ${plan.textColor} rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300`}
           >
             <div className="p-8">
               {/* Plan Header */}
@@ -182,6 +215,23 @@ const PricingSection = () => {
           </motion.div>
         ))}
       </div>
+
+      {/* Mobile dot indicators */}
+      <div className="flex justify-center gap-3 mt-6 md:hidden">
+        {pricingPlans.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => scrollToPlan(index)}
+            aria-label={`View pricing plan ${index + 1}`}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === activeIndex 
+                ? 'bg-[#365D56] scale-125 transform' 
+                : 'bg-gray-300 hover:bg-gray-400'
+            }`}
+          />
+        ))}
+      </div>
+
     </motion.section>
   );
 };

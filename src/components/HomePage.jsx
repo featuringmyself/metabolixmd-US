@@ -19,6 +19,7 @@ import { getMethod } from '@/services/API/ApiMethod'
 import { toast } from 'react-toastify'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import LabTestedSection from './LabTestedSection'
 
 // Add this CSS at the top of your file or in your global CSS
 const cardContainerStyle = {
@@ -218,7 +219,7 @@ const HomePage = () => {
         setWeightLoss(Math.round(weight * 0.20));
     };
     return (
-        <div className='font-tt-hoves md:mt-20 overflow-x-hidden'>
+        <div className='font-tt-hoves mt-20 overflow-x-hidden'>
             <div className='mx-auto'>
                 <NavBar />
     
@@ -226,7 +227,7 @@ const HomePage = () => {
                     initial="hidden"
                     animate="visible"
                     variants={staggerChildren}
-                    className='flex flex-col lg:flex-row min-h-[80vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative'
+                    className='flex flex-col lg:flex-row min-h-[75vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative'
                 >
                     <div 
                         className='absolute inset-0 order-2 lg:order-none hidden lg:block'
@@ -243,20 +244,17 @@ const HomePage = () => {
                         variants={fadeInUp}
                         className='flex-1 flex text-start flex-col justify-center px-0 md:px-10 relative z-10 order-1 lg:order-none'
                     >
-                        <h1 className='text-4xl md:text-7xl font-medium mb-4 md:mb-5 text-wrap mx-5 hidden md:block'>
-                        <span className='text-[#365D56]'>Your Personalised <br />Weight Loss</span> <span className='text-zinc-800'>Journey <br />Starts Here</span>
-                        </h1>
-                        <h1 className='text-4xl md:text-7xl font-medium mb-4 md:mb-5 text-wrap mx-5 md:hidden'>
-                        <span className='text-[#365D56]'>Your <br />Personalised <br />Weight Loss</span> <span className='text-zinc-800'>Journey Starts Here</span>
+                        <h1 className='text-4xl md:text-7xl font-medium mb-4 md:mb-5 text-wrap mx-5'>
+                        <span className='text-[#365D56]'>Your Personalised <br /> Weight Loss</span> <span className='text-zinc-800'>Journey <br /> Starts Here</span>
                         </h1>
                         <p className='mt-2 md:mt-3 font-light md:text-lg mb-4 md:mb-5 text-zinc-600 md:max-w-[30%] max-w-[90%] text-start mx-5'>
                             Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
                         </p>
                         {/* Replacing the conditional rendering with a simple button */}
-                        <motion.div className="md:block flex justify-start pl-2">
+                        <motion.div className="md:block w-full flex justify-start pl-5">
                             <Link 
                                 href="/get-started" 
-                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-5 md:px-10 w-[200px] md:w-[300px] text-white text-md rounded-full mt-6"
+                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[250px] md:w-[300px] text-white text-lg rounded-full mt-6"
                             >
                                 <motion.div
                                     className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
@@ -270,7 +268,7 @@ const HomePage = () => {
                                     }}
                                 />
                                 <motion.span
-                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300"
+                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300 "
                                 >
                                     GET STARTED
                                     <svg 
@@ -313,7 +311,7 @@ const HomePage = () => {
     
                     {/* Rest of the code remains unchanged */}
                     
-                    <Image src="/images/hero.png" width={4096} height={1951} className='absolute bottom-0 right-0 -z-20 -scale-x-100 h-[50vw] md:hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent),linear-gradient(to_top,white,white_90%,transparent)] object-cover' />
+                    <Image src="/images/hero.png" width={4096} height={1951} className='absolute bottom-0 -z-20 -scale-x-100 h-[50vw] md:hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent),linear-gradient(to_top,white,white_80%,transparent)]'/>
                 </motion.section>
                 <motion.section 
                     initial={{ opacity: 0, y: 20 }}
@@ -408,6 +406,8 @@ const HomePage = () => {
     
                 {/* Pricing Section */}
                 <PricingSection />
+
+                <LabTestedSection />
 
                 {/* FAQ Section */}
                 <motion.section 

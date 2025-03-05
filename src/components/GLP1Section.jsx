@@ -176,7 +176,7 @@ const GLP1Section = () => {
                 whileHover={{ y: -5 }}
               >
                 <motion.div 
-                  className="absolute top-0 right-[-2vw] w-[150px] h-[150px] md:w-[280px] md:h-[280px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
+                  className="absolute top-0 right-[-2vw] w-[200px] h-[200px] md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
                   animate={{ rotate: [0, 5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -189,18 +189,32 @@ const GLP1Section = () => {
                 </motion.div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto">
-                    <h4 className="text-2xl font-semibold text-white mb-4 drop-shadow-sm">Vial & Syringe</h4>
-                    <p className="text-white/90 text-sm max-w-[80%] leading-relaxed mb-6">
-                      A more traditional method, requiring manual dosage preparation before injection. This approach allows for precise dosing and is typically more cost-effective for long-term treatment plans.
+                    <h4 className="text-2xl font-semibold text-black mb-4 drop-shadow-sm">Vial & Syringe</h4>
+                    <p className="text-black/90 text-xs max-w-[80%] leading-relaxed mb-6">
+                    A more traditional method, requiring 
+                    manual dosage preparation before injection.
                     </p>
                   </div>
-                  <div className="mt-8 text-center">
-                    <Link 
-                      href="#" 
-                      className="inline-block text-sm bg-white/20 hover:bg-white/40 backdrop-blur-sm px-5 py-2.5 rounded-full text-white font-medium transition-all duration-300 hover:shadow-md"
+                  <div className="text-center">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.7 }}
+                      viewport={{ once: true }}
                     >
-                      Important safety information
-                    </Link>
+                      <Link 
+                        href="#" 
+                        className="inline-block text-xs bg-white/20 hover:bg-white/40 backdrop-blur-sm px-5 py-2.5 rounded-full text-black font-medium transition-all duration-300 hover:shadow-md"
+                      >
+                        <motion.span
+                          animate={{ x: [0, 2, 0] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          className="inline-flex items-center"
+                        >
+                          Important safety information
+                        </motion.span>
+                      </Link>
+                    </motion.div>
                   </div>
                 </div>
               </motion.div>
@@ -211,11 +225,11 @@ const GLP1Section = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="relative bg-[#365D56] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
+                className="relative bg-gradient-to-br from-emerald-700 to-emerald-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
                 whileHover={{ y: -5 }}
               >
                 <motion.div 
-                  className="absolute top-0 right-0 w-[150px] h-[150px] md:w-[280px] md:h-[280px] transform translate-x-[5%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
+                  className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[350px] md:h-[350px] transform translate-x-[5%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
                   animate={{ rotate: [0, -5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -229,17 +243,30 @@ const GLP1Section = () => {
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto">
                     <h4 className="text-2xl font-semibold text-white mb-4 drop-shadow-sm">Auto-injectors</h4>
-                    <p className="text-white/90 text-sm max-w-[80%] leading-relaxed mb-6">
-                      Designed for quick and seamless administration, often with a single-use format. These pens offer convenience and ease of use, making them ideal for those who prefer a simplified injection process with minimal preparation.
+                    <p className="text-white/90 text-xs max-w-[80%] leading-relaxed mb-6">
+                    Designed for quick and seamless administration, often with a single-use format.
                     </p>
                   </div>
-                  <div className="mt-8 text-center">
-                    <Link 
-                      href="#" 
-                      className="inline-block text-sm bg-white/20 hover:bg-white/40 backdrop-blur-sm px-5 py-2.5 rounded-full text-white font-medium transition-all duration-300 hover:shadow-md"
+                  <div className="text-center">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.7 }}
+                      viewport={{ once: true }}
                     >
-                      Important safety information
-                    </Link>
+                      <Link 
+                        href="#" 
+                        className="inline-block text-xs bg-white/20 hover:bg-white/40 backdrop-blur-sm px-5 py-2.5 rounded-full text-white font-medium transition-all duration-300 hover:shadow-md"
+                      >
+                        <motion.span
+                          animate={{ x: [0, 2, 0] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          className="inline-flex items-center"
+                        >
+                          Important safety information
+                        </motion.span>
+                      </Link>
+                    </motion.div>
                   </div>
                 </div>
               </motion.div>
