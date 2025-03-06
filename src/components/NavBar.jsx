@@ -71,7 +71,7 @@ const NavBar = () => {
 
   return (
     <div className='flex flex-col'>
-      <nav className={`fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md border-b border-gray-200/20 transition-all duration-300 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'} ${isScrolled ? 'shadow-md' : ''}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-[100] bg-white/70 backdrop-blur-md border-b border-gray-200/20 transition-all duration-300 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'} ${isScrolled ? 'shadow-md' : ''}`}>
         <div className="max-w-[1920px] mx-auto px-4 md:px-8 py-4">
           <div className="flex items-center justify-between relative">
             {/* Logo */}

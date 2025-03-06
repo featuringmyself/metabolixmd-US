@@ -230,67 +230,67 @@ const HomePage = () => {
                     initial="hidden"
                     animate="visible"
                     variants={staggerChildren}
-                    className='flex flex-col lg:flex-row min-h-screen md:min-h-[75vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative md:mt-20'
+                    className='flex flex-col lg:flex-row min-h-[70vh] lg:min-h-[75vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative md:mt-20 mt-16'
+>
+    <div 
+        className='absolute inset-0 order-2 lg:order-none hidden lg:block'
+        style={{
+            backgroundImage: 'url(/images/hero.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            transform: 'scaleX(-1)'
+        }}
+    ></div>
+    <div className='absolute inset-0 order-2 lg:order-none hidden lg:block'></div>
+    <motion.div 
+        variants={fadeIn}
+        className='flex-1 flex text-start flex-col justify-evenly px-0 md:px-10 relative z-10 order-1 lg:order-none md:min-h-0'
+    >
+        <h1 className='text-5xl md:text-7xl font-medium md:mb-3 text-wrap mx-5'>
+            <span className='text-[#365D56]'>Your Personalised <br /> Weight Loss</span> <span className='text-zinc-800'>Journey <br /> Starts Here</span>
+        </h1>
+        <p className='md:mt-2 font-light text-md md:text-lg md:mb-3 text-zinc-600 md:max-w-[30%] max-w-[90%] text-start mx-5'>
+            Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
+        </p>
+        <motion.div className="md:block w-full flex justify-start pl-5 md:pl-2 mt-1">
+            <Link 
+                href="/get-started" 
+                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-6 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full"
+            >
+                <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+                    animate={{
+                        x: ['-100%', '100%'],
+                    }}
+                    transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                />
+                <motion.span
+                    className="flex items-center gap-2 group-hover:translate-x-1 text-sm transition-transform duration-300"
                 >
-                    <div 
-                        className='absolute inset-0 order-2 lg:order-none hidden lg:block'
-                        style={{
-                            backgroundImage: 'url(/images/hero.png)',
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                            transform: 'scaleX(-1)'
-                        }}
-                    ></div>
-                    <div className='absolute inset-0 order-2 lg:order-none hidden lg:block'></div>
-                    <motion.div 
-                        variants={fadeIn}
-                        className='flex-1 flex text-start flex-col justify-evenly px-0 md:px-10 relative z-10 order-1 lg:order-none  md:min-h-0'
+                    GET STARTED
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        className="h-5 w-5" 
+                        viewBox="0 0 20 20" 
+                        fill="currentColor"
                     >
-                        <h1 className='text-5xl md:text-7xl font-medium md:mb-5 text-wrap mx-5 '>  
-                        <span className='text-[#365D56]'>Your Personalised <br /> Weight Loss</span> <span className='text-zinc-800'>Journey <br /> Starts Here</span>
-                        </h1>
-                        <p className='md:mt-3 font-light text-lg md:text-lg md:mb-5 text-zinc-600 md:max-w-[30%] max-w-[90%] text-start mx-5'>
-                            Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
-                        </p>
-                        <motion.div className="md:block w-full flex justify-start pl-5 md:pl-2 md:mb-0">
-                            <Link 
-                                href="/get-started" 
-                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-6 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full"
-                            >
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                                    animate={{
-                                        x: ['-100%', '100%'],
-                                    }}
-                                    transition={{
-                                        duration: 2,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }}
-                                />
-                                <motion.span
-                                    className="flex items-center gap-2 group-hover:translate-x-1 text-sm transition-transform duration-300 "
-                                >
-                                    GET STARTED
-                                    <svg 
-                                        xmlns="http://www.w3.org/2000/svg" 
-                                        className="h-5 w-5" 
-                                        viewBox="0 0 20 20" 
-                                        fill="currentColor"
-                                    >
-                                        <path 
-                                            fillRule="evenodd" 
-                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
-                                            clipRule="evenodd" 
-                                        />
-                                    </svg>
-                                </motion.span>
-                            </Link>
-                        </motion.div>
-                    </motion.div>
-                    <Image src="/images/hero.png" width={4096} height={1951} className='absolute bottom-0 -z-20 -scale-x-100 h-[50vw] md:hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent),linear-gradient(to_top,white,white_80%,transparent)]'/>
-                </motion.section>
+                        <path 
+                            fillRule="evenodd" 
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" 
+                            clipRule="evenodd" 
+                        />
+                    </svg>
+                </motion.span>
+            </Link>
+        </motion.div>
+    </motion.div>
+    <Image src="/images/hero.png" width={4096} height={1951} className='absolute bottom-0 -z-20 -scale-x-100 h-[50vw] md:hidden w-full object-cover'/>
+</motion.section>
                 <motion.section 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
