@@ -19,7 +19,6 @@ import { getMethod } from '@/services/API/ApiMethod'
 import { toast } from 'react-toastify'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import LabTestedSection from './LabTestedSection'
 
 // Add this CSS at the top of your file or in your global CSS
 const cardContainerStyle = {
@@ -251,10 +250,10 @@ const HomePage = () => {
                             Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
                         </p>
                         {/* Replacing the conditional rendering with a simple button */}
-                        <motion.div className="md:block w-full flex justify-start pl-5">
+                        <motion.div className="md:block w-full flex justify-start pl-2">
                             <Link 
                                 href="/get-started" 
-                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-4 px-8 md:px-10 w-[250px] md:w-[300px] text-white text-lg rounded-full mt-6"
+                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-6 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-16"
                             >
                                 <motion.div
                                     className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
@@ -268,7 +267,7 @@ const HomePage = () => {
                                     }}
                                 />
                                 <motion.span
-                                    className="flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300 "
+                                    className="flex items-center gap-2 group-hover:translate-x-1 text-sm transition-transform duration-300 "
                                 >
                                     GET STARTED
                                     <svg 
@@ -406,8 +405,6 @@ const HomePage = () => {
     
                 {/* Pricing Section */}
                 <PricingSection />
-
-                <LabTestedSection />
 
                 {/* FAQ Section */}
                 <motion.section 

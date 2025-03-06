@@ -22,8 +22,19 @@ const facebookProvider = new FacebookAuthProvider();
 const appleProvider = new OAuthProvider('apple.com');
 const database = getDatabase(app);
 let messaging = null;
-if (typeof window !== 'undefined' && isSupported()) {
-  messaging = getMessaging(app);
-}
+const initializeMessaging = async () => {
+  if (typeof window !== 'undefined') {
+    try {
+      const isMessagingSupported = await isSupported();
+      if (isMessagingSupported) {
+        messaging = getMessaging(app);
+      }
+    } catch (error) {
+      console.error('Error initializing Firebase messaging:', error);
+    }
+  }
+};
+
+initializeMessaging();
 
 export { auth, googleProvider,facebookProvider,appleProvider, database, messaging };

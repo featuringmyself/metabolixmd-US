@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import PrescriptionQuestion from './froms/PrescriptionQuestion';
 import PrescriptionUpload from './froms/UploadPriscription';
 import GoalSelectionForm from './froms/GoalSelectionForm';
@@ -137,44 +136,22 @@ const MultiStepForm = () => {
     return null;
   }
 
-  // Animation variants for form transitions
-  const pageTransition = {
-    initial: { opacity: 0, x: 20 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -20 }
-  };
-
   return (
-    <div className="multi-step-form py-10 mt-20 md:py-5 font-tt-hoves bg-[#d3d2cc] min-h-screen flex flex-col justify-center items-center">
+    <div className="multi-step-form py-10 mt-20 md:py-5 font-tt-hoves bg-[#d3d2cc]  min-h-screen flex flex-col justify-center items-center">
 
       {/* Stepper */}
       {
         formOrder.includes(activeForm) &&
-        <motion.div 
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full p-5 md:p-0 md:w-[500px] flex gap-2 items-center"
-        >
+        <div className="w-full p-5 md:p-0 md:w-[500px] flex gap-2 items-center">
           {/* Dynamic width based on progress */}
-          <div className="h-[15px] border rounded-full bg-white flex-1 overflow-hidden">
-            <motion.div
+          <div className="h-[15px] border rounded-full bg-white flex-1">
+            <div
               className="h-full bg-primary rounded-full"
-              initial={{ width: 0 }}
-              animate={{ width: `${progressPercentage}%` }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-            ></motion.div>
+              style={{ width: `${progressPercentage}%` }}
+            ></div>
           </div>
-          <motion.img 
-            src="images/27.webp" 
-            className="w-[70px]" 
-            alt="Step indicator" 
-            initial={{ scale: 0.8, opacity: 0.5 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            whileHover={{ scale: 1.05, rotate: 5 }}
-          />
-        </motion.div>
+          <img src="images/27.webp" className="w-[70px]" alt="Step indicator" />
+        </div>
       }
 
       {/* {activeForm === "prescriptionQuestion" && (

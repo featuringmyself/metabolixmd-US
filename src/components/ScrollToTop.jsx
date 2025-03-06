@@ -33,27 +33,10 @@ const ScrollToTop = () => {
             {isVisible && (
                 <motion.button
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ 
-                        opacity: 1, 
-                        y: 0,
-                        scale: [1, 1.1, 1],
-                        boxShadow: [
-                            "0 4px 6px rgba(54, 93, 86, 0.1)",
-                            "0 10px 15px rgba(54, 93, 86, 0.2)",
-                            "0 4px 6px rgba(54, 93, 86, 0.1)"
-                        ]
-                    }}
-                    transition={{ 
-                        duration: 0.8,
-                        times: [0, 0.5, 1]
-                    }}
+                    animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 20 }}
-                    whileHover={{ 
-                        scale: 1.1, 
-                        rotate: 5,
-                        boxShadow: "0 10px 15px rgba(54, 93, 86, 0.2)"
-                    }}
-                    whileTap={{ scale: 0.9, rotate: 0 }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={scrollToTop}
                     className="fixed bottom-24 right-8 z-40 bg-white text-primary p-3 rounded-full shadow-soft hover:shadow-lg transition-all duration-300 border border-primary/10"
                 >
@@ -77,4 +60,4 @@ const ScrollToTop = () => {
     );
 };
 
-export default ScrollToTop;
+export default ScrollToTop; 

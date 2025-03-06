@@ -165,17 +165,8 @@ const WeightCalculation = ({ data, onNext }) => {
                 </h2>
                 <p className='text-primary text-3xl font-semibold flex items-center gap-3 mt-2'>
                   <motion.svg 
-                    animate={{ 
-                      y: [0, 5, 0],
-                      scale: [1, 1.1, 1],
-                      filter: ["drop-shadow(0px 0px 0px #365d56)", "drop-shadow(0px 2px 3px #365d56)", "drop-shadow(0px 0px 0px #365d56)"]
-                    }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity, 
-                      ease: "easeInOut",
-                      times: [0, 0.5, 1]
-                    }}
+                    animate={{ y: [0, 5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                     xmlns="http://www.w3.org/2000/svg" 
                     width="24" 
                     height="24" 
