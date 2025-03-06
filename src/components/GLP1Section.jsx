@@ -176,7 +176,7 @@ const GLP1Section = () => {
                 whileHover={{ y: -5 }}
               >
                 <motion.div 
-                  className="absolute top-0 right-[-2vw] w-[200px] h-[200px] md:w-[280px] md:h-[280px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
+                  className="absolute top-0 right-[-2vw] w-[200px] h-[200px] md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
                   animate={{ rotate: [0, 5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -215,7 +215,7 @@ const GLP1Section = () => {
                 whileHover={{ y: -5 }}
               >
                 <motion.div 
-                  className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[280px] md:h-[280px] transform translate-x-[5%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
+                  className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[350px] md:h-[350px] transform translate-x-[5%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
                   animate={{ rotate: [0, -5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 >

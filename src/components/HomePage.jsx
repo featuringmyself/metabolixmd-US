@@ -153,6 +153,11 @@ const HomePage = () => {
         visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
     };
 
+    // Animation variants
+    const fadeIn = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    };
     const staggerChildren = {
         hidden: { opacity: 0 },
         visible: {
@@ -162,7 +167,6 @@ const HomePage = () => {
             }
         }
     };
-
     // Add these new variants
     const scaleIn = {
         hidden: { scale: 0.95, opacity: 0 },
@@ -218,7 +222,7 @@ const HomePage = () => {
         setWeightLoss(Math.round(weight * 0.20));
     };
     return (
-        <div className='font-tt-hoves mt-20 overflow-x-hidden'>
+        <div className='font-tt-hoves overflow-x-hidden'>
             <div className='mx-auto'>
                 <NavBar />
     
@@ -226,7 +230,7 @@ const HomePage = () => {
                     initial="hidden"
                     animate="visible"
                     variants={staggerChildren}
-                    className='flex flex-col lg:flex-row min-h-[75vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative'
+                    className='flex flex-col lg:flex-row min-h-screen md:min-h-[75vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative md:mt-20'
                 >
                     <div 
                         className='absolute inset-0 order-2 lg:order-none hidden lg:block'
@@ -240,20 +244,19 @@ const HomePage = () => {
                     ></div>
                     <div className='absolute inset-0 order-2 lg:order-none hidden lg:block'></div>
                     <motion.div 
-                        variants={fadeInUp}
-                        className='flex-1 flex text-start flex-col justify-center px-0 md:px-10 relative z-10 order-1 lg:order-none'
+                        variants={fadeIn}
+                        className='flex-1 flex text-start flex-col justify-evenly px-0 md:px-10 relative z-10 order-1 lg:order-none  md:min-h-0'
                     >
-                        <h1 className='text-4xl md:text-7xl font-medium mb-4 md:mb-5 text-wrap mx-5'>
+                        <h1 className='text-5xl md:text-7xl font-medium md:mb-5 text-wrap mx-5 '>  
                         <span className='text-[#365D56]'>Your Personalised <br /> Weight Loss</span> <span className='text-zinc-800'>Journey <br /> Starts Here</span>
                         </h1>
-                        <p className='mt-2 md:mt-3 font-light md:text-lg mb-4 md:mb-5 text-zinc-600 md:max-w-[30%] max-w-[90%] text-start mx-5'>
+                        <p className='md:mt-3 font-light text-lg md:text-lg md:mb-5 text-zinc-600 md:max-w-[30%] max-w-[90%] text-start mx-5'>
                             Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you
                         </p>
-                        {/* Replacing the conditional rendering with a simple button */}
-                        <motion.div className="md:block w-full flex justify-start pl-2">
+                        <motion.div className="md:block w-full flex justify-start pl-5 md:pl-2 md:mb-0">
                             <Link 
                                 href="/get-started" 
-                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-6 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full mt-16"
+                                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-6 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full"
                             >
                                 <motion.div
                                     className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
@@ -285,31 +288,7 @@ const HomePage = () => {
                                 </motion.span>
                             </Link>
                         </motion.div>
-    
-                        {/* <div className='flex justify-center md:justify-start items-center gap-4 my-5'>
-                            <Link 
-                                href="#safety" 
-                                onClick={scrollToSafety}
-                                className='text-sm underline text-primary'
-                            >
-                                Important safety information
-                            </Link>
-    
-                            <Link 
-                                href="#safety" 
-                                onClick={scrollToSafety}
-                                className='bg-white border-primary border rounded-full size-10 flex items-center justify-center'
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#365d56" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
-                                    <path d="M7 7h10v10" />
-                                    <path d="M7 17 17 7" />
-                                </svg>
-                            </Link>
-                        </div> */}
                     </motion.div>
-    
-                    {/* Rest of the code remains unchanged */}
-                    
                     <Image src="/images/hero.png" width={4096} height={1951} className='absolute bottom-0 -z-20 -scale-x-100 h-[50vw] md:hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent),linear-gradient(to_top,white,white_80%,transparent)]'/>
                 </motion.section>
                 <motion.section 
