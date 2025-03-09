@@ -38,7 +38,7 @@ const LoginForm = () => {
 
       if (res.token) {
         try {
-          const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "/users/me", requestOptions)
+          const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/users/me", requestOptions)
           const data = await response.json()
           setToken(res.token, res.expiryTime)
           setUser(data.data)

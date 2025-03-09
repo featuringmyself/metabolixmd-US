@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import Head from 'next/head';
 
 const GetStarted = () => {
-  const [userOrders, setUserOrders] = useState([]);
+  const [userOrders, setUserOrders] = useState(null);
 
   const getOrderDetails = async () => {
     try {
@@ -27,15 +27,17 @@ const GetStarted = () => {
       <Head><title>Get Started - MetabolixMD</title></Head>
       <NavBar />
 
-
-      {
-        userOrders.length > 0 ?
-          <div className="multi-step-form py-10 mt-20 md:py-5 font-tt-hoves bg-[#d3d2cc]  min-h-screen flex flex-col justify-center items-center">
-            <SuccessPropt type="2" />
-          </div>
-          :
-          <MultiStepForm />
-      }
+{userOrders ? (
+  userOrders.length > 0 ? (
+    <div className="multi-step-form py-10 mt-20 md:py-5 font-tt-hoves bg-[#d3d2cc]  min-h-screen flex flex-col justify-center items-center">
+      <SuccessPropt type="2" />
+    </div>
+  ) : (
+    <MultiStepForm />
+  )
+) : (
+  <MultiStepForm />
+)}
     </div>
   )
 }

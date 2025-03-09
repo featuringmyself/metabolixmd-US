@@ -233,7 +233,7 @@ const GLP1Section = () => {
                     Designed for quick and seamless administration, often with a single-use format.
                     </p>
                   </div>
-                  <div className="mt-8 text-center">
+                  <div className="mt-2 text-center">
                     <Link 
                       href="#" 
                       className="inline-block text-xs bg-white/20 hover:bg-white/40 backdrop-blur-sm px-2 py-2 rounded-full text-white font-medium transition-all duration-300 hover:shadow-md"

@@ -1,5 +1,5 @@
 
-import WeightLossMedication from "@/components/HomePage";
+import WeightLossMedication from "@/components/HomePage.jsx";
 import Head from "next/head";
 
 export default function Home() {
