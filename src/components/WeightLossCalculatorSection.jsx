@@ -21,7 +21,7 @@ const WeightLossCalculatorSection = () => {
   };
 
   // Background pattern image path
-  const backgroundPattern = "/images/weightloss_calculator.png";
+  const backgroundPattern = "/images/weightloss_calculator.webp";
 
   return (
     <>
@@ -196,7 +196,7 @@ const WeightLossCalculatorSection = () => {
               {/* Doctor Image */}
               <div className="relative w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full overflow-hidden flex-shrink-0 border-4 border-white shadow-md">
                 <Image
-                  src="/images/lab-test.jpeg"
+                  src="/images/lab-test.webp"
                   alt="Lab Doctor"
                   fill
                   className="object-cover"

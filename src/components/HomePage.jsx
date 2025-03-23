@@ -248,7 +248,7 @@ const HomePage = () => {
           <div
             className="absolute inset-0 order-2 lg:order-none hidden lg:block"
             style={{
-              backgroundImage: "url(/images/hero.png)",
+              backgroundImage: "url(/images/hero.webp)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -308,7 +308,7 @@ const HomePage = () => {
             </motion.div>
           </motion.div>
           <Image
-            src="/images/hero.png"
+            src="/images/hero.webp"
             width={2048}
             height={976}
             className="absolute bottom-0 -z-20 -scale-x-100 h-[40vw] md:hidden w-full object-cover"

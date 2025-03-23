@@ -24,7 +24,7 @@ const LabTestedSection = () => {
           {/* Doctor Image */}
           <div className="relative w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 overflow-hidden flex-shrink-0">
             <Image 
-              src="/images/lab-doctor.jpg" 
+              src="/images/lab-doctor.webp" 
               alt="Lab doctor"
               fill
               sizes="(max-width: 768px) 100px, 160px"

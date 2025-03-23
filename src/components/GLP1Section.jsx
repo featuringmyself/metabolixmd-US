@@ -220,7 +220,7 @@ const GLP1Section = () => {
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <Image 
-                    src="/images/42-inverted.png" 
+                    src="/images/42-inverted.webp" 
                     alt="Auto-Injector Pen" 
                     fill 
                     className="object-contain drop-shadow-lg"
