@@ -31,6 +31,7 @@ const SignupForm = () => {
 
     if (res.status) {
       toast.success("Account created!");
+      router.push('/profile');
       let myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${res.token}`);
       myHeaders.append("Content-Type", "application/json");

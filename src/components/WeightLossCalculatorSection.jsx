@@ -51,13 +51,16 @@ const WeightLossCalculatorSection = () => {
                 </div>
               </div>
               <div className="relative mt-4">
-                <div className="w-full h-1 bg-white/30 rounded-full"></div>
+                {/* Background track */}
+                <div className="w-full h-2 bg-white/20 rounded-full"></div>
+                {/* Filled track */}
                 <div
-                  className="absolute left-0 top-0 h-1 bg-white/70 rounded-full"
+                  className="absolute left-0 top-0 h-2 bg-white/60 rounded-full"
                   style={{ width: `${((currentWeight - 100) / 300) * 100}%` }}
                 ></div>
+                {/* Slider thumb with glow effect */}
                 <div
-                  className="absolute top-0 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full"
+                  className="absolute top-0 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md shadow-white/30 border-2 border-white/80"
                   style={{ left: `${((currentWeight - 100) / 300) * 100}%` }}
                 ></div>
                 <input
@@ -66,7 +69,7 @@ const WeightLossCalculatorSection = () => {
                   max="400"
                   value={currentWeight}
                   onChange={handleWeightChange}
-                  className="absolute inset-0 w-full h-1 opacity-0 cursor-pointer"
+                  className="absolute inset-0 w-full h-6 opacity-0 cursor-pointer z-10"
                 />
               </div>
             </div>
@@ -133,15 +136,18 @@ const WeightLossCalculatorSection = () => {
                     </div>
                   </div>
                   <div className="relative mt-4">
-                    <div className="w-full h-1 bg-white/30 rounded-full"></div>
+                    {/* Background track */}
+                    <div className="w-full h-2 bg-white/20 rounded-full"></div>
+                    {/* Filled track */}
                     <div
-                      className="absolute left-0 top-0 h-1 bg-white/70 rounded-full"
+                      className="absolute left-0 top-0 h-2 bg-white/60 rounded-full"
                       style={{
                         width: `${((currentWeight - 100) / 300) * 100}%`,
                       }}
                     ></div>
+                    {/* Slider thumb with glow effect */}
                     <div
-                      className="absolute top-0 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full"
+                      className="absolute top-0 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md shadow-white/30 border-2 border-white/80"
                       style={{
                         left: `${((currentWeight - 100) / 300) * 100}%`,
                       }}
@@ -152,7 +158,7 @@ const WeightLossCalculatorSection = () => {
                       max="400"
                       value={currentWeight}
                       onChange={handleWeightChange}
-                      className="absolute inset-0 w-full h-1 opacity-0 cursor-pointer"
+                      className="absolute inset-0 w-full h-6 opacity-0 cursor-pointer z-10"
                     />
                   </div>
                 </div>

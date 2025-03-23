@@ -11,7 +11,7 @@ const Footer = () => {
              <section id="bottom-footer" className='bg-[#223D38] py-10 w-full'>
                 <div className='w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
                     {/* Mobile and Desktop Layout */}
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mb-12'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-12'>
                         {/* Logo Column with Address, Contact and Social Icons */}
                         <div className='flex flex-col items-center md:items-start order-2 md:order-1'>
                             {/* SVG Logo */}

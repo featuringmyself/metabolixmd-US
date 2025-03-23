@@ -29,56 +29,44 @@ const GLP1 = ({onNext}) => {
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="w-full p-5 md:p-0 md:max-w-fit mx-auto"
+            className="w-full p-5 md:p-0 mx-auto max-w-3xl"
         >
-            <div className="w-full md:w-[500px]">
-                <motion.h2 
-                    variants={fadeIn}
-                    className="text-2xl mb-6 text-primary font-semibold"
-                >
-                   Do you have an allergy to GLP-1 agonist medications?
-                </motion.h2>
-               
-                <motion.div 
-                    variants={fadeIn}
-                    whileHover={{ scale: activeTab === "yes" ? 1 : 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={handleTab} 
-                    id="yes" 
-                    className={`bg-white cursor-pointer border rounded-xl p-4 text-lg font-semibold mt-4 transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "yes" ? "border-primary border-2 bg-primary/5" : ""}`}
-                >
-                    Yes
-                </motion.div>
-                <motion.div 
-                    variants={fadeIn}
-                    whileHover={{ scale: activeTab === "no" ? 1 : 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={handleTab} 
-                    id="no" 
-                    className={`bg-white cursor-pointer border rounded-xl p-4 text-lg font-semibold mt-4 transition-all duration-300 shadow-sm hover:shadow-md ${activeTab === "no" ? "border-primary border-2 bg-primary/5" : ""}`}
-                >
-                    No
-                </motion.div>
+            <AnimatePresence mode='wait'>
+                <div className="space-y-8 md:space-y-10">
+                    <motion.h2 
+                        variants={fadeIn}
+                        className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight"
+                    >
+                        Do you have an allergy to GLP-1 agonist medications?
+                    </motion.h2>
 
-                <motion.button
-                    variants={fadeIn}
-                    whileHover={{ scale: 1.02, backgroundColor: "#2e4f49" }}
-                    whileTap={{ scale: 0.98 }}
-                    type="button"
-                    className="mt-8 p-3 text-white w-full py-3 font-semibold rounded-full bg-primary transition-all duration-300 shadow-sm hover:shadow-md"
-                    onClick={()=>{
-                        if(activeTab =="yes"){
-                            onNext({allergy_GLP_1:true},"stopProcess")
-                        }
-                        else{
-                            onNext({allergy_GLP_1:false},"anyMedication")
-                        }
-                    }}
-                    aria-label='Continue'
-                >
-                    Continue
-                </motion.button>
-            </div>
+                    <div className="grid grid-cols-1 gap-5 md:gap-6 md:grid-cols-2">
+                        {['yes', 'no'].map((choice) => (
+                            <motion.div
+                                key={choice}
+                                variants={fadeIn}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                transition={{ type: 'spring', stiffness: 300 }}
+                            >
+                                <button
+                                    id={choice}
+                                    onClick={handleTab}
+                                    className={`w-full text-left p-6 md:p-7 rounded-xl transition-all
+                                        ${activeTab === choice 
+                                            ? 'border-2 border-green-500 bg-green-50 ring-4 ring-green-100'
+                                            : 'border-2 border-gray-200 hover:border-green-300 bg-white'}
+                                        shadow-sm hover:shadow-md`}
+                                >
+                                    <span className="text-lg md:text-xl font-semibold text-gray-800">
+                                        {choice === 'yes' ? 'Yes' : 'No'}
+                                    </span>
+                                </button>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </AnimatePresence>
         </motion.div>
     )
 }

@@ -16,12 +16,12 @@ import { firebaseErrorFinder } from "./firebaseErrors";
 import { toast } from 'react-toastify';
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import { useEffect } from 'react';
 
 export default function useFirebaseAuth() {
     const router = useRouter();
     const recaptchaVerifierRef = useRef(null);
     const confirmationResultRef = useRef(null);
-
     const createUserWithEmailMethod = async (email, password) => {
         try {
             const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -31,7 +31,8 @@ export default function useFirebaseAuth() {
             const expiryTime = new Date(Date.now() + 3600 * 1000);
             // Set the cookie
             const token = auth.currentUser.accessToken;
-            // setToken(token, expiryTime);
+            setToken(token, expiryTime);
+            localStorage.setItem('token', token);
             return { status: true, user: auth.currentUser, token: token, expiryTime: expiryTime };
         }
         catch (e) {
@@ -42,7 +43,6 @@ export default function useFirebaseAuth() {
             return { status: false, error: error }
         }
     }
-
     const resendEmailVerificationLink = async () => {
         try {
             await sendEmailVerification(auth.currentUser)
@@ -57,7 +57,6 @@ export default function useFirebaseAuth() {
             })
         }
     }
-
     const loginWithEmailAndPassword = async (email, password, redirect = "") => {
         try {
             const res = await signInWithEmailAndPassword(auth, email, password);
@@ -70,7 +69,8 @@ export default function useFirebaseAuth() {
             const expiryTime = new Date(Date.now() + 3600 * 1000);
             // Set the cookie
             const token = auth.currentUser.accessToken;
-            // setToken(token, expiryTime);
+            setToken(token, expiryTime);
+            localStorage.setItem('token', token);
             return { status: true, user: auth.currentUser, token: token, expiryTime: expiryTime };
         }
         catch (e) {
@@ -81,12 +81,12 @@ export default function useFirebaseAuth() {
             return { status: false, error: error }
         }
     }
-
     const logOut = async () => {
         try {
             const res = await signOut(auth);
             removeToken();
             removeUser();
+            localStorage.removeItem('token');
             return { status: true };
         }
         catch (e) {
@@ -97,7 +97,6 @@ export default function useFirebaseAuth() {
             return { status: false, error: error }
         }
     }
-
     const forgotPassword = async (email) => {
         await sendPasswordResetEmail(auth, email);
         toast.success("Reset password email has been sent successfully", {

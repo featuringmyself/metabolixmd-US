@@ -42,7 +42,7 @@ const LoginForm = () => {
           const data = await response.json()
           setToken(res.token, res.expiryTime)
           setUser(data.data)
-          router.push("/")
+          router.push("/profile")
           setLoading(false);
         }
         catch (e) {

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { auth } from '../services/Auth/firebaseConfigue';
-import SignupPrompt from './SignupPrompt';
+import AuthGate from './AuthGate';
 
 const BlurOverlay = ({ children, blurIntensity = 8 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -50,7 +50,7 @@ const BlurOverlay = ({ children, blurIntensity = 8 }) => {
           </div>
         </div>
       )}
-      {showSignupPrompt && <SignupPrompt onClose={() => setShowSignupPrompt(false)} />}
+      {showSignupPrompt && <AuthGate />}
     </div>
   );
 };

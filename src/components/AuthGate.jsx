@@ -1,9 +1,25 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import useFirebaseAuth from '@/services/Auth/useFirebaseAuth';
 
 const AuthGate = ({ children }) => {
+  const auth = useFirebaseAuth();
   const router = useRouter();
+  const [currentUser, setCurrentUser] = React.useState(null);
+  
+  // Check for authentication on component mount
+  React.useEffect(() => {
+    // Check if user is authenticated by looking for token
+    const isAuthenticated = typeof window !== 'undefined' && localStorage.getItem('token');
+    if (isAuthenticated) {
+      setCurrentUser(true);
+    }
+  }, []);
+
+  if (currentUser) {
+    return children;
+  }
 
   const handleSignup = () => {
     router.push('/signup');
@@ -13,12 +29,7 @@ const AuthGate = ({ children }) => {
     router.push('/login');
   };
 
-  // Check if user is authenticated by looking for token
-  const isAuthenticated = typeof window !== 'undefined' && localStorage.getItem('token');
-
-  if (isAuthenticated) {
-    return children;
-  }
+  // We already checked authentication in useEffect, no need to check again
 
   return (
     <motion.div

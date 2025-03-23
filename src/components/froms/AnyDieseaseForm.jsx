@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from 'framer-motion';
 
 const AnyDiseaseForm = ({ onNext }) => {
     const [selectedGoals, setSelectedGoals] = useState([]);
@@ -76,45 +77,57 @@ const AnyDiseaseForm = ({ onNext }) => {
 
 
     return (
-        <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto">
-            <div className="w-full md:w-[500px]">
-                <h2 className="text-2xl  mb-6 text-primary">
-                    Do you currently have, or have you ever been diagnosed with any of these hormone, kidney, or liver conditions?
-                </h2>
-                <p className="my-5 font-semibold text-zinc-500">Select all that apply</p>
-                <form>
-                    <div className="space-y-4">
-                        {goals.map((goal, index) => (
-                            <label
-                                key={index}
-                                className="flex items-center p-4 gap-2 border rounded-lg cursor-pointer hover:bg-gray-50"
+        <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="w-full p-5 md:p-0 mx-auto max-w-3xl"
+        >
+            <AnimatePresence mode='wait'>
+                <div className="space-y-8 md:space-y-10">
+                    <motion.h2
+                        variants={fadeIn}
+                        className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight"
+                    >
+                        Medical History Questionnaire
+                    </motion.h2>
+
+                    <motion.p variants={fadeIn} className="text-lg text-gray-600 mb-8">
+                        Please select any conditions you've been diagnosed with:
+                    </motion.p>
+
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        {goals.map((goal) => (
+                            <motion.div
+                                key={goal}
+                                variants={fadeIn}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                transition={{ type: 'spring', stiffness: 300 }}
+                                className={`p-5 rounded-xl border-2 transition-colors cursor-pointer
+                                    ${selectedGoals.includes(goal)
+                                        ? 'border-green-500 bg-green-50 ring-4 ring-green-100'
+                                        : 'border-gray-200 hover:border-green-300 bg-white'}
+                                    shadow-sm hover:shadow-md`}
+                                onClick={() => handleCheckboxChange(goal)}
                             >
-                                <input
-                                    type="checkbox"
-                                    className="form-checkbox min-h-[20px] min-w-[20px] text-green-600"
-                                    checked={selectedGoals.includes(goal)}
-                                    onChange={() => handleCheckboxChange(goal)}
-                                />
-                                <span className=" text-gray-800">{goal}</span>
-                            </label>
+                                <label className="flex items-center space-x-3 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedGoals.includes(goal)}
+                                        className="form-checkbox h-5 w-5 text-green-500 rounded focus:ring-green-500"
+                                        onChange={() => {}}
+                                    />
+                                    <span className="text-gray-800 font-medium">
+                                        {goal}
+                                    </span>
+                                </label>
+                            </motion.div>
                         ))}
                     </div>
-
-                    <button
-                        type="button"
-                        className={`mt-6 hover:bg-primary/90  w-full py-3 text-white font-semibold rounded-full ${isButtonDisabled
-                            ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-primary hover:bg-primary"
-                            }`}
-                        disabled={isButtonDisabled}
-                        onClick={handleNext}
-                        aria-label="Next"
-                    >
-                        Next
-                    </button>
-                </form>
-            </div>
-        </div>
+                </div>
+            </AnimatePresence>
+        </motion.div>
     );
 };
 

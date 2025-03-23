@@ -309,9 +309,9 @@ const HomePage = () => {
           </motion.div>
           <Image
             src="/images/hero.png"
-            width={4096}
-            height={1951}
-            className="absolute bottom-0 -z-20 -scale-x-100 h-[80vw] md:hidden w-full object-cover"
+            width={2048}
+            height={976}
+            className="absolute bottom-0 -z-20 -scale-x-100 h-[40vw] md:hidden w-full object-cover"
           />
         </motion.section>
         <motion.section
