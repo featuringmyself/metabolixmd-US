@@ -268,6 +268,7 @@ const MultiStepForm = ({ initialForm }) => {
         {activeForm === "anyMedication" && (
           <AnyMedicationForm 
             onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
             initialData={formData.medications ? { medications: formData.medications } : undefined}
           />
         )}
