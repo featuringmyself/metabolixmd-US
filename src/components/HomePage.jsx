@@ -346,7 +346,7 @@ const HomePage = () => {
 
           <div className="flex flex-col-reverse lg:flex-row gap-8 font-montserrat bg-[#F6F6F3] px-12 rounded-2xl">
             {/* Left side: Number, Title, description */}
-            <div className="flex-1 flex flex-col justify-center">
+            <div className="flex-1 flex flex-col justify-center ">
               {/* Orange numbered circle */}
               <div className="bg-orange-500 text-white w-16 h-16 rounded-full items-center justify-center text-2xl font-medium mb-6 md:flex hidden">
                 {Object.keys(stepDetails).indexOf(activeStep) + 1}
@@ -356,14 +356,14 @@ const HomePage = () => {
                 <h2 className="text-4xl md:text-6xl text-zinc-800 font-medium">
                   {stepDetails[activeStep].title}
                 </h2>
-                <p className="text-zinc-600 mt-4 max-w-xl">
+                <p className="text-zinc-600 mt-4 max-w-xl md:text-lg text-xs te">
                   {stepDetails[activeStep].description}
                 </p>
               </div>
             </div>
             {/* Right side: Image with process steps overlay */}
             <div className="flex-1">
-              <div className="relative h-[500px] rounded-3xl overflow-hidden">
+              <div className="relative md:h-[500px] h-[300px] rounded-3xl overflow-hidden">
                 {/* Main image */}
                 <Image
                   src={stepDetails[activeStep].image}

@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const DiabeticRetinopathy = ({ onNext }) => {
-    const [activeTab, setActiveTab] = useState("");
+const DiabeticRetinopathy = ({ onNext, onBack }) => {
+    const [activeTab, setActiveTab] = useState(() => {
+  const savedTab = localStorage.getItem('DiabeticRetinopathy_activeTab');
+  try {
+    return savedTab ? JSON.parse(savedTab) : "";
+  } catch (e) {
+    return "";
+  };
+});
 
     const handleTab = (e) => {
-        setActiveTab(e.currentTarget.id);
-    }
+  const tab = e.currentTarget.id;
+  setActiveTab(tab);
+  localStorage.setItem('DiabeticRetinopathy_activeTab', JSON.stringify(tab));
+}
 
     const handleContinue = () => {
         const data = {
             diabetic: activeTab
         };
+        // Save to localStorage for persistence
+        localStorage.setItem('DiabeticRetinopathy_data', JSON.stringify(data));
         onNext(data, "anyDisease2"); // Pass the data and move to the next step
     }
 
@@ -63,8 +74,8 @@ const DiabeticRetinopathy = ({ onNext }) => {
                                     onClick={handleTab}
                                     className={`w-full text-left p-6 md:p-7 rounded-xl transition-all
                                         ${activeTab === choice 
-                                            ? 'border-2 border-green-500 bg-green-50 ring-4 ring-green-100'
-                                            : 'border-2 border-gray-200 hover:border-green-300 bg-white'}
+                                            ? 'border-2 border-primary-500 bg-primary-50 ring-4 ring-primary-100'
+                                            : 'border-2 border-gray-200 hover:border-primary-300 bg-white'}
                                         shadow-sm hover:shadow-md`}
                                 >
                                     <span className="text-lg md:text-xl font-semibold text-gray-800">
@@ -75,6 +86,34 @@ const DiabeticRetinopathy = ({ onNext }) => {
                         ))}
                     </div>
                 </div>
+                {/* Container for the back and continue buttons */}
+          <div className="flex justify-center gap-4 mt-6">
+            {/* Back button - only shown if not the first form */}
+            
+              <button
+                type="button"
+                className="hover:bg-gray-200 px-8 py-3 text-gray-700 font-semibold rounded-full border border-gray-300"
+                onClick={onBack}
+                aria-label="Back"
+              >
+                Back
+              </button>
+            
+            {/* Continue button - disabled when no goals are selected */}
+            <button
+              type="button"
+              className={`hover:bg-primary/90 px-8 py-3 text-white font-semibold rounded-full ${
+                isButtonDisabled
+                  ? "bg-gray-400 cursor-not-allowed" // Gray styling when disabled
+                  : "bg-primary hover:bg-primary"    // Primary color when enabled
+              }`}
+              disabled={isButtonDisabled}
+              onClick={handleContinue} // Trigger the continue action
+              aria-label="Continue"
+            >
+              Continue
+            </button>
+          </div>
             </AnimatePresence>
         </motion.div>
     );

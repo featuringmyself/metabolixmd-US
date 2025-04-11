@@ -2,24 +2,15 @@ import "@/styles/globals.css";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import LenisProvider from '@/components/LenisProvider'
-import { Montserrat, Poppins, Kanit } from 'next/font/google';
+import { Inter } from 'next/font/google';
+import { ClerkProvider } from '@clerk/nextjs';
 import { useEffect } from 'react';
 
-const montserrat = Montserrat({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-montserrat',
-});
-
-const poppins = Poppins({
   weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  variable: '--font-poppins',
-});
-
-const kanit = Kanit({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-  variable: '--font-kanit',
+  variable: '--font-inter',
+  display: 'swap',
 });
 
 export default function App({ Component, pageProps, err }) {
@@ -35,14 +26,19 @@ export default function App({ Component, pageProps, err }) {
       }
       return false;
     });
+
+    // Apply Inter font to the HTML element
+    document.documentElement.classList.add(inter.variable);
   }, []);
 
   return (
-    <LenisProvider>
-      <main className={`${montserrat.variable} ${poppins.variable} ${kanit.variable}`}>
-        <ToastContainer />
-        <Component {...pageProps} err={err} />
-      </main>
-    </LenisProvider>
+    <ClerkProvider {...pageProps}>
+      <LenisProvider>
+        <main className="font-sans">
+          <ToastContainer />
+          <Component {...pageProps} err={err} />
+        </main>
+      </LenisProvider>
+    </ClerkProvider>
   );
 }

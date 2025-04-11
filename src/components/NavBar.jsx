@@ -7,6 +7,15 @@ import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
 import ScrollProgressBar from './ProgressBar'
 import { motion, AnimatePresence } from 'framer-motion'
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
+
 
 const NavBar = () => {
   let user = getUser()
@@ -236,23 +245,7 @@ const NavBar = () => {
                         />
                       </motion.div>
 
-                      {/* Login Button */}
-                      {!token && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.5 }}
-                          className="mt-4"
-                        >
-                          <Link
-                            href="/login"
-                            onClick={() => setIsOpen(false)}
-                            className="bg-primary text-white px-8 py-3 rounded-full hover:bg-primary/90 transition-colors"
-                          >
-                            Sign In
-                          </Link>
-                        </motion.div>
-                      )}
+                      
                     </motion.div>
                   </motion.div>
                 </>
@@ -261,33 +254,23 @@ const NavBar = () => {
 
             {/* Action Buttons */}
             <div className='hidden md:flex items-center gap-4'>
-              {(token) ? (
-                <div className="flex items-center gap-4">
-                  <Link href="/profile-details" className="flex items-center gap-2 font-montserrat">
-                    <span className="text-white capitalize size-7 text-xs rounded-full bg-orange-500 flex items-center justify-center font-medium">
-                      {user?.email[0]}
-                    </span>
-                    <span className="font-medium">
-                      {user?.name ? user.name : user?.email.split('@')[0]}
-                    </span>
-                  </Link>
-                </div>
-              ) : (
-                <>
-                  <Link
-                    href="/login"
-                    className='text-sm px-6 py-2 rounded-full font-montserrat font-medium border border-gray-300 hover:border-primary hover:text-primary transition-colors'
-                  >
-                    Sign in
-                  </Link>
-                  <Link
-                    href="/register"
-                    className='text-sm px-6 py-2 rounded-full font-montserrat font-medium bg-primary text-white hover:bg-primary/90 transition-colors'
-                  >
-                    Get Started
-                  </Link>
-                </>
-              )}
+            <SignedOut>
+              <SignInButton 
+                mode='modal' 
+                afterSignInUrl={typeof window !== 'undefined' ? window.location.href : '/'}
+                className='py-2 px-4 ring-1 text-sm ring-[#365e65] rounded-full' 
+              />
+              <SignUpButton 
+                mode='modal' 
+                afterSignUpUrl={typeof window !== 'undefined' ? window.location.href : '/'}
+                className='py-2 px-4 text-sm bg-[#365e65] rounded-full text-white'
+              >
+                Get Started
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
             </div>
           </div>
         </div>

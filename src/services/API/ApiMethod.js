@@ -4,7 +4,7 @@ import { setToken } from "../Auth/cookies";
 import { getAuthToken } from "./apiHelper";
 import { toast } from "react-toastify";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 // Error handler for API responses
@@ -78,7 +78,7 @@ export async function getMethod(url, payload) {
 
     if (token) {
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + url, requestOptions)
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
             // console.log(response)
             const data = await response.json()
             return data
@@ -105,7 +105,7 @@ export async function getAuthData(url) {
             redirect: 'follow'
         };
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + url, requestOptions)
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
             const data = await response.json()
             return data
             // if (data.status == true) {
@@ -141,7 +141,7 @@ export async function postWithFileMethod(url, payload) {
             redirect: 'follow'
         }
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + url, requestOptions)
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
             const data = await response.json()
           
                 return data
@@ -181,7 +181,7 @@ export async function postMethod(url, payload) {
             }
         }
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + url, requestOptions)
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
             const data = await response.json()
 
                 return data
@@ -214,7 +214,7 @@ export async function patchWithFileMethod(url, payload) {
             redirect: 'follow'
         }
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + url, requestOptions)
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
             const data = await response.json()
            
                 return data
@@ -246,7 +246,7 @@ export async function patchWithFileMethodCustomToken(url, payload, token) {
             redirect: 'follow'
         }
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + url, requestOptions)
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
             const data = await response.json()
             if (data.status == true) {
                 return data
@@ -280,7 +280,7 @@ export async function patchMethod(url, payload) {
             redirect: 'follow'
         };
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + url, requestOptions)
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
             const data = await response.json()
 
             return data
@@ -317,7 +317,7 @@ export async function deleteMethod(url, payload) {
             };
         }
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + url, requestOptions)
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
             const data = await response.json()
             if (data.status == true) {
                 return data
@@ -359,7 +359,7 @@ export async function putMethod(url, payload) {
     }
     if (token) {
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + url, requestOptions)
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
             // console.log(response)
             const data = await response.json()
             return data
@@ -391,7 +391,7 @@ export async function putMethod(url, payload) {
 //         };
 
 //         try {
-//             const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + "file-upload", requestOptions)
+//             const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "file-upload", requestOptions)
 //             const data = await response.json()
 //             if (data.status == true) {
 //                 return data

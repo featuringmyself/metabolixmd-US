@@ -3,26 +3,43 @@
 import React, { useRef, useState } from 'react'
 import { ClipLoader } from 'react-spinners'
 
-const UploadProfile = ({ onSubmit, loading,img, setImg }) => {
+const UploadProfile = ({ onSubmit, loading, img, setImg, onNext }) => {
     const [activeTab, setActiveTab] = useState("")
     const [preUrl, setPreUrl] = useState("")
     const fileInputRef = useRef()
+    
     const handleFile = (e) => {
         e.preventDefault();
         let file = e.target.files[0];
-        setImg(file)
-        const fileURL = URL.createObjectURL(file);
-        setPreUrl(fileURL)
+        if (file) {
+            setImg(file)
+            const fileURL = URL.createObjectURL(file);
+            setPreUrl(fileURL)
+        }
+    }
 
+    const handleSubmit = async () => {
+        // Call the onSubmit function which will handle the upload
+        // This function is defined in MultiStepForm.jsx and will call FormService.submitFormWithProfile
+        try {
+            await onSubmit();
+            // After successful upload, navigate to the LicensedProvider component
+            // The navigation will happen automatically in the parent component (MultiStepForm.jsx)
+            // as it sets the activeForm to "licensedProvider" after successful upload
+        } catch (error) {
+            console.error("Error uploading profile:", error);
+            // Error handling is managed in the parent component
+        }
     }
 
     const handleTab = (e) => {
         setActiveTab(e.currentTarget.id)
     }
+    
     return (
-        <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto">
-            <div className="w-full md:w-[500px]">
-                <div onClick={() => fileInputRef.current.click()} className=" h-[150px] w-[150px] cursor-pointer border border-zinc-100 rounded-lg  flex items-center justify-center">
+        <div className="w-full p-4 sm:p-5 md:p-0 md:max-w-fit mx-auto">
+            <div className="w-full max-w-full sm:max-w-[450px] md:w-[500px] flex flex-col justify-center items-center">
+                <div onClick={() => fileInputRef.current.click()} className="h-[200px] w-full max-w-[250px] sm:max-w-[300px] md:h-[250px] md:w-[350px] cursor-pointer border border-zinc-100 rounded-lg flex items-center justify-center">
 
                     {
                         preUrl ?
@@ -39,7 +56,7 @@ const UploadProfile = ({ onSubmit, loading,img, setImg }) => {
                     }
                     <input disabled={loading} type="file" accept="image/*" ref={fileInputRef} onChange={(e) => handleFile(e)} hidden />
                 </div>
-                <p className=' mt-5 '>
+                <p className='mt-4 sm:mt-5 text-sm sm:text-base text-center px-2 sm:px-0 font-semibold'>
                     Kindly provide your clear picture to meet telehealth guidelines and ensure secure identity verification at MetabolixMD.
                 </p>
 
@@ -52,12 +69,9 @@ const UploadProfile = ({ onSubmit, loading,img, setImg }) => {
                 <button
                     type="button"
                     className={`mt-6 hover:bg-primary/90  p-3 text-white w-full py-3text-white font-semibold rounded-full bg-primary hover:bg-primary`}
-
-                    onClick={onSubmit}
-                    disabled={loading || (img ==="")}
-                    aria-label='continue'
+                    onClick={handleSubmit}
+                    disabled={loading || (img === "")}
                 >
-
                     {loading ? <ClipLoader size={24} color="white" /> : "Continue"}
                 </button>
             </div>

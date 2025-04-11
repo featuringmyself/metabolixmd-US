@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const Type2Diabetes = ({ onNext }) => {
-    const [activeTab, setActiveTab] = useState("")
+const Type2Diabetes = ({ onNext, onBack }) => {
+    const [activeTab, setActiveTab] = useState(() => {
+  const savedTab = localStorage.getItem('Type2Diabetes_activeTab');
+  return savedTab ? JSON.parse(savedTab) : "";
+})
 
     const handleTab = (e) => {
-        setActiveTab(e.currentTarget.id)
+        const tab = e.currentTarget.id;
+  setActiveTab(tab);
+  localStorage.setItem('Type2Diabetes_activeTab', JSON.stringify(tab))
     }
 
     const handleContinue = () => {
         const data = {
             type_2_diabetes: activeTab
         }
+        // Save to localStorage for persistence
+        localStorage.setItem('Type2Diabetes_data', JSON.stringify(data));
         onNext(data, "diabeticRetinopathy")  // Pass the data and move to the next step
     }
 
@@ -67,8 +74,8 @@ const Type2Diabetes = ({ onNext }) => {
                                     onClick={handleTab}
                                     className={`w-full text-left p-6 md:p-7 rounded-xl transition-all
                                         ${activeTab === choice 
-                                            ? 'border-2 border-green-500 bg-green-50 ring-4 ring-green-100'
-                                            : 'border-2 border-gray-200 hover:border-green-300 bg-white'}
+                                            ? 'border-2 border-primary-500 bg-primary-50 ring-4 ring-primary-100'
+                                            : 'border-2 border-gray-200 hover:border-primary-300 bg-white'}
                                         shadow-sm hover:shadow-md`}
                                 >
                                     <span className="text-lg md:text-xl font-semibold text-gray-800">
@@ -79,20 +86,35 @@ const Type2Diabetes = ({ onNext }) => {
                         ))}
                     </div>
 
-                    <motion.button
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6 }}
-                        whileHover={{ scale: isButtonDisabled ? 1 : 1.02, backgroundColor: isButtonDisabled ? "" : "#2e4f49" }}
-                        whileTap={{ scale: isButtonDisabled ? 1 : 0.98 }}
-                        type="button"
-                        className={`mt-8 p-3 w-full py-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md ${isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-primary"}`}
-                        onClick={handleContinue}
-                        disabled={isButtonDisabled}
-                        aria-label='continue'
-                    >
-                        Continue
-                    </motion.button>
+                    <div className="flex gap-4 mt-8">
+                        <motion.button
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5 }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            type="button"
+                            className="flex-1 p-3 border border-primary text-primary hover:bg-primary/10 font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md"
+                            onClick={onBack}
+                            aria-label='Back'
+                        >
+                            Back
+                        </motion.button>
+                        <motion.button
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6 }}
+                            whileHover={{ scale: isButtonDisabled ? 1 : 1.02, backgroundColor: isButtonDisabled ? "" : "#2e4f49" }}
+                            whileTap={{ scale: isButtonDisabled ? 1 : 0.98 }}
+                            type="button"
+                            className={`flex-1 p-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md ${isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-primary"}`}
+                            onClick={handleContinue}
+                            disabled={isButtonDisabled}
+                            aria-label='Continue'
+                        >
+                            Continue
+                        </motion.button>
+                    </div>
                 </div>
             </AnimatePresence>
         </motion.div>

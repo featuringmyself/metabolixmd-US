@@ -1,12 +1,25 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
-const GLP1 = ({onNext}) => {
-    const [activeTab, setActiveTab] = useState("no")
+const GLP1 = ({ onNext, onBack }) => {
+  const handleContinue = () => {
+    // Pass the GLP1 allergy data to the parent component
+    const data = {
+      allergy_GLP_1: activeTab === 'yes'
+    };
+    onNext(data, "anyMedication");
+  };
+    const [activeTab, setActiveTab] = useState(() => {
+  const savedTab = localStorage.getItem('GLP1_activeTab');
+  return savedTab ? JSON.parse(savedTab) : "no";
+})
+    const [selectedGoals, setSelectedGoals] = useState([]);
 
     const handleTab = (e) => {
-        setActiveTab(e.currentTarget.id)
-    }
+  const tab = e.currentTarget.id;
+  setActiveTab(tab);
+  localStorage.setItem('GLP1_activeTab', JSON.stringify(tab));
+}
 
     // Animation variants
     const fadeIn = {
@@ -23,6 +36,28 @@ const GLP1 = ({onNext}) => {
             }
         }
     }
+    const handleCheckboxChange = (goal) => {
+        if (goal === "No, I have not been diagnosed with any of these conditions") {
+          if (selectedGoals.includes(goal)) {
+            // If "No" is already selected, deselect it
+            setSelectedGoals([]);
+          } else {
+            // If "No" is not selected, select only "No" and deselect all others
+            setSelectedGoals([goal]);
+          }
+        } else {
+          if (selectedGoals.includes("No, I have not been diagnosed with any of these conditions")) {
+            // Prevent selecting other options if "No" is selected
+            return;
+          }
+          // Toggle the selection of other options
+          setSelectedGoals((prev) =>
+            prev.includes(goal) ? prev.filter((g) => g !== goal) : [...prev, goal]
+          );
+        }
+      };
+    
+      const isButtonDisabled = !activeTab; // Disable if no tab is selected
 
     return (
         <motion.div 
@@ -54,8 +89,8 @@ const GLP1 = ({onNext}) => {
                                     onClick={handleTab}
                                     className={`w-full text-left p-6 md:p-7 rounded-xl transition-all
                                         ${activeTab === choice 
-                                            ? 'border-2 border-green-500 bg-green-50 ring-4 ring-green-100'
-                                            : 'border-2 border-gray-200 hover:border-green-300 bg-white'}
+                                            ? 'border-2 border-primary-500 bg-primary-50 ring-4 ring-primary-100'
+                                            : 'border-2 border-gray-200 hover:border-primary-300 bg-white'}
                                         shadow-sm hover:shadow-md`}
                                 >
                                     <span className="text-lg md:text-xl font-semibold text-gray-800">
@@ -66,6 +101,34 @@ const GLP1 = ({onNext}) => {
                         ))}
                     </div>
                 </div>
+                {/* Container for the back and continue buttons */}
+          <div className="flex justify-center gap-4 mt-6">
+            {/* Back button - only shown if not the first form */}
+            
+              <button
+                type="button"
+                className="hover:bg-gray-200 px-8 py-3 text-gray-700 font-semibold rounded-full border border-gray-300"
+                onClick={onBack}
+                aria-label="Back"
+              >
+                Back
+              </button>
+            
+            {/* Continue button - disabled when no goals are selected */}
+            <button
+              type="button"
+              className={`hover:bg-primary/90 px-8 py-3 text-white font-semibold rounded-full ${
+                isButtonDisabled
+                  ? "bg-gray-400 cursor-not-allowed" // Gray styling when disabled
+                  : "bg-primary hover:bg-primary"    // Primary color when enabled
+              }`}
+              disabled={isButtonDisabled}
+              onClick={handleContinue} // Trigger the continue action
+              aria-label="Continue"
+            >
+              Continue
+            </button>
+          </div>
             </AnimatePresence>
         </motion.div>
     )

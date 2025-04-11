@@ -1,10 +1,14 @@
 import { useState } from "react";
 
-const HeartDiseaseForm = ({ onNext }) => {
-  const [selectedGoals, setSelectedGoals] = useState([]);
+const HeartDiseaseForm = ({ onNext, onBack }) => {
+  const [selectedGoals, setSelectedGoals] = useState(() => {
+    const savedGoals = localStorage.getItem('HeartDiseaseForm_selectedGoals');
+    return savedGoals ? JSON.parse(savedGoals) : [];
+  });
   
   // Heart condition options
   const goals = [
+    "Not diagnosed with any",
     "Atrial fibrillation or flutter",
     "Tachycardia (episodes of rapid heart rate)",
     "Heart failure",
@@ -14,28 +18,28 @@ const HeartDiseaseForm = ({ onNext }) => {
     "Hypertension (high blood pressure)",
     "Hyperlipidemia (high cholesterol)",
     "Hypertriglyceridemia (high triglycerides)",
-    "No, I have not been diagnosed with any of these heart conditions",
   ];
 
   // Handle checkbox change
   const handleCheckboxChange = (goal) => {
-    if (goal === "No, I have not been diagnosed with any of these heart conditions") {
+    if (goal === "Not diagnosed with any") {
       if (selectedGoals.includes(goal)) {
-        // If "No" is already selected, deselect it
         setSelectedGoals([]);
+        localStorage.removeItem('HeartDiseaseForm_selectedGoals');
       } else {
-        // If "No" is not selected, select only "No" and deselect all others
         setSelectedGoals([goal]);
+        localStorage.setItem('HeartDiseaseForm_selectedGoals', JSON.stringify([goal]));
       }
     } else {
-      if (selectedGoals.includes("No, I have not been diagnosed with any of these heart conditions")) {
-        // Prevent selecting other options if "No" is selected
-        return;
-      }
-      // Toggle the selection of other options
-      setSelectedGoals((prev) =>
-        prev.includes(goal) ? prev.filter((g) => g !== goal) : [...prev, goal]
-      );
+      if (selectedGoals.includes("Not diagnosed with any")) return;
+      
+      setSelectedGoals((prev) => {
+        const newGoals = prev.includes(goal) 
+          ? prev.filter((g) => g !== goal)
+          : [...prev, goal];
+        localStorage.setItem('HeartDiseaseForm_selectedGoals', JSON.stringify(newGoals));
+        return newGoals;
+      });
     }
   };
 
@@ -46,50 +50,66 @@ const HeartDiseaseForm = ({ onNext }) => {
     const data = {
       heart_conditions: selectedGoals
     };
-    onNext(data); // Replace "nextFormStep" with the next form step identifier
+    onNext(data); // Pass the selected heart conditions to the parent component
   };
 
   return (
-    <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto">
-      <div className="w-full md:w-[500px]">
-        <h2 className="text-2xl  mb-6 text-primary">
-        Do you currently have, or have you ever been diagnosed with any of the following heart or heart-related conditions?
+    <div className="w-full p-5 md:p-6 lg:p-8 mx-auto max-w-screen-md">
+      <div className="w-full max-w-[800px] mx-auto">
+        <h2 className="text-xl sm:text-2xl md:text-3xl mb-12 md:mb-6  font-semibold text-center">
+          Do you currently have, or have you ever been diagnosed with any of the following heart or heart-related conditions?
         </h2>
-        <p className="my-5 font-semibold text-zinc-500">Select all that apply</p>
+        <p className="my-3 md:my-5 font-semibold text-zinc-500 text-sm md:text-base">Select all that apply</p>
         
         {/* Form with heart condition checkboxes */}
         <form>
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {goals.map((goal, index) => (
               <label
                 key={index}
-                className="flex items-center p-4 gap-2 border rounded-lg cursor-pointer hover:bg-gray-50"
+                className={`flex items-center p-3 md:p-4 gap-3 border rounded-lg cursor-pointer transition-all duration-300 hover:shadow-md ${selectedGoals.includes(goal) 
+                  ? 'bg-[#365e56] text-white border-[#365e56] shadow-sm' 
+                  : 'bg-white hover:bg-gray-50 hover:border-[#6d8a84]'}`}
               >
-                <input
-                  type="checkbox"
-                  className="form-checkbox min-h-[20px] min-w-[20px] text-green-600"
-                  checked={selectedGoals.includes(goal)}
-                  onChange={() => handleCheckboxChange(goal)}
-                />
-                <span className=" text-gray-800">{goal}</span>
+                <div className="relative flex-shrink-0">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox min-h-[20px] min-w-[20px] md:min-h-[24px] md:min-w-[24px] accent-[#6d8a84] rounded-full"
+                    checked={selectedGoals.includes(goal)}
+                    onChange={() => handleCheckboxChange(goal)}
+                  />
+                </div>
+                <span className={`${selectedGoals.includes(goal) ? 'text-white' : 'text-gray-800'} text-sm md:text-base`}>{goal}</span>
               </label>
             ))}
           </div>
 
-          {/* Continue button */}
-          <button
-            type="button"
-            className={`mt-6 hover:bg-primary/90  w-full py-3 text-white font-semibold rounded-full ${
-              isButtonDisabled
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-primary hover:bg-primary"
-            }`}
-            disabled={isButtonDisabled}
-            onClick={handleNext}
-            aria-label="Continue"
-          >
-            Continue
-          </button>
+          {/* Button Container */}
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full mt-6 md:mt-8">
+            {/* Back Button */}
+            <button
+              type="button"
+              className="w-full sm:flex-1 py-3 hover:bg-gray-200 rounded-full text-gray-700 font-semibold border border-gray-300 transition-colors duration-300 shadow-sm hover:shadow-md"
+              onClick={onBack}
+              aria-label="Back"
+            >
+              Back
+            </button>
+            {/* Continue button */}
+            <button
+              type="button"
+              className={`w-full sm:flex-1 py-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md ${
+                isButtonDisabled
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-primary hover:bg-primary/90 transform hover:scale-[1.02]"
+              }`}
+              disabled={isButtonDisabled}
+              onClick={handleNext}
+              aria-label="Continue"
+            >
+              Continue
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-const baseURL = process.env.NODE_ENV === 'development' 
-  ? 'http://localhost:8004/v1'
-  : 'https://api.metabolixmdindia.com/v1';
+const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || 
+  (process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:8004/v1'
+    : 'https://api.metabolixmdindia.com/v1');
 
 const axiosInstance = axios.create({
   baseURL,

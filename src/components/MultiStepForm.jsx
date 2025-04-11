@@ -1,37 +1,83 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
-import useFirebaseAuth from '@/services/Auth/useFirebaseAuth';
-import PrescriptionQuestion from './froms/PrescriptionQuestion';
-import PrescriptionUpload from './froms/UploadPriscription';
-import GoalSelectionForm from './froms/GoalSelectionForm';
-import UserInfoForm from './froms/UserInfoForm';
-import WeightCalculation from './froms/WeightCalculation';
-import BasicsUserInfo from './froms/BasicsUserInfo';
-import PrimaryCareConfirmation from './froms/PrimaryCareConfirmation';
-import HeartDiseaseForm from './froms/HeartDiseaseForm';
-import AnyDiseaseForm from './froms/AnyDieseaseForm';
-import Type2Diabetes from './froms/Type2Diabetes';
-import DiabeticRetinopathy from './froms/DiabeticRetinopathy';
-import AnyDisease2Form from './froms/AnyDiesease2Form';
-import SearchAndSelectAllergies from './froms/SearchAndSelectAllergies';
-import GLP1 from './froms/GLP1';
-import AnyMedicationForm from './froms/AnyMedicationForm';
-import EthnicityForm from './froms/EthinicityForm';
-import LabTestForm from './froms/LabTestForm';
-import BeforeWrapUp from './froms/BeforeWrapUp';
-import CheckOutForm from './froms/CheckOutForm';
-import SuccessPropt from './froms/SuccessPropt';
-import { patchMethod, patchWithFileMethod } from '@/services/API/ApiMethod';
-import LicensedProvider from './froms/LicensedProvider';
-import UploadProfile from './froms/UploadProfile';
+import { useAuth } from '@clerk/nextjs';
+import FormService from '@/services/API/FormService';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const MultiStepForm = () => {
-  const { user } = useFirebaseAuth();
+// Lazy load form components
+const PrescriptionQuestion = lazy(() => import('./froms/PrescriptionQuestion'));
+const PrescriptionUpload = lazy(() => import('./froms/UploadPriscription'));
+const GoalSelectionForm = lazy(() => import('./froms/GoalSelectionForm'));
+const UserInfoForm = lazy(() => import('./froms/UserInfoForm'));
+const AuthForm = lazy(() => import('./froms/AuthForm'));
+const WeightCalculation = lazy(() => import('./froms/WeightCalculation'));
+const BasicsUserInfo = lazy(() => import('./froms/BasicsUserInfo'));
+const PrimaryCareConfirmation = lazy(() => import('./froms/PrimaryCareConfirmation'));
+const HeartDiseaseForm = lazy(() => import('./froms/HeartDiseaseForm'));
+const AnyDiseaseForm = lazy(() => import('./froms/AnyDiseaseForm'));
+const Type2Diabetes = lazy(() => import('./froms/Type2Diabetes'));
+const DiabeticRetinopathy = lazy(() => import('./froms/DiabeticRetinopathy'));
+const AnyDisease2Form = lazy(() => import('./froms/AnyDiesease2Form'));
+const SearchAndSelectAllergies = lazy(() => import('./froms/SearchAndSelectAllergies'));
+const GLP1 = lazy(() => import('./froms/GLP1'));
+const AnyMedicationForm = lazy(() => import('./froms/AnyMedicationForm'));
+const EthnicityForm = lazy(() => import('./froms/EthnicityForm'));
+const LabTestForm = lazy(() => import('./froms/LabTestForm'));
+const BeforeWrapUp = lazy(() => import('./froms/BeforeWrapUp'));
+const CheckOutForm = lazy(() => import('./froms/CheckOutForm'));
+const SuccessPropt = lazy(() => import('./froms/SuccessPropt'));
+const LicensedProvider = lazy(() => import('./froms/LicensedProvider'));
+const UploadProfile = lazy(() => import('./froms/UploadProfile'));
+
+// Loading component for Suspense fallback
+const LoadingFallback = () => (
+  <div className="flex justify-center items-center h-[50vh]">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+  </div>
+);
+
+// Form order definition moved to the top level of the component
+const formOrder = [
+  "goalSelection",
+  "userInfo",
+  "auth",
+  "weightCalculation",
+  "basicsUserInfo",
+  "primaryCareConfirmation",
+  "heartDisease",
+  "anyDisease",
+  "type2Diabetes",
+  "diabeticRetinopathy",
+  "anyDisease2",
+  "searchAndSelectAllergies",
+  "glp1",
+  "anyMedication",
+  "ethnicity",
+  "beforeWrapUp",
+  "uploadProfile",
+  "licensedProvider",
+  "checkout"
+];
+
+const MultiStepForm = ({ initialForm }) => {
+  const { userId, isSignedIn } = useAuth();
   const router = useRouter();
-  // REMOVED isAuthenticated state and associated useEffect
-  const [activeForm, setActiveForm] = useState("goalSelection");
+  const [isAuthenticated, setIsAuthenticated] = useState(!!isSignedIn);
+  const [activeForm, setActiveForm] = useState(initialForm || "goalSelection");
+
+  // Validate and set the initial form
+  useEffect(() => {
+    if (initialForm) {
+      // Check if the initialForm is valid and exists in formOrder
+      if (formOrder.includes(initialForm)) {
+        setActiveForm(initialForm);
+      } else {
+        console.warn(`Invalid form name: ${initialForm}. Defaulting to goalSelection.`);
+        setActiveForm("goalSelection");
+      }
+    }
+  }, [initialForm, formOrder]);
   const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(false)
   const [img, setImg] = useState("")
@@ -56,86 +102,73 @@ const MultiStepForm = () => {
 
   const handleNextForm = (nextForm, data) => {
     setFormData({ ...formData, ...data });
+    
+    // If moving to basicsUserInfo and not authenticated, show auth form
+    // This allows users to complete the first two steps without authentication
+    if (activeForm === "weightCalculation" && !isAuthenticated && (!nextForm || nextForm === "basicsUserInfo")) {
+      setActiveForm("auth");
+      return;
+    }
+    
+    // If coming from auth form, update authentication status
+    if (activeForm === "auth") {
+      setIsAuthenticated(true);
+    }
+    
     setActiveForm(nextForm || getNextFormKey(activeForm));
   };
 
+  const handlePrevForm = () => {
+    // Get the previous form based on the form order
+    const currentIndex = formOrder.indexOf(activeForm);
+    if (currentIndex > 0) {
+      setActiveForm(formOrder[currentIndex - 1]);
+      // No need to update formData here as it's already preserved in state
+    }
+  };
+
   const getNextFormKey = (currentForm) => {
-    const formOrder = [
-      // "prescriptionQuestion",
-      "goalSelection",
-      "userInfo",
-      "auth",
-      "weightCalculation",
-      "basicsUserInfo",
-      "primaryCareConfirmation",
-      "heartDisease",
-      "anyDisease",
-      "type2Diabetes",
-      "diabeticRetinopathy",
-      "anyDisease2",
-      "searchAndSelectAllergies",
-      "glp1",
-      "anyMedication",
-      "ethnicity",
-      "beforeWrapUp",
-      "uploadProfile",
-      "licensedProvider",
-      "checkout"
-    ];
     const currentIndex = formOrder.indexOf(currentForm);
     return formOrder[currentIndex + 1] || "checkout";
   };
 
   const handleSubmit = async () => {
-    let payload = {
-      detail: formData
-    }
     setLoading(true)
-    console.log(payload)
-    const formData2 = new FormData();
-    formData2.append("profilePic", img);
-   
-   try{
-    const res1 = await patchMethod("/users/updateDetails", payload)
-    const res = await patchWithFileMethod("/users/updateDetails", formData2)
-    setLoading(false)
-    if (res && res1) {
-      handleNextForm("licesedProvider", {})
+    
+    try {
+      // Use the FormService to submit both form data and profile picture
+      const { dataResponse, imageResponse } = await FormService.submitFormWithProfile(formData, img);
+      
+      setLoading(false)
+      if (dataResponse && (imageResponse || !img)) {
+        // Store the form data in localStorage for persistence
+        localStorage.setItem('user_form_data', JSON.stringify(formData));
+        setActiveForm("licensedProvider"); // Directly set the active form to LicensedProvider
+      }
+    } catch (err) {
+      setLoading(false)
+      toast(err.message || 'Error submitting form data')
     }
-   }
-   catch(err){
-    toast(err.message)
-   }
-
   };
 
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    setIsAuthenticated(!!isSignedIn);
+    
+    // If user just signed in and we have form data in state with height and weight
+    // but we're not on the weightCalculation form, redirect to it
+    if (isSignedIn && formData.height && formData.height.feet > 0 && formData.weight > 0 && activeForm !== "weightCalculation") {
+      // Only redirect if we're at the auth form or earlier in the flow
+      const currentIndex = formOrder.indexOf(activeForm);
+      const weightCalcIndex = formOrder.indexOf("weightCalculation");
+      
+      if (currentIndex <= formOrder.indexOf("auth")) {
+        setActiveForm("weightCalculation");
+      }
+    }
+  }, [isSignedIn, formData]);
 
   // Calculate progress as a percentage
-  const formOrder = [
-    // "prescriptionQuestion",
-    "goalSelection",
-    "userInfo",
-    "auth",
-    "weightCalculation",
-    "basicsUserInfo",
-    "primaryCareConfirmation",
-    "heartDisease",
-    "anyDisease",
-    "type2Diabetes",
-    "diabeticRetinopathy",
-    "anyDisease2",
-    "searchAndSelectAllergies",
-    "glp1",
-    "anyMedication",
-    "ethnicity",
-    "beforeWrapUp",
-    "uploadProfile",
-    "licensedProvider",
-    "checkout"
-  ];
   const currentStep = formOrder.indexOf(activeForm) + 1;
   const totalSteps = formOrder.length;
   const progressPercentage = (currentStep / totalSteps) * 100;
@@ -144,129 +177,167 @@ const MultiStepForm = () => {
     return null;
   }
 
+  // Render the active form component with Suspense for lazy loading
+  const renderActiveForm = () => {
+    return (
+      <Suspense fallback={<LoadingFallback />}>
+        {activeForm === "uploadPrescription" && (
+          <PrescriptionUpload onNext={(data, next) => handleNextForm(next, data)} />
+        )}
+        {activeForm === "goalSelection" && (
+          <GoalSelectionForm 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
+            isFirstForm={true}
+            initialData={formData.accomplish_with_body_program ? { accomplish_with_body_program: formData.accomplish_with_body_program } : undefined}
+          />
+        )}
+        {activeForm === "userInfo" && (
+          <UserInfoForm 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
+            initialData={formData.height && formData.weight ? { height: formData.height, weight: formData.weight } : undefined}
+          />
+        )}
+        {activeForm === "auth" && (
+          <AuthForm 
+            onNext={(data, next) => handleNextForm(next, data)}
+          />
+        )}
+        {activeForm === "weightCalculation" && (
+          <WeightCalculation data={formData} onNext={(data, next) => handleNextForm(next, data)} />
+        )}
+        {activeForm === "basicsUserInfo" && (
+          <BasicsUserInfo 
+            onNext={(data, next) => handleNextForm(next, data)}
+            onBack={handlePrevForm}
+            initialData={formData.gender || formData.dob || formData.zipCode ? { gender: formData.gender, dob: formData.dob, zipCode: formData.zipCode } : undefined}
+          />
+        )}
+        {activeForm === "primaryCareConfirmation" && (
+          <PrimaryCareConfirmation 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
+            initialData={formData.seen_primary_care_provider !== undefined ? { seen_primary_care_provider: formData.seen_primary_care_provider } : undefined}
+          />
+        )}
+        {activeForm === "heartDisease" && (
+          <HeartDiseaseForm 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
+            initialData={formData.heart_conditions ? { heart_conditions: formData.heart_conditions } : undefined}
+          />
+        )}
+        {activeForm === "anyDisease" && (
+          <AnyDiseaseForm 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            initialData={formData.hormone_kidney_liver_condition ? { hormone_kidney_liver_condition: formData.hormone_kidney_liver_condition } : undefined}
+          />
+        )}
+        {activeForm === "type2Diabetes" && (
+          <Type2Diabetes 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
+            initialData={formData.type_2_diabetes ? { type_2_diabetes: formData.type_2_diabetes } : undefined}
+          />
+        )}
+        {activeForm === "diabeticRetinopathy" && (
+          <DiabeticRetinopathy 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            initialData={formData.diabetic ? { diabetic: formData.diabetic } : undefined}
+          />
+        )}
+        {activeForm === "anyDisease2" && (
+          <AnyDisease2Form 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            initialData={formData.additional_condition ? { additional_condition: formData.additional_condition } : undefined}
+          />
+        )}
+        {activeForm === "searchAndSelectAllergies" && (
+          <SearchAndSelectAllergies 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            initialData={formData.allergies ? { allergies: formData.allergies } : undefined}
+          />
+        )}
+        {activeForm === "glp1" && (
+          <GLP1 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            initialData={formData.allergy_GLP_1 !== undefined ? { allergy_GLP_1: formData.allergy_GLP_1 } : undefined}
+          />
+        )}
+        {activeForm === "anyMedication" && (
+          <AnyMedicationForm 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            initialData={formData.medications ? { medications: formData.medications } : undefined}
+          />
+        )}
+        {activeForm === "ethnicity" && (
+          <EthnicityForm 
+            onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
+            initialData={formData.describe_yourself ? { describe_yourself: formData.describe_yourself } : undefined}
+          />
+        )}
+        {activeForm === "beforeWrapUp" && (
+          <BeforeWrapUp 
+            onNext={(data, next) => handleNextForm(next, data)}
+            initialData={formData}
+          />
+        )}
+        {activeForm === "uploadProfile" && (
+          <UploadProfile onSubmit={handleSubmit} img={img} setImg={setImg} loading={loading} onNext={(data, next) => handleNextForm(next, data)}/>
+        )}
+        {activeForm === "licensedProvider" && (
+          <LicensedProvider onNext={(data, next) => handleNextForm(next, data)} />
+        )}
+        {activeForm === "checkout" && (
+          <CheckOutForm userdata={formData} onNext={(data, next) => handleNextForm(next, data)} />
+        )}
+        {activeForm === "success" && (
+          <SuccessPropt type="1" />
+        )}
+        {activeForm === "success2" && (
+          <SuccessPropt type="2" />
+        )}
+        {activeForm === "lessbmi" && (
+          <SuccessPropt type="3" />
+        )}
+        {activeForm === "stopProcess" && (
+          <SuccessPropt type="4" />
+        )}
+      </Suspense>
+    );
+  };
+
   return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="multi-step-form py-5 mt-5 md:py-10 font-tt-hoves bg-[#ecf4f2] min-h-screen flex flex-col justify-center items-center relative"
+    >
+      <AnimatePresence mode='wait'>
         <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="multi-step-form py-10 mt-20 md:py-5 font-tt-hoves bg-[#d3d2cc] min-h-screen flex flex-col justify-center items-center relative"
+          key={activeForm}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+          className="w-full max-w-4xl flex flex-col items-center justify-evenly min-h-[90vh] py-8 "
         >
-        {!isAuthenticated && (
-          <div className="absolute inset-0 backdrop-blur-lg bg-black/50 z-50 flex flex-col items-center justify-center p-4">
-            <div className="bg-white rounded-xl p-8 max-w-md w-full text-center space-y-4">
-              <h3 className="text-2xl font-semibold text-primary">Continue Your Journey</h3>
-              <p className="text-gray-600">Sign up or login to view your personalized weight loss projection</p>
-              <div className="flex flex-col gap-3">
-                <button
-                  onClick={() => router.push('/signup')}
-                  className="w-full py-3 bg-primary text-white rounded-full hover:bg-primary-dark transition-colors"
-                >
-                  Create Account
-                </button>
-                <button
-                  onClick={() => router.push('/login')}
-                  className="w-full py-3 border-2 border-primary text-primary rounded-full hover:bg-primary/10 transition-colors"
-                >
-                  Login
-                </button>
+          {/* Progress bar positioned below the form title */}
+          {formOrder.includes(activeForm) && 
+            <div className="w-full mt-4 mb-6 px-5 md:px-0 md:w-[800px] flex gap-2 items-center">
+              <div className="h-[5px] border rounded-full bg-[#dae5e3] flex-1">
+                <div className="h-full bg-[#539488] rounded-full" style={{ width: `${progressPercentage}%` }} />
               </div>
             </div>
-          </div>
-        )}
-            {/* Stepper */}
-            {formOrder.includes(activeForm) && 
-                <div className="w-full p-5 md:p-0 md:w-[500px] flex gap-2 items-center">
-                    <div className="h-[15px] border rounded-full bg-white flex-1">
-                        <div className="h-full bg-primary rounded-full" style={{ width: `${progressPercentage}%` }} />
-                    </div>
-                    <img src="images/27.webp" className="w-[70px]" alt="Step indicator" />
-                </div>
-            }
-
-            <AnimatePresence mode='wait'>
-                <motion.div
-                    key={activeForm}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-                    className="w-full max-w-4xl"
-                >
-                    {/* Form rendering logic */}
-                    {activeForm === "uploadPrescription" && (
-                        <PrescriptionUpload onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "goalSelection" && (
-                        <GoalSelectionForm onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "userInfo" && (
-                        <UserInfoForm onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "weightCalculation" && (
-                        <WeightCalculation data={formData} onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "basicsUserInfo" && (
-                        <BasicsUserInfo onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "primaryCareConfirmation" && (
-                        <PrimaryCareConfirmation onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "heartDisease" && (
-                        <HeartDiseaseForm onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "anyDisease" && (
-                        <AnyDiseaseForm onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "type2Diabetes" && (
-                        <Type2Diabetes onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "diabeticRetinopathy" && (
-                        <DiabeticRetinopathy onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "anyDisease2" && (
-                        <AnyDisease2Form onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "searchAndSelectAllergies" && (
-                        <SearchAndSelectAllergies onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "glp1" && (
-                        <GLP1 onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "anyMedication" && (
-                        <AnyMedicationForm onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "ethnicity" && (
-                        <EthnicityForm onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "beforeWrapUp" && (
-                        <BeforeWrapUp onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "uploadProfile" && (
-                        <UploadProfile onSubmit={handleSubmit} img={img} setImg={setImg} loading={loading} onNext={(data, next) => handleNextForm(next, data)}/>
-                    )}
-                    {activeForm === "licesedProvider" && (
-                        <LicensedProvider onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "checkout" && (
-                        <CheckOutForm userdata={formData} onNext={(data, next) => handleNextForm(next, data)} />
-                    )}
-                    {activeForm === "success" && (
-                        <SuccessPropt type="1" />
-                    )}
-                    {activeForm === "success2" && (
-                        <SuccessPropt type="2" />
-                    )}
-                    {activeForm === "lessbmi" && (
-                        <SuccessPropt type="3" />
-                    )}
-                    {activeForm === "stopProcess" && (
-                        <SuccessPropt type="4" />
-                    )}
-                </motion.div>
-            </AnimatePresence>
+          }
+          {renderActiveForm()}
         </motion.div>
-    );
-
+      </AnimatePresence>
+    </motion.div>
+  );
 };
 
 export default MultiStepForm;

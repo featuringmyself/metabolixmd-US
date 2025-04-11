@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.31.8",
     "@studio-freight/lenis": "^1.0.42",
     "bcryptjs": "^3.0.2",
     "date-fns": "^4.1.0",

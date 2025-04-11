@@ -17,7 +17,7 @@ const ProfileDetails = () => {
   const [selectedPres, setselectedPres] = useState(null)
   const [isOpencheckout, setIsOpencheckout] = useState(false)
   const [isclient, setisclient] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState({})
   let user = getUser()
   const router = useRouter()
   const { logOut } = useFirebaseAuth()
@@ -61,12 +61,19 @@ const ProfileDetails = () => {
 
 
     try {
-      setLoading(true);
+      // Update loading state for this specific order ID
+      setLoading(prev => ({ ...prev, [id]: true }));
+      
       let res = await postMethod("/order/checkout/" + id);
-      setLoading(false);
+      
+      // Reset loading state for this order ID
+      setLoading(prev => ({ ...prev, [id]: false }));
+      
       if (res?.data?.url) window.open(res?.data?.url);
       toast.success(res.message);
     } catch (err) {
+      // Reset loading state on error
+      setLoading(prev => ({ ...prev, [id]: false }));
       toast.error(err.message);
     }
   };
@@ -164,7 +171,7 @@ const ProfileDetails = () => {
                       onSubmit(order._id)
                     }} className="bg-primary min-w-[150px] text-center w-fit text-white rounded-full px-5 py-2 text-sm cursor-pointer mt-2">
                       {
-                        loading ?
+                        loading[order._id] ?
                           <ClipLoader size={12} color="white" />
                           :
                           "Checkout"
@@ -216,7 +223,7 @@ const ProfileDetails = () => {
               setselectedPres(null)
               setIsOpencheckout(false)
             }} className="flex justify-end cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
             </div>
             <ProfileCheckOutForm prescription={selectedPres} />
 

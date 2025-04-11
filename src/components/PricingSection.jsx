@@ -127,9 +127,9 @@ const PricingSection = () => {
 <path d="M26.0721 51.7822H11.957" stroke="#FD7823" strokeWidth="1.97829" strokeLinecap="round" strokeLinejoin="round"/>
 <path d="M11.957 27.0537H31.7399C32.828 27.0537 33.7182 27.9439 33.7182 29.032V43.6615" stroke="#FD7823" strokeWidth="1.97829" strokeLinecap="round" strokeLinejoin="round"/>
 <path d="M26.0721 51.7822H11.957" stroke="#FD7823" strokeWidth="1.97829" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M30.4415 60.9255C28.1237 58.6076 28.1237 54.8505 30.4415 52.5326L37.4365 45.5377C39.7544 43.2198 43.5114 43.2198 45.8293 45.5377C48.1472 47.8556 48.1472 51.6127 45.8293 53.9306L38.8345 60.9255C36.5166 63.2434 32.7594 63.2434 30.4415 60.9255Z" stroke="#FD7823" stroke-width="1.97829" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M51.2436 52.0693C52.6185 53.1574 53.4989 54.8389 53.4989 56.7282C53.4989 58.3702 52.8361 59.8539 51.7579 60.9222C50.6897 62.0004 49.206 62.6631 47.564 62.6631H42.6875" stroke="#FD7823" stroke-width="1.97829" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M33.9375 49.0347L39.5328 54.6299" stroke="#FD7823" stroke-width="1.97829" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M30.4415 60.9255C28.1237 58.6076 28.1237 54.8505 30.4415 52.5326L37.4365 45.5377C39.7544 43.2198 43.5114 43.2198 45.8293 45.5377C48.1472 47.8556 48.1472 51.6127 45.8293 53.9306L38.8345 60.9255C36.5166 63.2434 32.7594 63.2434 30.4415 60.9255Z" stroke="#FD7823" strokeWidth="1.97829" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M51.2436 52.0693C52.6185 53.1574 53.4989 54.8389 53.4989 56.7282C53.4989 58.3702 52.8361 59.8539 51.7579 60.9222C50.6897 62.0004 49.206 62.6631 47.564 62.6631H42.6875" stroke="#FD7823" strokeWidth="1.97829" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M33.9375 49.0347L39.5328 54.6299" stroke="#FD7823" strokeWidth="1.97829" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 
       ),

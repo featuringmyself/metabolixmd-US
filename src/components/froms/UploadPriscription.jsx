@@ -43,11 +43,11 @@ const UploadPrescription = ({onNext}) => {
   };
 
   return (
-    <div className="w-full p-5 md:p-0 md:max-w-fit  mx-auto">
-      <div className="w-full md:w-[500px] text-center">
-        <h2 className="text-2xl  mb-6 text-primary">Upload prescription</h2>
+    <div className="w-full p-4 sm:p-5 md:p-0 md:max-w-fit mx-auto">
+      <div className="w-full max-w-full sm:max-w-[450px] md:w-[500px] text-center">
+        <h2 className="text-xl sm:text-2xl mb-4 sm:mb-6 text-primary">Upload prescription</h2>
 
-        <div onClick={() => fileInputRef.current.click()} className="border-2 h-[300px] border-primary border-dashed rounded-lg p-10 mb-4 flex items-center justify-center">
+        <div onClick={() => fileInputRef.current.click()} className="border-2 h-[200px] sm:h-[250px] md:h-[300px] border-primary border-dashed rounded-lg p-4 sm:p-6 md:p-10 mb-4 flex items-center justify-center">
           {
             preUrl ?
               <div style={{backgroundImage:`url(${preUrl})`}} className="w-full min-h-full cursor-pointer bg-contain bg-no-repeat bg-center ">
@@ -70,16 +70,16 @@ const UploadPrescription = ({onNext}) => {
             id="terms"
             checked={checked}
             onChange={handleCheckboxChange}
-            className="min-h-[20px] min-w-[20px] accent-primary"
+            className="min-h-[18px] min-w-[18px] sm:min-h-[20px] sm:min-w-[20px] accent-primary"
           />
-          <label htmlFor="terms" className=" text-sm text-gray-600">
+          <label htmlFor="terms" className="text-xs sm:text-sm text-gray-600">
             I agree to the <span className="font-semibold text-primary">terms & conditions</span> of metabolixMD.
           </label>
         </div>
 
         <button
           type="button"
-          className={`mt-6 p-3 hover:bg-primary/90  text-white w-full font-semibold rounded-full bg-primary hover:bg-primary-dark ${!checked ? 'opacity-50 cursor-not-allowed' : ''
+          className={`mt-4 sm:mt-6 p-2 sm:p-3 hover:bg-primary/90 text-white w-full text-sm sm:text-base font-semibold rounded-full bg-primary hover:bg-primary-dark ${!checked ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           disabled={!checked || loading}
           onClick={handleUpload}
