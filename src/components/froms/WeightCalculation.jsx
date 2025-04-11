@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const WeightCalculation = ({ data: initialData, onNext }) => {
+const WeightCalculation = ({ data: initialData, onNext, onBack }) => {
   // Use state to manage data to ensure component re-renders when data changes
   const [formData, setFormData] = useState(initialData || {});
   const [storedWeight, setStoredWeight] = useState(null);
@@ -240,7 +240,14 @@ const WeightCalculation = ({ data: initialData, onNext }) => {
                   </div>
                 </div>
               )}
-              <div className="mt-6 text-center">
+              <div className="flex justify-center gap-4 mt-10">
+                <button
+                  onClick={onBack}
+                  className="hover:bg-gray-200 px-8 py-3 text-gray-700 font-semibold rounded-full border border-gray-300"
+                  aria-label="Back"
+                >
+                  Back
+                </button>
                 <button
                   onClick={handleContinue}
                   className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors"

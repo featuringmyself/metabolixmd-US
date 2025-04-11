@@ -231,6 +231,7 @@ const MultiStepForm = ({ initialForm }) => {
         {activeForm === "anyDisease" && (
           <AnyDiseaseForm 
             onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
             initialData={formData.hormone_kidney_liver_condition ? { hormone_kidney_liver_condition: formData.hormone_kidney_liver_condition } : undefined}
           />
         )}
@@ -262,6 +263,7 @@ const MultiStepForm = ({ initialForm }) => {
         {activeForm === "glp1" && (
           <GLP1 
             onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
             initialData={formData.allergy_GLP_1 !== undefined ? { allergy_GLP_1: formData.allergy_GLP_1 } : undefined}
           />
         )}
@@ -282,6 +284,7 @@ const MultiStepForm = ({ initialForm }) => {
         {activeForm === "beforeWrapUp" && (
           <BeforeWrapUp 
             onNext={(data, next) => handleNextForm(next, data)}
+            onBack={handlePrevForm}
             initialData={formData}
           />
         )}
