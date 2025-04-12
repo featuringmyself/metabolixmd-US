@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@clerk/nextjs';
 import FormService from '@/services/API/FormService';
 import { toast } from 'react-toastify';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useAnimation } from 'framer-motion';
 
 // Lazy load form components
 const PrescriptionQuestion = lazy(() => import('./froms/PrescriptionQuestion'));
@@ -30,10 +30,26 @@ const SuccessPropt = lazy(() => import('./froms/SuccessPropt'));
 const LicensedProvider = lazy(() => import('./froms/LicensedProvider'));
 const UploadProfile = lazy(() => import('./froms/UploadProfile'));
 
-// Loading component for Suspense fallback
+// Enhanced Loading component for Suspense fallback
 const LoadingFallback = () => (
-  <div className="flex justify-center items-center h-[50vh]">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+  <div className="flex flex-col justify-center items-center h-[50vh] space-y-4">
+    <motion.div 
+      className="rounded-full h-14 w-14 border-4 border-[#dae5e3] border-t-primary"
+      animate={{ rotate: 360 }}
+      transition={{ 
+        duration: 1.2, 
+        ease: "linear", 
+        repeat: Infinity,
+      }}
+    />
+    <motion.p
+      className="text-primary font-medium text-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5, duration: 0.5 }}
+    >
+      Loading your form...
+    </motion.p>
   </div>
 );
 
@@ -313,28 +329,92 @@ const MultiStepForm = ({ initialForm }) => {
     );
   };
 
+  // Define animation variants for smoother transitions
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        duration: 0.4,
+        ease: "easeInOut",
+        when: "beforeChildren"
+      }
+    },
+    exit: { 
+      opacity: 0,
+      transition: { 
+        duration: 0.3,
+        ease: "easeOut" 
+      }
+    }
+  };
+
+  const formVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.98 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { 
+        type: 'spring', 
+        stiffness: 300, 
+        damping: 25,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
+    exit: { 
+      opacity: 0, 
+      y: -30, 
+      scale: 0.96,
+      transition: { 
+        duration: 0.3,
+        ease: "easeIn" 
+      }
+    }
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       className="multi-step-form py-5 mt-5 md:py-10 font-tt-hoves bg-[#ecf4f2] min-h-screen flex flex-col justify-center items-center relative"
     >
       <AnimatePresence mode='wait'>
         <motion.div
           key={activeForm}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+          variants={formVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
           className="w-full max-w-4xl flex flex-col items-center justify-evenly min-h-[90vh] py-8 "
         >
           {/* Progress bar positioned below the form title */}
           {formOrder.includes(activeForm) && 
             <div className="w-full mt-4 mb-6 px-5 md:px-0 md:w-[800px] flex gap-2 items-center">
-              <div className="h-[5px] border rounded-full bg-[#dae5e3] flex-1">
-                <div className="h-full bg-[#539488] rounded-full" style={{ width: `${progressPercentage}%` }} />
+              <div className="h-[5px] border rounded-full bg-[#dae5e3] flex-1 overflow-hidden">
+                <motion.div 
+                  className="h-full bg-[#539488] rounded-full" 
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progressPercentage}%` }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 260, 
+                    damping: 20,
+                    duration: 0.5 
+                  }}
+                />
               </div>
+              <motion.span 
+                className="text-xs font-medium text-primary"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                {Math.round(progressPercentage)}%
+              </motion.span>
             </div>
           }
           {renderActiveForm()}
