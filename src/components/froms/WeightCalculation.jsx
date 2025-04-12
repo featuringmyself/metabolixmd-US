@@ -242,13 +242,6 @@ const WeightCalculation = ({ data: initialData, onNext, onBack }) => {
               )}
               <div className="flex justify-center gap-4 mt-10">
                 <button
-                  onClick={onBack}
-                  className="hover:bg-gray-200 px-8 py-3 text-gray-700 font-semibold rounded-full border border-gray-300"
-                  aria-label="Back"
-                >
-                  Back
-                </button>
-                <button
                   onClick={handleContinue}
                   className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors"
                 >

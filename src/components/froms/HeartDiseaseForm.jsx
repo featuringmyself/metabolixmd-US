@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedButton from "../AnimatedButton";
 import AnimatedCheckbox from "../AnimatedCheckbox";
+import { toast } from "react-toastify";
 
-const HeartDiseaseForm = ({ onNext, onBack }) => {
+const HeartDiseaseForm = ({ onNext, onBack, initialData }) => {
   const [selectedGoals, setSelectedGoals] = useState(() => {
+    // Use initialData if provided, otherwise check localStorage
+    if (initialData?.heart_conditions) {
+      return initialData.heart_conditions;
+    }
     const savedGoals = localStorage.getItem('HeartDiseaseForm_selectedGoals');
     return savedGoals ? JSON.parse(savedGoals) : [];
   });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Animation variants
   const containerVariants = {
@@ -104,11 +111,25 @@ const HeartDiseaseForm = ({ onNext, onBack }) => {
   const isButtonDisabled = selectedGoals.length === 0;
 
   // Handle form submission
-  const handleNext = () => {
-    const data = {
-      heart_conditions: selectedGoals
-    };
-    onNext(data); // Pass the selected heart conditions to the parent component
+  const handleNext = async () => {
+    if (isSubmitting) return;
+    
+    try {
+      setIsSubmitting(true);
+      
+      // Prepare data to be sent to the backend
+      const data = {
+        heart_conditions: selectedGoals
+      };
+      
+      // Pass the data to the parent component with the next form name
+      onNext(data, "anyDisease");
+    } catch (error) {
+      console.error("Error submitting heart disease data:", error);
+      toast.error("Failed to submit heart condition data. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -182,12 +203,23 @@ const HeartDiseaseForm = ({ onNext, onBack }) => {
             {/* Continue button */}
             <AnimatedButton
               type="primary"
-              disabled={isButtonDisabled}
+              disabled={isButtonDisabled || isSubmitting}
               onClick={handleNext}
               ariaLabel="Continue"
               className="w-full sm:flex-1"
             >
-              Continue
+              {isSubmitting ? (
+                <span className="flex items-center justify-center">
+                  <motion.div
+                    className="w-5 h-5 mr-2 border-2 border-white border-t-transparent rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  />
+                  Submitting...
+                </span>
+              ) : (
+                "Continue"
+              )}
             </AnimatedButton>
           </motion.div>
         </form>

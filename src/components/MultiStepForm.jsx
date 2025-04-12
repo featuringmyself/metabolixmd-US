@@ -28,6 +28,7 @@ const BeforeWrapUp = lazy(() => import('./froms/BeforeWrapUp'));
 const CheckOutForm = lazy(() => import('./froms/CheckOutForm'));
 const SuccessPropt = lazy(() => import('./froms/SuccessPropt'));
 const LicensedProvider = lazy(() => import('./froms/LicensedProvider'));
+const CalendlyForm = lazy(() => import('./froms/CalendlyForm'));
 const UploadProfile = lazy(() => import('./froms/UploadProfile'));
 
 // Enhanced Loading component for Suspense fallback
@@ -73,6 +74,7 @@ const formOrder = [
   "beforeWrapUp",
   "uploadProfile",
   "licensedProvider",
+  "calendly",
   "checkout"
 ];
 
@@ -261,18 +263,21 @@ const MultiStepForm = ({ initialForm }) => {
         {activeForm === "diabeticRetinopathy" && (
           <DiabeticRetinopathy 
             onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
             initialData={formData.diabetic ? { diabetic: formData.diabetic } : undefined}
           />
         )}
         {activeForm === "anyDisease2" && (
           <AnyDisease2Form 
             onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
             initialData={formData.additional_condition ? { additional_condition: formData.additional_condition } : undefined}
           />
         )}
         {activeForm === "searchAndSelectAllergies" && (
           <SearchAndSelectAllergies 
             onNext={(data, next) => handleNextForm(next, data)} 
+            onBack={handlePrevForm}
             initialData={formData.allergies ? { allergies: formData.allergies } : undefined}
           />
         )}
@@ -309,6 +314,12 @@ const MultiStepForm = ({ initialForm }) => {
         )}
         {activeForm === "licensedProvider" && (
           <LicensedProvider onNext={(data, next) => handleNextForm(next, data)} />
+        )}
+        {activeForm === "calendly" && (
+          <CalendlyForm 
+            onNext={(data, next) => handleNextForm(next, data)}
+            onBack={handlePrevForm}
+          />
         )}
         {activeForm === "checkout" && (
           <CheckOutForm userdata={formData} onNext={(data, next) => handleNextForm(next, data)} />

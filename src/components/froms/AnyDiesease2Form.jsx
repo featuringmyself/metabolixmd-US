@@ -11,8 +11,9 @@ import { useState } from "react";
  * 
  * @param {Object} props - Component props
  * @param {Function} props.onNext - Callback function to proceed to the next form with selected data
+ * @param {Function} props.onBack - Callback function to go back to the previous form
  */
-const AnyDisease2Form = ({onNext}) => {
+const AnyDisease2Form = ({onNext, onBack}) => {
   // State to track which conditions the user has selected
   const [selectedGoals, setSelectedGoals] = useState(() => {
     try {
@@ -130,19 +131,29 @@ const AnyDisease2Form = ({onNext}) => {
             ))}
           </div>
 
-          <button
-            type="button"
-            className={`mt-6 md:mt-8 w-full py-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md ${
-              isButtonDisabled
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-primary hover:bg-primary/90 transform hover:scale-[1.02]"
-            }`}
-            disabled={isButtonDisabled}
-            onClick={handleContinue}
-            aria-label="Next"
-          >
-            Next
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full mt-6 md:mt-8">
+            <button
+              type="button"
+              className="w-full sm:flex-1 py-3 hover:bg-gray-200 rounded-full text-gray-700 font-semibold border border-gray-300 transition-colors duration-300 shadow-sm hover:shadow-md"
+              onClick={onBack}
+              aria-label="Back"
+            >              
+              Back
+            </button>
+            <button
+              type="button"
+              className={`w-full sm:flex-1 py-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md ${
+                isButtonDisabled
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-primary hover:bg-primary/90 transform hover:scale-[1.02]"
+              }`}
+              disabled={isButtonDisabled}
+              onClick={handleContinue}
+              aria-label="Next"
+            >
+              Next
+            </button>
+          </div>
         </form>
       </div>
     </div>

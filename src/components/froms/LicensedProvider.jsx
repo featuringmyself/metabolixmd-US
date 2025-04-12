@@ -16,7 +16,7 @@ const LicensedProvider = ({onNext}) => {
                 <div style={{backgroundImage:`url(/images/dr3.png)`}} className='w-[150px] h-[150px] bg-cover bg-center bg-no-repeat bg-orange-400  rounded-lg overflow-hidden'></div>
               </div>
 
-                <div onClick={()=>onNext({},"checkout")} className='mt-6 p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary hover:bg-primary'>Continue</div>
+                <div onClick={()=>onNext({},"calendly")} className='mt-6 p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary hover:bg-primary'>Continue</div>
             </div>
         </div>
     )
