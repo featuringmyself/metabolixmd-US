@@ -3,7 +3,8 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import LenisProvider from '@/components/LenisProvider'
 import { Inter } from 'next/font/google';
-import { ClerkProvider } from '@clerk/nextjs';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { AuthModalProvider } from '@/contexts/AuthModalContext';
 import { useEffect } from 'react';
 
 const inter = Inter({
@@ -32,13 +33,15 @@ export default function App({ Component, pageProps, err }) {
   }, []);
 
   return (
-    <ClerkProvider {...pageProps}>
-      <LenisProvider>
-        <main className="font-sans">
-          <ToastContainer />
-          <Component {...pageProps} err={err} />
-        </main>
-      </LenisProvider>
-    </ClerkProvider>
+    <AuthProvider>
+      <AuthModalProvider>
+        <LenisProvider>
+          <main className="font-sans">
+            <ToastContainer />
+            <Component {...pageProps} err={err} />
+          </main>
+        </LenisProvider>
+      </AuthModalProvider>
+    </AuthProvider>
   );
 }

@@ -1,11 +1,22 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { SignIn, SignUp } from '@clerk/nextjs';
+import FirebaseAuthForm from './FirebaseAuthForm';
+import { toast } from 'react-toastify';
 
 const AuthForm = ({ onNext, mode = 'signin' }) => {
   const router = useRouter();
 
   const handleComplete = () => {
+    // Show success toast notification
+    toast.success('Successfully signed in!', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+    
     // Don't specify the next form - let the MultiStepForm component handle it
     // This prevents redirection to a specific form after authentication
     onNext({});
@@ -26,23 +37,10 @@ const AuthForm = ({ onNext, mode = 'signin' }) => {
 
   return (
     <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      {mode === 'signin' ? (
-        <SignIn
-          appearance={appearance}
-          afterSignInUrl="/get-started"
-          signUpUrl={null}
-          routing="virtual"
-          afterSignIn={handleComplete}
-        />
-      ) : (
-        <SignUp
-          appearance={appearance}
-          afterSignUpUrl="/get-started"
-          signInUrl={null}
-          routing="virtual"
-          afterSignUp={handleComplete}
-        />
-      )}
+      <FirebaseAuthForm 
+        mode={mode} 
+        onNext={handleComplete} 
+      />
     </div>
   );
 };

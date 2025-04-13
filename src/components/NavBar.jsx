@@ -7,18 +7,13 @@ import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
 import ScrollProgressBar from './ProgressBar'
 import { motion, AnimatePresence } from 'framer-motion'
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { useAuthModalContext } from '@/contexts/AuthModalContext'
+import { toast } from 'react-toastify'
+// Firebase authentication is used instead of Clerk
 
 
 const NavBar = () => {
-  let user = getUser()
+  const [user, setUser] = useState(getUser());
   const [isClient, setIsClient] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -28,10 +23,12 @@ const NavBar = () => {
   const [token, setToken] = useState("")
   const [isOpen, setIsOpen] = useState(false);
   const [resourcesDropdown, setResourcesDropdown] = useState(false);
+  const [profileDropdown, setProfileDropdown] = useState(false);
+  const { openSignIn, openSignUp } = useAuthModalContext();
 
   const handleLogout = () => {
     logOut()
-    router.push("/login")
+    router.push("/")
   }
 
   const handleMobileMenuToggle = () => {
@@ -44,6 +41,7 @@ const NavBar = () => {
     setIsClient(true);
     let token = getAuthToken()
     setToken(token)
+    setUser(getUser())
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -64,6 +62,32 @@ const NavBar = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  // Update user state when auth modal closes
+  useEffect(() => {
+    const updateUserState = () => {
+      const currentUser = getUser();
+      setUser(currentUser);
+    };
+
+    // Listen for auth state changes
+    const handleAuthChange = () => {
+      updateUserState();
+    };
+
+    window.addEventListener('storage', updateUserState);
+    document.addEventListener('visibilitychange', updateUserState);
+    window.addEventListener('auth-state-changed', handleAuthChange);
+
+    // Initial check
+    updateUserState();
+
+    return () => {
+      window.removeEventListener('storage', updateUserState);
+      document.removeEventListener('visibilitychange', updateUserState);
+      window.removeEventListener('auth-state-changed', handleAuthChange);
+    };
+  }, []);
 
   // Prevent scroll when menu is open
   useEffect(() => {
@@ -245,6 +269,60 @@ const NavBar = () => {
                         />
                       </motion.div>
 
+                      {/* Authentication Buttons */}
+                      <div className="mt-6 flex flex-col items-center gap-4">
+                        {!user ? (
+                          <>
+                            <Link 
+                              href="/login" 
+                              className='w-full py-3 px-4 ring-1 text-base ring-[#365e65] rounded-full text-center hover:text-primary transition-colors'
+                              onClick={() => setIsOpen(false)}
+                            >
+                              Sign In
+                            </Link>
+                            <Link 
+                              href="/get-started" 
+                              className='w-full py-3 px-4 text-base bg-[#365e65] rounded-full text-white text-center hover:bg-[#365e65]/90 transition-colors'
+                              onClick={() => setIsOpen(false)}
+                            >
+                              Get Started
+                            </Link>
+                          </>
+                        ) : (
+                          <div className="flex flex-col items-center justify-center w-full gap-4">
+                            <div className="flex items-center gap-2 text-primary font-medium">
+                              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-medium">
+                                {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                              </div>
+                              <span>{user.name || 'User'}</span>
+                            </div>
+                            <div className="flex flex-col w-full gap-2 mt-2">
+                              <Link 
+                                href="/profile-details" 
+                                className="flex items-center gap-2 text-white font-medium py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
+                                onClick={() => setIsOpen(false)}
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                Profile & Orders
+                              </Link>
+                              <button 
+                                onClick={() => {
+                                  handleLogout();
+                                  setIsOpen(false);
+                                }} 
+                                className="flex items-center gap-2 text-red-500 font-medium py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                                Sign Out
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
                       
                     </motion.div>
                   </motion.div>
@@ -254,23 +332,58 @@ const NavBar = () => {
 
             {/* Action Buttons */}
             <div className='hidden md:flex items-center gap-4'>
-            <SignedOut>
-              <SignInButton 
-                mode='modal' 
-                afterSignInUrl={typeof window !== 'undefined' ? window.location.href : '/'}
-                className='py-2 px-4 ring-1 text-sm ring-[#365e65] rounded-full' 
-              />
-              <SignUpButton 
-                mode='modal' 
-                afterSignUpUrl={typeof window !== 'undefined' ? window.location.href : '/'}
-                className='py-2 px-4 text-sm bg-[#365e65] rounded-full text-white'
-              >
-                Get Started
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+              {!user ? (
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={openSignIn}
+                    className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    onClick={openSignUp}
+                    className="text-sm font-medium bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition-colors"
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              ) : (
+                <div className="relative">
+                  <button 
+                    onClick={() => setProfileDropdown(!profileDropdown)} 
+                    className="flex items-center gap-2 focus:outline-none"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-medium cursor-pointer">
+                      {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                    </div>
+                  </button>
+                  
+                  {profileDropdown && (
+                    <div 
+                      className="absolute top-full right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-20"
+                    >
+                      <Link 
+                        href="/profile-details" 
+                        className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        Profile & Orders
+                      </Link>
+                      <button 
+                        onClick={handleLogout} 
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-gray-100 w-full text-left"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Sign Out
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

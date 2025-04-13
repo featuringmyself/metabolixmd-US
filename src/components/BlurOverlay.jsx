@@ -1,10 +1,13 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useAuth, SignIn, SignInButton, ClerkLoaded, ClerkLoading } from '@clerk/nextjs';
+import { useAuth } from '@/contexts/AuthContext';
+import { useAuthModalContext } from '@/contexts/AuthModalContext';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-const BlurOverlay = ({ children, blurIntensity = 8, formData }) => {
-  const { isLoaded, isSignedIn } = useAuth();
+const BlurOverlay = ({ children, blurIntensity = 8, formData,onBack }) => {
+  const { isLoaded, isSignedIn, currentUser } = useAuth();
+  const { openSignIn } = useAuthModalContext();
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
@@ -15,7 +18,7 @@ const BlurOverlay = ({ children, blurIntensity = 8, formData }) => {
   // For debugging
   useEffect(() => {
     if (mounted && !isSignedIn) {
-      console.log('BlurOverlay: User not signed in, should show sign-in modal');
+      console.log('BlurOverlay: User not signed in, should show login modal');
     }
   }, [mounted, isSignedIn]);
 
@@ -26,45 +29,38 @@ const BlurOverlay = ({ children, blurIntensity = 8, formData }) => {
   return (
     <div className="relative">
       <div className={`transition-all duration-500 ease-in-out ${
-        !isSignedIn ? 'filter blur-md pointer-events-none' : ''
+        !isSignedIn ? 'filter blur-md pointer-events-none ' : ''
       }`}>
         {children}
       </div>
       {mounted && !isSignedIn && (
         <div className="fixed inset-0 flex items-center justify-center z-[9999]">
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          <div className="absolute inset-0 "></div>
           <div className="relative z-[10000] w-full max-w-md mx-4">
-            <ClerkLoading>
+            {!isLoaded ? (
               <div className="bg-white rounded-xl shadow-2xl p-8 w-full transform transition-all flex justify-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
               </div>
-            </ClerkLoading>
-            <ClerkLoaded>
+            ) : (
               <div className="bg-white rounded-xl shadow-2xl p-8 w-full transform transition-all">
                 <h2 className="text-2xl font-bold mb-4 text-center">Sign In Required</h2>
                 <p className="text-gray-600 mb-6 text-center">Please sign in to access this content</p>
-                <SignInButton 
-                  mode="modal" 
-                  afterSignInUrl="/get-started?form=weightCalculation"
-                  redirectUrl="/get-started?form=weightCalculation"
-                  appearance={{
-                    elements: {
-                      rootBox: "w-full",
-                      formButtonPrimary: "bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors w-full",
-                    }
-                  }}
-                  signUpUrl="/sign-up"
-                  afterSignIn={(result) => {
-                    router.push('/get-started?form=weightCalculation');
-                    return false;
-                  }}
+                <button 
+                  onClick={openSignIn}
+                  className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors w-full"
                 >
-                  <button className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors w-full">
-                    Sign In
-                  </button>
-                </SignInButton>
+                  Sign In
+                </button>
+                <div className="flex flex-col gap-3 mt-4">
+                  <Link 
+                    href="/get-started?form=UserInfoForm"
+                    className="bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-300 transition-colors w-full"
+                  >
+                    Back
+                  </Link>
+                </div>
               </div>
-            </ClerkLoaded>
+            )}
           </div>
         </div>
       )}

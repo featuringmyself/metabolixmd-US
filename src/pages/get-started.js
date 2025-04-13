@@ -8,7 +8,7 @@ import Head from 'next/head';
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { useAuth } from '@clerk/nextjs';
+import { useAuth } from '@/contexts/AuthContext';
 
 const GetStarted = () => {
   const { userId, isLoaded, isSignedIn } = useAuth();

@@ -78,7 +78,9 @@ export async function getMethod(url, payload) {
 
     if (token) {
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + url, requestOptions)
+            // Ensure URLs start with /v1 for backend API routes
+            const apiUrl = url.startsWith('/v1/') ? url : `/v1${url}`;
+            const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + apiUrl, requestOptions)
             // console.log(response)
             const data = await response.json()
             return data

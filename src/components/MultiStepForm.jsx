@@ -1,9 +1,10 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@clerk/nextjs';
+import { useAuth } from '@/contexts/AuthContext';
+
 import FormService from '@/services/API/FormService';
 import { toast } from 'react-toastify';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Lazy load form components
 const PrescriptionQuestion = lazy(() => import('./froms/PrescriptionQuestion'));
@@ -28,74 +29,20 @@ const BeforeWrapUp = lazy(() => import('./froms/BeforeWrapUp'));
 const CheckOutForm = lazy(() => import('./froms/CheckOutForm'));
 const SuccessPropt = lazy(() => import('./froms/SuccessPropt'));
 const LicensedProvider = lazy(() => import('./froms/LicensedProvider'));
-const CalendlyForm = lazy(() => import('./froms/CalendlyForm'));
 const UploadProfile = lazy(() => import('./froms/UploadProfile'));
 
-// Enhanced Loading component for Suspense fallback
+// Loading component for Suspense fallback
 const LoadingFallback = () => (
-  <div className="flex flex-col justify-center items-center h-[50vh] space-y-4">
-    <motion.div 
-      className="rounded-full h-14 w-14 border-4 border-[#dae5e3] border-t-primary"
-      animate={{ rotate: 360 }}
-      transition={{ 
-        duration: 1.2, 
-        ease: "linear", 
-        repeat: Infinity,
-      }}
-    />
-    <motion.p
-      className="text-primary font-medium text-sm"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.5, duration: 0.5 }}
-    >
-      Loading your form...
-    </motion.p>
+  <div className="flex justify-center items-center h-[50vh]">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
   </div>
 );
-
-// Form order definition moved to the top level of the component
-const formOrder = [
-  "goalSelection",
-  "userInfo",
-  "auth",
-  "weightCalculation",
-  "basicsUserInfo",
-  "primaryCareConfirmation",
-  "heartDisease",
-  "anyDisease",
-  "type2Diabetes",
-  "diabeticRetinopathy",
-  "anyDisease2",
-  "searchAndSelectAllergies",
-  "glp1",
-  "anyMedication",
-  "ethnicity",
-  "beforeWrapUp",
-  "uploadProfile",
-  "licensedProvider",
-  "calendly",
-  "checkout"
-];
 
 const MultiStepForm = ({ initialForm }) => {
   const { userId, isSignedIn } = useAuth();
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(!!isSignedIn);
   const [activeForm, setActiveForm] = useState(initialForm || "goalSelection");
-
-  // Validate and set the initial form
-  useEffect(() => {
-    if (initialForm) {
-      // Check if the initialForm is valid and exists in formOrder
-      if (formOrder.includes(initialForm)) {
-        setActiveForm(initialForm);
-      } else {
-        console.warn(`Invalid form name: ${initialForm}. Defaulting to goalSelection.`);
-        setActiveForm("goalSelection");
-      }
-    }
-  }, [initialForm, formOrder]);
   const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(false)
   const [img, setImg] = useState("")
@@ -117,6 +64,30 @@ const MultiStepForm = ({ initialForm }) => {
     medications: [],
     describe_yourself: []
   });
+
+  // Form order definition moved to the top for better reference
+  const formOrder = [
+    // "prescriptionQuestion",
+    "goalSelection",
+    "userInfo",
+    "auth",
+    "weightCalculation",
+    "basicsUserInfo",
+    "primaryCareConfirmation",
+    "heartDisease",
+    "anyDisease",
+    "type2Diabetes",
+    "diabeticRetinopathy",
+    "anyDisease2",
+    "searchAndSelectAllergies",
+    "glp1",
+    "anyMedication",
+    "ethnicity",
+    "beforeWrapUp",
+    "uploadProfile",
+    "licensedProvider",
+    "checkout"
+  ];
 
   const handleNextForm = (nextForm, data) => {
     setFormData({ ...formData, ...data });
@@ -173,10 +144,15 @@ const MultiStepForm = ({ initialForm }) => {
     setIsClient(true);
     setIsAuthenticated(!!isSignedIn);
     
-    // If user just signed in and we have form data in state with height and weight
-    // but we're not on the weightCalculation form, redirect to it
+    // Update form state based on URL parameters when route changes
+    const params = new URLSearchParams(window.location.search);
+    const formParam = params.get('form');
+    if (formParam && formOrder.includes(formParam)) {
+      setActiveForm(formParam);
+    }
+    
+    // Existing authentication check logic
     if (isSignedIn && formData.height && formData.height.feet > 0 && formData.weight > 0 && activeForm !== "weightCalculation") {
-      // Only redirect if we're at the auth form or earlier in the flow
       const currentIndex = formOrder.indexOf(activeForm);
       const weightCalcIndex = formOrder.indexOf("weightCalculation");
       
@@ -184,7 +160,7 @@ const MultiStepForm = ({ initialForm }) => {
         setActiveForm("weightCalculation");
       }
     }
-  }, [isSignedIn, formData]);
+  }, [isSignedIn, formData, router.query]);
 
   // Calculate progress as a percentage
   const currentStep = formOrder.indexOf(activeForm) + 1;
@@ -220,6 +196,7 @@ const MultiStepForm = ({ initialForm }) => {
         {activeForm === "auth" && (
           <AuthForm 
             onNext={(data, next) => handleNextForm(next, data)}
+            
           />
         )}
         {activeForm === "weightCalculation" && (
@@ -249,7 +226,6 @@ const MultiStepForm = ({ initialForm }) => {
         {activeForm === "anyDisease" && (
           <AnyDiseaseForm 
             onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
             initialData={formData.hormone_kidney_liver_condition ? { hormone_kidney_liver_condition: formData.hormone_kidney_liver_condition } : undefined}
           />
         )}
@@ -263,35 +239,30 @@ const MultiStepForm = ({ initialForm }) => {
         {activeForm === "diabeticRetinopathy" && (
           <DiabeticRetinopathy 
             onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
             initialData={formData.diabetic ? { diabetic: formData.diabetic } : undefined}
           />
         )}
         {activeForm === "anyDisease2" && (
           <AnyDisease2Form 
             onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
             initialData={formData.additional_condition ? { additional_condition: formData.additional_condition } : undefined}
           />
         )}
         {activeForm === "searchAndSelectAllergies" && (
           <SearchAndSelectAllergies 
             onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
             initialData={formData.allergies ? { allergies: formData.allergies } : undefined}
           />
         )}
         {activeForm === "glp1" && (
           <GLP1 
             onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
             initialData={formData.allergy_GLP_1 !== undefined ? { allergy_GLP_1: formData.allergy_GLP_1 } : undefined}
           />
         )}
         {activeForm === "anyMedication" && (
           <AnyMedicationForm 
             onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
             initialData={formData.medications ? { medications: formData.medications } : undefined}
           />
         )}
@@ -305,7 +276,6 @@ const MultiStepForm = ({ initialForm }) => {
         {activeForm === "beforeWrapUp" && (
           <BeforeWrapUp 
             onNext={(data, next) => handleNextForm(next, data)}
-            onBack={handlePrevForm}
             initialData={formData}
           />
         )}
@@ -314,12 +284,6 @@ const MultiStepForm = ({ initialForm }) => {
         )}
         {activeForm === "licensedProvider" && (
           <LicensedProvider onNext={(data, next) => handleNextForm(next, data)} />
-        )}
-        {activeForm === "calendly" && (
-          <CalendlyForm 
-            onNext={(data, next) => handleNextForm(next, data)}
-            onBack={handlePrevForm}
-          />
         )}
         {activeForm === "checkout" && (
           <CheckOutForm userdata={formData} onNext={(data, next) => handleNextForm(next, data)} />
@@ -340,92 +304,28 @@ const MultiStepForm = ({ initialForm }) => {
     );
   };
 
-  // Define animation variants for smoother transitions
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { 
-        duration: 0.4,
-        ease: "easeInOut",
-        when: "beforeChildren"
-      }
-    },
-    exit: { 
-      opacity: 0,
-      transition: { 
-        duration: 0.3,
-        ease: "easeOut" 
-      }
-    }
-  };
-
-  const formVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.98 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      scale: 1,
-      transition: { 
-        type: 'spring', 
-        stiffness: 300, 
-        damping: 25,
-        duration: 0.5,
-        ease: "easeOut"
-      }
-    },
-    exit: { 
-      opacity: 0, 
-      y: -30, 
-      scale: 0.96,
-      transition: { 
-        duration: 0.3,
-        ease: "easeIn" 
-      }
-    }
-  };
-
   return (
     <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
       className="multi-step-form py-5 mt-5 md:py-10 font-tt-hoves bg-[#ecf4f2] min-h-screen flex flex-col justify-center items-center relative"
     >
       <AnimatePresence mode='wait'>
         <motion.div
           key={activeForm}
-          variants={formVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           className="w-full max-w-4xl flex flex-col items-center justify-evenly min-h-[90vh] py-8 "
         >
           {/* Progress bar positioned below the form title */}
           {formOrder.includes(activeForm) && 
             <div className="w-full mt-4 mb-6 px-5 md:px-0 md:w-[800px] flex gap-2 items-center">
-              <div className="h-[5px] border rounded-full bg-[#dae5e3] flex-1 overflow-hidden">
-                <motion.div 
-                  className="h-full bg-[#539488] rounded-full" 
-                  initial={{ width: 0 }}
-                  animate={{ width: `${progressPercentage}%` }}
-                  transition={{ 
-                    type: "spring", 
-                    stiffness: 260, 
-                    damping: 20,
-                    duration: 0.5 
-                  }}
-                />
+              <div className="h-[5px] border rounded-full bg-[#dae5e3] flex-1">
+                <div className="h-full bg-[#539488] rounded-full" style={{ width: `${progressPercentage}%` }} />
               </div>
-              <motion.span 
-                className="text-xs font-medium text-primary"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-              >
-                {Math.round(progressPercentage)}%
-              </motion.span>
             </div>
           }
           {renderActiveForm()}

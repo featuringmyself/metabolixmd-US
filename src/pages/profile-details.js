@@ -37,9 +37,10 @@ const ProfileDetails = () => {
     try {
       const res = await getMethod("/prescription/user");
       console.log(res)
-      if (res) {
-        // setUserOrders(res.data);
+      if (res?.data?.results) {
         setUserPres(res.data.results)
+      } else {
+        setUserPres([])
       }
     } catch (e) {
       toast.error(e.message);
@@ -223,7 +224,7 @@ const ProfileDetails = () => {
               setselectedPres(null)
               setIsOpencheckout(false)
             }} className="flex justify-end cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
             </div>
             <ProfileCheckOutForm prescription={selectedPres} />
 

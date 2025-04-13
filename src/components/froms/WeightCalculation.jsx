@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import BlurOverlay from '../BlurOverlay';
-import { useAuth } from '@clerk/nextjs';
+import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
