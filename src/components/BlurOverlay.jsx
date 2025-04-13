@@ -34,9 +34,9 @@ const BlurOverlay = ({ children, blurIntensity = 8, formData,onBack }) => {
         {children}
       </div>
       {mounted && !isSignedIn && (
-        <div className="fixed inset-0 flex items-center justify-center z-[9999]">
+        <div className="fixed inset-0 flex items-center justify-center z-[40]">
           <div className="absolute inset-0 "></div>
-          <div className="relative z-[10000] w-full max-w-md mx-4">
+          <div className="relative z-20 w-full max-w-md mx-4">
             {!isLoaded ? (
               <div className="bg-white rounded-xl shadow-2xl p-8 w-full transform transition-all flex justify-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -53,7 +53,7 @@ const BlurOverlay = ({ children, blurIntensity = 8, formData,onBack }) => {
                 </button>
                 <div className="flex flex-col gap-3 mt-4">
                   <Link 
-                    href="/get-started?form=UserInfoForm"
+                    href="/get-started?form=userInfoForm"
                     className="bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-300 transition-colors w-full"
                   >
                     Back
