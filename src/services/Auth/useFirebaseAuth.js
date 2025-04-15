@@ -10,7 +10,7 @@ import {
     RecaptchaVerifier,
     signInWithPhoneNumber
 } from "firebase/auth";
-import { appleProvider, auth, facebookProvider, googleProvider } from './firebaseConfigue';
+import { auth, googleProvider } from './firebaseConfigue';
 import { setToken, removeToken, removeUser, removeFcmToken, removeSupportRoomId } from "./cookies";
 import { firebaseErrorFinder } from "./firebaseErrors";
 import { toast } from 'react-toastify';
@@ -130,52 +130,6 @@ export default function useFirebaseAuth() {
             return { status: false, error: error }
         }
     }
-    const signInWithFacebook = async () => {
-        try {
-            const res = await signInWithPopup(auth, facebookProvider);
-            const user = res.user;
-
-            // Check if this is the user's first sign-in
-            const isFirstSignIn = user.metadata.creationTime === user.metadata.lastSignInTime;
-
-            // Set up the cookie expiry time
-            const expiryTime = new Date(Date.now() + 3600 * 1000);
-            // Set the cookie
-            const token = auth.currentUser.accessToken;
-
-            return { status: true, user: auth.currentUser, token: token, isFirstSignIn: isFirstSignIn, expiryTime: expiryTime };
-        }
-        catch (e) {
-            const error = firebaseErrorFinder(e);
-            toast.error(error, {
-                toastId: "firebase-error"
-            })
-            return { status: false, error: error }
-        }
-    }
-    const signInWithApple = async () => {
-        try {
-            const res = await signInWithPopup(auth, appleProvider);
-            const user = res.user;
-
-            // Check if this is the user's first sign-in
-            const isFirstSignIn = user.metadata.creationTime === user.metadata.lastSignInTime;
-
-            // Set up the cookie expiry time
-            const expiryTime = new Date(Date.now() + 3600 * 1000);
-            // Set the cookie
-            const token = auth.currentUser.accessToken;
-
-            return { status: true, user: auth.currentUser, token: token, isFirstSignIn: isFirstSignIn, expiryTime: expiryTime };
-        }
-        catch (e) {
-            const error = firebaseErrorFinder(e);
-            toast.error(error, {
-                toastId: "firebase-error"
-            })
-            return { status: false, error: error }
-        }
-    }
 
     const initializeRecaptcha = (container) => {
         if (!recaptchaVerifierRef.current && container) {
@@ -248,8 +202,6 @@ export default function useFirebaseAuth() {
         loginWithEmailAndPassword,
         forgotPassword,
         signInWithGoogle,
-        signInWithApple,
-        signInWithFacebook,
         initializeRecaptcha,
         phoneSignIn,
         confirmCode,

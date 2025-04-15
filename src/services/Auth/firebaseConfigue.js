@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { FacebookAuthProvider, getAuth, GoogleAuthProvider, OAuthProvider } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getMessaging, isSupported } from 'firebase/messaging';
 
@@ -18,12 +18,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
-const appleProvider = new OAuthProvider('apple.com');
 const database = getDatabase(app);
 let messaging = null;
 if (typeof window !== 'undefined' && isSupported()) {
   messaging = getMessaging(app);
 }
 
-export { auth, googleProvider,facebookProvider,appleProvider, database, messaging };
+export { auth, googleProvider, database, messaging };

@@ -27,8 +27,8 @@ const NavBar = () => {
   const { openSignIn, openSignUp } = useAuthModalContext();
 
   const handleLogout = () => {
-    logOut()
-    router.push("/")
+    logOut();
+    router.push("/");
   }
 
   const handleMobileMenuToggle = () => {
