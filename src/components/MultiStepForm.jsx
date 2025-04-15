@@ -29,6 +29,7 @@ const BeforeWrapUp = lazy(() => import('./froms/BeforeWrapUp'));
 const CheckOutForm = lazy(() => import('./froms/CheckOutForm'));
 const SuccessPropt = lazy(() => import('./froms/SuccessPropt'));
 const LicensedProvider = lazy(() => import('./froms/LicensedProvider'));
+const CalendlyForm = lazy(() => import('./froms/CalendlyForm'));
 const UploadProfile = lazy(() => import('./froms/UploadProfile'));
 
 // Loading component for Suspense fallback
@@ -85,8 +86,9 @@ const MultiStepForm = ({ initialForm }) => {
     "ethnicity",
     "beforeWrapUp",
     "uploadProfile",
+    "calendly",
+    "checkout",
     "licensedProvider",
-    "checkout"
   ];
 
   const handleNextForm = (nextForm, data) => {
@@ -127,12 +129,14 @@ const MultiStepForm = ({ initialForm }) => {
     try {
       // Use the FormService to submit both form data and profile picture
       const { dataResponse, imageResponse } = await FormService.submitFormWithProfile(formData, img);
+      // console.log(dataResponse);
+      // console.log(imageResponse);
       
       setLoading(false)
       if (dataResponse && (imageResponse || !img)) {
         // Store the form data in localStorage for persistence
         localStorage.setItem('user_form_data', JSON.stringify(formData));
-        setActiveForm("licensedProvider"); // Directly set the active form to LicensedProvider
+        setActiveForm("calendly"); // Navigate to CalendlyForm after successful submission
       }
     } catch (err) {
       setLoading(false)
@@ -147,8 +151,17 @@ const MultiStepForm = ({ initialForm }) => {
     // Update form state based on URL parameters when route changes
     const params = new URLSearchParams(window.location.search);
     const formParam = params.get('form');
-    if (formParam && formOrder.includes(formParam)) {
-      setActiveForm(formParam);
+    
+    // Handle case-insensitive form names and map to correct form keys
+    if (formParam) {
+      const formParamLower = formParam.toLowerCase();
+      
+      // Map URL parameter to form key
+      if (formParamLower === 'calendlyform') {
+        setActiveForm('calendly');
+      } else if (formOrder.includes(formParam)) {
+        setActiveForm(formParam);
+      }
     }
     
     // Existing authentication check logic
@@ -161,6 +174,24 @@ const MultiStepForm = ({ initialForm }) => {
       }
     }
   }, [isSignedIn, formData, router.query]);
+  
+  // Add a listener for URL changes to handle direct navigation to specific forms
+  useEffect(() => {
+    const handleRouteChange = () => {
+      const params = new URLSearchParams(window.location.search);
+      const formParam = params.get('form');
+      if (formParam && formOrder.includes(formParam)) {
+        setActiveForm(formParam);
+      }
+    };
+
+    // Listen for popstate events (browser back/forward buttons)
+    window.addEventListener('popstate', handleRouteChange);
+    
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, []);
 
   // Calculate progress as a percentage
   const currentStep = formOrder.indexOf(activeForm) + 1;
@@ -264,6 +295,7 @@ const MultiStepForm = ({ initialForm }) => {
           <AnyMedicationForm 
             onNext={(data, next) => handleNextForm(next, data)} 
             initialData={formData.medications ? { medications: formData.medications } : undefined}
+            onBack={handlePrevForm}
           />
         )}
         {activeForm === "ethnicity" && (
@@ -281,6 +313,9 @@ const MultiStepForm = ({ initialForm }) => {
         )}
         {activeForm === "uploadProfile" && (
           <UploadProfile onSubmit={handleSubmit} img={img} setImg={setImg} loading={loading} onNext={(data, next) => handleNextForm(next, data)}/>
+        )}
+        {activeForm === "calendly" && (
+          <CalendlyForm onNext={(data, next) => handleNextForm(next, data)} onBack={handlePrevForm} />
         )}
         {activeForm === "licensedProvider" && (
           <LicensedProvider onNext={(data, next) => handleNextForm(next, data)} />

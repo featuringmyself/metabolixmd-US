@@ -15,9 +15,10 @@ export const FormService = {
       const payload = {
         detail: formData
       };
-      
-      const response = await patchMethod("/users/updateDetails", payload);
+      console.log(payload)
+      const response = await patchMethod("/v1/users/updateDetails", payload);
       return response;
+      console.log(response)
     } catch (error) {
       console.error("Error submitting form data:", error);
       throw error;
@@ -34,7 +35,7 @@ export const FormService = {
       const formData = new FormData();
       formData.append("profilePic", imageFile);
       
-      const response = await patchWithFileMethod("/users/updateDetails", formData);
+      const response = await patchWithFileMethod("/v1/users/updateDetails", formData);
       return response;
     } catch (error) {
       console.error("Error uploading profile picture:", error);
@@ -55,6 +56,8 @@ export const FormService = {
       let imageResponse = null;
       if (imageFile) {
         imageResponse = await FormService.uploadProfilePicture(imageFile);
+        console.log(dataResponse);
+        
       }
       
       return {

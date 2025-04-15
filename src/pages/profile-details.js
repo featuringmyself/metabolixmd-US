@@ -25,7 +25,7 @@ const ProfileDetails = () => {
 
   const getOrderDetails = async () => {
     try {
-      const res = await getMethod("/order/user");
+      const res = await getMethod("/v1/order/user");
       if (res) {
         setUserOrders(res.data);
       }
@@ -35,7 +35,7 @@ const ProfileDetails = () => {
   };
   const getPresDetails = async () => {
     try {
-      const res = await getMethod("/prescription/user");
+      const res = await getMethod("/v1/prescription/user");
       console.log(res)
       if (res?.data?.results) {
         setUserPres(res.data.results)
@@ -65,7 +65,7 @@ const ProfileDetails = () => {
       // Update loading state for this specific order ID
       setLoading(prev => ({ ...prev, [id]: true }));
       
-      let res = await postMethod("/order/checkout/" + id);
+      let res = await postMethod("/v1/order/checkout/" + id);
       
       // Reset loading state for this order ID
       setLoading(prev => ({ ...prev, [id]: false }));

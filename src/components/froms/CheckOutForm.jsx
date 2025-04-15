@@ -41,8 +41,6 @@ const CheckOutForm = ({ onNext }) => {
     };
 
     const onSubmit = async (data) => {
-
-       
         const deliveryAddress = {
             ...data,
             position: {
@@ -52,20 +50,20 @@ const CheckOutForm = ({ onNext }) => {
         };
 
         const payload = {
-            orderItems: [],
+            orderItems: [{ product: "670c155fda7d6e34119c8e8e", quantity: 1 }],
             deliveryAddress
         };
 
         try {
             setLoading(true);
-            let res = await postMethod("/order", payload);
+            let res = await postMethod("/v1/order", payload);
             setLoading(false);
-            // if (res) window.open(res?.data?.url);
             toast.success(res.message);
             if (res) {
                 onNext({}, "success2")
             }
         } catch (err) {
+            setLoading(false);
             toast.error(err.message);
         }
     };
@@ -74,7 +72,7 @@ const CheckOutForm = ({ onNext }) => {
         <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto font-tt-hoves">
             <div className="w-full md:w-[500px]">
                 <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-                    <h1 className='text-2xl mb-6 text-primary'>Please fill out your shipping details</h1>
+                    <h1 className='text-2xl mb-6 text-primary text-center'>Please fill out your shipping details</h1>
 
                     <div>
                         <label>Address</label>

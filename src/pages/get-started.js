@@ -15,11 +15,21 @@ const GetStarted = () => {
   const [userOrders, setUserOrders] = useState(null);
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
-  const initialForm = searchParams.get('form');
+  let initialForm = searchParams.get('form');
+  
+  // Handle case-insensitive form names and map to correct form keys
+  if (initialForm) {
+    const formParamLower = initialForm.toLowerCase();
+    
+    // Map URL parameter to form key
+    if (formParamLower === 'calendlyform') {
+      initialForm = 'calendly';
+    }
+  }
 
   const getOrderDetails = async () => {
     try {
-      const res = await getMethod("/order/user");
+      const res = await getMethod("/v1/order/user");
       if (res) {
         setUserOrders(res.data);
       }

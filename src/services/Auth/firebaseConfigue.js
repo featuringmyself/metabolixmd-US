@@ -5,13 +5,13 @@ import { getDatabase } from "firebase/database";
 import { getMessaging, isSupported } from 'firebase/messaging';
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+  apiKey: "AIzaSyCB55J7Ezvys5ofQTZmiSpT5Sou4bMdOm8",
+  authDomain: "metabolix-ed05e.firebaseapp.com",
+  projectId: "metabolix-ed05e",
+  storageBucket: "metabolix-ed05e.appspot.com",
+  messagingSenderId: "626263424592",
+  appId: "1:626263424592:web:a77efefeea9dd0cb6ddb55",
+  measurementId: "G-8ZNG5L3N25"
 };
 
 // Initialize Firebase
@@ -22,19 +22,8 @@ const facebookProvider = new FacebookAuthProvider();
 const appleProvider = new OAuthProvider('apple.com');
 const database = getDatabase(app);
 let messaging = null;
-const initializeMessaging = async () => {
-  if (typeof window !== 'undefined') {
-    try {
-      const isMessagingSupported = await isSupported();
-      if (isMessagingSupported) {
-        messaging = getMessaging(app);
-      }
-    } catch (error) {
-      console.error('Error initializing Firebase messaging:', error);
-    }
-  }
-};
-
-initializeMessaging();
+if (typeof window !== 'undefined' && isSupported()) {
+  messaging = getMessaging(app);
+}
 
 export { auth, googleProvider,facebookProvider,appleProvider, database, messaging };

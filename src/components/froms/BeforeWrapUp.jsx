@@ -23,7 +23,7 @@ const BeforeWrapUp = ({ onNext }) => {
         <div className="w-full p-4 sm:p-5 md:p-0 md:max-w-fit mx-auto">
             <div className="w-full max-w-full sm:max-w-[450px] md:w-[500px]">
                 <p className="text-sm sm:text-base">BEFORE WE WRAP UP</p>
-                <h2 className="text-xl sm:text-2xl mb-4 sm:mb-6 font-semibold">
+                <h2 className="text-xl sm:text-2xl mb-4 sm:mb-6 font-semibold   mt-2">
                     Is there anything else you want your healthcare provider to know about your health?
                 </h2>
                 <p className="text-zinc-500 font-semibold text-sm sm:text-base">

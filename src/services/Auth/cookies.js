@@ -58,4 +58,3 @@ export const getUserType = () => {
 };
 
 export const removeUserType = () => cookies.remove('userType');
-

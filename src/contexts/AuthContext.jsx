@@ -4,10 +4,22 @@ import { auth } from '../services/Auth/firebaseConfigue';
 import { onAuthStateChanged } from 'firebase/auth';
 import { setToken, removeToken } from '../services/Auth/cookies';
 
-// Create the authentication context
+/**
+ * Authentication Context
+ * Provides authentication state and user information throughout the application.
+ * @type {React.Context}
+ */
 const AuthContext = createContext();
 
-// Custom hook to use the auth context
+/**
+ * Custom hook to access the authentication context
+ * @returns {Object} Authentication context object containing:
+ * - currentUser: The current authenticated user object
+ * - isLoaded: Boolean indicating if the auth state has been initialized
+ * - isSignedIn: Boolean indicating if a user is currently signed in
+ * - userId: The current user's unique identifier
+ * @throws {Error} If used outside of AuthProvider
+ */
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -16,7 +28,14 @@ export const useAuth = () => {
   return context;
 };
 
-// Provider component that wraps the app and makes auth object available to any child component that calls useAuth()
+/**
+ * Authentication Provider Component
+ * Manages authentication state and provides auth-related functionality to child components.
+ * Handles user session persistence, token management, and auth state changes.
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Child components to be wrapped
+ * @returns {JSX.Element} AuthContext Provider component
+ */
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,7 +43,10 @@ export function AuthProvider({ children }) {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    // Set up auth state observer and triggers when user signs in/out
+    /**
+     * Sets up Firebase authentication state observer
+     * Handles user sign-in/sign-out events and manages token storage
+     */
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       setIsSignedIn(!!user);

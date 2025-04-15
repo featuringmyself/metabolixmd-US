@@ -1,4 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# MetabolixMD Frontend
+
+Next.js-based frontend application for MetabolixMD healthcare platform, providing a modern and responsive user interface for patients and healthcare providers.
+
+## Project Structure
+
+```
+src/
+├── components/     # Reusable UI components
+├── contexts/       # React Context providers
+├── hooks/          # Custom React hooks
+├── pages/          # Next.js pages and routes
+├── services/       # API and external service integrations
+├── styles/         # Global styles and CSS modules
+└── utils/          # Utility functions and helpers
+```
+
+## Features
+
+- User Authentication with Firebase
+- Protected Routes and Role-based Access
+- Responsive Design with Tailwind CSS
+- Dynamic Form Handling
+- Real-time Updates
+- Cart Management
+- Payment Integration
+
+## Authentication
+
+The application uses Firebase Authentication with the following features:
+- Email/Password Authentication
+- Token Management
+- Protected Routes
+- Role-based Access Control
+
+## Components
+
+### Authentication Components
+- `AuthContext` - Manages authentication state
+- `AuthModalContext` - Handles authentication modal UI
+- `FirebaseAuthForm` - Authentication form component
+
+### Admin Components
+- Protected admin routes
+- User management interface
+- Dashboard components
+
+## Setup
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Configure environment variables:
+   - Create a `.env.local` file
+   - Add required Firebase and API configurations
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Development
+
+- Build production: `npm run build`
+- Start production: `npm start`
+- Run linter: `npm run lint`
+
+## State Management
+
+The application uses React Context for state management:
+- Authentication state
+- User session
+- Cart state
+- UI state
+
+## Styling
+
+- Tailwind CSS for utility-first styling
+- CSS Modules for component-specific styles
+- Responsive design patterns
+
+## API Integration
+
+- RESTful API consumption
+- Axios for HTTP requests
+- Error handling
+- Request/response interceptors
+
+## Performance Optimization
+
+- Image optimization
+- Code splitting
+- Dynamic imports
+- Caching strategies
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is proprietary and confidential.
 
 ## Getting Started
 

@@ -105,7 +105,7 @@ const OrdersList = () => {
         "status": newStatus
       }
 
-      const res = await putMethod("/order/updateorder", payload);
+      const res = await putMethod("/v1/order/updateorder", payload);
       if (res?.data) {
         setSelectedOrder(null)
         setNewStatus("")
@@ -125,7 +125,7 @@ const OrdersList = () => {
       "time": utcTime
     }
 
-    const res = await postMethod("/order/schedule", payload);
+    const res = await postMethod("/v1/order/schedule", payload);
     if (res?.data) {
       setSelectedOrder(null)
       setSchMeet({
@@ -150,7 +150,7 @@ const OrdersList = () => {
     }
     console.log(payload)
 
-    const res = await postMethod("/order/upateItems", payload);
+    const res = await postMethod("/v1/order/upateItems", payload);
     if (res?.data) {
       setSelectedOrder(null)
       setSelectedDose("")

@@ -144,16 +144,16 @@ const HomePage = () => {
 
   const getOrderDetails = async () => {
     // Commenting out the API call to avoid auth dependencies
-    /*
+
         try {
-            const res = await getMethod("/order/user");
+            const res = await getMethod("/v1/order/user");
             if (res) {
                 setUserOrders(res.data);
             }
         } catch (e) {
             toast.error(e.message);
         }
-        */
+        
   };
 
   useEffect(() => {

@@ -67,7 +67,7 @@ const EthnicityForm = ({onNext, onBack}) => {
   return (
     <div className="w-full p-5 md:p-6 lg:p-8 mx-auto max-w-screen-md">
       <div className="w-full max-w-[500px] mx-auto">
-        <h2 className="text-xl sm:text-2xl md:text-3xl mb-4 md:mb-6 text-primary font-medium" 
+        <h2 className="text-xl sm:text-2xl md:text-3xl mb-4 md:mb-6 text-zinc-700 text-center font-medium" 
             id="ethnicity-heading">
           How would you describe yourself?
         </h2>
