@@ -1,21 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import FirebaseAuthForm from './FirebaseAuthForm';
-import { toast } from 'react-toastify';
+import { showSuccessToast } from '@/lib/toastConfig';
 
 const AuthForm = ({ onNext, mode = 'signin' }) => {
   const router = useRouter();
 
   const handleComplete = () => {
-    // Show success toast notification
-    toast.success('Successfully signed in!', {
-      position: 'top-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+    // Show success toast notification using our custom function
+    showSuccessToast('Successfully signed in!');
     
     // Don't specify the next form - let the MultiStepForm component handle it
     // This prevents redirection to a specific form after authentication
