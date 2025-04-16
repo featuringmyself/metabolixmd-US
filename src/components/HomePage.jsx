@@ -291,7 +291,7 @@ const HomePage = () => {
             </motion.div>
           </motion.div>
 
-          <div className="absolute bottom-0 left-0 right-0 h-[30vh] w-full md:hidden block">
+          <div className="absolute bottom-0 left-0 right-0 h-[30vh] w-full md:hidden block ">
             <Image
               src="/images/hero.webp"
               alt="Hero image"
