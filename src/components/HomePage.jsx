@@ -266,7 +266,7 @@ const HomePage = () => {
               </span>
             </h1>
             
-            <p className="text-[#666666] text-lg mb-8 md:max-w-[40%] max-w-[90%] my-30">
+            <p className="text-[#666666] text-lg md:max-w-[30%] max-w-[90%] md:my-20 my-5">
               Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you.
             </p>
 
