@@ -13,7 +13,6 @@ import WeightLossCalculatorSection from "./WeightLossCalculatorSection";
 // import { getAuthToken } from '@/services/API/apiHelper'
 import Link from "next/link";
 import Footer from "./Footer";
-
 import ScrollProgressBar from "./ProgressBar";
 import { getMethod } from "@/services/API/ApiMethod";
 import { toast } from "react-toastify";
@@ -243,40 +242,38 @@ const HomePage = () => {
           initial="hidden"
           animate="visible"
           variants={staggerChildren}
-          className="flex flex-col lg:flex-row min-h-screen lg:min-h-[75vh] gap-6 md:gap-10 sm:border-b mb-10 md:mb-20 relative md:mt-20 mt-8"
+          className="flex flex-col relative mt-10 pb-0 px-4 md:min-h-[80vh] h-[90vh]  justify-evenly  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
+          style={{
+            
+                      
+            
+          }}
         >
-          <div
-            className="absolute inset-0 order-2 lg:order-none hidden lg:block"
-            style={{
-              backgroundImage: "url(/images/hero.webp)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              transform: "scaleX(-1)",
-            }}
-          ></div>
-          <div className="absolute inset-0 order-2 lg:order-none hidden lg:block"></div>
+          <Image src="/images/hero.webp" alt="Hero image" fill className="object-cover object-center -scale-x-100 relative -z-20 hidden md:block" priority />
           <motion.div
             variants={fadeIn}
-            className="flex-1 flex text-start flex-col justify-evenly px-0 md:px-10 relative z-10 order-1 lg:order-none md:min-h-0"
+            className="flex flex-col justify-evenly items-start z-10 md:mx-20 mx-0 "
+            
           >
-            <h1 className="text-5xl md:text-7xl font-medium md:mb-3 text-wrap mx-5">
-              <span className="text-[#365D56]">
-                Your Personalised <br /> Weight Loss
-              </span>{" "}
-              <span className="text-zinc-800">
-                Journey <br /> Starts Here
+            <h1 className="text-5xl md:text-7xl leading-[1.2] font-medium mb-6 ">
+              <span className="text-primary block">
+                Your Personalized<br />
+                Weight Loss
+              </span>
+              <span className="text-[#333333] block">
+                Journey Starts
+                Here
               </span>
             </h1>
-            <p className="md:mt-2 font-light text-md md:text-lg md:mb-3 text-zinc-600 md:max-w-[30%] max-w-[90%] text-start mx-5">
-              Connect with our US-based physicians to receive tailored support
-              on your weight loss journey. Experience a program designed just
-              for you
+            
+            <p className="text-[#666666] text-lg mb-8 md:max-w-[40%] max-w-[90%] my-30">
+              Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you.
             </p>
-            <motion.div className="md:block w-full flex justify-start pl-5 md:pl-2 mt-1">
+
+            <motion.div>
               <Link
                 href="/get-started"
-                className="group bg-primary relative overflow-hidden hover:bg-primary/90 transition-all duration-300 flex items-center justify-center p-3 px-6 md:px-10 w-[200px] md:w-[300px] text-white text-lg rounded-full"
+                className="inline-flex items-center justify-center bg-[#365D56] text-white rounded-full px-8 py-2 text-lg font-medium relative overflow-hidden group"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
@@ -289,31 +286,22 @@ const HomePage = () => {
                     ease: "easeInOut",
                   }}
                 />
-                <motion.span className="flex items-center gap-2 group-hover:translate-x-1 text-sm transition-transform duration-300">
-                  GET STARTED
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </motion.span>
+                Get Started
               </Link>
             </motion.div>
           </motion.div>
-          <Image
-            src="/images/hero.webp"
-            width={2048}
-            height={976}
-            className="absolute bottom-0 -z-20 -scale-x-100 h-[40vw] md:hidden w-full object-cover"
-          />
+
+          <div className="absolute bottom-0 left-0 right-0 h-[30vh] w-full md:hidden block">
+            <Image
+              src="/images/hero.webp"
+              alt="Hero image"
+              fill
+              className="object-cover object-center -scale-x-100"
+              priority
+            />
+          </div>
         </motion.section>
+
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
