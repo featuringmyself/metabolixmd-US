@@ -52,9 +52,10 @@ const BlurOverlay = ({ children, blurIntensity = 8, formData,onBack }) => {
                   Sign In
                 </button>
                 <div className="flex flex-col gap-3 mt-4">
+                  
                   <Link 
                     href="/get-started?form=userInfoForm"
-                    className="bg-gray-200 text-gray-700 px-6 py-2 rounded-full hover:bg-gray-300 transition-colors w-full"
+                    className="bg-gray-200 text-gray-700 px-6 py-2 text-center rounded-full hover:bg-gray-300 transition-colors w-full"
                   >
                     Back
                   </Link>
