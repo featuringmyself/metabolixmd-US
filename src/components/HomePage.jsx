@@ -242,13 +242,8 @@ const HomePage = () => {
           initial="hidden"
           animate="visible"
           variants={staggerChildren}
-          className="flex flex-col relative mt-10 pb-0 px-4 md:min-h-[80vh] h-[90vh]  justify-evenly  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
-          style={{
-            
-                      
-            
-          }}
-        >
+          className="flex flex-col relative mt-10 pb-0 px-4 md:min-h-[80vh] min-h-[90vh]  justify-evenly  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
+          >
           <Image src="/images/hero-desktop.webp" alt="Hero image" fill className="object-cover object-center -scale-x-100 relative -z-20 hidden md:block" priority />
           <motion.div
             variants={fadeIn}

@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const CalendlyForm = ({ onNext }) => {
+const CalendlyForm = ({ onNext, onBack }) => {
+  const [isMeetingScheduled, setIsMeetingScheduled] = useState(false);
+
   useEffect(() => {
     // Load Calendly widget script
     const script = document.createElement('script');
@@ -11,8 +13,8 @@ const CalendlyForm = ({ onNext }) => {
     // Add event listener for Calendly scheduling
     window.addEventListener('message', function(e) {
       if (e.data.event && e.data.event === 'calendly.event_scheduled') {
-        // When event is scheduled, navigate to checkout
-        onNext({}, "checkout");
+        // When event is scheduled, enable continue button
+        setIsMeetingScheduled(true);
       }
     });
 
@@ -21,11 +23,11 @@ const CalendlyForm = ({ onNext }) => {
       document.body.removeChild(script);
       window.removeEventListener('message', function(e) {
         if (e.data.event && e.data.event === 'calendly.event_scheduled') {
-          onNext({}, "checkout");
+          setIsMeetingScheduled(true);
         }
       });
     };
-  }, [onNext]);
+  }, []);
 
   return (
     <div className="w-full p-4 sm:p-5 md:p-0 md:max-w-fit mx-auto">
@@ -43,13 +45,27 @@ const CalendlyForm = ({ onNext }) => {
           style={{ minWidth: '320px', height: '700px' }}
         />
 
-        <button
-          type="button"
-          className="mt-6 p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary hover:bg-primary/90"
-          onClick={() => onNext({}, "checkout")}
-        >
-          Continue
-        </button>
+        <div className="flex gap-4 mt-6">
+          <button
+            type="button"
+            className="p-3 text-gray-700 w-full text-center py-3 font-semibold rounded-full border border-gray-300 hover:bg-gray-50"
+            onClick={onBack}
+          >
+            Back
+          </button>
+          <button
+            type="button"
+            className={`p-3 text-white w-full text-center py-3 font-semibold rounded-full ${
+              isMeetingScheduled 
+                ? 'bg-primary hover:bg-primary/90 cursor-pointer' 
+                : 'bg-gray-400 cursor-not-allowed'
+            }`}
+            onClick={() => onNext({}, "checkout")}
+            disabled={!isMeetingScheduled}
+          >
+            Continue
+          </button>
+        </div>
       </div>
     </div>
   );
