@@ -249,7 +249,7 @@ const HomePage = () => {
             
           }}
         >
-          <Image src="/images/hero.webp" alt="Hero image" fill className="object-cover object-center -scale-x-100 relative -z-20 hidden md:block" priority />
+          <Image src="/images/hero-desktop.webp" alt="Hero image" fill className="object-cover object-center -scale-x-100 relative -z-20 hidden md:block" priority />
           <motion.div
             variants={fadeIn}
             className="flex flex-col justify-evenly items-start z-10 md:mx-20 mx-0 "
