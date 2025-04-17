@@ -24,11 +24,11 @@ export default function middleware(request) {
   // Get the token from cookies
   const token = request.cookies.get('token');
   
-  // If it's not a public route and there's no token, redirect to login
+  // If it's not a public route and there's no token, redirect to home
   if (!isPublicRoute && !token) {
-    const loginUrl = new URL('/login', request.url);
-    loginUrl.searchParams.set('redirect', request.nextUrl.pathname);
-    return NextResponse.redirect(loginUrl);
+    const homeUrl = new URL('/', request.url);
+    homeUrl.searchParams.set('redirect', request.nextUrl.pathname);
+    return NextResponse.redirect(homeUrl);
   }
 
   return NextResponse.next();

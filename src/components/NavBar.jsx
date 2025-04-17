@@ -273,20 +273,24 @@ const NavBar = () => {
                       <div className="mt-6 flex flex-col items-center gap-4">
                         {!user ? (
                           <>
-                            <Link 
-                              href="/login" 
-                              className='w-full py-3 px-4 ring-1 text-base ring-[#365e65] rounded-full text-center hover:text-primary transition-colors'
-                              onClick={() => setIsOpen(false)}
+                            <button 
+                              onClick={() => {
+                                openSignIn();
+                                setIsOpen(false);
+                              }}
+                              className='w-full py-3 text-white px-4 ring-1 text-base ring-[#365e65] rounded-full text-center hover:text-primary transition-colors'
                             >
                               Sign In
-                            </Link>
-                            <Link 
-                              href="/get-started" 
+                            </button>
+                            <button 
+                              onClick={() => {
+                                openSignUp();
+                                setIsOpen(false);
+                              }}
                               className='w-full py-3 px-4 text-base bg-[#365e65] rounded-full text-white text-center hover:bg-[#365e65]/90 transition-colors'
-                              onClick={() => setIsOpen(false)}
                             >
                               Get Started
-                            </Link>
+                            </button>
                           </>
                         ) : (
                           <div className="flex flex-col items-center justify-center w-full gap-4">
