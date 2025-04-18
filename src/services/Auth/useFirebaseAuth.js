@@ -83,10 +83,19 @@ export default function useFirebaseAuth() {
     }
     const logOut = async () => {
         try {
-            const res = await signOut(auth);
+            // First sign out from Firebase
+            await signOut(auth);
+            
+            // Then clean up local storage and cookies
             removeToken();
             removeUser();
+            removeFcmToken();
+            removeSupportRoomId();
             localStorage.removeItem('token');
+            
+            // Force a full page refresh by using window.location
+            window.location.href = "/";
+            
             return { status: true };
         }
         catch (e) {

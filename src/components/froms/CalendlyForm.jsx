@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { postMethod } from '@/services/API/ApiMethod';
+import { toast } from 'react-toastify';
 
 const CalendlyForm = ({ onNext, onBack }) => {
   const [isMeetingScheduled, setIsMeetingScheduled] = useState(false);
+  const [meetingDetails, setMeetingDetails] = useState(null);
 
   useEffect(() => {
     // Load Calendly widget script
@@ -13,7 +16,18 @@ const CalendlyForm = ({ onNext, onBack }) => {
     // Add event listener for Calendly scheduling
     window.addEventListener('message', function(e) {
       if (e.data.event && e.data.event === 'calendly.event_scheduled') {
-        // When event is scheduled, enable continue button
+        // When event is scheduled, store the meeting details
+        console.log('Full Calendly event data:', e.data);
+        
+        // Extract the event data from the correct path
+        const eventData = e.data.payload;
+        console.log('Event data:', eventData);
+        const details = {
+          meetLink: eventData.event.uri,
+        };
+        
+        console.log('Extracted meeting details:', details);
+        setMeetingDetails(details);
         setIsMeetingScheduled(true);
       }
     });
@@ -23,11 +37,38 @@ const CalendlyForm = ({ onNext, onBack }) => {
       document.body.removeChild(script);
       window.removeEventListener('message', function(e) {
         if (e.data.event && e.data.event === 'calendly.event_scheduled') {
+          const details = {
+            meetLink: e.data.payload.event.uri,
+          };
+          setMeetingDetails(details);
           setIsMeetingScheduled(true);
         }
       });
     };
   }, []);
+
+  const handleContinue = async () => {
+    if (!meetingDetails) {
+      toast.error("Please schedule a meeting first");
+      return;
+    }
+
+    try {
+      // Create a new meeting using the new endpoint
+      console.log('Sending meeting details:', meetingDetails);
+      const meetingRes = await postMethod("/v1/meeting", {
+        meetLink: meetingDetails.meetLink,
+        type: "consultation"
+      });
+      console.log('Meeting response:', meetingRes);
+      if (meetingRes?.data) {
+        onNext({}, "checkout");
+      }
+    } catch (error) {
+      toast.error("Failed to save meeting details. Please try again.");
+      console.error("Error saving meeting details:", error);
+    }
+  };
 
   return (
     <div className="w-full p-4 sm:p-5 md:p-0 md:max-w-fit mx-auto">
@@ -60,7 +101,7 @@ const CalendlyForm = ({ onNext, onBack }) => {
                 ? 'bg-primary hover:bg-primary/90 cursor-pointer' 
                 : 'bg-gray-400 cursor-not-allowed'
             }`}
-            onClick={() => onNext({}, "checkout")}
+            onClick={handleContinue}
             disabled={!isMeetingScheduled}
           >
             Continue

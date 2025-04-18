@@ -17,6 +17,7 @@ export const getToken = () => {
 export const removeToken = () => cookies.remove('token');
 
 export const setUser = (user, expiry) => {
+  console.log('Setting User Cookie:', user);
   cookies.set('user', JSON.stringify(user), {
     expires: 7
   });
@@ -24,14 +25,17 @@ export const setUser = (user, expiry) => {
 
 export const getUser = () => {
   const cookie = cookies.get('user');
+  console.log('Getting User Cookie:', cookie);
   if (!cookie) {
     return null;
   }
   try{
-    return JSON.parse(cookie);
+    const parsedUser = JSON.parse(cookie);
+    console.log('Parsed User Cookie:', parsedUser);
+    return parsedUser;
   }
   catch(e){
-    console.log(e)
+    console.log('Error parsing user cookie:', e)
   }
 };
 
@@ -58,3 +62,7 @@ export const getUserType = () => {
 };
 
 export const removeUserType = () => cookies.remove('userType');
+
+export const removeFcmToken = () => cookies.remove('fcmToken');
+
+export const removeSupportRoomId = () => cookies.remove('supportRoomId');

@@ -58,7 +58,7 @@ const GLP1Section = () => {
                   viewport={{ once: true }}
                   className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 w-full md:w-[90%] leading-tight"
                 >
-                  How GLP-1 Drugs Work
+                  How GLP-1 Drugs Works
                 </motion.h3>
                 <motion.p 
                   initial={{ opacity: 0 }}

@@ -50,7 +50,7 @@ const CheckOutForm = ({ onNext }) => {
         };
 
         const payload = {
-            orderItems: [{ product: "670c155fda7d6e34119c8e8e", quantity: 1 }],
+            orderItems: [],
             deliveryAddress
         };
 
@@ -72,7 +72,7 @@ const CheckOutForm = ({ onNext }) => {
         <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto font-tt-hoves">
             <div className="w-full md:w-[500px]">
                 <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-                    <h1 className='text-2xl mb-6 text-primary text-center'>Please fill out your shipping details</h1>
+                    <h1 className='text-3xl font-semibold mb-6 text-zinc-800 text-center'>Please fill out your shipping details</h1>
 
                     <div>
                         <label>Address</label>

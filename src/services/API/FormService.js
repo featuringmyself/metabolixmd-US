@@ -56,9 +56,9 @@ export const FormService = {
       let imageResponse = null;
       if (imageFile) {
         imageResponse = await FormService.uploadProfilePicture(imageFile);
-        console.log(dataResponse);
         
       }
+      console.log(dataResponse);
       
       return {
         dataResponse,

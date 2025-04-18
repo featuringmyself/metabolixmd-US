@@ -48,9 +48,14 @@ const ProfileDetails = () => {
     }
   };
 
-  const handleLogout = () => {
-    logOut();
-    router.push("/");
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      window.location.href = "/";
+    } catch (error) {
+      console.error('Logout error:', error);
+      toast.error('Failed to logout. Please try again.');
+    }
   };
 
   useEffect(() => {

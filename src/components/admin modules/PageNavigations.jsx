@@ -1,9 +1,8 @@
-
-
 import { usePathname } from 'next/navigation';
 import { mainRoutes } from '@/constants/paths';
 import useFirebaseAuth from '@/services/Auth/useFirebaseAuth';
 import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
 
 
 const PageNavigations = () => {
@@ -12,10 +11,15 @@ const PageNavigations = () => {
     const { logOut } = useFirebaseAuth()
     const router = useRouter()
 
-    const handleLogout = () => {
-        logOut()
-        router.push("/login")
-      }
+    const handleLogout = async () => {
+        try {
+            await logOut();
+            window.location.href = "/";
+        } catch (error) {
+            console.error('Logout error:', error);
+            toast.error('Failed to logout. Please try again.');
+        }
+    }
 
     return (
         <>

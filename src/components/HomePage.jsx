@@ -6,6 +6,7 @@ import MeetExpertBackground from "./MeetExpertBackground";
 import CompareModule from "./CompareModule";
 import GLP1Section from "./GLP1Section";
 import TrustSection from "./TrustSection";
+import ReviewsSection from "./ReviewsSection";
 import PricingSection from "./PricingSection";
 import WeightLossCalculatorSection from "./WeightLossCalculatorSection";
 
@@ -390,6 +391,9 @@ const HomePage = () => {
 
         {/* Why Thousands Trust Us Section */}
         <TrustSection />
+
+        {/* Reviews Section */}
+        <ReviewsSection />
 
         {/* GLP-1 Information Section */}
         <GLP1Section />

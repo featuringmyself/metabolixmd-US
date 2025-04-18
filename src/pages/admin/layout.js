@@ -11,12 +11,17 @@ export default function AdminLayout({ children }) {
     const router = useRouter()
 
     useEffect(() => {
+        console.log('Admin Layout - User Details:', loggedinUserDetail);
+        console.log('Admin Layout - User Type:', loggedinUserDetail?.__t);
+        
         if (loggedinUserDetail) {
             if (loggedinUserDetail?.__t !== "Admin") {
+                console.log('Access Denied - Not an Admin');
                 router.push("/")
             }
         }
         else {
+            console.log('Access Denied - Not Logged In');
             router.push("/login")
         }
 
