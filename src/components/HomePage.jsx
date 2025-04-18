@@ -403,7 +403,7 @@ const HomePage = () => {
         <WeightLossCalculatorSection />
 
         {/* Pricing Section */}
-        <PricingSection />
+        {/* <PricingSection /> */}
 
         {/* FAQ Section */}
         <motion.section
