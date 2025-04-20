@@ -42,11 +42,24 @@ const LoadingFallback = () => (
 const MultiStepForm = ({ initialForm }) => {
   const { userId, isSignedIn } = useAuth();
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(!!isSignedIn);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeForm, setActiveForm] = useState(initialForm || "goalSelection");
   const [isClient, setIsClient] = useState(false);
-  const [loading, setLoading] = useState(false)
-  const [img, setImg] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [img, setImg] = useState("");
+
+  // Set isClient on mount
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Update authentication state after hydration
+  useEffect(() => {
+    if (isClient) {
+      setIsAuthenticated(!!isSignedIn);
+    }
+  }, [isClient, isSignedIn]);
+
   const [formData, setFormData] = useState({
     accomplish_with_body_program: "",
     height: { feet: 0, inch: 0 },
@@ -145,9 +158,6 @@ const MultiStepForm = ({ initialForm }) => {
   };
 
   useEffect(() => {
-    setIsClient(true);
-    setIsAuthenticated(!!isSignedIn);
-    
     // Update form state based on URL parameters when route changes
     const params = new URLSearchParams(window.location.search);
     const formParam = params.get('form');
@@ -198,6 +208,7 @@ const MultiStepForm = ({ initialForm }) => {
   const totalSteps = formOrder.length;
   const progressPercentage = (currentStep / totalSteps) * 100;
 
+  // Don't render anything during SSR
   if (!isClient) {
     return null;
   }
@@ -206,135 +217,137 @@ const MultiStepForm = ({ initialForm }) => {
   const renderActiveForm = () => {
     return (
       <Suspense fallback={<LoadingFallback />}>
-        {activeForm === "uploadPrescription" && (
-          <PrescriptionUpload onNext={(data, next) => handleNextForm(next, data)} />
-        )}
-        {activeForm === "goalSelection" && (
-          <GoalSelectionForm 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
-            isFirstForm={true}
-            initialData={formData.accomplish_with_body_program ? { accomplish_with_body_program: formData.accomplish_with_body_program } : undefined}
-          />
-        )}
-        {activeForm === "userInfo" && (
-          <UserInfoForm 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
-            initialData={formData.height && formData.weight ? { height: formData.height, weight: formData.weight } : undefined}
-          />
-        )}
-        {activeForm === "auth" && (
-          <AuthForm 
-            onNext={(data, next) => handleNextForm(next, data)}
-            
-          />
-        )}
-        {activeForm === "weightCalculation" && (
-          <WeightCalculation data={formData} onNext={(data, next) => handleNextForm(next, data)} />
-        )}
-        {activeForm === "basicsUserInfo" && (
-          <BasicsUserInfo 
-            onNext={(data, next) => handleNextForm(next, data)}
-            onBack={handlePrevForm}
-            initialData={formData.gender || formData.dob || formData.zipCode ? { gender: formData.gender, dob: formData.dob, zipCode: formData.zipCode } : undefined}
-          />
-        )}
-        {activeForm === "primaryCareConfirmation" && (
-          <PrimaryCareConfirmation 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
-            initialData={formData.seen_primary_care_provider !== undefined ? { seen_primary_care_provider: formData.seen_primary_care_provider } : undefined}
-          />
-        )}
-        {activeForm === "heartDisease" && (
-          <HeartDiseaseForm 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
-            initialData={formData.heart_conditions ? { heart_conditions: formData.heart_conditions } : undefined}
-          />
-        )}
-        {activeForm === "anyDisease" && (
-          <AnyDiseaseForm 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            initialData={formData.hormone_kidney_liver_condition ? { hormone_kidney_liver_condition: formData.hormone_kidney_liver_condition } : undefined}
-          />
-        )}
-        {activeForm === "type2Diabetes" && (
-          <Type2Diabetes 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
-            initialData={formData.type_2_diabetes ? { type_2_diabetes: formData.type_2_diabetes } : undefined}
-          />
-        )}
-        {activeForm === "diabeticRetinopathy" && (
-          <DiabeticRetinopathy 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            initialData={formData.diabetic ? { diabetic: formData.diabetic } : undefined}
-          />
-        )}
-        {activeForm === "anyDisease2" && (
-          <AnyDisease2Form 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            initialData={formData.additional_condition ? { additional_condition: formData.additional_condition } : undefined}
-          />
-        )}
-        {activeForm === "searchAndSelectAllergies" && (
-          <SearchAndSelectAllergies 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            initialData={formData.allergies ? { allergies: formData.allergies } : undefined}
-          />
-        )}
-        {activeForm === "glp1" && (
-          <GLP1 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            initialData={formData.allergy_GLP_1 !== undefined ? { allergy_GLP_1: formData.allergy_GLP_1 } : undefined}
-          />
-        )}
-        {activeForm === "anyMedication" && (
-          <AnyMedicationForm 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            initialData={formData.medications ? { medications: formData.medications } : undefined}
-            onBack={handlePrevForm}
-          />
-        )}
-        {activeForm === "ethnicity" && (
-          <EthnicityForm 
-            onNext={(data, next) => handleNextForm(next, data)} 
-            onBack={handlePrevForm}
-            initialData={formData.describe_yourself ? { describe_yourself: formData.describe_yourself } : undefined}
-          />
-        )}
-        {activeForm === "beforeWrapUp" && (
-          <BeforeWrapUp 
-            onNext={(data, next) => handleNextForm(next, data)}
-            initialData={formData}
-          />
-        )}
-        {activeForm === "uploadProfile" && (
-          <UploadProfile onSubmit={handleSubmit} img={img} setImg={setImg} loading={loading} onNext={(data, next) => handleNextForm(next, data)}/>
-        )}
-        {activeForm === "calendly" && (
-          <CalendlyForm onNext={(data, next) => handleNextForm(next, data)} onBack={handlePrevForm} />
-        )}
-        {activeForm === "licensedProvider" && (
-          <LicensedProvider onNext={(data, next) => handleNextForm(next, data)} />
-        )}
-        {activeForm === "checkout" && (
-          <CheckOutForm userdata={formData} onNext={(data, next) => handleNextForm(next, data)} />
-        )}
-        {activeForm === "success" && (
-          <SuccessPropt type="1" />
-        )}
-        {activeForm === "success2" && (
-          <SuccessPropt type="2" />
-        )}
-        {activeForm === "lessbmi" && (
-          <SuccessPropt type="3" />
-        )}
-        {activeForm === "stopProcess" && (
-          <SuccessPropt type="4" />
-        )}
+      {activeForm === "uploadPrescription" && (
+        <PrescriptionUpload onNext={(data, next) => handleNextForm(next, data)} />
+      )}
+      {activeForm === "goalSelection" && (
+        <GoalSelectionForm 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        onBack={handlePrevForm}
+        isFirstForm={true}
+        initialData={formData.accomplish_with_body_program ? { accomplish_with_body_program: formData.accomplish_with_body_program } : undefined}
+        />
+      )}
+      {activeForm === "userInfo" && (
+        <UserInfoForm 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        onBack={handlePrevForm}
+        initialData={formData.height && formData.weight ? { height: formData.height, weight: formData.weight } : undefined}
+        />
+      )}
+      {activeForm === "auth" && (
+        <AuthForm 
+        onNext={(data, next) => handleNextForm(next, data)}
+        />
+      )}
+      {activeForm === "weightCalculation" && (
+        <WeightCalculation data={formData} onNext={(data, next) => handleNextForm(next, data)} />
+      )}
+      {activeForm === "basicsUserInfo" && (
+        <BasicsUserInfo 
+        onNext={(data, next) => handleNextForm(next, data)}
+        onBack={handlePrevForm}
+        initialData={formData.gender || formData.dob || formData.zipCode ? { gender: formData.gender, dob: formData.dob, zipCode: formData.zipCode } : undefined}
+        />
+      )}
+      {activeForm === "primaryCareConfirmation" && (
+        <PrimaryCareConfirmation 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        onBack={handlePrevForm}
+        initialData={formData.seen_primary_care_provider !== undefined ? { seen_primary_care_provider: formData.seen_primary_care_provider } : undefined}
+        />
+      )}
+      {activeForm === "heartDisease" && (
+        <HeartDiseaseForm 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        onBack={handlePrevForm}
+        initialData={formData.heart_conditions ? { heart_conditions: formData.heart_conditions } : undefined}
+        />
+      )}
+      {activeForm === "anyDisease" && (
+        <AnyDiseaseForm 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        initialData={formData.hormone_kidney_liver_condition ? { hormone_kidney_liver_condition: formData.hormone_kidney_liver_condition } : undefined}
+        />
+      )}
+      {activeForm === "type2Diabetes" && (
+        <Type2Diabetes 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        onBack={handlePrevForm}
+        initialData={formData.type_2_diabetes ? { type_2_diabetes: formData.type_2_diabetes } : undefined}
+        />
+      )}
+      {activeForm === "diabeticRetinopathy" && (
+        <DiabeticRetinopathy 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        initialData={formData.diabetic ? { diabetic: formData.diabetic } : undefined}
+        />
+      )}
+      {activeForm === "anyDisease2" && (
+        <AnyDisease2Form 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        initialData={formData.additional_condition ? { additional_condition: formData.additional_condition } : undefined}
+        />
+      )}
+      {activeForm === "searchAndSelectAllergies" && (
+        <SearchAndSelectAllergies 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        initialData={formData.allergies ? { allergies: formData.allergies } : undefined}
+        />
+      )}
+      {activeForm === "glp1" && (
+        <GLP1 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        initialData={formData.allergy_GLP_1 !== undefined ? { allergy_GLP_1: formData.allergy_GLP_1 } : undefined}
+        />
+      )}
+      {activeForm === "anyMedication" && (
+        <AnyMedicationForm 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        initialData={formData.medications ? { medications: formData.medications } : undefined}
+        onBack={handlePrevForm}
+        />
+      )}
+      {activeForm === "ethnicity" && (
+        <EthnicityForm 
+        onNext={(data, next) => handleNextForm(next, data)} 
+        onBack={handlePrevForm}
+        initialData={formData.describe_yourself ? { describe_yourself: formData.describe_yourself } : undefined}
+        />
+      )}
+      {activeForm === "beforeWrapUp" && (
+        <BeforeWrapUp 
+        onNext={(data, next) => handleNextForm(next, data)}
+        initialData={formData}
+        />
+      )}
+      {activeForm === "uploadProfile" && (
+        <UploadProfile onSubmit={handleSubmit} img={img} setImg={setImg} loading={loading} onNext={(data, next) => handleNextForm(next, data)}/>
+      )}
+      {activeForm === "calendly" && (
+        <CalendlyForm onNext={(data, next) => handleNextForm(next, data)} onBack={handlePrevForm} />
+      )}
+      {activeForm === "licensedProvider" && (
+        <LicensedProvider onNext={(data, next) => router.push('/profile-details')} />
+      )}
+      {activeForm === "checkout" && (
+        <CheckOutForm 
+        userdata={formData} 
+        onNext={(data, next) => handleNextForm("licensedProvider", data)} 
+        />
+      )}
+      {activeForm === "success" && (
+        <SuccessPropt type="1" />
+      )}
+      {activeForm === "success2" && (
+        <SuccessPropt type="2" />
+      )}
+      {activeForm === "lessbmi" && (
+        <SuccessPropt type="3" />
+      )}
+      {activeForm === "stopProcess" && (
+        <SuccessPropt type="4" />
+      )}
       </Suspense>
     );
   };

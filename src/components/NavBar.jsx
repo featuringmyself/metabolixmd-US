@@ -11,10 +11,9 @@ import { useAuthModalContext } from '@/contexts/AuthModalContext'
 import { toast } from 'react-toastify'
 // Firebase authentication is used instead of Clerk
 
-
 const NavBar = () => {
-  const [user, setUser] = useState(getUser());
   const [isClient, setIsClient] = useState(false);
+  const [user, setUser] = useState(null); // Initialize as null instead of calling getUser()
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -25,6 +24,10 @@ const NavBar = () => {
   const [resourcesDropdown, setResourcesDropdown] = useState(false);
   const [profileDropdown, setProfileDropdown] = useState(false);
   const { openSignIn, openSignUp } = useAuthModalContext();
+
+  const getUserInitial = (name) => {
+    return name && typeof name === 'string' ? name.charAt(0).toUpperCase() : 'U';
+  };
 
   const handleLogout = async () => {
     try {
@@ -44,10 +47,13 @@ const NavBar = () => {
 
   useEffect(() => {
     setIsClient(true);
+    const currentUser = getUser();
+    setUser(currentUser);
     let token = getAuthToken()
-    setToken(token)
-    setUser(getUser())
+    setToken(token);
+  }, []);
 
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
@@ -103,8 +109,28 @@ const NavBar = () => {
     }
   }, [isOpen]);
 
+  // Don't render anything user-specific during SSR
   if (!isClient) {
-    return null;
+    return (
+      <div className='flex flex-col'>
+        <nav className={`fixed top-0 left-0 right-0 z-[100] bg-white/70 backdrop-blur-md border-b border-gray-200/20 transition-all duration-300`}>
+          <div className="max-w-[1920px] mx-auto px-4 md:px-8 py-4">
+            <div className="flex items-center justify-between relative">
+              <Link href="/" className="relative z-10">
+                <Image 
+                  src="/images/logo.webp" 
+                  alt="MetabolixMD Logo" 
+                  width={200} 
+                  height={50} 
+                  className="w-[150px] md:w-[200px] h-auto"
+                  priority
+                />
+              </Link>
+            </div>
+          </div>
+        </nav>
+      </div>
+    );
   }
 
   return (
@@ -301,9 +327,9 @@ const NavBar = () => {
                           <div className="flex flex-col items-center justify-center w-full gap-4">
                             <div className="flex items-center gap-2 text-primary font-medium">
                               <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-medium">
-                                {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                                {getUserInitial(user?.name)}
                               </div>
-                              <span>{user.name || 'User'}</span>
+                              <span>{user?.name || 'User'}</span>
                             </div>
                             <div className="flex flex-col w-full gap-2 mt-2">
                               <Link 
@@ -363,7 +389,7 @@ const NavBar = () => {
                     className="flex items-center gap-2 focus:outline-none"
                   >
                     <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-medium cursor-pointer">
-                      {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                      {getUserInitial(user?.name)}
                     </div>
                   </button>
                   

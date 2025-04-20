@@ -1,70 +1,80 @@
 import cookies from 'js-cookie';
 
+const isClient = typeof window !== 'undefined';
+
 export const setToken = (token, expiry) => {
+    if (!isClient) return;
     cookies.set('token', JSON.stringify({ value: token, expiry }), {
       expires: 7
     });
 };
 
 export const getToken = () => {
+  if (!isClient) return null;
   const cookie = cookies.get('token');
-  if (!cookie) {
-    return null;
-  }
-  return (cookie);
+  if (!cookie) return null;
+  return cookie;
 };
 
-export const removeToken = () => cookies.remove('token');
+export const removeToken = () => {
+  if (!isClient) return;
+  cookies.remove('token');
+};
 
 export const setUser = (user, expiry) => {
-  // console.log('Setting User Cookie:', user);
+  if (!isClient) return;
   cookies.set('user', JSON.stringify(user), {
-    expires: expiry || 7 // Default to 7 days if no expiry is provided
+    expires: expiry || 7
   });
 };
 
 export const getUser = () => {
-  const cookie = cookies.get('user');
-  // console.log('Getting User Cookie:', cookie);
-  if (!cookie) {
-    return null;
-  }
-  try{
-    const parsedUser = JSON.parse(cookie);
-    return parsedUser;
-  }
-  catch(e){
-    console.log('Error parsing user cookie:', e);
+  if (!isClient) return null;
+  try {
+    const cookie = cookies.get('user');
+    if (!cookie) return null;
+    return JSON.parse(cookie);
+  } catch(e) {
+    console.error('Error parsing user cookie:', e);
     return null;
   }
 };
 
-export const removeUser = () => cookies.remove('user');
+export const removeUser = () => {
+  if (!isClient) return;
+  cookies.remove('user');
+};
 
-
-export const setUserType = (user, expiry) => {
-  cookies.set('userType', JSON.stringify(user), {
-    expires: 7
+export const setUserType = (userType, expiry) => {
+  if (!isClient) return;
+  cookies.set('userType', JSON.stringify(userType), {
+    expires: expiry || 7
   });
 };
 
 export const getUserType = () => {
-  const cookie = cookies.get('userType');
-  if (!cookie) {
-    return null;
-  }
-  try{
+  if (!isClient) return null;
+  try {
+    const cookie = cookies.get('userType');
+    if (!cookie) return null;
     return JSON.parse(cookie);
-    console.log('Getting User Type Cookie:', cookie);
-    
-  }
-  catch(e){
-    console.log(e)
+  } catch(e) {
+    console.error('Error parsing userType cookie:', e);
+    return null;
   }
 };
 
-export const removeUserType = () => cookies.remove('userType');
+export const removeUserType = () => {
+  if (!isClient) return;
+  cookies.remove('userType');
+};
 
-export const removeFcmToken = () => cookies.remove('fcmToken');
+export const removeFcmToken = () => {
+  if (!isClient) return;
+  cookies.remove('fcmToken');
+};
 
-export const removeSupportRoomId = () => cookies.remove('supportRoomId');
+export const removeSupportRoomId = () => {
+  if (!isClient) return;
+  cookies.remove('supportRoomId');
+};

@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import useFirebaseAuth from "@/services/Auth/useFirebaseAuth";
 import { toast } from "react-toastify";
+import { setUser, setUserType } from "@/services/Auth/cookies";
 
 const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
   const router = useRouter();
@@ -38,6 +39,7 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
 
     try {
       let result;
+      let userType = 'User'; // Default user type
 
       if (mode === "signin") {
         result = await loginWithEmailAndPassword(email, password);
@@ -58,22 +60,18 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
           process.env.NEXT_PUBLIC_API_URL + "/v1/auth/onBoarding",
           requestOptions
         );
-        const res1 = await resp.json();
         
-        // Check if user type is available in the response
+        if (!resp.ok) {
+          throw new Error(`Server error: ${resp.status}`);
+        }
+        
+        const res1 = await resp.json();
         if (res1?.data?.__t) {
           userType = res1.data.__t;
-          console.log('FirebaseAuthForm - User Type from signup:', userType);
         }
       }
 
       if (result.status) {
-        // Import the setUser function
-        const { setUser } = await import("@/services/Auth/cookies");
-
-        // Get user type from the backend response
-        // let userType = "Admin"; // Default user type
-        
         // For signin, we need to make an additional API call to get user type
         if (mode === "signin") {
           try {
@@ -90,48 +88,45 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
               process.env.NEXT_PUBLIC_API_URL + "/v1/auth/me",
               requestOptions
             );
+            
+            if (!resp.ok) {
+              console.error("Server response not OK:", resp.status);
+              throw new Error("Failed to get user information");
+            }
+            
             const userData = await resp.json();
-            console.log('FirebaseAuthForm - User Data:', userData);
             if (userData?.data?.__t) {
               userType = userData.data.__t;
-              console.log('FirebaseAuthForm - User Type from signin:', userType);
-              
             }
           } catch (error) {
             console.error("Error fetching user type:", error);
+            // Don't throw here, continue with default user type
           }
         }
 
-        console.log('FirebaseAuthForm - Setting User Type:', userType);
-
         // Set user data in cookies
-        setUser({
+        const userData = {
           uid: result.user.uid,
           email: result.user.email,
           name: result.user.displayName || name || email.split("@")[0],
           __t: userType
-        });
+        };
         
-        // Also set the userType in a separate cookie to ensure it's properly stored
-        const { setUserType } = await import("@/services/Auth/cookies");
+        setUser(userData);
         setUserType(userType);
-
-        console.log('FirebaseAuthForm - User Data Set in Cookies:', {
-          uid: result.user.uid,
-          email: result.user.email,
-          name: result.user.displayName || name || email.split("@")[0],
-          __t: userType
-        });
 
         toast.success(
           `${mode === "signin" ? "Signed in" : "Account created"} successfully!`
         );
-        console.log("User ID:", result.user.uid);
+        
         window.dispatchEvent(new Event("auth-state-changed"));
         onNext({});
+      } else {
+        throw new Error(result.error || "Authentication failed");
       }
     } catch (error) {
       console.error("Authentication error:", error);
+      toast.error(error.message || "Authentication failed");
     } finally {
       setLoading(false);
     }
@@ -142,6 +137,7 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
 
     try {
       let result;
+      let userType;
 
       switch (provider) {
         case "google":
@@ -158,11 +154,6 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
       }
 
       if (result.status) {
-        // Import the setUser function
-        const { setUser } = await import("@/services/Auth/cookies");
-
-        // Get user type from the backend response
-        // For social sign-in, we need to make an API call to get user type
         try {
           const myHeaders = new Headers();
           myHeaders.append("Authorization", `Bearer ${result.token}`);
@@ -186,7 +177,6 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
           console.error("Error fetching user type for social auth:", error);
         }
 
-        // Set user data in cookies
         setUser({
           uid: result.user.uid,
           email: result.user.email,
@@ -194,8 +184,6 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
           __t: userType
         });
         
-        // Also set the userType in a separate cookie to ensure it's properly stored
-        const { setUserType } = await import("@/services/Auth/cookies");
         setUserType(userType);
 
         toast.success("Signed in successfully!");

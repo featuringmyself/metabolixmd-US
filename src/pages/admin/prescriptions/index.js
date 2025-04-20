@@ -15,9 +15,9 @@ const PrescriptionList = () => {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [status, setStatus] = useState("all");
-  const [totalPages, setTotalPages] = useState("1") // Track selected status
+  const [totalPages, setTotalPages] = useState("1");
   const router = useRouter();
-  const [usersPerPage, setUsersPerPage] = useState(10)
+  const [usersPerPage, setUsersPerPage] = useState(10);
   const { page = 1 } = router.query;
 
   useEffect(() => {
@@ -25,170 +25,194 @@ const PrescriptionList = () => {
       const newHeight = window.innerHeight * 0.75;
       setContainerHeight(newHeight);
     };
-
     updateHeight();
     window.addEventListener('resize', updateHeight);
-
     return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
-  const getOrderData = async (status, page,limit) => {
+  const getOrderData = async (status, page, limit) => {
     let url = `/prescription?page=${page}&limit=${limit}`;
     if (status !== "all") {
       url += `&status=${status}`;
     }
     const res = await getMethod(url);
     if (res?.data) {
-      setOrderData(res.data?.results);
-      setTotalPages(res.data?.totalPages)
+      setOrderData(res.data.results);
+      setTotalPages(res.data.totalPages);
     }
   };
 
   useEffect(() => {
-    getOrderData(status, page,usersPerPage);
-  }, [status, page,usersPerPage]);
+    getOrderData(status, page, usersPerPage);
+  }, [status, page, usersPerPage]);
 
   const handleApprove = async () => {
-    // Make API call for approval
-    let payload = {
-      status: "approved"
-    }
-    let res = await patchMethod(`/prescription/${selectedOrderId}`, payload);
+    const res = await patchMethod(`/prescription/${selectedOrderId}`, { status: "approved" });
     setIsApproveModalOpen(false);
-    getOrderData(status, page,usersPerPage);
+    getOrderData(status, page, usersPerPage);
   };
 
   const handleReject = async () => {
-
-    let payload = {
-      status: "rejected"
-    }
-    let res = await patchMethod(`/prescription/${selectedOrderId}`, payload);
+    const res = await patchMethod(`/prescription/${selectedOrderId}`, { status: "rejected" });
     setIsRejectModalOpen(false);
-    getOrderData(status, page,usersPerPage);
+    getOrderData(status, page, usersPerPage);
   };
+
   const handleTabChange = (newStatus) => {
     setStatus(newStatus);
     router.push(`/admin/prescriptions?page=1`);
   };
-  const handleSelect=(e)=>{
-    setUsersPerPage(Number(e.target.value))
+
+  const handleSelect = (e) => {
+    setUsersPerPage(Number(e.target.value));
     router.push(`/admin/prescriptions?page=1`);
-  }
+  };
+
   return (
     <AdminLayout>
-      <div>
+      <div className="min-h-full">
         <AdminNavBar title="Prescription Management" />
 
-
-        <section className='p-5 flex flex-col gap-2'>
-          {/* <div className='flex items-center justify-between gap-10'>
-            <input type="search" placeholder='Search order by id' className='bg-white outline-none px-3 py-2 rounded-md' />
-          </div> */}
-          <div className="tabs flex gap-4 ">
-            {["all", "approved", "rejected", "pending"].map((tab) => (
-              <button
-                key={tab}
-                className={`tab ${status === tab ? 'bg-white py-2 rounded-full px-5 font-semibold' : ' font-semibold'}`}
-                onClick={() => handleTabChange(tab)}
-              >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
-            ))}
+        <section className="p-6">
+          {/* Status Tabs */}
+          <div className="bg-white rounded-lg p-4 mb-6 shadow-sm">
+            <div className="flex gap-2 overflow-x-auto">
+              {["all", "approved", "rejected", "pending"].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => handleTabChange(tab)}
+                  className={`
+                    px-4 py-2 rounded-full text-sm font-medium transition-colors
+                    ${status === tab 
+                      ? 'bg-primary text-white shadow-sm' 
+                      : 'text-gray-600 hover:bg-gray-100'
+                    }
+                  `}
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div className="bg-white">
-
-            <div className="bg-[#F0F2F5] min-w-fit w-full">
-              <div className="items-center gap-3 grid grid-cols-presTable justify-between p-4 bg-liteOrange text-lg">
-                <span className="text-black font-medium font-sans text-sm">Id</span>
-                <span className="text-black font-medium font-sans text-sm">User Name</span>
-                <span className="text-black font-medium font-sans text-sm">Date Ordered</span>
-                <span className="text-black font-medium font-sans text-sm flex items-center justify-between gap-1">Status</span>
-                <span className="text-black font-medium font-sans text-sm"> Action</span>
-                <span className="text-black font-medium font-sans text-sm text-center"> Read </span>
-              </div>
+          {/* Prescriptions Table */}
+          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+            <div className="grid grid-cols-presTable gap-4 p-4 bg-gray-50 border-b border-gray-200">
+              <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">ID</div>
+              <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">User Info</div>
+              <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">Date</div>
+              <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">Status</div>
+              <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</div>
+              <div className="text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Image</div>
             </div>
 
-            <div className="flex flex-col bg-white min-w-fit w-full overflow-y-auto" style={{ maxHeight: containerHeight, overflowY: 'auto' }}>
-              {
-                orderData.map((order) => {
-                  return (
-
-                    <div key={order._id} className="grid gap-3 grid-cols-presTable justify-between border-b border-[#E9E9EC] items-center p-4">
-                      <span className=" font-sans font-semibold text-sm">{order._id}</span>
-                      <div className="flex flex-row items-center gap-2">
-                        <div className="flex flex-col">
-                          <p className="text-sm font-sans font-medium">{order.user.name ? order.user.name : "NA"}</p>
-                          <p className="text-sm font-normal font-sans text-zinc-500">{order.user?.email}</p>
-                        </div>
-                      </div>
-                      <span className=" font-sans font-semibold text-sm">{new Date(order.createdAt).toLocaleString("en-US", { month: "short", day: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: true })}</span>
-
-                      <div
-                        className={`py-1 px-3 justify-center w-full rounded-md border font-sans font-semibold text-sm flex flex-row capitalize items-center gap-2
-    ${order.status === "approved"
-                            ? "text-[#2BAB4B] border-[#2BAB4B]"
-                            : order.status === "rejected"
-                              ? "text-red-500 border-red-500"
-                              : "text-yellow-400 border-yellow-400"
-                          }`}
-                      >
-                        {order.status}
-                      </div>
-
-                      {
-                        order.status == "pending" ?
-                          <span className=" font-sans font-semibold text-sm flex items-center gap-2 ">
-                            {/* approve button */}
-                            <p onClick={() => {
-                              setSelectedOrderId(order._id);
-                              setIsApproveModalOpen(true);
-                            }} className='cursor-pointer text-green-400'>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></svg>
-                            </p>
-                            {/* reject button */}
-                            <p onClick={() => {
-                              setSelectedOrderId(order._id);
-                              setIsRejectModalOpen(true);
-                            }} className='cursor-pointer text-red-400'>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="m9 9 6 6" /></svg>
-                            </p>
-                          </span>
-                          :
-                          <span className=" text-center ">
-                            -
-                          </span>
+            <div className="divide-y divide-gray-200" style={{ maxHeight: containerHeight, overflowY: 'auto' }}>
+              {orderData.map((order) => (
+                <div key={order._id} className="grid grid-cols-presTable gap-4 p-4 items-center hover:bg-gray-50 transition-colors">
+                  <div className="text-sm font-medium text-gray-900">{order._id}</div>
+                  
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium text-gray-900">{order.user.name || "NA"}</span>
+                    <span className="text-sm text-gray-500">{order.user?.email}</span>
+                  </div>
+                  
+                  <div className="text-sm text-gray-500">
+                    {new Date(order.createdAt).toLocaleString("en-US", {
+                      month: "short",
+                      day: "2-digit",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: true
+                    })}
+                  </div>
+                  
+                  <div>
+                    <span className={`
+                      inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                      ${order.status === "approved"
+                        ? "bg-green-100 text-green-800"
+                        : order.status === "rejected"
+                        ? "bg-red-100 text-red-800"
+                        : "bg-yellow-100 text-yellow-800"
                       }
-                      <span onClick={() => {
-                        setSelectedImage(order.image?.url);
-                        setIsImageModalOpen(true);
-                      }} className=" font-sans font-semibold text-center ">
-                        ...
-                      </span>
-                    </div>
-                  )
-
-                })
-              }
-
+                    `}>
+                      {order.status}
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    {order.status === "pending" && (
+                      <>
+                        <button
+                          onClick={() => {
+                            setSelectedOrderId(order._id);
+                            setIsApproveModalOpen(true);
+                          }}
+                          className="p-1.5 text-green-600 hover:bg-green-50 rounded-full transition-colors"
+                          aria-label="Approve"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedOrderId(order._id);
+                            setIsRejectModalOpen(true);
+                          }}
+                          className="p-1.5 text-red-600 hover:bg-red-50 rounded-full transition-colors"
+                          aria-label="Reject"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </>
+                    )}
+                  </div>
+                  
+                  <div className="flex justify-center">
+                    {order.image?.url ? (
+                      <button
+                        onClick={() => {
+                          setSelectedImage(order.image.url);
+                          setIsImageModalOpen(true);
+                        }}
+                        className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                        aria-label="View Image"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                    ) : (
+                      <span className="text-gray-400">—</span>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className='flex justify-between items-center bg-transparent'>
-            <div className="flex items-center gap-2">
-              <label htmlFor="usersPerPage" className="text-sm font-medium">Users per page:</label>
+          {/* Pagination */}
+          <div className="mt-6 bg-white rounded-lg p-4 shadow-sm flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <label htmlFor="usersPerPage" className="text-sm text-gray-600">
+                Items per page:
+              </label>
               <select
                 id="usersPerPage"
-                className="bg-white px-2 py-1 rounded-md"
                 value={usersPerPage}
                 onChange={handleSelect}
+                className="rounded-md border-gray-300 text-sm focus:border-primary focus:ring focus:ring-primary/20"
               >
                 {[10, 15, 20, 25, 30].map((count) => (
                   <option key={count} value={count}>{count}</option>
                 ))}
               </select>
             </div>
+            
             {totalPages && (
               <Pagination
                 currentPage={parseInt(page)}
@@ -197,53 +221,98 @@ const PrescriptionList = () => {
               />
             )}
           </div>
-
         </section>
 
-        {/* Approve Modal */}
+        {/* Modals */}
         {isApproveModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-5 rounded-md">
-              <p>Are you sure you want to accept this prescription?</p>
-              <div className="flex justify-end gap-3 mt-4">
-                <button className="bg-green-500 text-white px-4 py-2 rounded-md" onClick={handleApprove} aria-label='Yes Button'>
-                  Yes
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
+            <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4 shadow-xl">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Confirm Approval
+              </h3>
+              <p className="text-gray-500 mb-6">
+                Are you sure you want to approve this prescription?
+              </p>
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={() => setIsApproveModalOpen(false)}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                >
+                  Cancel
                 </button>
-                <button className="bg-gray-300 px-4 py-2 rounded-md" onClick={() => setIsApproveModalOpen(false)} aria-label='Yes Button'>
-                  No
+                <button
+                  onClick={handleApprove}
+                  className="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                >
+                  Approve
                 </button>
               </div>
             </div>
           </div>
         )}
 
-        {/* Reject Modal */}
         {isRejectModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-5 rounded-md">
-              <p>Are you sure you want to reject this prescription?</p>
-              <div className="flex justify-end gap-3 mt-4">
-                <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={handleReject} aria-label='Yes Button'>
-                  Yes
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
+            <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4 shadow-xl">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Confirm Rejection
+              </h3>
+              <p className="text-gray-500 mb-6">
+                Are you sure you want to reject this prescription?
+              </p>
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={() => setIsRejectModalOpen(false)}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                >
+                  Cancel
                 </button>
-                <button className="bg-gray-300 px-4 py-2 rounded-md" onClick={() => setIsRejectModalOpen(false)} aria-label='No Button'>
-                  No
+                <button
+                  onClick={handleReject}
+                  className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                >
+                  Reject
                 </button>
               </div>
             </div>
           </div>
         )}
 
-        {/* Image Modal */}
         {isImageModalOpen && (
-          <div className="fixed  inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white min-w-fit p-5 rounded-md">
-              <img src={selectedImage} alt="Prescription" className="max-w-full max-h-96" />
-              <div className="flex gap-5 justify-end mt-4">
-                <a href={selectedImage} target='_blank' className="bg-green-300 px-4 py-2 rounded-md" download>
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
+            <div className="bg-white rounded-lg p-6 max-w-3xl w-full mx-4 shadow-xl">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Prescription Image
+                </h3>
+                <button
+                  onClick={() => setIsImageModalOpen(false)}
+                  className="text-gray-400 hover:text-gray-500"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <div className="relative">
+                <img
+                  src={selectedImage}
+                  alt="Prescription"
+                  className="w-full h-auto max-h-[70vh] object-contain rounded-lg"
+                />
+              </div>
+              <div className="flex justify-end gap-3 mt-4">
+                <a
+                  href={selectedImage}
+                  download
+                  className="px-4 py-2 text-sm font-medium text-primary bg-primary/10 rounded-lg hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                >
                   Download
                 </a>
-                <button className="bg-gray-300 px-4 py-2 rounded-md" onClick={() => setIsImageModalOpen(false)} aria-label='Close Button'>
+                <button
+                  onClick={() => setIsImageModalOpen(false)}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                >
                   Close
                 </button>
               </div>

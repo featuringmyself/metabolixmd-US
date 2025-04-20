@@ -1,135 +1,120 @@
 import React from "react";
 
-export default function Pagination({ currentPage, totalPages, onPageChange }) {
- 
-  if (totalPages <= 1) return null;
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const pageNumbers = [];
+  const maxVisible = 5; // Maximum number of visible page numbers
 
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
+  // Calculate range of visible page numbers
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisible - 1);
 
-    // Previous Button (only shows if not on the first page)
-    if (currentPage > 1) {
-      pageNumbers.push(
-        <button
-          key="prev"
-          className="hover:bg-gray-200 p-2 px-4 bg-gray-300 text-black rounded-l"
-          onClick={() => onPageChange(currentPage - 1)}
-          aria-label="Previous"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
-      );
-    }
+  // Adjust if we're near the end
+  if (endPage - startPage + 1 < maxVisible) {
+    startPage = Math.max(1, endPage - maxVisible + 1);
+  }
 
-    // First page
-    pageNumbers.push(
-      <button
-        key={1}
-        className={`p-2 px-4 border ${
-          currentPage === 1
-            ? "bg-blue-500 text-white font-semibold"
-            : "hover:bg-gray-200 text-black"
-        }`}
-        onClick={() => onPageChange(1)}
-        aria-label="1"
-      >
-        1
-      </button>
-    );
-
-    // Ellipsis if needed
-    if (currentPage > 3) {
-      pageNumbers.push(
-        <span key="ellipsis1" className="p-2 px-4">…</span>
-      );
-    }
-
-    // Range of pages around the current page
-    const startPage = Math.max(2, currentPage - 1);
-    const endPage = Math.min(totalPages - 1, currentPage + 1);
-
-    for (let i = startPage; i <= endPage; i++) {
-      pageNumbers.push(
-        <button
-          key={i}
-          className={`p-2 px-4 border ${
-            currentPage === i
-              ? "bg-blue-500 text-white font-semibold"
-              : "hover:bg-gray-200 text-black"
-          }`}
-          onClick={() => onPageChange(i)}
-        >
-          {i}
-        </button>
-      );
-    }
-
-    // Ellipsis if needed before the last page
-    if (currentPage < totalPages - 2) {
-      pageNumbers.push(
-        <span key="ellipsis2" className="p-2 px-4">…</span>
-      );
-    }
-
-    // Last page
-    pageNumbers.push(
-      <button
-        key={totalPages}
-        className={`p-2 px-4 border ${
-          currentPage === totalPages
-            ? "bg-blue-500 text-white font-semibold"
-            : "hover:bg-gray-200 text-black"
-        }`}
-        onClick={() => onPageChange(totalPages)}
-      >
-        {totalPages}
-      </button>
-    );
-
-    // Next Button (only shows if not on the last page)
-    if (currentPage < totalPages) {
-      pageNumbers.push(
-        <button
-          key="next"
-          className="hover:bg-gray-200 p-2 px-4 bg-gray-300 text-black rounded-r"
-          onClick={() => onPageChange(currentPage + 1)}
-          aria-label="Next"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </button>
-      );
-    }
-
-    return pageNumbers;
-  };
+  for (let i = startPage; i <= endPage; i++) {
+    pageNumbers.push(i);
+  }
 
   return (
-    <div className="pagination flex justify-center items-center space-x-1 bg-white p-2 rounded border">
-      {renderPageNumbers()}
-    </div>
+    <nav className="flex items-center gap-2" aria-label="Pagination">
+      {/* Previous button */}
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className={`
+          p-2 rounded-lg transition-colors
+          ${currentPage === 1
+            ? 'text-gray-300 cursor-not-allowed'
+            : 'text-gray-600 hover:bg-gray-100'
+          }
+        `}
+        aria-label="Previous page"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      {/* First page */}
+      {startPage > 1 && (
+        <>
+          <button
+            onClick={() => onPageChange(1)}
+            className={`
+              px-3 py-1 rounded-lg text-sm transition-colors
+              ${currentPage === 1
+                ? 'bg-primary text-white'
+                : 'text-gray-600 hover:bg-gray-100'
+              }
+            `}
+          >
+            1
+          </button>
+          {startPage > 2 && (
+            <span className="text-gray-400">...</span>
+          )}
+        </>
+      )}
+
+      {/* Page numbers */}
+      {pageNumbers.map((number) => (
+        <button
+          key={number}
+          onClick={() => onPageChange(number)}
+          className={`
+            px-3 py-1 rounded-lg text-sm font-medium transition-colors
+            ${currentPage === number
+              ? 'bg-primary text-white shadow-sm'
+              : 'text-gray-600 hover:bg-gray-100'
+            }
+          `}
+        >
+          {number}
+        </button>
+      ))}
+
+      {/* Last page */}
+      {endPage < totalPages && (
+        <>
+          {endPage < totalPages - 1 && (
+            <span className="text-gray-400">...</span>
+          )}
+          <button
+            onClick={() => onPageChange(totalPages)}
+            className={`
+              px-3 py-1 rounded-lg text-sm transition-colors
+              ${currentPage === totalPages
+                ? 'bg-primary text-white'
+                : 'text-gray-600 hover:bg-gray-100'
+              }
+            `}
+          >
+            {totalPages}
+          </button>
+        </>
+      )}
+
+      {/* Next button */}
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className={`
+          p-2 rounded-lg transition-colors
+          ${currentPage === totalPages
+            ? 'text-gray-300 cursor-not-allowed'
+            : 'text-gray-600 hover:bg-gray-100'
+          }
+        `}
+        aria-label="Next page"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </nav>
   );
-}
+};
+
+export default Pagination;
