@@ -60,6 +60,11 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
         );
         const res1 = await resp.json();
         
+        // Check if user type is available in the response
+        if (res1?.data?.__t) {
+          userType = res1.data.__t;
+          console.log('FirebaseAuthForm - User Type from signup:', userType);
+        }
       }
 
       if (result.status) {
@@ -67,14 +72,10 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
         const { setUser } = await import("@/services/Auth/cookies");
 
         // Get user type from the backend response
-        let userType = "User"; // Default user type
+        // let userType = "Admin"; // Default user type
         
-        // For signup, we have res1 from the onBoarding call
-        if (mode === "signup" && res1?.data?.__t) {
-          userType = res1.data.__t;
-        }
         // For signin, we need to make an additional API call to get user type
-        else if (mode === "signin") {
+        if (mode === "signin") {
           try {
             const myHeaders = new Headers();
             myHeaders.append("Authorization", `Bearer ${result.token}`);
@@ -93,6 +94,8 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
             console.log('FirebaseAuthForm - User Data:', userData);
             if (userData?.data?.__t) {
               userType = userData.data.__t;
+              console.log('FirebaseAuthForm - User Type from signin:', userType);
+              
             }
           } catch (error) {
             console.error("Error fetching user type:", error);
@@ -108,6 +111,10 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
           name: result.user.displayName || name || email.split("@")[0],
           __t: userType
         });
+        
+        // Also set the userType in a separate cookie to ensure it's properly stored
+        const { setUserType } = await import("@/services/Auth/cookies");
+        setUserType(userType);
 
         console.log('FirebaseAuthForm - User Data Set in Cookies:', {
           uid: result.user.uid,
@@ -155,9 +162,28 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
         const { setUser } = await import("@/services/Auth/cookies");
 
         // Get user type from the backend response
-        let userType = "User"; // Default user type
-        if (res1?.data?.__t) {
-          userType = res1.data.__t;
+        // For social sign-in, we need to make an API call to get user type
+        try {
+          const myHeaders = new Headers();
+          myHeaders.append("Authorization", `Bearer ${result.token}`);
+          
+          const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+          };
+
+          const resp = await fetch(
+            process.env.NEXT_PUBLIC_API_URL + "/v1/auth/me",
+            requestOptions
+          );
+          const userData = await resp.json();
+          if (userData?.data?.__t) {
+            userType = userData.data.__t;
+            console.log('FirebaseAuthForm - Social Auth User Type:', userType);
+          }
+        } catch (error) {
+          console.error("Error fetching user type for social auth:", error);
         }
 
         // Set user data in cookies
@@ -167,6 +193,10 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
           name: result.user.displayName || result.user.email.split("@")[0],
           __t: userType
         });
+        
+        // Also set the userType in a separate cookie to ensure it's properly stored
+        const { setUserType } = await import("@/services/Auth/cookies");
+        setUserType(userType);
 
         toast.success("Signed in successfully!");
         console.log("User ID:", result.user.uid);
@@ -373,7 +403,7 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <rect width="189" height="40" rx="20" fill="#F2F2F2" />
-              <g clip-path="url(#clip0_760_7196)">
+              <g clipPath="url(#clip0_760_7196)">
                 <path
                   d="M31.6 20.2273C31.6 19.5182 31.5364 18.8364 31.4182 18.1818H22V22.05H27.3818C27.15 23.3 26.4455 24.3591 25.3864 25.0682V27.5773H28.6182C30.5091 25.8364 31.6 23.2727 31.6 20.2273V20.2273Z"
                   fill="#4285F4"

@@ -13,7 +13,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => {
           {question}
         </span>
         <span 
-          className={`transition-transform duration-300 text-xl ring-1 ring-[#fc7823] rounded-full h-8 w-4 flex items-center justify-center ${isOpen ? 'rotate-45 bg-[#fc7823] text-white' : 'text-[#fc7823]'}`}
+          className={`transition-transform duration-300 text-xl ring-1 ring-[#fc7823] rounded-full h-5 w-5 flex items-center justify-center ${isOpen ? 'rotate-45 bg-[#fc7823] text-white' : 'text-[#fc7823]'}`}
         >
           +
         </span>

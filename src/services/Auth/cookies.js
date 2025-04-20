@@ -17,25 +17,25 @@ export const getToken = () => {
 export const removeToken = () => cookies.remove('token');
 
 export const setUser = (user, expiry) => {
-  console.log('Setting User Cookie:', user);
+  // console.log('Setting User Cookie:', user);
   cookies.set('user', JSON.stringify(user), {
-    expires: 7
+    expires: expiry || 7 // Default to 7 days if no expiry is provided
   });
 };
 
 export const getUser = () => {
   const cookie = cookies.get('user');
-  console.log('Getting User Cookie:', cookie);
+  // console.log('Getting User Cookie:', cookie);
   if (!cookie) {
     return null;
   }
   try{
     const parsedUser = JSON.parse(cookie);
-    console.log('Parsed User Cookie:', parsedUser);
     return parsedUser;
   }
   catch(e){
-    console.log('Error parsing user cookie:', e)
+    console.log('Error parsing user cookie:', e);
+    return null;
   }
 };
 
@@ -55,6 +55,8 @@ export const getUserType = () => {
   }
   try{
     return JSON.parse(cookie);
+    console.log('Getting User Type Cookie:', cookie);
+    
   }
   catch(e){
     console.log(e)
