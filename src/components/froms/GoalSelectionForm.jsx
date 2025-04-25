@@ -88,7 +88,7 @@ const GoalSelectionForm = ({ onNext, onBack, isFirstForm = true, initialData }) 
               >
                 <input
                   type="checkbox"
-                  className="form-checkbox min-h-[20px] min-w-[40px] text-green-600 accent-[#6d8a84] rounded-full"
+                  className="form-checkbox min-h-[20px] min-w-[40px] text-green-600 accent-[#6d8a84] "
                   checked={selectedGoals.includes(goal)}
                   onChange={() => handleCheckboxChange(goal)}
                 />

@@ -33,17 +33,50 @@ const ProfileDetails = () => {
       return;
     }
 
-    getOrderDetails();
-    getPresDetails();
-  }, []);
+    // Handle payment status messages
+    const { payment, session_id } = router.query;
+    if (payment === 'success' && session_id) {
+      console.log('Payment successful with session:', session_id);
+      // Add small delay to allow webhook to process
+      setTimeout(() => {
+        getOrderDetails();
+        toast.success('Payment completed successfully!');
+      }, 2000);
+      router.replace('/profile-details', undefined, { shallow: true });
+    } else if (payment === 'cancelled') {
+      toast.info('Payment was cancelled');
+      router.replace('/profile-details', undefined, { shallow: true });
+    } else if (payment) {
+      toast.error('An unexpected error occurred with the payment');
+      router.replace('/profile-details', undefined, { shallow: true });
+    } else {
+      // Initial load - get orders
+      getOrderDetails();
+      getPresDetails();
+    }
+  }, [router.query]);
 
   const getOrderDetails = async () => {
     try {
+      console.log('Fetching orders...');
       const res = await getMethod("/v1/order/user");
-      if (res) {
-        setUserOrders(res.data);
+      console.log('Orders API response:', res);
+      
+      if (res?.data) {
+        // Process orders to ensure payment information is properly mapped
+        const processedOrders = res.data.map(order => ({
+          ...order,
+          paymentStatus: order.paymentStatus || 'pending',
+          paymentDate: order.paymentDate || null
+        }));
+        setUserOrders(processedOrders);
+        console.log('Processed orders:', processedOrders);
+      } else {
+        console.log('No orders found in response');
+        setUserOrders([]);
       }
     } catch (e) {
+      console.error('Error fetching orders:', e);
       toast.error(e.message);
     }
   };
@@ -168,27 +201,33 @@ const ProfileDetails = () => {
           >
             <div className="flex flex-col md:flex-row md:items-center md:space-x-8">
               <motion.div 
-                className="relative group cursor-pointer"
+                className="relative group cursor-pointer mx-auto md:mx-0"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <motion.div 
-                  className="w-32 h-32 rounded-full bg-gradient-to-br from-primary via-primary/90 to-primary/80 flex items-center justify-center text-4xl font-semibold text-white shadow-lg"
-                  variants={shimmer}
-                  initial="hidden"
-                  animate="animate"
-                  style={{
-                    backgroundSize: "200% 100%",
-                    backgroundImage: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)"
+                  className="w-36 h-36 rounded-full bg-gradient-to-br from-primary via-primary/90 to-primary/80 flex items-center justify-center text-5xl font-semibold text-white shadow-xl ring-4 ring-white"
+                  animate={{
+                    boxShadow: ["0px 0px 20px rgba(0,0,0,0.1)", "0px 0px 30px rgba(0,0,0,0.2)"],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "reverse"
                   }}
                 >
                   {getUserInitial(user?.name)}
                 </motion.div>
                 <motion.div 
-                  className="absolute -inset-2 rounded-full bg-primary/10 z-0"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileHover={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2 }}
+                  className="absolute -inset-4 rounded-full bg-primary/5 z-0"
+                  animate={{
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 />
               </motion.div>
               <div className="mt-6 md:mt-0">
@@ -245,27 +284,51 @@ const ProfileDetails = () => {
                   >
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                       <div>
-                        <p className="text-lg font-medium text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                        <p className="text-xs font-medium text-gray-900 mb-2 group-hover:text-primary transition-colors">
                           Order ID: {order._id}
                         </p>
-                        <p className="text-gray-600">
-                          Status: <span className="font-medium capitalize">{order.status}</span>
-                        </p>
+                        <div className="space-y-1">
+                          <p className="text-gray-600">
+                            Status: <span className="font-medium capitalize">{order.status}</span>
+                          </p>
+                          <p className="text-gray-600">
+                            Payment: {" "}
+                            <span className={`font-medium capitalize ${
+                              order.paymentStatus === "paid" ? "text-green-600" : 
+                              order.paymentStatus === "failed" ? "text-red-600" : 
+                              "text-yellow-600"
+                            }`}>
+                              {order.paymentStatus || "pending"}
+                            </span>
+                            {order.paymentDate && (
+                              <span className="text-xs text-gray-500 ml-2">
+                                ({new Date(order.paymentDate).toLocaleDateString()})
+                              </span>
+                            )}
+                          </p>
+                        </div>
                       </div>
                       <div className="mt-4 md:mt-0">
-                        <motion.button
-                          onClick={() => onSubmit(order._id)}
-                          disabled={loading[order._id]}
-                          className="inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium text-white bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          {loading[order._id] ? (
-                            <ClipLoader size={20} color="#ffffff" />
-                          ) : (
-                            "Pay Now"
-                          )}
-                        </motion.button>
+                        {order.orderItems && order.orderItems.length > 0 && order.paymentStatus !== "paid" && (
+                          <motion.button
+                            onClick={() => onSubmit(order._id)}
+                            disabled={loading[order._id]}
+                            className="inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium text-white bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                          >
+                            {loading[order._id] ? (
+                              <ClipLoader size={20} color="#ffffff" />
+                            ) : (
+                              "Pay Now"
+                            )}
+                          </motion.button>
+                        )}
+                        {(!order.orderItems || order.orderItems.length === 0) && (
+                          <span className="text-sm text-gray-500 italic">
+                            Awaiting medication assignment
+                          </span>
+                        )}
                       </div>
                     </div>
                   </motion.div>
@@ -345,11 +408,6 @@ const ProfileDetails = () => {
           </motion.div>
         </div>
       </motion.div>
-      <ProfileCheckOutForm
-        isOpen={isOpencheckout}
-        setIsOpen={setIsOpencheckout}
-        selectedPres={selectedPres}
-      />
       <Footer />
     </>
   );

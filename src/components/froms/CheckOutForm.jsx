@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { postMethod } from '@/services/API/ApiMethod';
 import { useRouter } from 'next/router';
 import { ClipLoader } from 'react-spinners';
+import { auth } from '@/services/Auth/firebaseConfigue';
 
 const CheckOutForm = ({ onNext }) => {
     const wrapperRef = useRef(null);
@@ -49,22 +50,40 @@ const CheckOutForm = ({ onNext }) => {
             }
         };
 
-        const payload = {
-            orderItems: [],
+        // Pass phone data to parent component through onNext
+        const formData = {
+            countryCode: data.countryCode,
+            phoneNumber: data.phoneNumber,
             deliveryAddress
         };
 
         try {
             setLoading(true);
-            let res = await postMethod("/v1/order", payload);
+            // Get the current user's token
+            const token = await auth.currentUser?.getIdToken();
+            if (!token) {
+                toast.error("Authentication required. Please sign in again.");
+                return;
+            }
+            
+            let res = await postMethod("/v1/order", {
+                orderItems: [], // Empty array - products will be added by admin later
+                deliveryAddress,
+                phone: `${data.countryCode}${data.phoneNumber}` // Send combined phone number
+            });
             setLoading(false);
-            toast.success(res.message);
-            if (res) {
-                onNext({}, "success2")
+            
+            if (res.status) {
+                toast.success("Order created successfully! Our team will review and assign your medication.");
+                onNext(formData, "success2");
             }
         } catch (err) {
             setLoading(false);
-            toast.error(err.message);
+            if (err.response?.status === 404 && err.response?.data?.message?.includes("User doesn't exist")) {
+                toast.error("Please complete your profile setup first");
+            } else {
+                toast.error(err.message || "An error occurred during checkout");
+            }
         }
     };
 
@@ -73,6 +92,39 @@ const CheckOutForm = ({ onNext }) => {
             <div className="w-full md:w-[500px]">
                 <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                     <h1 className='text-3xl font-semibold mb-6 text-zinc-800 text-center'>Please fill out your shipping details</h1>
+
+                    <div className="flex gap-2">
+                        <div className="w-1/4">
+                            <label>Country Code</label>
+                            <input
+                                placeholder="+1"
+                                {...register('countryCode', { 
+                                    required: true,
+                                    pattern: {
+                                        value: /^\+\d{1,4}$/,
+                                        message: "Please enter a valid country code (e.g. +1)"
+                                    }
+                                })}
+                                className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            />
+                            {errors.countryCode && <p className="text-red-500 text-xs">Valid country code required</p>}
+                        </div>
+                        <div className="w-3/4">
+                            <label>Phone Number</label>
+                            <input
+                                placeholder="Enter your phone number"
+                                {...register('phoneNumber', { 
+                                    required: true,
+                                    pattern: {
+                                        value: /^[0-9]{10}$/,
+                                        message: "Please enter a valid 10-digit phone number"
+                                    }
+                                })}
+                                className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            />
+                            {errors.phoneNumber && <p className="text-red-500 text-xs">10-digit phone number required</p>}
+                        </div>
+                    </div>
 
                     <div>
                         <label>Address</label>

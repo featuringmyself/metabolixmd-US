@@ -82,7 +82,7 @@ const CalendlyForm = ({ onNext, onBack }) => {
         
         <div 
           className="calendly-inline-widget bg-white rounded-xl p-4" 
-          data-url="https://calendly.com/ashleydonaldson-metabolixmd/new-weight-loss-consult?primary_color=365d56" 
+          data-url="https://calendly.com/ashleydonaldson-metabolixmd/weight-loss-follow-up?primary_color=365d56" 
           style={{ minWidth: '320px', height: '700px' }}
         />
 

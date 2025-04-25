@@ -1,4 +1,3 @@
-
 import { auth } from "../Auth/firebaseConfigue"
 import { setToken } from "../Auth/cookies";
 import { getAuthToken } from "./apiHelper";
@@ -48,41 +47,58 @@ export async function tokenValidator() {
 }
 
 export async function getMethod(url, payload) {
-    const token = await tokenValidator()
+    try {
+        const token = await tokenValidator();
+        if (!token) {
+            console.error('No valid token found for API request');
+            return null;
+        }
 
-    
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-    myHeaders.append("timezone", tz);
-    var requestOptions;
-    if (payload) {
-        myHeaders.append("Content-Type", "application/json");
-        requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow',
-            body: JSON.stringify(payload)
-        };
-    }
-    else {
-        requestOptions = {
+        console.log(`Making GET request to ${url}`);
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${token}`);
+        myHeaders.append("timezone", tz);
+        
+        var requestOptions = {
             method: 'GET',
             headers: myHeaders,
             redirect: 'follow'
         };
-    }
 
-    if (token) {
-        try {
-            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + url, requestOptions)
-            // console.log(response)
-            const data = await response.json()
-            return data
+        if (payload) {
+            myHeaders.append("Content-Type", "application/json");
+            requestOptions.body = JSON.stringify(payload);
+        }
 
+        const response = await fetch(process.env.NEXT_PUBLIC_API_URL + url, requestOptions);
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error('API request failed:', {
+                url,
+                status: response.status,
+                data
+            });
+            throw new Error(data.message || 'Request failed');
         }
-        catch (e) {
-            return e.message
+
+        if (url.includes('/order')) {
+            console.log('Order data received:', {
+                count: Array.isArray(data.data) ? data.data.length : 'single order',
+                hasPayments: Array.isArray(data.data) ? 
+                    data.data.filter(o => o.payment).length : 
+                    (data.data?.payment ? 'yes' : 'no')
+            });
         }
+
+        return data;
+    } catch (e) {
+        console.error('API request error:', {
+            url,
+            error: e.message
+        });
+        toast.error(e.message);
+        return null;
     }
 }
 

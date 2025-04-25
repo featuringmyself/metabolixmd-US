@@ -47,10 +47,15 @@ const OrdersList = () => {
     if (status !== "all") {
       url += `&status=${status}`;
     }
-    const res = await getMethod(url);
-    if (res?.data) {
-      setOrderData(res.data.results);
-      setTotalPages(res.data.totalPages);
+    try {
+      const res = await getMethod(url);
+      if (res?.data) {
+        console.log('Order data received:', res.data.results);
+        setOrderData(res.data.results);
+        setTotalPages(res.data.totalPages);
+      }
+    } catch (error) {
+      console.error('Error fetching orders:', error);
     }
   };
 
@@ -197,9 +202,21 @@ const OrdersList = () => {
                   <div className="text-sm font-medium text-gray-900">{order._id}</div>
                   
                   <div className="flex flex-col">
-                    <span className="text-sm font-medium text-gray-900">{order.user.name || "NA"}</span>
-                    <span className="text-sm text-gray-500">{order.user?.email}</span>
-                    <span className="text-sm text-gray-500">{order.user?.phone}</span>
+                    {order?.user ? (
+                      <>
+                        <span className="text-sm font-medium text-gray-900">
+                          {order.user.name !== null ? order.user.name : "Name not set"}
+                        </span>
+                        <span className="text-sm text-gray-500">
+                          {order.user.email || "Email not provided"}
+                        </span>
+                        <span className="text-sm text-gray-500">
+                          {order.user.phone || "Phone not provided"}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-sm text-gray-500 italic">User information not available</span>
+                    )}
                   </div>
                   
                   <div className="text-sm text-gray-500">

@@ -76,7 +76,9 @@ const MultiStepForm = ({ initialForm }) => {
     allergies: [],
     allergy_GLP_1: false,
     medications: [],
-    describe_yourself: []
+    describe_yourself: [],
+    countryCode: "",
+    phoneNumber: "",
   });
 
   // Form order definition moved to the top for better reference

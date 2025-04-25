@@ -38,7 +38,7 @@ const AnyDiseaseForm = ({ onNext, onBack }) => {
         "Hyperthyroidism (high functioning thyroid)",
         "Graves' disease",
         "Other thyroid issues",
-        "Syndrome of inappropriate antidiuretic hormones (SIADH)",
+        "Syndrome of inappropriate antidiuretic hormone (SIADH)",
         "No, I have not been diagnosed with any of these conditions",
     ];
 

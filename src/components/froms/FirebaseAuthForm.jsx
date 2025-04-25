@@ -36,97 +36,81 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
   const handleEmailAuth = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    
     try {
       let result;
-      let userType = 'User'; // Default user type
-
-      if (mode === "signin") {
-        result = await loginWithEmailAndPassword(email, password);
-      } else {
+      if (mode === "signup") {
         result = await createUserWithEmailMethod(email, password);
-        let myHeaders = new Headers();
-        myHeaders.append("Authorization", `Bearer ${result.token}`);
-        myHeaders.append("Content-Type", "application/json");
-
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          redirect: "follow",
-          body: JSON.stringify({ name: name }),
-        };
-
-        const resp = await fetch(
-          process.env.NEXT_PUBLIC_API_URL + "/v1/auth/onBoarding",
-          requestOptions
-        );
-        
-        if (!resp.ok) {
-          throw new Error(`Server error: ${resp.status}`);
-        }
-        
-        const res1 = await resp.json();
-        if (res1?.data?.__t) {
-          userType = res1.data.__t;
-        }
+      } else {
+        result = await loginWithEmailAndPassword(email, password);
       }
 
       if (result.status) {
-        // For signin, we need to make an additional API call to get user type
-        if (mode === "signin") {
-          try {
-            const myHeaders = new Headers();
-            myHeaders.append("Authorization", `Bearer ${result.token}`);
-            
-            const requestOptions = {
-              method: "GET",
-              headers: myHeaders,
-              redirect: "follow"
-            };
-
-            const resp = await fetch(
-              process.env.NEXT_PUBLIC_API_URL + "/v1/auth/me",
-              requestOptions
+        let userType = "User"; // default user type
+        
+        try {
+          // Create user profile in backend if this is a new signup
+          if (mode === "signup") {
+            const onboardingResponse = await fetch(
+              `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/onBoarding`,
+              {
+                method: "POST",
+                headers: {
+                  "Authorization": `Bearer ${result.token}`,
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  name: name || email.split("@")[0],
+                  email: email
+                })
+              }
             );
             
-            if (!resp.ok) {
-              console.error("Server response not OK:", resp.status);
-              throw new Error("Failed to get user information");
+            if (!onboardingResponse.ok) {
+              throw new Error("Failed to create user profile");
             }
-            
-            const userData = await resp.json();
-            if (userData?.data?.__t) {
-              userType = userData.data.__t;
-            }
-          } catch (error) {
-            console.error("Error fetching user type:", error);
-            // Don't throw here, continue with default user type
           }
+
+          // Get user type
+          const myHeaders = new Headers();
+          myHeaders.append("Authorization", `Bearer ${result.token}`);
+          
+          const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+          };
+
+          const resp = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/me`,
+            requestOptions
+          );
+          const userData = await resp.json();
+          if (userData?.data?.__t) {
+            userType = userData.data.__t;
+          }
+        } catch (error) {
+          console.error("Error:", error);
         }
 
-        // Set user data in cookies
-        const userData = {
+        setUser({
           uid: result.user.uid,
           email: result.user.email,
           name: result.user.displayName || name || email.split("@")[0],
           __t: userType
-        };
+        });
         
-        setUser(userData);
         setUserType(userType);
-
-        toast.success(
-          `${mode === "signin" ? "Signed in" : "Account created"} successfully!`
-        );
         
+        toast.success(mode === "signup" ? "Account created successfully!" : "Signed in successfully!");
         window.dispatchEvent(new Event("auth-state-changed"));
         onNext({});
       } else {
-        throw new Error(result.error || "Authentication failed");
+        toast.error(result.error || "Authentication failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("Authentication error:", error);
-      toast.error(error.message || "Authentication failed");
+      toast.error(error.message || "An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }

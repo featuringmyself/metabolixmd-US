@@ -13,12 +13,12 @@ export const FormService = {
     try {
       // Use the existing updateDetails endpoint to save form data
       const payload = {
-        detail: formData
+        detail: formData,
+        phone: formData.countryCode && formData.phoneNumber ? `${formData.countryCode}${formData.phoneNumber}` : undefined
       };
-      console.log(payload)
+      console.log(payload);
       const response = await patchMethod("/v1/users/updateDetails", payload);
       return response;
-      console.log(response)
     } catch (error) {
       console.error("Error submitting form data:", error);
       throw error;
