@@ -193,7 +193,7 @@ const ProfileDetails = () => {
         animate="animate"
         exit="exit"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto mt-10">
           {/* Profile Header */}
           <motion.div 
             className="bg-white backdrop-blur-lg bg-opacity-80 rounded-3xl shadow-xl p-8 mb-10 border border-gray-100/50"
@@ -246,6 +246,14 @@ const ProfileDetails = () => {
                   transition={{ delay: 0.3 }}
                 >
                   {user?.email}
+                </motion.p>
+                <motion.p 
+                  className="text-lg text-gray-600 mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  {user?.phone }
                 </motion.p>
                 <motion.button
                   onClick={handleLogout}
