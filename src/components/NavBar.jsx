@@ -135,7 +135,7 @@ const NavBar = () => {
 
   return (
     <div className='flex flex-col'>
-      <nav className={`fixed top-0 left-0 right-0 z-[100] bg-white/70 backdrop-blur-md border-b border-gray-200/20 transition-all duration-300 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'} ${isScrolled ? 'shadow-md' : ''}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-[100] backdrop-blur-md border-b border-gray-200/20 transition-all duration-300 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'} ${isScrolled ? 'shadow-md' : ''}`}>
         <div className="max-w-[1920px] mx-auto px-4 md:px-8 py-4">
           <div className="flex items-center justify-between relative">
             {/* Logo */}
@@ -155,40 +155,48 @@ const NavBar = () => {
 
             {/* Navigation Links - Desktop - Now positioned to the right */}
             <div className="hidden md:flex items-center gap-8 relative z-10 mr-8">
+              {user?.__t === "Admin" && (
+                <Link 
+                  href="/admin" 
+                  className={`cursor-pointer text-sm font-poppins tracking-wider text-red-500 font-bold hover:text-red-700 hover:font-bold ${
+                    router.pathname.startsWith("/admin") ? "font-semibold " : ''
+                  }`}
+                >
+                  Admin
+                </Link>
+              )}
+              <Link 
+                href="/" 
+                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
+                  router.pathname == "/" ? "font-semibold text-primary text-base underline decoration-2 underline-offset-8" : ''
+                }`}
+              >
+                Home
+              </Link>
               <Link 
                 href="/about-us" 
-                className={`cursor-pointer text-sm font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/about-us" ? "font-semibold text-primary text-base" : ''
+                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
+                  router.pathname == "/about-us" ? "font-semibold text-primary text-base underline decoration-2 underline-offset-8" : ''
                 }`}
               >
                 About Us
               </Link>
               <Link 
-                href="/services" 
-                className={`cursor-pointer text-sm font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/services" ? "font-semibold text-primary text-base" : ''
+                href="/contact" 
+                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
+                  router.pathname == "/contact" ? "font-semibold text-primary text-base underline decoration-2 underline-offset-8" : ''
                 }`}
               >
-                Services
+                Contact
               </Link>
-              <div className="relative">
-                <button 
-                  className="cursor-pointer text-sm font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold flex items-center gap-1"
-                  onClick={() => setResourcesDropdown(!resourcesDropdown)}
-                >
-                  Resources
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {resourcesDropdown && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-20">
-                    <Link href="/resources/blog" className="block px-4 py-2 text-sm hover:bg-gray-100">Blog</Link>
-                    <Link href="/resources/faq" className="block px-4 py-2 text-sm hover:bg-gray-100">FAQ</Link>
-                    <Link href="/resources/guides" className="block px-4 py-2 text-sm hover:bg-gray-100">Guides</Link>
-                  </div>
-                )}
-              </div>
+              <Link 
+                href="/faq" 
+                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
+                  router.pathname == "/faq" ? "font-semibold text-primary text-base underline decoration-2 underline-offset-8" : ''
+                }`}
+              >
+                FAQ
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -262,9 +270,11 @@ const NavBar = () => {
                     >
                       {/* Navigation Links */}
                       {[
+                        { href: "/", label: "Home" },
                         { href: "/about-us", label: "About Us" },
-                        { href: "/services", label: "Services" },
-                        { href: "/resources", label: "Resources" }
+                        { href: "/contact", label: "Contact" },
+                        { href: "/faq", label: "FAQ" },
+                        ...(user?.__t === "Admin" ? [{ href: "/admin/users", label: "Admin" }] : [])
                       ].map((link, index) => (
                         <motion.div
                           key={link.href}
@@ -309,7 +319,7 @@ const NavBar = () => {
                                 openSignIn();
                                 setIsOpen(false);
                               }}
-                              className='w-full py-3 text-white px-4 ring-1 text-base ring-[#365e65] rounded-full text-center hover:text-primary transition-colors'
+                              className='w-full py-3 text-white px-4 text-base border-2 border-[#015c04] rounded-full text-center hover:text-[#015c04] hover:bg-white transition-colors'
                             >
                               Sign In
                             </button>
@@ -377,9 +387,9 @@ const NavBar = () => {
                   </button>
                   <button
                     onClick={openSignUp}
-                    className="text-sm font-medium bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 transition-colors"
+                    className="text-base font-medium bg-primary text-white px-4 py-2   rounded-full hover:bg-primary/90 transition-colors"
                   >
-                    Sign Up
+                    Get Started
                   </button>
                 </div>
               ) : (

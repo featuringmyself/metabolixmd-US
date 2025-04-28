@@ -73,11 +73,11 @@ const BasicsUserInfo = ({ onNext, onBack }) => {
 
         <div className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10 mt-4 sm:mt-6 md:mt-10 w-full max-w-xl">
           <label className="text-base sm:text-lg font-medium">Sex Assigned at Birth</label>
-          <div className="flex flex-col sm:flex-row mb-3 sm:mb-5 p-2 my-3 sm:my-5 gap-2 sm:gap-3 bg-[#ebf4f1] rounded-lg sm:rounded-full">
+          <div className="flex flex-col sm:flex-row mb-3 sm:mb-5 p-2 my-3 sm:my-5 gap-2 sm:gap-3 bg-[#ebf4f1] items-center justify-center rounded-lg sm:rounded-full">
             <div
               onClick={handleTab}
               id="male"
-              className={`flex items-center border py-2 px-3 sm:px-6 md:px-10 lg:px-16 rounded-lg sm:rounded-3xl cursor-pointer w-full sm:w-auto ${
+              className={`flex items-center border py-1 px-3 sm:px-6 md:px-10 lg:px-16 rounded-lg sm:rounded-3xl cursor-pointer w-full sm:w-auto ${
                 activeTab === "male"
                   ? "bg-primary border-1 border-primary text-white font-medium"
                   : "bg-white"

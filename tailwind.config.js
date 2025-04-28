@@ -50,7 +50,7 @@ module.exports = {
           light: "#2a5708"
         },
         tertiary: {
-          DEFAULT: "#9FE870",
+          DEFAULT: "#FC7823",
           light: "#b5ff86"
         },
         accent: "#E8F3F1",

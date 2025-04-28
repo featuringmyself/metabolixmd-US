@@ -32,6 +32,36 @@ const OrdersList = () => {
   const minDateTime = new Date().toISOString().slice(0, 16);
 
   useEffect(() => {
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape') {
+        if (isView) {
+          setIsView(false);
+        }
+        if (isStatusPopupOpen) {
+          setIsStatusPopupOpen(false);
+          setSelectedOrder(null);
+          setNewStatus("");
+        }
+        if (isMeetPopupOpen) {
+          setIsMeetPopupOpen(false);
+          setSelectedOrder(null);
+          setSchMeet({ meetLink: "", time: "" });
+        }
+        if (isDosePopupOpen) {
+          setIsDosePopupOpen(false);
+          setSelectedOrder(null);
+          setSelectedDose("");
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleEscapeKey);
+    return () => {
+      window.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isView, isStatusPopupOpen, isMeetPopupOpen, isDosePopupOpen]);
+
+  useEffect(() => {
     const updateHeight = () => {
       const newHeight = window.innerHeight * 0.58;
       setContainerHeight(newHeight);
@@ -341,47 +371,131 @@ const OrdersList = () => {
         </section>
 
         {isView && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white max-w-[600px] p-5 rounded-md">
-              <div>
-                <h2 className="text-xl font-bold mb-4 capitalize">{selectedOrder?.user?.name ? selectedOrder?.user?.name : "User"} Details</h2>
-                <div className="space-y-2">
-                  <p><strong>Goal:</strong> {data?.accomplish_with_body_program.join(", ")}</p>
-                  <p><strong>Height:</strong> {data?.height.feet} ft</p>
-                  <p><strong>Weight:</strong> {data?.weight ? data?.weight + " lbs" : "NA"} </p>
-                  <p><strong>Gender:</strong> {data?.gender}</p>
-                  <p><strong>Date of Birth:</strong>  {new Date(data?.dob).toLocaleString()}</p>
-                  <p><strong>Postal Code:</strong> {data?.zipCode}</p>
-                  <p><strong>Seen Primary Care Provider:</strong> {data?.seen_primary_care_provider ? "Yes" : "No"}</p>
-                  <p><strong>Heart Condition:</strong> {data?.heart_condition.filter(Boolean).join(", ") || "None"}</p>
-                  <p><strong>Hormone/Kidney/Liver Condition:</strong> {data?.hormone_kidney_liver_condition.filter(Boolean).join(", ") || "None"}</p>
-                  <p><strong>Type 2 Diabetes:</strong> {data?.type_2_diabetes}</p>
-                  <p><strong>Diabetic:</strong> {data?.diabetic}</p>
-                  <p><strong>Additional Condition:</strong> {data?.additional_condition.join(", ")}</p>
-                  <p><strong>Allergies:</strong> {data?.allergies.length > 0 ? data.allergies.join(", ") : "None"}</p>
-                  <p><strong>Allergic to GLP-1:</strong> {data?.allergy_GLP_1 ? "Yes" : "No"}</p>
-                  <p><strong>Medications:</strong> {data?.medications.join(", ")}</p>
-                  <p><strong> Self Described:</strong> {data?.describe_yourself.join(", ")}</p>
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50">
+            <div className="bg-white max-w-2xl w-full mx-4 rounded-xl shadow-2xl overflow-hidden">
+              {/* Header */}
+              <div className="bg-primary p-6">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-2xl font-bold text-white capitalize">
+                    {selectedOrder?.user?.name ? selectedOrder?.user?.name : "User"} Details
+                  </h2>
+                  <button
+                    onClick={() => setIsView(false)}
+                    className="text-white hover:text-gray-200 transition-colors"
+                    aria-label='Close Button'
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
                 </div>
               </div>
-              <div className="flex gap-5 justify-end mt-4">
-                <button
-                  className="bg-gray-300 px-4 py-2 rounded-md"
-                  onClick={() => setIsView(false)}
-                  aria-label='Close Button'
-                >
-                  Close
-                </button>
+
+              {/* Content */}
+              <div className="p-6 max-h-[70vh] overflow-y-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Personal Information */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Personal Information</h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Height:</span>
+                        <span className="font-medium">{data?.height?.feet} ft</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Weight:</span>
+                        <span className="font-medium">{data?.weight ? `${data?.weight} lbs` : "NA"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Gender:</span>
+                        <span className="font-medium">{data?.gender || "NA"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Date of Birth:</span>
+                        <span className="font-medium">{data?.dob ? new Date(data?.dob).toLocaleDateString() : "NA"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Postal Code:</span>
+                        <span className="font-medium">{data?.zipCode || "NA"}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Health Information */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Health Information</h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Primary Care Provider:</span>
+                        <span className="font-medium">{data?.seen_primary_care_provider ? "Yes" : "No"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Heart Condition:</span>
+                        <span className="font-medium">{data?.heart_condition?.filter(Boolean).join(", ") || "None"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Hormone/Kidney/Liver:</span>
+                        <span className="font-medium">{data?.hormone_kidney_liver_condition?.filter(Boolean).join(", ") || "None"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Type 2 Diabetes:</span>
+                        <span className="font-medium">{data?.type_2_diabetes || "NA"}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Additional Information */}
+                  <div className="md:col-span-2 space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">Additional Information</h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Goals:</span>
+                        <span className="font-medium text-right max-w-[70%]">{data?.accomplish_with_body_program?.join(", ") || "NA"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Additional Conditions:</span>
+                        <span className="font-medium text-right max-w-[70%]">{data?.additional_condition?.join(", ") || "None"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Allergies:</span>
+                        <span className="font-medium text-right max-w-[70%]">{data?.allergies?.length > 0 ? data.allergies.join(", ") : "None"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Allergic to GLP-1:</span>
+                        <span className="font-medium">{data?.allergy_GLP_1 ? "Yes" : "No"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Medications:</span>
+                        <span className="font-medium text-right max-w-[70%]">{data?.medications?.join(", ") || "None"}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Self Description:</span>
+                        <span className="font-medium text-right max-w-[70%]">{data?.describe_yourself?.join(", ") || "NA"}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         )}
         {isStatusPopupOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg w-80">
-              <h2 className="text-lg font-bold mb-4">Update Status</h2>
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50">
+            <div className="bg-white rounded-xl shadow-2xl w-96 p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-gray-800">Update Order Status</h2>
+                <button
+                  onClick={() => { setIsStatusPopupOpen(false); setSelectedOrder(""); setNewStatus("") }}
+                  className="text-gray-500 hover:text-gray-700 transition-colors"
+                  aria-label='Close Button'
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
               <select
-                className="w-full p-2 mb-4 border rounded-md"
+                className="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors"
                 value={newStatus}
                 onChange={(e) => setNewStatus(e.target.value)}
               >
@@ -394,114 +508,144 @@ const OrdersList = () => {
               <div className="flex justify-end gap-4">
                 <button
                   onClick={() => { setIsStatusPopupOpen(false); setSelectedOrder(""); setNewStatus("") }}
-                  className="bg-gray-300 px-4 py-2 rounded-md"
-                  aria-label='Close Button'
+                  className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
                 >
-                  Close
+                  Cancel
                 </button>
                 <button
                   onClick={confirmStatusChange}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                  aria-label='Confirm Button'
+                  className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
                 >
-                  Confirm
+                  Update Status
                 </button>
               </div>
             </div>
           </div>
         )}
         {isMeetPopupOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg w-80">
-              <h2 className="text-lg font-bold mb-4">Schedule meet</h2>
-              <p className="text-zinc-600 my-2">
-                <span className="text-zinc-400">User email:</span> {selectedOrder.user?.email}
-              </p>
-              <input
-                type="text"
-                className="w-full p-2 mb-4 border rounded-md"
-                placeholder="Enter meet link here"
-                name="meetLink"
-                value={schMeet.meetLink}
-                onChange={(e) =>
-                  setSchMeet({ ...schMeet, [e.currentTarget.name]: e.currentTarget.value })
-                }
-              />
-              <input
-                type="datetime-local"
-                className="w-full p-2 mb-4 border rounded-md cursor-pointer"
-                name="time"
-                min={minDateTime}
-                value={schMeet.time}
-                onClick={(e) => e.currentTarget.showPicker()}
-                onChange={(e) =>
-                  setSchMeet({ ...schMeet, [e.currentTarget.name]: e.currentTarget.value })
-                }
-              />
-
-              <div className="flex justify-end gap-4">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50">
+            <div className="bg-white rounded-xl shadow-2xl w-96 p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-gray-800">Schedule Meeting</h2>
                 <button
                   onClick={() => { setIsMeetPopupOpen(false); setSelectedOrder(""); setSchMeet({ meetLink: "", time: "" }) }}
-                  className="bg-gray-300 px-4 py-2 rounded-md"
+                  className="text-gray-500 hover:text-gray-700 transition-colors"
                   aria-label='Close Button'
                 >
-                  Close
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <div className="mb-4">
+                <p className="text-sm text-gray-600 mb-1">User Email</p>
+                <p className="text-gray-800 font-medium">{selectedOrder.user?.email}</p>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="meetLink" className="block text-sm text-gray-600 mb-1">Meeting Link</label>
+                  <input
+                    type="text"
+                    id="meetLink"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors"
+                    placeholder="Enter meeting link"
+                    name="meetLink"
+                    value={schMeet.meetLink}
+                    onChange={(e) =>
+                      setSchMeet({ ...schMeet, [e.currentTarget.name]: e.currentTarget.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label htmlFor="meetTime" className="block text-sm text-gray-600 mb-1">Meeting Time</label>
+                  <input
+                    type="datetime-local"
+                    id="meetTime"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors cursor-pointer"
+                    name="time"
+                    min={minDateTime}
+                    value={schMeet.time}
+                    onClick={(e) => e.currentTarget.showPicker()}
+                    onChange={(e) =>
+                      setSchMeet({ ...schMeet, [e.currentTarget.name]: e.currentTarget.value })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end gap-4 mt-6">
+                <button
+                  onClick={() => { setIsMeetPopupOpen(false); setSelectedOrder(""); setSchMeet({ meetLink: "", time: "" }) }}
+                  className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+                >
+                  Cancel
                 </button>
                 <button
                   onClick={handleConfirmMeet}
                   disabled={isConfirmDisabled}
-                  className={`px-4 py-2 rounded-md ${isConfirmDisabled
-                    ? "bg-blue-200 cursor-not-allowed"
-                    : "bg-blue-500 text-white"
-                    }`}
-                  aria-label='Confirm button'
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    isConfirmDisabled
+                      ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                      : "bg-primary text-white hover:bg-primary/90"
+                  }`}
                 >
-                  Confirm
+                  Schedule Meeting
                 </button>
               </div>
             </div>
           </div>
         )}
         {isDosePopupOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-6 rounded-lg w-80">
-              <h2 className="text-lg font-bold mb-4">Add Doses</h2>
-              <select
-                className="w-full p-2 mb-4 border rounded-md"
-                value={selectedDose._id}
-                onChange={(event) => {
-                  const selectedId = event.target.value;
-                  const dose = doses.find((dose) => dose._id === selectedId);
-                  setSelectedDose(dose);
-                }}
-              >
-                <option value="">
-                  Select
-                </option>
-                {doses.map((dose) => (
-                  <option key={dose._id} value={dose._id}>
-                    {dose.name}
-                  </option>
-                ))}
-              </select>
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50">
+            <div className="bg-white rounded-xl shadow-2xl w-96 p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-gray-800">Add Doses</h2>
+                <button
+                  onClick={() => { setIsDosePopupOpen(false); setSelectedDose(""); setSelectedOrder("") }}
+                  className="text-gray-500 hover:text-gray-700 transition-colors"
+                  aria-label='Close Button'
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <div className="mb-6">
+                <label htmlFor="doseSelect" className="block text-sm text-gray-600 mb-1">Select Dose</label>
+                <select
+                  id="doseSelect"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors"
+                  value={selectedDose._id}
+                  onChange={(event) => {
+                    const selectedId = event.target.value;
+                    const dose = doses.find((dose) => dose._id === selectedId);
+                    setSelectedDose(dose);
+                  }}
+                >
+                  <option value="">Select a dose</option>
+                  {doses.map((dose) => (
+                    <option key={dose._id} value={dose._id}>
+                      {dose.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <div className="flex justify-end gap-4">
                 <button
                   onClick={() => { setIsDosePopupOpen(false); setSelectedDose(""); setSelectedOrder("") }}
-                  className="bg-gray-300 px-4 py-2 rounded-md"
-                  aria-label='Close Button'
+                  className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
                 >
-                  Close
+                  Cancel
                 </button>
                 <button
                   onClick={handleConfirmDose}
                   disabled={selectedDose === ""}
-                  className={`px-4 py-2 rounded-md ${selectedDose === ""
-                    ? "bg-blue-200 cursor-not-allowed"
-                    : "bg-blue-500 text-white"
-                    }`}
-                  aria-label='Confirm button'
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    selectedDose === ""
+                      ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                      : "bg-primary text-white hover:bg-primary/90"
+                  }`}
                 >
-                  Confirm
+                  Add Dose
                 </button>
               </div>
             </div>

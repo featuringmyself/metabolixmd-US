@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { LuCalendarClock } from "react-icons/lu";
 
-const SuccessPropt = ({ type }) => {
+const SuccessPropt = ({ type, orderData }) => {
   const router = useRouter();
   if (type == "3") {
     return (
@@ -68,6 +68,73 @@ const SuccessPropt = ({ type }) => {
             className="mt-8 p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary hover:bg-primary/90 transition-colors duration-300 cursor-pointer"
           >
             Continue
+          </div>
+        </div>
+      </div>
+    );
+  } else if (type === "order_confirmed" && orderData) {
+    return (
+      <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto">
+        <div className="w-full md:w-[500px] bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl">
+          <h1 className="text-primary font-semibold text-3xl mb-6">
+            Order Confirmed!
+          </h1>
+
+          <div className="space-y-4">
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-lg font-normal text-gray-700">
+                <span className="font-semibold">Order ID:</span> {orderData.orderId}
+              </p>
+              <p className="text-lg font-normal text-gray-700">
+                <span className="font-semibold">Delivery Address:</span> {orderData.address}
+              </p>
+              <p className="text-lg font-normal text-gray-700">
+                <span className="font-semibold">Estimated Delivery:</span> {orderData.estimatedDelivery}
+              </p>
+            </div>
+            <p className="text-lg font-normal text-gray-700">
+              Your order has been successfully confirmed. We will keep you updated on the delivery status.
+            </p>
+            <p className="text-lg font-normal text-gray-700">
+              Thank you for choosing MetabolixMD! <br />
+              <b className="text-primary">The MetabolixMD Team</b>
+            </p>
+          </div>
+
+          <div
+            onClick={() => router.push("/")}
+            className="mt-8 p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary hover:bg-primary/90 transition-colors duration-300 cursor-pointer"
+          >
+            Continue
+          </div>
+        </div>
+      </div>
+    );
+  } else if (type === "payment_required") {
+    return (
+      <div className="w-full p-5 md:p-0 md:max-w-fit mx-auto">
+        <div className="w-full md:w-[500px] bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl">
+          <h1 className="text-primary font-semibold text-3xl mb-6">
+            Payment Required
+          </h1>
+
+          <div className="space-y-4">
+            <p className="text-lg font-normal text-gray-700">
+              Your order is pending payment. Please complete the payment to confirm your order.
+            </p>
+            <p className="text-lg font-normal text-gray-700">
+              You can make the payment through our secure payment gateway.
+            </p>
+            <p className="text-lg font-normal text-gray-700">
+              If you have any questions, please contact our support team.
+            </p>
+          </div>
+
+          <div
+            onClick={() => router.push("/payment")}
+            className="mt-8 p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary hover:bg-primary/90 transition-colors duration-300 cursor-pointer"
+          >
+            Proceed to Payment
           </div>
         </div>
       </div>

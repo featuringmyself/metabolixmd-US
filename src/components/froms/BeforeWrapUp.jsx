@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ClipLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 
-const BeforeWrapUp = ({ onNext }) => {
+const BeforeWrapUp = ({ onNext, onBack }) => {
     const [activeTab, setActiveTab] = useState('no');
     const [text, setText] = useState('');
 
@@ -59,14 +59,24 @@ const BeforeWrapUp = ({ onNext }) => {
                     />
                 )}
                 </div>
-                <button
-                    type="button"
-                    className="mt-4 sm:mt-6 hover:bg-primary/90 p-2 sm:p-3 text-white w-full py-2 sm:py-3 text-sm sm:text-base font-semibold rounded-full bg-primary"
-                    onClick={handleContinue}
-                    aria-label='Continue'
-                >
-                    Continue
-                </button>
+                <div className="flex gap-4">
+                    <button
+                        type="button"
+                        className="mt-4 sm:mt-6 hover:bg-gray-200 p-2 sm:p-3 text-primary w-full py-2 sm:py-3 text-sm sm:text-base font-semibold rounded-full bg-white border border-primary"
+                        onClick={onBack}
+                        aria-label='Back'
+                    >
+                        Back
+                    </button>
+                    <button
+                        type="button"
+                        className="mt-4 sm:mt-6 hover:bg-primary/90 p-2 sm:p-3 text-white w-full py-2 sm:py-3 text-sm sm:text-base font-semibold rounded-full bg-primary"
+                        onClick={handleContinue}
+                        aria-label='Continue'
+                    >
+                        Continue
+                    </button>
+                </div>
             </div>
         </div>
     );
