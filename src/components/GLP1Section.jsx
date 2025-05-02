@@ -26,7 +26,7 @@ const GLP1Section = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerChildren}
-      className="mt-20 pt-10 bg-[#365D56] w-full rounded-3xl text-white shadow-lg transform transition-all duration-300 hover:shadow-xl"
+      className="-mt-36 pt-32 bg-[#365D56] w-full  text-white shadow-lg transform transition-all duration-300 hover:shadow-xl rounded-b-[100px] relative z-20"
     >
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}
@@ -67,7 +67,7 @@ const GLP1Section = () => {
                   viewport={{ once: true }}
                   className="text-gray-600 mb-8 w-full md:w-[90%] leading-relaxed"
                 >
-                  GLP-1 drugs mimic a naturally occurring hormone that regulates blood sugar, slows gastric emptying, reduces hunger, and helps control food intake. These medications work by targeting receptors in your brain that control appetite and food intake, helping you feel fuller longer.
+                  GLP-1 drugs help regulate blood sugar, slow digestion, and curb appetite. They trigger insulin production when needed, reduce the hormone that raises blood sugar, and keep food in the stomach longer, leading to increased fullness and lower calorie intake.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -160,12 +160,12 @@ const GLP1Section = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-gray-700 mb-12 w-[95%] md:w-[80%] leading-relaxed"
+              className="text-gray-700 mb-12 w-[95%] md:w-[80%] text-center leading-relaxed"
             >
               GLP-1 medications come in different forms, but they all work toward the same goal - supporting weight management and metabolic health. These treatments are typically delivered through vials with syringes or auto-injectors and can be self-administered. Each method ensures effective absorption, allowing the medication to work efficiently in your body. During your consultation with one of our healthcare professionals, we will help determine the best option for you.
             </motion.p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl">
               {/* Vial & Syringe Option */}
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
@@ -189,15 +189,15 @@ const GLP1Section = () => {
                 </motion.div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto">
-                    <h4 className="text-lg font-semibold text-black drop-shadow-sm">Vial & Syringe</h4>
-                    <p className="text-black/90 text-xs max-w-[80%] leading-relaxed">
+                    <h4 className="text-2xl font-semibold text-black drop-shadow-sm">Vial & Syringe</h4>
+                    <p className="text-black/90 text-sm max-w-[80%] leading-relaxed my-2">
                     A more traditional method, requiring manual dosage preparation before injection.
                     </p>
                   </div>
                   <div className="text-center">
                     <Link 
                       href="#" 
-                      className="inline-block text-xs bg-white/20 hover:bg-white/40 backdrop-blur-sm px-2 py-2 rounded-full text-black font-medium transition-all duration-300 hover:shadow-md mt-2"
+                      className="inline-block text-sm px-2 py-2 text-black font-medium underline underline-offset-2"
                     >
                       Important safety information
                     </Link>
@@ -228,15 +228,15 @@ const GLP1Section = () => {
                 </motion.div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto">
-                    <h4 className="text-xl font-semibold text-white drop-shadow-sm">Auto-injectors</h4>
-                    <p className="text-white/90 text-xs max-w-[80%] leading-relaxed">
+                    <h4 className="text-2xl font-semibold text-white drop-shadow-sm">Auto-injectors</h4>
+                    <p className="text-white/90 text-sm max-w-[80%] leading-relaxed my-2">
                     Designed for quick and seamless administration, often with a single-use format.
                     </p>
                   </div>
-                  <div className="mt-2 text-center">
+                  <div className="text-center">
                     <Link 
                       href="#" 
-                      className="inline-block text-xs bg-white/20 hover:bg-white/40 backdrop-blur-sm px-2 py-2 rounded-full text-white font-medium transition-all duration-300 hover:shadow-md"
+                      className="inline-block text-sm px-2 py-2 text-white font-medium underline underline-offset-2"
                     >
                       Important safety information
                     </Link>

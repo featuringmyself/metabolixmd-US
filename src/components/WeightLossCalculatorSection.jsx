@@ -24,12 +24,12 @@ const WeightLossCalculatorSection = () => {
   const backgroundPattern = "/images/weightloss_calculator.webp";
 
   return (
-    <>
-      <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-8 md:mb-16">
+    <div className="-mt-64 min-h-screen">
+      <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-24 md:mb-32">
         {/* Weight Loss Calculator Card */}
         <motion.div
           variants={fadeIn}
-          className="bg-[#365D56] text-white overflow-hidden shadow-lg w-full md:w-[450px] lg:w-[500px] z-10 md:hidden flex-col flex md:mt-0 mt-12"
+          className="bg-[#365D56] text-white overflow-hidden shadow-lg w-full md:max-w-[450px] lg:max-w-[500px] z-10 md:hidden flex-col flex md:mt-0 mt-48"
         >
           <div className="p-6 md:p-8 lg:p-10">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-light mb-6 leading-tight">
@@ -40,29 +40,37 @@ const WeightLossCalculatorSection = () => {
 
             <div className="my-12">
               <div className="flex items-start justify-between">
-                <span className="text-xs md:text-lg opacity-80 font-light w-[40%]">
+                <span className="text-xs md:text-lg opacity-80 w-[40%]">
                   Select your Current Weight
                 </span>
                 <div className="flex items-end">
                   <span className="text-6xl md:text-7xl font-light">
                     {currentWeight}
                   </span>
-                  <span className="text-xl opacity-80 ml-2">lbs</span>
+                  <span className="text-xl opacity-80 ml-2 align-top">lbs</span>
                 </div>
               </div>
               <div className="relative mt-4">
                 {/* Background track */}
-                <div className="w-full h-2 bg-white/20 rounded-full"></div>
+                <div className="w-full h-1 bg-white/20 rounded-full"></div>
                 {/* Filled track */}
                 <div
-                  className="absolute left-0 top-0 h-2 bg-white/60 rounded-full"
+                  className="absolute left-0 top-0 h-1 bg-white rounded-full"
                   style={{ width: `${((currentWeight - 100) / 300) * 100}%` }}
                 ></div>
-                {/* Slider thumb with glow effect */}
+                {/* Slider thumb */}
                 <div
-                  className="absolute top-0 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md shadow-white/30 border-2 border-white/80"
-                  style={{ left: `${((currentWeight - 100) / 300) * 100}%` }}
-                ></div>
+                  className="absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full border-4 border-[#365D56]"
+                  style={{
+                    left: `${((currentWeight - 100) / 300) * 100}%`,
+                    boxShadow: "0px 0.5px 4px 0px #0000001F",
+                  }}
+                >
+                  <div
+                    className="w-full h-full bg-white rounded-full"
+                    style={{ boxShadow: "0px 6px 13px 0px #0000001F" }}
+                  ></div>
+                </div>
                 <input
                   type="range"
                   min="100"
@@ -83,7 +91,7 @@ const WeightLossCalculatorSection = () => {
                   <span className="text-7xl md:text-8xl font-">
                     {weightLoss}
                   </span>
-                  <span className="text-xl opacity-80 ml-2">lbs</span>
+                  <span className="text-xl opacity-80 ml-2 absolute">lbs</span>
                 </div>
               </div>
             </div>
@@ -97,149 +105,185 @@ const WeightLossCalculatorSection = () => {
           </div>
         </motion.div>
       </div>
+
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="relative w-full min-h-screen flex flex-col md:rounded-3xl md:mt-12 mt-0"
-        style={{
-          backgroundImage: `url(${backgroundPattern})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
+        className="relative w-full min-h-screen flex flex-col md:mt-12 mt-0"
       >
-        <div className="w-[90%] mx-auto px-4 md:px-6 flex flex-col justify-between py-8 md:py-12">
-          <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-8 md:mb-16">
-            {/* Weight Loss Calculator Card */}
+        <div className="relative w-full h-screen">
+          <Image
+            src="/images/weightloss_calculator.webp"
+            alt="Weight Loss Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/20" />
+          
+          <div className="absolute inset-0 w-[90%] mx-auto px-4 md:px-6 flex flex-col justify-between py-8 md:py-12">
+            <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-8 md:mb-16">
+              {/* Weight Loss Calculator Card - Desktop */}
+              <motion.div
+                variants={fadeIn}
+                className="bg-[#365D56] md:flex flex-col hidden text-white rounded-3xl overflow-hidden shadow-lg w-full md:w-[450px] lg:w-[500px] z-10"
+              >
+                <div className="p-6 md:p-8 lg:p-10">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-light mb-6 leading-tight">
+                    Lose 15-20% Body
+                    <br />
+                    Fat in a Year!
+                  </h2>
+
+                  <div className="my-12">
+                    <div className="flex items-start justify-between">
+                      <span className="text-xs md:text-lg opacity-80 font-light w-[40%]">
+                        Select your Current Weight
+                      </span>
+                      <div className="flex items-end">
+                        <span className="text-6xl md:text-7xl font-light">
+                          {currentWeight}
+                        </span>
+                        <span className="text-xl opacity-80 ml-2 align-top">
+                          lbs
+                        </span>
+                      </div>
+                    </div>
+                    <div className="relative mt-4">
+                      {/* Background track */}
+                      <div className="w-full h-1 bg-white/20 rounded-full"></div>
+                      {/* Filled track */}
+                      <div
+                        className="absolute left-0 top-0 h-1 bg-white rounded-full"
+                        style={{
+                          width: `${((currentWeight - 100) / 300) * 100}%`,
+                        }}
+                      ></div>
+                      {/* Slider thumb */}
+                      <div
+                        className="absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full border-4 border-[#365D56]"
+                        style={{
+                          left: `${((currentWeight - 100) / 300) * 100}%`,
+                          boxShadow: "0px 0.5px 4px 0px #0000001F",
+                        }}
+                      >
+                        <div
+                          className="w-full h-full bg-white rounded-full"
+                          style={{ boxShadow: "0px 6px 13px 0px #0000001F" }}
+                        ></div>
+                      </div>
+                      <input
+                        type="range"
+                        min="100"
+                        max="400"
+                        value={currentWeight}
+                        onChange={handleWeightChange}
+                        className="absolute inset-0 w-full h-6 opacity-0 cursor-pointer z-10"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mb-8">
+                    <div className="flex items-start justify-between">
+                      <span className="text-xs md:text-lg opacity-80 font-light w-[40%]">
+                        Weight you could lose
+                      </span>
+                      <div className="flex items-end">
+                        <span className="text-7xl md:text-8xl font-">
+                          {weightLoss}
+                        </span>
+                        <span className="text-xl opacity-80 ml-2 align-top">
+                          lbs
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Link
+                    href="/get-started"
+                    className="inline-block bg-transparent text-white border px-6 py-3 rounded-full hover:bg-white hover:text-[#365D56] transition-all duration-300 transform hover:scale-105 hover:shadow-md font-medium w-full text-center md:w-auto"
+                  >
+                    Start your journey
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Lab Tested & Certified Card */}
             <motion.div
               variants={fadeIn}
-              className="bg-[#365D56] md:flex flex-col hidden text-white rounded-3xl overflow-hidden shadow-lg w-full md:w-[450px] lg:w-[500px] z-10"
+              className="bg-white rounded-3xl overflow-hidden shadow-lg flex flex-row justify-center items-center md:w-[60%] w-full mx-auto z-10 relative p-8"
             >
-              <div className="p-6 md:p-8 lg:p-10">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-light mb-6 leading-tight">
-                  Lose 15-20% Body
-                  <br />
-                  Fat in a Year!
-                </h2>
-
-                <div className="my-12">
-                  <div className="flex items-start justify-between">
-                    <span className="text-xs md:text-lg opacity-80 font-light w-[40%]">
-                      Select your Current Weight
-                    </span>
-                    <div className="flex items-end">
-                      <span className="text-6xl md:text-7xl font-light">
-                        {currentWeight}
-                      </span>
-                      <span className="text-xl opacity-80 ml-2">lbs</span>
-                    </div>
-                  </div>
-                  <div className="relative mt-4">
-                    {/* Background track */}
-                    <div className="w-full h-2 bg-white/20 rounded-full"></div>
-                    {/* Filled track */}
-                    <div
-                      className="absolute left-0 top-0 h-2 bg-white/60 rounded-full"
-                      style={{
-                        width: `${((currentWeight - 100) / 300) * 100}%`,
-                      }}
-                    ></div>
-                    {/* Slider thumb with glow effect */}
-                    <div
-                      className="absolute top-0 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-md shadow-white/30 border-2 border-white/80"
-                      style={{
-                        left: `${((currentWeight - 100) / 300) * 100}%`,
-                      }}
-                    ></div>
-                    <input
-                      type="range"
-                      min="100"
-                      max="400"
-                      value={currentWeight}
-                      onChange={handleWeightChange}
-                      className="absolute inset-0 w-full h-6 opacity-0 cursor-pointer z-10"
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-8">
-                  <div className="flex items-start justify-between">
-                    <span className="text-xs md:text-lg opacity-80 font-light w-[40%]">
-                      Weight you could lose
-                    </span>
-                    <div className="flex items-end">
-                      <span className="text-7xl md:text-8xl font-">
-                        {weightLoss}
-                      </span>
-                      <span className="text-xl opacity-80 ml-2">lbs</span>
-                    </div>
-                  </div>
-                </div>
-
-                <Link
-                  href="/get-started"
-                  className="inline-block bg-transparent text-white border px-6 py-3 rounded-full hover:bg-white hover:text-[#365D56] transition-all duration-300 transform hover:scale-105 hover:shadow-md font-medium w-full text-center md:w-auto"
-                >
-                  Start your journey
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Lab Tested & Certified Card - Positioned at the bottom */}
-          <motion.div
-            variants={fadeIn}
-            className="bg-white rounded-3xl overflow-hidden shadow-lg flex flex-col justify-center items-center md:w-[50%] w-full md:ml-auto z-10"
-          >
-            <div className="flex flex-row items-center p-6 md:p-8 md:pb-8">
-              {/* Doctor Image */}
-              <div className="relative w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32 rounded-full overflow-hidden flex-shrink-0 border-4 border-white shadow-md">
+              {/* Left: Image */}
+              <div className="relative w-1/2 h-40 md:h-56 flex-shrink-0">
                 <Image
                   src="/images/lab-test.webp"
                   alt="Lab Doctor"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top rounded-3xl "
                 />
               </div>
 
-              {/* Check Icon - Now positioned in the middle */}
-              <div className="mx-4 md:mx-6">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#365D56] flex items-center justify-center flex-shrink-0">
-                  <svg
-                    width="67"
-                    height="51"
-                    viewBox="0 0 67 51"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="p-3"
-                  >
-                    <path
-                      d="M58.7897 2.52636C68.3993 8.20541 69.5352 21.4242 62.3982 29.5769C58.5987 33.9176 45.371 47.5965 40.9419 49.446C34.3708 52.1904 27.4135 51.2541 21.7824 46.9986L22.0242 46.6786C31.379 48.6093 37.6744 42.7272 43.7086 36.9048C47.2663 33.4725 58.3826 22.7856 59.267 18.851C60.6093 12.8789 54.6508 6.82486 48.6207 7.54937C42.5905 8.27388 31.999 23.0276 26.6186 27.0387C24.9829 28.2585 23.4874 28.6669 21.5824 27.5881C21.0157 27.2672 14.6356 21.1041 14.1382 20.421C10.9668 16.0668 15.8917 11.6226 20.2434 14.8733C21.3559 15.7045 22.9191 18.3932 24.4073 17.6973C33.3276 9.72211 39.9599 -3.05795 54.3082 0.664126C55.686 1.0216 57.5676 1.80344 58.7889 2.52556L58.7897 2.52636Z"
-                      fill="white"
-                    />
-                    <path
-                      d="M29.7699 4.75477C30.2584 5.19186 31.3492 5.88931 31.0549 6.5971C30.7582 7.31126 26.5815 10.484 26.0188 11.5086L25.5584 11.3813C18.5439 2.49684 4.02234 11.8295 9.75342 21.7274C10.8023 23.5387 18.548 31.1923 20.382 32.2376C24.3451 34.4979 27.7553 33.2328 31.0638 30.705C34.5327 28.0546 46.0473 14.5524 48.3764 13.9879C51.7413 13.1726 54.9047 16.1384 53.3577 19.5037C52.512 21.3437 39.5536 33.7726 37.1786 35.8721C30.9541 41.3752 22.9996 43.0066 15.4732 38.7105C13.4199 37.5385 5.3364 29.8475 3.73857 27.7855C-9.13279 11.1822 14.1197 -9.23865 29.7699 4.75477Z"
-                      fill="white"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Text Content */}
-              <div className="">
-                <h3 className="text-lg md:text-xl font-medium text-zinc-800 mb-2">
+              {/* Right: Text */}
+              <div className="w-1/2 flex flex-col justify-center pl-14 pr-4 py-6">
+              <h3 className="text-lg md:text-3xl font-medium text-[#2E2E2E] mb-2">
                   Lab tested & Certified
                 </h3>
-                <p className="text-zinc-600 text-xs md:text-sm">
+                <p className="text-[#626262] text-xs md:text-lg">
                   Filled the shipped same day as your appointment
                 </p>
               </div>
-            </div>
-          </motion.div>
+
+              {/* Badge: Overlapping both halves */}
+              <div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+                style={{ width: "90px", height: "90px" }}
+              >
+                <svg
+                  width="90"
+                  height="90"
+                  viewBox="0 0 142 142"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M64.9913 2.74073C68.5148 -0.0392264 73.4852 -0.0392275 77.0087 2.74073C79.6606 4.83302 83.21 5.39518 86.3786 4.22478C90.5887 2.66971 95.3159 4.20566 97.8079 7.93837C99.6835 10.7477 102.885 12.3792 106.261 12.2453C110.745 12.0673 114.766 14.9888 115.983 19.3089C116.899 22.5604 119.44 25.1014 122.691 26.017C127.011 27.2336 129.933 31.2548 129.755 35.7394C129.621 39.1146 131.252 42.3165 134.062 44.1921C137.794 46.6841 139.33 51.4113 137.775 55.6214C136.605 58.79 137.167 62.3394 139.259 64.9913C142.039 68.5148 142.039 73.4852 139.259 77.0087C137.167 79.6606 136.605 83.21 137.775 86.3786C139.33 90.5888 137.794 95.3159 134.062 97.8079C131.252 99.6835 129.621 102.885 129.755 106.261C129.933 110.745 127.011 114.766 122.691 115.983C119.44 116.899 116.899 119.44 115.983 122.691C114.766 127.011 110.745 129.933 106.261 129.755C102.885 129.621 99.6835 131.252 97.8079 134.062C95.3159 137.794 90.5887 139.33 86.3786 137.775C83.21 136.605 79.6606 137.167 77.0087 139.259C73.4852 142.039 68.5148 142.039 64.9913 139.259C62.3394 137.167 58.79 136.605 55.6214 137.775C51.4113 139.33 46.6841 137.794 44.1921 134.062C42.3165 131.252 39.1146 129.621 35.7394 129.755C31.2548 129.933 27.2336 127.011 26.017 122.691C25.1014 119.44 22.5604 116.899 19.3089 115.983C14.9888 114.766 12.0673 110.745 12.2453 106.261C12.3792 102.885 10.7477 99.6835 7.93837 97.8079C4.20566 95.3159 2.66971 90.5887 4.22478 86.3786C5.39518 83.21 4.83302 79.6606 2.74073 77.0087C-0.039227 73.4852 -0.0392264 68.5148 2.74073 64.9913C4.83302 62.3394 5.39518 58.79 4.22478 55.6214C2.66971 51.4113 4.20565 46.6841 7.93837 44.1921C10.7477 42.3165 12.3792 39.1146 12.2453 35.7394C12.0673 31.2548 14.9888 27.2336 19.3089 26.017C22.5604 25.1014 25.1014 22.5604 26.017 19.3089C27.2336 14.9888 31.2548 12.0673 35.7394 12.2453C39.1146 12.3792 42.3165 10.7477 44.1921 7.93837C46.6841 4.20565 51.4113 2.66971 55.6214 4.22478C58.79 5.39518 62.3394 4.83302 64.9913 2.74073Z"
+                    fill="#365D56"
+                  />
+                  <path
+                    d="M64.9913 2.74073C68.5148 -0.0392264 73.4852 -0.0392275 77.0087 2.74073C79.6606 4.83302 83.21 5.39518 86.3786 4.22478C90.5887 2.66971 95.3159 4.20566 97.8079 7.93837C99.6835 10.7477 102.885 12.3792 106.261 12.2453C110.745 12.0673 114.766 14.9888 115.983 19.3089C116.899 22.5604 119.44 25.1014 122.691 26.017C127.011 27.2336 129.933 31.2548 129.755 35.7394C129.621 39.1146 131.252 42.3165 134.062 44.1921C137.794 46.6841 139.33 51.4113 137.775 55.6214C136.605 58.79 137.167 62.3394 139.259 64.9913C142.039 68.5148 142.039 73.4852 139.259 77.0087C137.167 79.6606 136.605 83.21 137.775 86.3786C139.33 90.5888 137.794 95.3159 134.062 97.8079C131.252 99.6835 129.621 102.885 129.755 106.261C129.933 110.745 127.011 114.766 122.691 115.983C119.44 116.899 116.899 119.44 115.983 122.691C114.766 127.011 110.745 129.933 106.261 129.755C102.885 129.621 99.6835 131.252 97.8079 134.062C95.3159 137.794 90.5887 139.33 86.3786 137.775C83.21 136.605 79.6606 137.167 77.0087 139.259C73.4852 142.039 68.5148 142.039 64.9913 139.259C62.3394 137.167 58.79 136.605 55.6214 137.775C51.4113 139.33 46.6841 137.794 44.1921 134.062C42.3165 131.252 39.1146 129.621 35.7394 129.755C31.2548 129.933 27.2336 127.011 26.017 122.691C25.1014 119.44 22.5604 116.899 19.3089 115.983C14.9888 114.766 12.0673 110.745 12.2453 106.261C12.3792 102.885 10.7477 99.6835 7.93837 97.8079C4.20566 95.3159 2.66971 90.5887 4.22478 86.3786C5.39518 83.21 4.83302 79.6606 2.74073 77.0087C-0.039227 73.4852 -0.0392264 68.5148 2.74073 64.9913C4.83302 62.3394 5.39518 58.79 4.22478 55.6214C2.66971 51.4113 4.20565 46.6841 7.93837 44.1921C10.7477 42.3165 12.3792 39.1146 12.2453 35.7394C12.0673 31.2548 14.9888 27.2336 19.3089 26.017C22.5604 25.1014 25.1014 22.5604 26.017 19.3089C27.2336 14.9888 31.2548 12.0673 35.7394 12.2453C39.1146 12.3792 42.3165 10.7477 44.1921 7.93837C46.6841 4.20565 51.4113 2.66971 55.6214 4.22478C58.79 5.39518 62.3394 4.83302 64.9913 2.74073Z"
+                    fill="url(#paint0_linear_33_1391)"
+                    fill-opacity="0.2"
+                  />
+                  <path
+                    d="M95.7897 52.5264C105.399 58.2054 106.535 71.4242 99.3982 79.5769C95.5987 83.9176 82.371 97.5965 77.9419 99.446C71.3708 102.19 64.4135 101.254 58.7824 96.9986L59.0242 96.6786C68.379 98.6093 74.6744 92.7272 80.7086 86.9048C84.2663 83.4725 95.3826 72.7856 96.267 68.851C97.6093 62.8789 91.6508 56.8249 85.6207 57.5494C79.5905 58.2739 68.999 73.0276 63.6186 77.0387C61.9829 78.2585 60.4874 78.6669 58.5824 77.5881C58.0157 77.2672 51.6356 71.1041 51.1382 70.421C47.9668 66.0668 52.8917 61.6226 57.2434 64.8733C58.3559 65.7045 59.9191 68.3932 61.4073 67.6973C70.3276 59.7221 76.9599 46.942 91.3082 50.6641C92.686 51.0216 94.5676 51.8034 95.7889 52.5256L95.7897 52.5264Z"
+                    fill="white"
+                  />
+                  <path
+                    d="M66.7699 54.7548C67.2584 55.1919 68.3492 55.8893 68.0549 56.5971C67.7582 57.3113 63.5815 60.484 63.0188 61.5086L62.5584 61.3813C55.5439 52.4968 41.0223 61.8295 46.7534 71.7274C47.8023 73.5387 55.548 81.1923 57.382 82.2376C61.3451 84.4979 64.7553 83.2328 68.0638 80.705C71.5327 78.0546 83.0473 64.5524 85.3764 63.9879C88.7413 63.1726 91.9047 66.1384 90.3577 69.5037C89.512 71.3437 76.5536 83.7726 74.1786 85.8721C67.9541 91.3752 59.9996 93.0066 52.4732 88.7105C50.4199 87.5385 42.3364 79.8475 40.7386 77.7855C27.8672 61.1822 51.1197 40.7613 66.7699 54.7548Z"
+                    fill="white"
+                  />
+                  <defs>
+                    <linearGradient
+                      id="paint0_linear_33_1391"
+                      x1="71"
+                      y1="-2"
+                      x2="71"
+                      y2="144"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stop-opacity="0" />
+                      <stop offset="1" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.section>
-    </>
+    </div>
   );
 };
 

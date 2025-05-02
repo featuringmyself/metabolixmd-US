@@ -168,7 +168,7 @@ const NavBar = () => {
               <Link 
                 href="/" 
                 className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/" ? "font-semibold text-primary text-base underline decoration-2 underline-offset-8" : ''
+                  router.pathname == "/" ? "font-semibold text-primary text-base" : ''
                 }`}
               >
                 Home
@@ -176,7 +176,7 @@ const NavBar = () => {
               <Link 
                 href="/about-us" 
                 className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/about-us" ? "font-semibold text-primary text-base underline decoration-2 underline-offset-8" : ''
+                  router.pathname == "/about-us" ? "font-semibold text-primary text-base" : ''
                 }`}
               >
                 About Us
@@ -184,7 +184,7 @@ const NavBar = () => {
               <Link 
                 href="/contact" 
                 className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/contact" ? "font-semibold text-primary text-base underline decoration-2 underline-offset-8" : ''
+                  router.pathname == "/contact" ? "font-semibold text-primary text-base" : ''
                 }`}
               >
                 Contact
@@ -192,7 +192,7 @@ const NavBar = () => {
               <Link 
                 href="/faq" 
                 className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/faq" ? "font-semibold text-primary text-base underline decoration-2 underline-offset-8" : ''
+                  router.pathname == "/faq" ? "font-semibold text-primary text-base" : ''
                 }`}
               >
                 FAQ
@@ -328,7 +328,7 @@ const NavBar = () => {
                                 openSignUp();
                                 setIsOpen(false);
                               }}
-                              className='w-full py-3 px-4 text-base bg-[#365e65] rounded-full text-white text-center hover:bg-[#365e65]/90 transition-colors'
+                              className='w-full py-2 px-4 text-base bg-[#365e65] rounded-full text-white text-center hover:bg-[#365e65]/90 transition-colors'
                             >
                               Get Started
                             </button>
@@ -381,7 +381,7 @@ const NavBar = () => {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={openSignIn}
-                    className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                    className="text-sm font-medium text-primary hover:text-primary/80 transition-colors ring-1 ring-[#365e65] px-4 py-2 rounded-full"
                   >
                     Sign In
                   </button>

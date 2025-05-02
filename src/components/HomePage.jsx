@@ -9,6 +9,7 @@ import TrustSection from "./TrustSection";
 import ReviewsSection from "./ReviewsSection";
 import PricingSection from "./PricingSection";
 import WeightLossCalculatorSection from "./WeightLossCalculatorSection";
+import bgVector from "@/../public/images/metabolixmd-bg-vector.svg"
 
 // Removing the auth token import
 // import { getAuthToken } from '@/services/API/apiHelper'
@@ -262,7 +263,7 @@ const HomePage = () => {
               </span>
             </h1>
             
-            <p className="text-[#666666] text-lg md:max-w-[30%] max-w-[90%] md:my-20 my-5">
+            <p className="text-[#626262] text-lg md:max-w-[30%] max-w-[90%] md:my-20 my-5">
               Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you.
             </p>
 
@@ -303,10 +304,10 @@ const HomePage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="font-montserrat mx-auto max-w-[1600px] my-16 md:my-32"
+          className="font-montserrat mx-auto max-w-[1600px] my-16 md:my-32 "
         >
           {/* Step-by-Step Process heading and description */}
-          <div className="flex flex-col md:flex-row justify-between items-start mb-16 font-inter px-3">
+          <div className="  flex flex-col md:flex-row justify-between items-start mb-16 font-inter px-3">
             <div className="md:max-w-[50%]">
               <h2 className="text-4xl md:text-6xl font-semibold text-zinc-800">
                 Step-by-Step <br />
@@ -314,7 +315,7 @@ const HomePage = () => {
               </h2>
             </div>
             <div className="md:max-w-[40%] mt-6 md:mt-0">
-              <p className="text-zinc-600 mb-6">
+              <p className="text-[#626262] mb-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Suspendisse varius enim in eros elementum tristique. Duis
                 cursus, mi quis viverra
@@ -340,7 +341,7 @@ const HomePage = () => {
                 <h2 className="text-4xl md:text-6xl text-zinc-800 font-medium">
                   {stepDetails[activeStep].title}
                 </h2>
-                <p className="text-zinc-600 mt-4 max-w-xl md:text-lg text-xs te">
+                <p className="text-[#626262] mt-4 max-w-sm md:text-lg text-xs te">
                   {stepDetails[activeStep].description}
                 </p>
               </div>
@@ -411,57 +412,102 @@ const HomePage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="font-montserrat px-4 md:px-6 mx-auto max-w-[1600px] my-16 md:my-32 min-h-[100vh] md:min-h-[100vh] flex flex-col "
+          className="w-full bg-[#ECF4F2] py-16 md:py-64 rounded-b-[100px] relative z-30"
         >
-          <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-7xl font-medium leading-[1.1] mb-6">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-zinc-600 max-w-2xl mx-auto">
-              Get answers to the most common questions about GLP-1 medications
-              and our weight loss program.
-            </p>
-          </motion.div>
+          <div className="max-w-[1600px] mx-auto px-4 md:px-6">
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-7xl font-medium leading-[1.1] mb-6">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-zinc-600 max-w-2xl mx-auto">
+                Get answers to the most common questions about GLP-1 medications
+                and our weight loss program.
+              </p>
+            </motion.div>
 
-          <div className="flex flex-col lg:flex-row gap-8 md:gap-16">
-            <div className="lg:w-1/3">
-              <motion.div
-                variants={fadeInUp}
-                className="bg-[#365D56] p-8 md:p-10 rounded-3xl text-white h-full"
-              >
-                <h3 className="text-2xl md:text-4xl font-medium mb-6">
-                  Still have questions?
-                </h3>
-                <p className="mb-8 opacity-90">
-                  Our team is here to help you with any questions you may have
-                  about our weight loss program or GLP-1 medications.
-                </p>
-                <Link
-                  href="/contact-us"
-                  className="inline-block bg-white text-[#365D56] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors font-medium"
+            <div className="flex flex-col lg:flex-row gap-8 md:gap-16 ">
+              <div className="lg:w-1/3">
+                <motion.div
+                  variants={fadeInUp}
+                  className="bg-[#365D56] p-8 md:p-10 rounded-3xl text-white h-full"
                 >
-                  Contact Us
-                </Link>
-              </motion.div>
-            </div>
-            <div className="lg:w-2/3">
-              <motion.div
-                variants={fadeInUp}
-                className="p-8 md:p-10 rounded-3xl shadow-sm"
-              >
-                <FaqList />
-              </motion.div>
+                  <h3 className="text-2xl md:text-4xl font-medium mb-6">
+                    Still have questions?
+                  </h3>
+                  <p className="mb-8 opacity-90">
+                    Our team is here to help you with any questions you may have
+                    about our weight loss program or GLP-1 medications.
+                  </p>
+                  <Link
+                    href="/contact-us"
+                    className="inline-block bg-white text-[#365D56] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors font-medium"
+                  >
+                    Contact Us
+                  </Link>
+                </motion.div>
+              </div>
+              <div className="lg:w-2/3">
+                <motion.div
+                  variants={fadeInUp}
+                  className="p-8 md:p-10 rounded-3xl shadow-sm"
+                >
+                  <FaqList />
+                </motion.div>
+              </div>
             </div>
           </div>
         </motion.section>
 
-        <Footer />
+        <div className="relative z-30 flex justify-center ">
+          <div
+            className=" 
+              bg-[#365D56]
+              rounded-3xl
+              shadow-xl
+              px-40 py-24
+              mx-20
+              text-center
+              text-white
+              max-w-[70rem]
+              w-full
+              -mb-40
+              flex flex-col items-center
+            "
+            style={{
+              position: "absolute",
+              top: "-180px",
+              backgroundImage: ` url(${bgVector.src})`,
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <h2 className="text-3xl md:text-4xl mb-8">
+              What's your weight loss goal?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
+              <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+                Losing<br />1-20 lbs
+              </button>
+              <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+                Losing<br />21-50 lbs
+              </button>
+              <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+                Losing<br />51+ lbs
+              </button>
+              <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+                Not sure, I just want to lose the weight
+              </button>
+            </div>
+          </div>
+        </div>
+        <Footer/>
       </div>
     </div>
   );
