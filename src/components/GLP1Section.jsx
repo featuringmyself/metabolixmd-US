@@ -26,7 +26,7 @@ const GLP1Section = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerChildren}
-      className="-mt-36 pt-32 bg-[#365D56] w-full  text-white shadow-lg transform transition-all duration-300 hover:shadow-xl rounded-b-[100px] relative z-20"
+      className="-mt-36 pt-32 bg-[#365D56] w-full  text-white shadow-lg transform transition-all duration-300 hover:shadow-xl rounded-b-[35px] relative z-0"
     >
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}
@@ -85,60 +85,20 @@ const GLP1Section = () => {
               </div>
               <div className="md:w-1/2 flex justify-center items-center relative">
                 {/* Container with floating effect */}
-                <div className="relative w-full max-w-[500px] h-[400px] md:h-[500px] flex items-center justify-center">
-                  {/* Background glow effect */}
-                  <motion.div 
-                    animate={{ 
-                      scale: [1, 1.05, 1],
-                      opacity: [0.5, 0.7, 0.5]
-                    }}
-                    transition={{ 
-                      duration: 8, 
-                      repeat: Infinity,
-                      ease: "easeInOut" 
-                    }}
-                    className="absolute w-[300px] h-[300px] bg-gradient-to-r from-teal-50/30 to-emerald-50/30 rounded-full blur-xl"
-                  ></motion.div>
+                <div className="relative w-full max-w-[500px] h-[400px] md:h-[500px]">
+                  
                   
                   {/* Floating medication image */}
-                  <motion.div 
-                    animate={{ 
-                      y: ["-2%", "2%", "-2%"],
-                      scale: [1, 1.02, 1],
-                      rotate: ["-1deg", "1deg", "-1deg"]
-                    }}
-                    transition={{ 
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: [0.76, 0, 0.24, 1]
-                    }}
-                    className="relative w-[280px] md:w-[350px] h-[280px] md:h-[350px] bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-xl border border-white/30 overflow-hidden z-10"
+                  <div className="absolute -top-20 w-[280px] md:w-[350px] h-[280px] md:h-[550px] overflow-hidden z-50 "
                   >
                       <Image 
                         src="/images/41.webp" 
                         alt="GLP-1 Medication" 
                         fill 
-                        className="object-contain drop-shadow-lg transition-all duration-700"
+                        className="object-contain transition-all duration-700 "
                       />
                       
-                      {/* Modern minimalistic gradient animation */}
-                      <motion.div 
-                        animate={{ 
-                          background: [
-                            "linear-gradient(45deg, rgba(54, 93, 86, 0.05) 0%, transparent 70%)",
-                            "linear-gradient(225deg, rgba(54, 93, 86, 0.05) 0%, transparent 70%)",
-                            "linear-gradient(45deg, rgba(54, 93, 86, 0.05) 0%, transparent 70%)"
-                          ],
-                          opacity: [0.6, 0.8, 0.6]
-                        }}
-                        transition={{ 
-                          duration: 12,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                        className="absolute inset-0 mix-blend-overlay backdrop-blur-[1px] rounded-3xl"
-                      ></motion.div>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -165,7 +125,7 @@ const GLP1Section = () => {
               GLP-1 medications come in different forms, but they all work toward the same goal - supporting weight management and metabolic health. These treatments are typically delivered through vials with syringes or auto-injectors and can be self-administered. Each method ensures effective absorption, allowing the medication to work efficiently in your body. During your consultation with one of our healthcare professionals, we will help determine the best option for you.
             </motion.p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl mt-5">
               {/* Vial & Syringe Option */}
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
@@ -176,7 +136,7 @@ const GLP1Section = () => {
                 whileHover={{ y: -5 }}
               >
                 <motion.div 
-                  className="absolute top-0 right-[-2vw] w-[200px] h-[200px] md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
+                  className="absolute right-[-2vw] w-[200px] h-[200px] md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
                   animate={{ rotate: [0, 5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 >

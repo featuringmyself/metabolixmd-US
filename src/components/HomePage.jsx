@@ -257,20 +257,20 @@ const HomePage = () => {
                 Your Personalized<br />
                 Weight Loss
               </span>
-              <span className="text-[#333333] block">
+              <span className="text-[#2E2E2E] block">
                 Journey Starts
                 Here
               </span>
             </h1>
             
-            <p className="text-[#626262] text-lg md:max-w-[30%] max-w-[90%] md:my-20 my-5">
+            <p className="text-[#626262] text-lg md:max-w-[30%] max-w-[90%] md:my-10 my-5">
               Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you.
             </p>
 
             <motion.div>
               <Link
                 href="/get-started"
-                className="inline-flex items-center justify-center bg-[#365D56] text-white rounded-full px-8 py-2 text-lg font-medium relative overflow-hidden group"
+                className="inline-flex items-center justify-center bg-[#365D56] text-white rounded-full px-10 py-3 text-lg font-medium relative overflow-hidden group"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
@@ -304,10 +304,10 @@ const HomePage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="font-montserrat mx-auto max-w-[1600px] my-16 md:my-32 "
+          className="font-montserrat mx-auto px-[8vw] py-40 rounded-t-[100px] bg-white relative z-20 -mt-20"
         >
           {/* Step-by-Step Process heading and description */}
-          <div className="  flex flex-col md:flex-row justify-between items-start mb-16 font-inter px-3">
+          <div className="  flex flex-col md:flex-row justify-between items-start mb-16 font-inter px-3 ">
             <div className="md:max-w-[50%]">
               <h2 className="text-4xl md:text-6xl font-semibold text-zinc-800">
                 Step-by-Step <br />
@@ -329,7 +329,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="flex flex-col-reverse lg:flex-row gap-8 font-montserrat bg-[#F6F6F3] px-12 rounded-2xl">
+          <div className="flex flex-col-reverse lg:flex-row gap-8 font-montserrat bg-[#F6F6F3] pl-16 rounded-3xl">
             {/* Left side: Number, Title, description */}
             <div className="flex-1 flex flex-col justify-center ">
               {/* Orange numbered circle */}

@@ -45,14 +45,14 @@ export default function AdminLayout({ children }) {
 
             {/* Main Content */}
             <div className="flex-1 hidden lg:block overflow-x-auto">
-                <main className="max-h-screen h-screen bg-gray-50 relative">
+                <main className="bg-gray-50 relative">
                     {children}
                 </main>
             </div>
 
             {/* Mobile View */}
             <div className="flex-1 lg:hidden overflow-x-auto">
-                <main className="max-h-screen h-screen bg-gray-50">
+                <main className="bg-gray-50">
                     {children}
                 </main>
             </div>

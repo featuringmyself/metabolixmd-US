@@ -353,7 +353,7 @@ const AboutUs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white">
+    <div className="bg-gradient-to-b from-white via-gray-50 to-white">
       <Head>
         <title>About Us - MetabolixMD</title>
       </Head>
@@ -747,7 +747,7 @@ const AboutUs = () => {
         {/* Expert Cards Grid */}
         <motion.div
           variants={staggerContainer}
-          className="flex flex-wrap gap-28 justify-center "
+          className="flex flex-wrap items-center justify-evenly gap-24 mx-auto"
         >
           {expertDetails
             .filter((expert) => expert.name)

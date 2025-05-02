@@ -24,7 +24,7 @@ const WeightLossCalculatorSection = () => {
   const backgroundPattern = "/images/weightloss_calculator.webp";
 
   return (
-    <div className="-mt-64 min-h-screen">
+    <div className="min-h-screen -mt-40">
       <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-24 md:mb-32">
         {/* Weight Loss Calculator Card */}
         <motion.div
@@ -226,7 +226,7 @@ const WeightLossCalculatorSection = () => {
               </div>
 
               {/* Right: Text */}
-              <div className="w-1/2 flex flex-col justify-center pl-14 pr-4 py-6">
+              <div className="w-1/2 flex flex-col justify-center pl-24 pr-4 py-6">
               <h3 className="text-lg md:text-3xl font-medium text-[#2E2E2E] mb-2">
                   Lab tested & Certified
                 </h3>

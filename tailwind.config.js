@@ -33,13 +33,13 @@ module.exports = {
       },
       colors: {
         primary: {
-          DEFAULT: "#365d56",
+          DEFAULT: "#004F41",
           50: "#f0f5f4",
           100: "#d9e5e3",
           200: "#b3ccc8",
           300: "#8db2ac",
           400: "#679991",
-          500: "#365d56",  // Original primary
+          500: "#004F41",  // Original primary
           600: "#2e4f49",
           700: "#25413c",
           800: "#1c332f",
