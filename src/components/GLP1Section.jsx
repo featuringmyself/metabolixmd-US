@@ -45,7 +45,7 @@ const GLP1Section = () => {
         {/* Main Content Card */}
         <motion.div 
           variants={fadeIn}
-          className="bg-white text-black rounded-3xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl"
+          className="bg-white text-black rounded-3xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-2xl md:py-10 py-0"
         >
           {/* How GLP-1 Drugs Work Section */}
           <div className="p-8 md:p-16 lg:p-24">
@@ -56,7 +56,7 @@ const GLP1Section = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                   viewport={{ once: true }}
-                  className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 w-full md:w-[90%] leading-tight"
+                  className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 w-[90%] tracking-tight "
                 >
                   How GLP-1 Drugs Works
                 </motion.h3>
@@ -65,7 +65,7 @@ const GLP1Section = () => {
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
                   viewport={{ once: true }}
-                  className="text-gray-600 mb-8 w-full md:w-[90%] leading-relaxed"
+                  className="text-[#626262] mb-8 w-full md:w-[90%] leading-relaxed"
                 >
                   GLP-1 drugs help regulate blood sugar, slow digestion, and curb appetite. They trigger insulin production when needed, reduce the hormone that raises blood sugar, and keep food in the stomach longer, leading to increased fullness and lower calorie intake.
                 </motion.p>
@@ -89,7 +89,7 @@ const GLP1Section = () => {
                   
                   
                   {/* Floating medication image */}
-                  <div className="absolute -top-20 w-[280px] md:w-[350px] h-[280px] md:h-[550px] overflow-hidden z-50 "
+                  <div className="absolute md:-top-20 right-0 top-10 w-[280px] md:w-[350px] h-[350px] md:h-[450px] overflow-hidden z-50 "
                   >
                       <Image 
                         src="/images/41.webp" 
@@ -105,7 +105,7 @@ const GLP1Section = () => {
           </div>
 
           {/* Delivery Methods Section */}
-          <div className="p-8 md:p-16 text-start flex flex-col justify-center items-center">
+          <div className="p-8 md:p-0 text-start flex flex-col justify-center items-center">
             <motion.h3 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -120,23 +120,24 @@ const GLP1Section = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-gray-700 mb-12 w-[95%] md:w-[80%] text-center leading-relaxed"
+              className="text-[#626262] mb-12 w-[95%] md:w-[80%] md:text-center text-start leading-relaxed hidden md:block"
             >
               GLP-1 medications come in different forms, but they all work toward the same goal - supporting weight management and metabolic health. These treatments are typically delivered through vials with syringes or auto-injectors and can be self-administered. Each method ensures effective absorption, allowing the medication to work efficiently in your body. During your consultation with one of our healthcare professionals, we will help determine the best option for you.
             </motion.p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-4xl mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-5">
               {/* Vial & Syringe Option */}
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="relative bg-[#F98F48] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
+                className="relative bg-[#F98F4C] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
+                
                 whileHover={{ y: -5 }}
               >
                 <motion.div 
-                  className="absolute right-[-2vw] w-[200px] h-[200px] md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
+                  className="absolute md:right-[-2vw] -right-10 w-[60vw] h-[60vw] md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
                   animate={{ rotate: [0, 5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -149,15 +150,15 @@ const GLP1Section = () => {
                 </motion.div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto">
-                    <h4 className="text-2xl font-semibold text-black drop-shadow-sm">Vial & Syringe</h4>
-                    <p className="text-black/90 text-sm max-w-[80%] leading-relaxed my-2">
+                    <h4 className="md:text-2xl text-xl font-semibold text-black drop-shadow-sm">Vial & Syringe</h4>
+                    <p className="text-black/90 text-sm md:max-w-[80%] w-full leading-relaxed md:my-2 my-1">
                     A more traditional method, requiring manual dosage preparation before injection.
                     </p>
                   </div>
                   <div className="text-center">
                     <Link 
                       href="#" 
-                      className="inline-block text-sm px-2 py-2 text-black font-medium underline underline-offset-2"
+                      className="inline-block text-sm md:px-2 md:py-2 py-0 text-black font-medium underline underline-offset-2"
                     >
                       Important safety information
                     </Link>
@@ -171,11 +172,11 @@ const GLP1Section = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="relative bg-gradient-to-br from-emerald-700 to-emerald-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
+                className="relative bg-[#365D56] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 group min-h-[400px] md:min-h-[500px]"
                 whileHover={{ y: -5 }}
               >
                 <motion.div 
-                  className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[350px] md:h-[350px] transform translate-x-[5%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
+                  className="absolute top-0 right-0 w-[60vw] h-[60vw] md:w-[350px] md:h-[350px] transform translate-x-[5%] -translate-y-[5%] group-hover:translate-y-[-12%] transition-transform duration-500"
                   animate={{ rotate: [0, -5, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -188,21 +189,30 @@ const GLP1Section = () => {
                 </motion.div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto">
-                    <h4 className="text-2xl font-semibold text-white drop-shadow-sm">Auto-injectors</h4>
-                    <p className="text-white/90 text-sm max-w-[80%] leading-relaxed my-2">
+                    <h4 className="md:text-2xl text-xl font-semibold text-white drop-shadow-sm">Auto-injectors</h4>
+                    <p className="text-white/90 text-sm md:max-w-[80%] w-full leading-relaxed md:my-2 my-1">
                     Designed for quick and seamless administration, often with a single-use format.
                     </p>
                   </div>
                   <div className="text-center">
                     <Link 
                       href="#" 
-                      className="inline-block text-sm px-2 py-2 text-white font-medium underline underline-offset-2"
+                      className="inline-block text-sm md:px-2 px-0 md:py-2 py-0 text-white font-medium underline underline-offset-2"
                     >
                       Important safety information
                     </Link>
                   </div>
                 </div>
               </motion.div>
+              <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-[#626262] mb-12 w-[95%] md:w-[80%] md:text-center text-start leading-relaxed block md:hidden"
+            >
+              GLP-1 medications come in different forms, but they all work toward the same goal - supporting weight management and metabolic health. These treatments are typically delivered through vials with syringes or auto-injectors and can be self-administered. Each method ensures effective absorption, allowing the medication to work efficiently in your body. During your consultation with one of our healthcare professionals, we will help determine the best option for you.
+            </motion.p>
             </div>
           </div>
         </motion.div>

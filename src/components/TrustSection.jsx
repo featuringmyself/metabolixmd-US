@@ -127,12 +127,12 @@ const TrustSection = () => {
             <motion.div
               key={index}
               variants={fadeIn}
-              className="flex items-center justify-center gap-4"
+              className="flex items-center md:justify-center justify-start gap-6"
             >
-              <div className="relative w-16 h-16 flex items-center justify-center">
+              <div className="relative w-12 h-12 flex items-center justify-center">
                 {feature.icon}
               </div>
-              <h3 className="text-lg font-medium mb-1 max-w-[45%]">{feature.title}</h3>
+              <h3 className="text-lg font-medium mb-1 md:max-w-[45%] max-w-full">{feature.title}</h3>
             </motion.div>
           ))}
         </div>

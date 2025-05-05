@@ -5,11 +5,11 @@ import Footer from "@/components/Footer";
 import Introduction from "@/components/Intro";
 import MeetExpertBackground from "@/components/MeetExpertBackground";
 import NavBar from "@/components/NavBar";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
-import heroImg from "@/../public/images/aboutHeroImg.png";
+import heroImg from "@/../public/images/aboutHeroImg.jpg";
 import scienceBehindResults from "@/../public/images/scienceBehindResults.png";
 import bgVector from "@/../public/images/metabolixmd-bg-vector.svg";
 import founder from "@/../public/images/founder.png"
@@ -229,7 +229,7 @@ const expertDetails = [
       </div>
     ),
   },
-  
+
   {
     route: "about-kurt",
     img: "/images/dr5.svg",
@@ -308,22 +308,98 @@ const AboutUs = () => {
   const [activeExpert, setActiveExpert] = useState(null);
   const [hoveredExpert, setHoveredExpert] = useState(null);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const sliderRef = useRef(null);
 
   // Add effect to handle body scroll
   useEffect(() => {
     if (showOverlay) {
-      // Just prevent scrolling on the body
       document.body.style.overflow = "hidden";
     } else {
-      // Restore scrolling
       document.body.style.overflow = "";
     }
 
     return () => {
-      // Cleanup
       document.body.style.overflow = "";
     };
   }, [showOverlay]);
+
+  // Add effect to handle mobile detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Add touch handling for mobile swipe
+  useEffect(() => {
+    if (!isMobile || !sliderRef.current) return;
+
+    let startX = 0;
+    let scrollLeft = 0;
+
+    const handleTouchStart = (e) => {
+      startX = e.touches[0].pageX - sliderRef.current.offsetLeft;
+      scrollLeft = sliderRef.current.scrollLeft;
+    };
+
+    const handleTouchMove = (e) => {
+      if (!startX) return;
+      const x = e.touches[0].pageX - sliderRef.current.offsetLeft;
+      const walk = (x - startX) * 2;
+      sliderRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleTouchEnd = () => {
+      startX = 0;
+      const slideWidth = sliderRef.current.offsetWidth;
+      const scrollPosition = sliderRef.current.scrollLeft;
+      const slideIndex = Math.round(scrollPosition / slideWidth);
+      setCurrentSlide(slideIndex);
+    };
+
+    const handleScroll = () => {
+      if (!sliderRef.current) return;
+      const slideWidth = sliderRef.current.offsetWidth;
+      const scrollPosition = sliderRef.current.scrollLeft;
+      const slideIndex = Math.round(scrollPosition / slideWidth);
+      setCurrentSlide(slideIndex);
+    };
+
+    const slider = sliderRef.current;
+    slider.addEventListener('touchstart', handleTouchStart);
+    slider.addEventListener('touchmove', handleTouchMove);
+    slider.addEventListener('touchend', handleTouchEnd);
+    slider.addEventListener('scroll', handleScroll);
+
+    return () => {
+      slider.removeEventListener('touchstart', handleTouchStart);
+      slider.removeEventListener('touchmove', handleTouchMove);
+      slider.removeEventListener('touchend', handleTouchEnd);
+      slider.removeEventListener('scroll', handleScroll);
+    };
+  }, [isMobile]);
+
+  // Add effect to handle initial scroll position
+  useEffect(() => {
+    if (!isMobile || !sliderRef.current) return;
+
+    const handleResize = () => {
+      const slideWidth = sliderRef.current.offsetWidth;
+      const scrollPosition = sliderRef.current.scrollLeft;
+      const slideIndex = Math.round(scrollPosition / slideWidth);
+      setCurrentSlide(slideIndex);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobile]);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -353,16 +429,16 @@ const AboutUs = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-white via-gray-50 to-white">
+    <div className="bg-gradient-to-b from-white via-gray-50 to-white ">
       <Head>
         <title>About Us - MetabolixMD</title>
       </Head>
       <NavBar />
 
-      <div className="flex justify-between items-center bg-[#ECF4F2] mt-20 pb-36">
-        <div className="max-w-2xl text-semibold pl-40 py-16">
-          <h1 className="text-xl text-[#386057] mb-5">About MetabolixMD</h1>
-          <h3 className="text-6xl font-medium text-[#2E2E2E]">
+      <div className="flex justify-between items-center bg-[#ECF4F2] mt-20 pb-16">
+        <div className="md:max-w-2xl max-w-full text-semibold md:pl-40 pl-5 md:py-16 py-0 pt-10">
+          <h1 className="text-xl text-[#386057] mb-5 md:block hidden">About MetabolixMD</h1>
+          <h3 className="md:text-6xl text-5xl font-medium text-[#2E2E2E]">
             <span className="text-[#004F41]">Your Trusted Partner In</span>{" "}
             Metabolic Health
           </h3>
@@ -377,7 +453,7 @@ const AboutUs = () => {
             Our telehealth approach gives you direct access to GLP-1 medications
             with:
           </p>
-          <div className="mt-10 flex justify-evenly">
+          <div className="mt-10 flex justify-evenly flex-wrap max-w-xl ">
             <div className="flex flex-col text-center items-center justify-center">
               <svg
                 width="79"
@@ -532,22 +608,25 @@ const AboutUs = () => {
             top-tier compounding pharmacies in the U.S.
           </p>
         </div>
-        <div>
-          <Image src={heroImg} width={674} height={843} />
+        <div className="md:block hidden">
+          <Image src={heroImg} width={674} height={843} className="rounded-tl-[80px] rounded-bl-[80px]" />
         </div>
       </div>
+      <div className="pb-32 px-5 bg-[#ECF4F2] md:hidden block">
+        <Image src={heroImg} width={674} height={843} className="rounded-[40px]" />
+      </div>
 
-      <div className="bg-[#365D56] text-white flex flex-col items-center justify-center text-center px-96 py-32 rounded-[5vw] -mt-14">
-        <h1 className="text-3xl font-extralight">
-          <span className="font-bold">Our mission</span> is to provide fast,
+      <div className="bg-[#365D56] text-white flex flex-col items-center justify-center text-center md:px-96 px-5 md:py-32 py-20 md:rounded-[100px] rounded-[50px] -mt-14">
+        <h1 className="md:text-3xl text-2xl font-light">
+          <span className="font-extralight">Our mission</span> is to provide fast,
           efficient, and expert telehealth services focused exclusively on{" "}
           <span className="font-bold">Metabolic Health</span>. We're committed
           to patient privacy, safety, and convenience—empowering you to take
           control of your health from the comfort of your home.
         </h1>
 
-        <div className="flex justify-evenly items-start my-10 mt-20 gap-28">
-          <div className="flex flex-col gap-5 items-center justify-center">
+        <div className="flex md:flex-row flex-col justify-evenly items-start my-10 mt-20 md:gap-28 gap-14">
+          <div className="flex flex-col  gap-5 items-center justify-center">
             <svg
               width="92"
               height="92"
@@ -562,7 +641,7 @@ const AboutUs = () => {
               />
             </svg>
             <h5 className="text-4xl">Privacy</h5>
-            <p className="max-w-xs opacity-70">
+            <p className="max-w-xs opacity-70 ">
               We take your privacy seriously. Your health data is encrypted and
               stored securely, and all care is delivered with discretion and
               respect.
@@ -636,27 +715,27 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className="flex justify-evenly items-center mt-24">
+      <div className="flex md:flex-row flex-col justify-evenly items-center mt-24 md:px-0 px-14">
         <div className="max-w-lg">
-          <Image src={founder} width={538} height={657}  className="rounded-3xl"/>
+          <Image src={founder} width={538} height={657} className="rounded-3xl" />
         </div>
-        <div className="max-w-xl">
-          <h4 className="text-[#004F41] text-6xl font-medium tracking-tight">A Personal Journey:</h4>
-          <h4 className="text-[#2E2E2E] text-6xl font-medium tracking-tight">Our Founder's Story</h4>
-          <p className=" text-[#000000CC] mt-10 opacity-[80%]">	“The story of MetabolixMD is personal to me. I’ve struggled with weight my entire life—trying everything from exercise and dieting to fasting and fads. <span className="text-black">Nothing worked.</span> After studying GLP-1 medications for two years, I finally started treatment in September 2023. Since then...</p>
+        <div className="md:max-w-xl max-w-full flex flex-col justify-center items-center mt-10">
+          <h4 className="text-[#004F41] md:text-6xl text-3xl font-medium tracking-tight">A Personal Journey:</h4>
+          <h4 className="text-[#2E2E2E] md:text-6xl text-3xl font-medium tracking-tight">Our Founder's Story</h4>
+          <p className=" text-[#000000CC] mt-10 opacity-[80%]">	“The story of MetabolixMD is personal to me. I've struggled with weight my entire life—trying everything from exercise and dieting to fasting and fads. <span className="text-black">Nothing worked.</span> After studying GLP-1 medications for two years, I finally started treatment in September 2023. Since then...</p>
 
-        <ul className="list-disc list-inside mt-5 text-[#000000CC] opacity-[80%]">
-          <li>I’ve lost nearly 70 pounds.</li>
-          <li>My asthma disappeared after one month.</li>
-          <li>I no longer need medication for hypertension.</li> 
-          <li>I sleep better, breathe better, and <span className="text-black  font-semibold">feel like I’m 20 again—at nearly 60 years old</span></li>
-        </ul>
+          <ul className="list-disc list-inside mt-5 text-[#000000CC] opacity-[80%]">
+            <li>I've lost nearly 70 pounds.</li>
+            <li>My asthma disappeared after one month.</li>
+            <li>I no longer need medication for hypertension.</li>
+            <li>I sleep better, breathe better, and <span className="text-black  font-semibold">feel like I'm 20 again—at nearly 60 years old</span></li>
+          </ul>
 
-        <p className="mt-10 text-[#000000CC] opacity-[80%]">
-        We created MetabolixMD so others could access this life-changing treatment the same way I did—quickly, privately, and safely. That’s when Ashley and I teamed up and launched this company together.”
-        </p>
-        <Image src={founderSign} width={400} height={100} className="mt-1" />
-        <p className="text-[#000000CC] opacity-[80%]">- Founder, Metabolixmd</p>
+          <p className="mt-10 text-[#000000CC] opacity-[80%]">
+            We created MetabolixMD so others could access this life-changing treatment the same way I did—quickly, privately, and safely. That's when Ashley and I teamed up and launched this company together."
+          </p>
+          <Image src={founderSign} width={400} height={100} className="md:mt-1 mt-10" />
+          <p className="text-[#000000CC] opacity-[80%]">- Founder, Metabolixmd</p>
         </div>
       </div>
 
@@ -667,7 +746,7 @@ const AboutUs = () => {
         className="max-w-7xl mx-auto px-4 pt-24 pb-16"
       >
         <motion.div variants={fadeInUp} className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary font-montserrat mb-6 flex justify-center items-center gap-5">
+          <h1 className="text-5xl  md:font-bold font-medium text-primary font-montserrat mb-6 flex justify-center items-center flex-wrap   gap-5">
             The{" "}
             <svg
               width="317"
@@ -675,6 +754,7 @@ const AboutUs = () => {
               viewBox="0 0 317 44"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className=""
             >
               <svg
                 width="317"
@@ -744,60 +824,142 @@ const AboutUs = () => {
           </p>
         </motion.div>
 
-        {/* Expert Cards Grid */}
-        <motion.div
-          variants={staggerContainer}
-          className="flex flex-wrap items-center justify-evenly gap-24 mx-auto"
-        >
-          {expertDetails
-            .filter((expert) => expert.name)
-            .map((expert, index) => (
-              <motion.div
-                key={expert.route}
-                variants={fadeInUp}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  scale: hoveredExpert === expert.route ? 1.01 : 1,
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                }}
-                onHoverStart={() => setHoveredExpert(expert.route)}
-                onHoverEnd={() => setHoveredExpert(null)}
-                onClick={() => {
-                  setActiveExpert(expert);
-                  setShowOverlay(true);
-                }}
-                className="group relative overflow-hidden rounded-[60px] cursor-pointer"
-              >
-                <div className="relative h-[400px] overflow-hidden ">
-                  {expert.img && (
-                    <motion.img
-                      src={expert.img}
-                      alt={expert.name}
-                      className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-102"
-                    />
-                  )}
-                  <div className="absolute inset-0" />
-                </div>
-                <div className="bg-[#F9FAFB] rounded-lg px-4 py-3 text-center font-bold">
-                  <h3 className="text-2xl font-bold font-montserrat text-[#004F41]">
-                    {expert.name}
-                  </h3>
-                  {expert.mainRole || expert.designation ? (
-                    <p className="text-sm text-[#004F41] font-light">
-                      {expert.mainRole && expert.designation
-                        ? `${expert.mainRole}, ${expert.designation}`
-                        : expert.mainRole || expert.designation}
-                    </p>
-                  ) : null}
-                </div>
-              </motion.div>
-            ))}
-        </motion.div>
+        {/* Expert Cards Grid/Carousel */}
+        {isMobile ? (
+          <div className="relative">
+            <div
+              ref={sliderRef}
+              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {expertDetails
+                .filter((expert) => expert.name)
+                .map((expert, index) => (
+                  <div
+                    key={expert.route}
+                    className="flex-none w-full snap-center px-4"
+                  >
+                    <motion.div
+                      variants={fadeInUp}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                        delay: index * 0.1,
+                      }}
+                      onClick={() => {
+                        setActiveExpert(expert);
+                        setShowOverlay(true);
+                      }}
+                      className="group relative overflow-hidden rounded-[60px] cursor-pointer  "
+                    >
+                      <div className="relative h-[400px] overflow-hidden ">
+                        {expert.img && (
+                          <motion.img
+                            src={expert.img}
+                            alt={expert.name}
+                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-102"
+                          />
+                        )}
+                        <div className="absolute inset-0" />
+                      </div>
+                      <div className="bg-[#F9FAFB] rounded-lg px-4 py-3 text-center font-bold  ">
+                        <h3 className="text-2xl font-bold font-montserrat text-[#004F41]">
+                          {expert.name}
+                        </h3>
+                        {expert.mainRole || expert.designation ? (
+                          <p className="text-sm text-[#004F41] font-light">
+                            {expert.mainRole && expert.designation
+                              ? `${expert.mainRole}, ${expert.designation}`
+                              : expert.mainRole || expert.designation}
+                          </p>
+                        ) : null}
+                      </div>
+                    </motion.div>
+                  </div>
+                ))}
+            </div>
+            {/* Pagination Dots */}
+            <div className="flex justify-center gap-2 mt-6">
+              {expertDetails
+                .filter((expert) => expert.name)
+                .map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      if (sliderRef.current) {
+                        const slideWidth = sliderRef.current.offsetWidth;
+                        sliderRef.current.scrollTo({
+                          left: slideWidth * index,
+                          behavior: 'smooth'
+                        });
+                        setCurrentSlide(index);
+                      }
+                    }}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-[#365D56] w-4' : 'bg-gray-300'
+                      }`}
+                  />
+                ))}
+            </div>
+          </div>
+        ) : (
+          <motion.div
+            variants={staggerContainer}
+            className="flex flex-wrap items-center justify-evenly gap-24 mx-auto"
+          >
+            {expertDetails
+              .filter((expert) => expert.name)
+              .map((expert, index) => (
+                <motion.div
+                  key={expert.route}
+                  variants={fadeInUp}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: hoveredExpert === expert.route ? 1.01 : 1,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1,
+                  }}
+                  onHoverStart={() => setHoveredExpert(expert.route)}
+                  onHoverEnd={() => setHoveredExpert(null)}
+                  onClick={() => {
+                    setActiveExpert(expert);
+                    setShowOverlay(true);
+                  }}
+                  className="group relative overflow-hidden rounded-[60px] cursor-pointer"
+                >
+                  <div className="relative h-[400px] overflow-hidden">
+                    {expert.img && (
+                      <motion.img
+                        src={expert.img}
+                        alt={expert.name}
+                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-102"
+                      />
+                    )}
+                    <div className="absolute inset-0" />
+                  </div>
+                  <div className="bg-[#F9FAFB] rounded-lg px-4 py-3 text-center font-bold">
+                    <h3 className="text-2xl font-bold font-montserrat text-[#004F41]">
+                      {expert.name}
+                    </h3>
+                    {expert.mainRole || expert.designation ? (
+                      <p className="text-sm text-[#004F41] font-light">
+                        {expert.mainRole && expert.designation
+                          ? `${expert.mainRole}, ${expert.designation}`
+                          : expert.mainRole || expert.designation}
+                      </p>
+                    ) : null}
+                  </div>
+                </motion.div>
+              ))}
+          </motion.div>
+        )}
 
         {/* Introduction Section */}
         <motion.div variants={fadeInUp} className="mt-20">
@@ -892,9 +1054,9 @@ const AboutUs = () => {
               exit="exit"
               onClick={() => setShowOverlay(false)}
             />
-            <div className="fixed  inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
               <motion.div
-                className="bg-white  rounded-[32px] w-full max-w-[1200px] max-h-[80vh] overflow-y-auto relative"
+                className="bg-white rounded-[32px] w-full max-w-[1200px] max-h-[60vh] overflow-y-auto relative"
                 variants={modalVariants}
                 initial="hidden"
                 animate="visible"
@@ -921,7 +1083,7 @@ const AboutUs = () => {
                   </svg>
                 </button>
 
-                <div className="flex items-center gap-12 p-12">
+                <div className="flex md:flex-row flex-col items-center gap-5 p-5">
                   <div className="relative w-[300px] h-[300px] flex-shrink-0 bg-[#ECF4F2] rounded-[40px]">
                     <Image
                       src={activeExpert.img}
@@ -933,8 +1095,8 @@ const AboutUs = () => {
                     />
                   </div>
 
-                  <div>
-                    <div className="">
+                  <div className="md:text-left text-center">
+                    <div className="md:block hidden">
                       <h1 className="text-4xl font-semibold text-[#004F41]">
                         <span className="text-[#2E2E2E]">
                           {activeExpert.name},
@@ -945,6 +1107,20 @@ const AboutUs = () => {
                         {activeExpert.mainRole}, {activeExpert.designation}
                       </p>
                       <p className="text-lg text-[#365D56] font-medium">
+                        {activeExpert.detailedJob}
+                      </p>
+                    </div>
+                    <div className="md:hidden block">
+                      <h1 className="text-3xl font-semibold text-[#004F41]">
+                        <span className="text-[#2E2E2E]">
+                          {activeExpert.name},
+                        </span>{" "}
+                        {activeExpert.subName}
+                      </h1>
+                      <p className="mt-2 text-base text-[#365D56] font-medium">
+                        {activeExpert.mainRole}, {activeExpert.designation}
+                      </p>
+                      <p className="text-base text-[#365D56] font-medium">
                         {activeExpert.detailedJob}
                       </p>
                     </div>
@@ -960,253 +1136,262 @@ const AboutUs = () => {
             </div>
           </>
         )}
-        </AnimatePresence>
-        <div className="relative flex justify-between items-center bg-[#ECF4F2] pl-20  rounded-b-[100px] z-30 -mb-24">
-          <div className="max-w-[38%]">
-            <h1 className="text-6xl font-semibold text-[#2E2E2E]">
-              <span className="text-[#365D56]">The Science</span> Behind Your
-              Results
-            </h1>
-            <p className="text-lg text-black font-light mt-10">
-              MetabolixMD is built on evidence—not trends. Our protocols are
-              guided by board-certified providers and grounded in clinical
-              research. GLP-1 medications are proven to support weight loss and
-              improve metabolic health.
-            </p>
-            <div className="flex flex-col items-center gap-4 mt-12 max-w-md">
-              <div className="flex bg-white rounded-full items-center py-5 pl-10 gap-4 w-full">
-                <svg
-                  width="41"
-                  height="41"
-                  viewBox="0 0 41 41"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M27.8214 4.39307H32.2143C32.991 4.39307 33.7359 4.70161 34.2851 5.25082C34.8343 5.80004 35.1429 6.54493 35.1429 7.32164V36.6074C35.1429 37.3841 34.8343 38.129 34.2851 38.6782C33.7359 39.2274 32.991 39.5359 32.2143 39.5359H8.78572C8.00901 39.5359 7.26412 39.2274 6.71491 38.6782C6.16569 38.129 5.85715 37.3841 5.85715 36.6074V7.32164C5.85715 6.54493 6.16569 5.80004 6.71491 5.25082C7.26412 4.70161 8.00901 4.39307 8.78572 4.39307H13.1786"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M24.8929 1.46436H16.1071C15.3304 1.46436 14.5855 1.7729 14.0363 2.32211C13.4871 2.87133 13.1786 3.61622 13.1786 4.39293V5.85721C13.1786 6.63392 13.4871 7.37881 14.0363 7.92803C14.5855 8.47724 15.3304 8.78578 16.1071 8.78578H24.8929C25.6696 8.78578 26.4145 8.47724 26.9637 7.92803C27.5129 7.37881 27.8214 6.63392 27.8214 5.85721V4.39293C27.8214 3.61622 27.5129 2.87133 26.9637 2.32211C26.4145 1.7729 25.6696 1.46436 24.8929 1.46436ZM18.4588 15.2579C18.1248 15.2579 17.8045 15.3906 17.5683 15.6268C17.3322 15.8629 17.1995 16.1832 17.1995 16.5172V20.052H13.6647C13.3307 20.052 13.0104 20.1847 12.7743 20.4208C12.5381 20.657 12.4054 20.9773 12.4054 21.3113V25.3966C12.4054 26.0907 12.9706 26.6559 13.6647 26.6559H17.1995V30.1907C17.1995 30.8848 17.7647 31.45 18.4588 31.45H22.5441C22.8781 31.45 23.1984 31.3173 23.4346 31.0812C23.6708 30.845 23.8034 30.5247 23.8034 30.1907V26.6501H27.3382C27.6722 26.6501 27.9925 26.5174 28.2287 26.2812C28.4648 26.0451 28.5975 25.7248 28.5975 25.3908V21.3113C28.5967 20.9778 28.4637 20.6583 28.2276 20.4227C27.9916 20.1872 27.6717 20.0549 27.3382 20.0549H23.8034V16.5143C23.8027 16.1808 23.6696 15.8613 23.4336 15.6257C23.1975 15.3902 22.8776 15.2579 22.5441 15.2579H18.4588Z"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <p className="text-lg font-medium">Evidence-based treatments</p>
-              </div>
-
-              <div className="flex bg-white rounded-full items-center py-5 pl-10 gap-4 w-full">
-                <svg
-                  width="44"
-                  height="51"
-                  viewBox="0 0 44 51"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M15.1351 40.8337H4.64711C3.68117 40.8337 2.89828 40.0759 2.89828 39.1409V18.8371C2.89828 13.7604 8.14311 14.6068 8.14311 11.1912V7.83887"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M22.1272 7.83789V11.1902C22.1272 14.6074 27.372 13.761 27.372 18.8362V25.6041"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M8.00583 12.0679H22.2644"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M16.884 7.83756H7.26872C6.30278 7.83756 5.5199 7.07977 5.5199 6.14479V3.60879C5.5199 2.67381 6.30278 1.91602 7.26872 1.91602H23.0016C23.9675 1.91602 24.7504 2.67381 24.7504 3.60879V6.14637C24.7504 7.08135 23.9675 7.83914 23.0016 7.83914H20.3783"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M2.89828 19.6826H18.6311V26.4521"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M2.89828 34.9121H13.3879"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M20.598 35.8875H27.8345H20.598ZM24.2162 39.6V32.1749V39.6ZM14.5676 36.1993C14.5676 45.712 22.9112 49.0533 24.0799 49.4752C24.1708 49.5082 24.2616 49.5082 24.3525 49.4752C25.5236 49.0669 33.8649 45.8098 33.8649 36.2005V27.6011C33.8651 27.4905 33.8293 27.383 33.763 27.2958C33.6968 27.2085 33.604 27.1466 33.4994 27.1197L24.3332 24.7648C24.2564 24.7451 24.176 24.7451 24.0992 24.7648L14.933 27.1197C14.8284 27.1466 14.7356 27.2085 14.6694 27.2958C14.6032 27.383 14.5673 27.4905 14.5676 27.6011V36.1993Z"
-                    fill="white"
-                  />
-                  <path
-                    d="M20.598 35.8875H27.8345M24.2162 39.6V32.1749M14.5676 36.1993C14.5676 45.712 22.9112 49.0533 24.0799 49.4752C24.1708 49.5082 24.2616 49.5082 24.3525 49.4752C25.5236 49.0669 33.8649 45.8098 33.8649 36.2005V27.6011C33.8651 27.4905 33.8293 27.383 33.763 27.2958C33.6968 27.2085 33.604 27.1466 33.4994 27.1197L24.3332 24.7648C24.2564 24.7451 24.176 24.7451 24.0992 24.7648L14.933 27.1197C14.8284 27.1466 14.7356 27.2085 14.6694 27.2958C14.6032 27.383 14.5673 27.4905 14.5676 27.6011V36.1993Z"
-                    stroke="#FD7823"
-                    stroke-width="1.75"
-                    stroke-miterlimit="10"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-
-                <p className="text-lg font-medium">
-                  Uncompromising product safety
-                </p>
-              </div>
-              <div className="flex bg-white rounded-full items-center py-5 pl-10 gap-4 w-full">
-                <svg
-                  width="42"
-                  height="41"
-                  viewBox="0 0 42 41"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M20.7614 11.1655V15.3421C25.498 15.3421 29.3383 19.1824 29.3383 23.919C29.3383 28.6557 25.498 32.496 20.7614 32.496H10.8178C8.27831 32.496 6.21875 34.5555 6.21875 37.095L30.7768 37.0902C33.6896 34.23 35.5134 30.1995 35.5134 25.9188C35.5134 17.7715 28.9087 11.1655 20.7602 11.1655H20.7614Z"
-                    fill="white"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M6.21875 37.093C6.21875 34.5536 8.27712 32.494 10.8178 32.494H20.7614C25.498 32.494 29.3383 28.6537 29.3383 23.9171C29.3383 19.1804 25.498 15.3401 20.7614 15.3401V11.1636C28.9099 11.1636 35.5146 17.7683 35.5146 25.9168C35.5146 30.1987 33.6908 34.2281 30.778 37.0882"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M6.21875 29.3628H17.0611"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M1.72656 39.8843H39.001"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M27.7847 2.21095L14.7141 15.2815C14.2701 15.7255 14.2701 16.4454 14.7141 16.8894L20.1586 22.3339C20.6026 22.7779 21.3224 22.7779 21.7664 22.3339L34.837 9.26329C35.281 8.81931 35.281 8.09947 34.837 7.65549L29.3925 2.21094C28.9485 1.76696 28.2286 1.76696 27.7847 2.21095Z"
-                    fill="white"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M32.8594 1.52686L35.5221 4.18837"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M14.0293 20.3589L16.6908 23.0216"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M30.333 16.5098C30.5335 15.2668 29.6883 14.0966 28.4453 13.8962C27.2023 13.6958 26.0321 14.541 25.8317 15.784C25.6312 17.027 26.4764 18.1972 27.7194 18.3976C28.9625 18.598 30.1326 17.7528 30.333 16.5098Z"
-                    fill="white"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M30.333 16.5098C30.5335 15.2668 29.6883 14.0966 28.4453 13.8962C27.2023 13.6958 26.0321 14.541 25.8317 15.784C25.6312 17.027 26.4764 18.1972 27.7194 18.3976C28.9625 18.598 30.1326 17.7528 30.333 16.5098Z"
-                    fill="white"
-                    stroke="#FD7823"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-
-                <p className="text-lg font-medium">Evidence-based treatments</p>
-              </div>
+      </AnimatePresence>
+      <div className="relative flex justify-between items-center bg-[#ECF4F2] md:pl-20 pl-5 md:py-0 py-20 md:rounded-b-[100px] rounded-none z-30 -mb-24">
+        <div className="md:max-w-[38%] max-w-full">
+          <h1 className="md:text-6xl text-5xl font-medium text-[#2E2E2E]">
+            <span className="text-[#365D56]">The Science</span> Behind Your
+            Results
+          </h1>
+          <p className="text-lg text-black font-extralight opacity-70 mt-10">
+            MetabolixMD is built on evidence—not trends. Our protocols are
+            guided by board-certified providers and grounded in clinical
+            research. GLP-1 medications are proven to support weight loss and
+            improve metabolic health.
+          </p>
+          <div className="flex flex-col items-center gap-4 mt-12 max-w-md">
+            <div className="flex bg-white rounded-full items-center py-5 pl-10 gap-4 w-full">
+              <svg
+                width="41"
+                height="41"
+                viewBox="0 0 41 41"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M27.8214 4.39307H32.2143C32.991 4.39307 33.7359 4.70161 34.2851 5.25082C34.8343 5.80004 35.1429 6.54493 35.1429 7.32164V36.6074C35.1429 37.3841 34.8343 38.129 34.2851 38.6782C33.7359 39.2274 32.991 39.5359 32.2143 39.5359H8.78572C8.00901 39.5359 7.26412 39.2274 6.71491 38.6782C6.16569 38.129 5.85715 37.3841 5.85715 36.6074V7.32164C5.85715 6.54493 6.16569 5.80004 6.71491 5.25082C7.26412 4.70161 8.00901 4.39307 8.78572 4.39307H13.1786"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M24.8929 1.46436H16.1071C15.3304 1.46436 14.5855 1.7729 14.0363 2.32211C13.4871 2.87133 13.1786 3.61622 13.1786 4.39293V5.85721C13.1786 6.63392 13.4871 7.37881 14.0363 7.92803C14.5855 8.47724 15.3304 8.78578 16.1071 8.78578H24.8929C25.6696 8.78578 26.4145 8.47724 26.9637 7.92803C27.5129 7.37881 27.8214 6.63392 27.8214 5.85721V4.39293C27.8214 3.61622 27.5129 2.87133 26.9637 2.32211C26.4145 1.7729 25.6696 1.46436 24.8929 1.46436ZM18.4588 15.2579C18.1248 15.2579 17.8045 15.3906 17.5683 15.6268C17.3322 15.8629 17.1995 16.1832 17.1995 16.5172V20.052H13.6647C13.3307 20.052 13.0104 20.1847 12.7743 20.4208C12.5381 20.657 12.4054 20.9773 12.4054 21.3113V25.3966C12.4054 26.0907 12.9706 26.6559 13.6647 26.6559H17.1995V30.1907C17.1995 30.8848 17.7647 31.45 18.4588 31.45H22.5441C22.8781 31.45 23.1984 31.3173 23.4346 31.0812C23.6708 30.845 23.8034 30.5247 23.8034 30.1907V26.6501H27.3382C27.6722 26.6501 27.9925 26.5174 28.2287 26.2812C28.4648 26.0451 28.5975 25.7248 28.5975 25.3908V21.3113C28.5967 20.9778 28.4637 20.6583 28.2276 20.4227C27.9916 20.1872 27.6717 20.0549 27.3382 20.0549H23.8034V16.5143C23.8027 16.1808 23.6696 15.8613 23.4336 15.6257C23.1975 15.3902 22.8776 15.2579 22.5441 15.2579H18.4588Z"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <p className="text-lg font-medium">Evidence-based treatments</p>
             </div>
-          </div>
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#ECF4F2] to-transparent z-10 max-w-[40%]"></div>
-            <Image
-              src={scienceBehindResults}
-              alt="science behind results"
-              className="max-h-screen relative z-0 rounded-b-[100px]"
-            />
-          </div>
-        </div>
-        <div className="relative z-30 flex justify-center ">
-          <div
-            className=" 
-              bg-[#365D56]
-              rounded-3xl
-              shadow-xl
-              px-40 py-24
-              mx-20
-              text-center
-              text-white
-              max-w-[70rem]
-              w-full
-              -mb-50
-              flex flex-col items-center
-            "
-            style={{
-              position: "absolute",
-              top: "-80px",
-              backgroundImage: ` url(${bgVector.src})`,
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            <h2 className="text-3xl md:text-4xl mb-8">
-              What's your weight loss goal?
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
-              <Link href="/get-started" className="flex items-center justify-center bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
-                Losing
-                <br />
-                1-20 lbs
-              </Link>
-              <Link href="/get-started" className="flex items-center justify-center bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
-                Losing
-                <br />
-                21-50 lbs
-              </Link>
-              <Link href="/get-started" className="flex items-center justify-center bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
-                Losing
-                <br />
-                51+ lbs
-              </Link>
-              <Link href="/get-started" className="flex items-center justify-center bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
-                Not sure, I just want to lose the weight
-              </Link>
+
+            <div className="flex bg-white rounded-full items-center py-5 pl-10 gap-4 w-full">
+              <svg
+                width="44"
+                height="51"
+                viewBox="0 0 44 51"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.1351 40.8337H4.64711C3.68117 40.8337 2.89828 40.0759 2.89828 39.1409V18.8371C2.89828 13.7604 8.14311 14.6068 8.14311 11.1912V7.83887"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M22.1272 7.83789V11.1902C22.1272 14.6074 27.372 13.761 27.372 18.8362V25.6041"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8.00583 12.0679H22.2644"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M16.884 7.83756H7.26872C6.30278 7.83756 5.5199 7.07977 5.5199 6.14479V3.60879C5.5199 2.67381 6.30278 1.91602 7.26872 1.91602H23.0016C23.9675 1.91602 24.7504 2.67381 24.7504 3.60879V6.14637C24.7504 7.08135 23.9675 7.83914 23.0016 7.83914H20.3783"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2.89828 19.6826H18.6311V26.4521"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2.89828 34.9121H13.3879"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M20.598 35.8875H27.8345H20.598ZM24.2162 39.6V32.1749V39.6ZM14.5676 36.1993C14.5676 45.712 22.9112 49.0533 24.0799 49.4752C24.1708 49.5082 24.2616 49.5082 24.3525 49.4752C25.5236 49.0669 33.8649 45.8098 33.8649 36.2005V27.6011C33.8651 27.4905 33.8293 27.383 33.763 27.2958C33.6968 27.2085 33.604 27.1466 33.4994 27.1197L24.3332 24.7648C24.2564 24.7451 24.176 24.7451 24.0992 24.7648L14.933 27.1197C14.8284 27.1466 14.7356 27.2085 14.6694 27.2958C14.6032 27.383 14.5673 27.4905 14.5676 27.6011V36.1993Z"
+                  fill="white"
+                />
+                <path
+                  d="M20.598 35.8875H27.8345M24.2162 39.6V32.1749M14.5676 36.1993C14.5676 45.712 22.9112 49.0533 24.0799 49.4752C24.1708 49.5082 24.2616 49.5082 24.3525 49.4752C25.5236 49.0669 33.8649 45.8098 33.8649 36.2005V27.6011C33.8651 27.4905 33.8293 27.383 33.763 27.2958C33.6968 27.2085 33.604 27.1466 33.4994 27.1197L24.3332 24.7648C24.2564 24.7451 24.176 24.7451 24.0992 24.7648L14.933 27.1197C14.8284 27.1466 14.7356 27.2085 14.6694 27.2958C14.6032 27.383 14.5673 27.4905 14.5676 27.6011V36.1993Z"
+                  stroke="#FD7823"
+                  stroke-width="1.75"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <p className="text-lg font-medium">
+                Uncompromising product safety
+              </p>
+            </div>
+            <div className="flex bg-white rounded-full items-center py-5 pl-10 gap-4 w-full">
+              <svg
+                width="42"
+                height="41"
+                viewBox="0 0 42 41"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20.7614 11.1655V15.3421C25.498 15.3421 29.3383 19.1824 29.3383 23.919C29.3383 28.6557 25.498 32.496 20.7614 32.496H10.8178C8.27831 32.496 6.21875 34.5555 6.21875 37.095L30.7768 37.0902C33.6896 34.23 35.5134 30.1995 35.5134 25.9188C35.5134 17.7715 28.9087 11.1655 20.7602 11.1655H20.7614Z"
+                  fill="white"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6.21875 37.093C6.21875 34.5536 8.27712 32.494 10.8178 32.494H20.7614C25.498 32.494 29.3383 28.6537 29.3383 23.9171C29.3383 19.1804 25.498 15.3401 20.7614 15.3401V11.1636C28.9099 11.1636 35.5146 17.7683 35.5146 25.9168C35.5146 30.1987 33.6908 34.2281 30.778 37.0882"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M6.21875 29.3628H17.0611"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M1.72656 39.8843H39.001"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M27.7847 2.21095L14.7141 15.2815C14.2701 15.7255 14.2701 16.4454 14.7141 16.8894L20.1586 22.3339C20.6026 22.7779 21.3224 22.7779 21.7664 22.3339L34.837 9.26329C35.281 8.81931 35.281 8.09947 34.837 7.65549L29.3925 2.21094C28.9485 1.76696 28.2286 1.76696 27.7847 2.21095Z"
+                  fill="white"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M32.8594 1.52686L35.5221 4.18837"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14.0293 20.3589L16.6908 23.0216"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M30.333 16.5098C30.5335 15.2668 29.6883 14.0966 28.4453 13.8962C27.2023 13.6958 26.0321 14.541 25.8317 15.784C25.6312 17.027 26.4764 18.1972 27.7194 18.3976C28.9625 18.598 30.1326 17.7528 30.333 16.5098Z"
+                  fill="white"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M30.333 16.5098C30.5335 15.2668 29.6883 14.0966 28.4453 13.8962C27.2023 13.6958 26.0321 14.541 25.8317 15.784C25.6312 17.027 26.4764 18.1972 27.7194 18.3976C28.9625 18.598 30.1326 17.7528 30.333 16.5098Z"
+                  fill="white"
+                  stroke="#FD7823"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <p className="text-lg font-medium">Evidence-based treatments</p>
             </div>
           </div>
         </div>
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#ECF4F2] to-transparent z-10 max-w-[40%]"></div>
+          <Image
+            src={scienceBehindResults}
+            alt="science behind results"
+            className="max-h-screen relative z-0 rounded-b-[100px] hidden md:block"
+          />
+        </div>
+      </div>
+      <div className="relative mt-20 z-20">
+        <div className="absolute inset-0 rounded-b-[100px] bg-gradient-to-r from-[#ECF4F2] to-transparent z-10 max-w-[40%]"></div>
+        <Image
+          src={scienceBehindResults}
+          alt="science behind results"
+          className=" relative z-0 rounded-b-[100px] block md:hidden"
+        />
+      </div>
+      <div className="relative z-30 flex justify-center mx-8 md:mx-0">
+        <div
+          className=" 
+            bg-[#365D56]
+            rounded-3xl
+            shadow-xl
+            md:px-40 px-8 md:py-24 py-10
+            mx-20
+            text-center
+            text-white
+            max-w-[70rem]
+            w-full
+            -mb-50
+            flex flex-col items-center
+          "
+          style={{
+            position: "absolute",
+            top: "-80px",
+            backgroundImage: ` url(${bgVector.src})`,
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <h2 className="text-3xl md:text-4xl mb-8">
+            What's your weight loss goal?
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
+            <Link href="/get-started" className="flex items-center justify-center bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              Losing
+              <br />
+              1-20 lbs
+            </Link>
+            <Link href="/get-started" className="flex items-center justify-center bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              Losing
+              <br />
+              21-50 lbs
+            </Link>
+            <Link href="/get-started" className="flex items-center justify-center bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              Losing
+              <br />
+              51+ lbs
+            </Link>
+            <Link href="/get-started" className="flex items-center justify-center bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              Not sure, I just want to lose the weight
+            </Link>
+          </div>
+        </div>
 
-      <Footer />
+      </div>
+
+      <Footer  />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import TrustSection from "./TrustSection";
 import ReviewsSection from "./ReviewsSection";
 import PricingSection from "./PricingSection";
 import WeightLossCalculatorSection from "./WeightLossCalculatorSection";
-import bgVector from "@/../public/images/metabolixmd-bg-vector.svg"
+import bgVector from "@/../public/images/metabolixmd-bg-vector.svg";
 
 // Removing the auth token import
 // import { getAuthToken } from '@/services/API/apiHelper'
@@ -146,15 +146,14 @@ const HomePage = () => {
   const getOrderDetails = async () => {
     // Commenting out the API call to avoid auth dependencies
 
-        try {
-            const res = await getMethod("/v1/order/user");
-            if (res) {
-                setUserOrders(res.data);
-            }
-        } catch (e) {
-            toast.error(e.message);
-        }
-        
+    try {
+      const res = await getMethod("/v1/order/user");
+      if (res) {
+        setUserOrders(res.data);
+      }
+    } catch (e) {
+      toast.error(e.message);
+    }
   };
 
   useEffect(() => {
@@ -245,26 +244,31 @@ const HomePage = () => {
           animate="visible"
           variants={staggerChildren}
           className="flex flex-col relative mt-10 pb-0 px-4 md:min-h-[80vh] min-h-[90vh]  justify-evenly  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
-          >
-          <Image src="/images/hero-desktop.webp" alt="Hero image" fill className="object-cover object-center -scale-x-100 relative -z-20 hidden md:block" priority />
+        >
+          <Image
+            src="/images/hero-desktop.webp"
+            alt="Hero image"
+            fill
+            className="object-cover object-center -scale-x-100 relative -z-20 hidden md:block"
+            priority
+          />
           <motion.div
             variants={fadeIn}
             className="flex flex-col justify-evenly items-start z-10 md:mx-20 mx-0 "
-            
           >
             <h1 className="text-5xl md:text-7xl leading-[1.2] font-medium mb-6 ">
               <span className="text-primary block">
-                Your Personalized<br />
+                Your Personalized
+                <br />
                 Weight Loss
               </span>
-              <span className="text-[#2E2E2E] block">
-                Journey Starts
-                Here
-              </span>
+              <span className="text-[#2E2E2E] block">Journey Starts Here</span>
             </h1>
-            
+
             <p className="text-[#626262] text-lg md:max-w-[30%] max-w-[90%] md:my-10 my-5">
-              Connect with our US-based physicians to receive tailored support on your weight loss journey. Experience a program designed just for you.
+              Connect with our US-based physicians to receive tailored support
+              on your weight loss journey. Experience a program designed just
+              for you.
             </p>
 
             <motion.div>
@@ -304,7 +308,7 @@ const HomePage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="font-montserrat mx-auto px-[8vw] py-40 rounded-t-[100px] bg-white relative z-20 -mt-20"
+          className="font-montserrat mx-auto px-[8vw] md:py-40 py-20 md:rounded-t-[5vw] rounded-t-[10vw] bg-white relative z-20 md:-mt-28 -mt-8"
         >
           {/* Step-by-Step Process heading and description */}
           <div className="  flex flex-col md:flex-row justify-between items-start mb-16 font-inter px-3 ">
@@ -329,7 +333,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="flex flex-col-reverse lg:flex-row gap-8 font-montserrat bg-[#F6F6F3] pl-16 rounded-3xl">
+          <div className="flex flex-col-reverse lg:flex-row gap-8 font-montserrat bg-[#F6F6F3] md:pl-16 pl-0 rounded-3xl">
             {/* Left side: Number, Title, description */}
             <div className="flex-1 flex flex-col justify-center ">
               {/* Orange numbered circle */}
@@ -337,7 +341,7 @@ const HomePage = () => {
                 {Object.keys(stepDetails).indexOf(activeStep) + 1}
               </div>
 
-              <div className="mb-8 w-[80%]">
+              <div className="mb-8 w-[80%] md:pl-0 pl-8">
                 <h2 className="text-4xl md:text-6xl text-zinc-800 font-medium">
                   {stepDetails[activeStep].title}
                 </h2>
@@ -360,7 +364,7 @@ const HomePage = () => {
                 {/* Process steps overlay - positioned differently based on screen size */}
                 <div className="absolute inset-0 flex md:flex-col md:justify-center md:items-start p-6">
                   {/* Step buttons */}
-                  <div className="md:space-y-3 flex md:flex-col flex-row gap-2 md:gap-0 absolute md:static bottom-4 left-0 right-0 justify-center md:justify-start">
+                  <div className="md:space-y-3 flex md:flex-col flex-row gap-2 md:gap-0 absolute md:static bottom-4 left-0 right-0 justify-center md:justify-start ">
                     {Object.entries(stepDetails).map(([key, step], index) => (
                       <button
                         key={key}
@@ -378,7 +382,7 @@ const HomePage = () => {
                         <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-xs font-medium text-primary">
                           {index + 1}
                         </div>
-                        <span className="hidden md:inline font-medium">
+                        <span className="hidden md:inline font-medium pl-10">
                           {step.title}
                         </span>
                       </button>
@@ -396,12 +400,13 @@ const HomePage = () => {
         {/* Reviews Section */}
         <ReviewsSection />
 
-        {/* GLP-1 Information Section */}
-        <GLP1Section />
+          {/* GLP-1 Information Section */}
+          <GLP1Section />
+        <div className="flex flex-col -mt-10 py-10" style={{ background: 'linear-gradient(180deg, #214E46 28.02%, rgba(97, 126, 122, 0) 100%)' }}>
 
-
-        {/* Weight Loss Calculator Section */}
-        <WeightLossCalculatorSection />
+          {/* Weight Loss Calculator Section */}
+          <WeightLossCalculatorSection />
+        </div>
 
         {/* Pricing Section */}
         {/* <PricingSection /> */}
@@ -464,24 +469,25 @@ const HomePage = () => {
           </div>
         </motion.section>
 
-        <div className="relative z-30 flex justify-center ">
+        <div className="relative z-30 flex justify-center md:mx-0 mx-4">
           <div
             className=" 
               bg-[#365D56]
               rounded-3xl
               shadow-xl
-              px-40 py-24
-              mx-20
+              md:px-40 md:py-24
+              py-10
+              md:mx-20 px-10
               text-center
               text-white
               max-w-[70rem]
               w-full
               -mb-40
               flex flex-col items-center
+              -top-52
             "
             style={{
               position: "absolute",
-              top: "-180px",
               backgroundImage: ` url(${bgVector.src})`,
               backgroundSize: "contain",
               backgroundPosition: "center",
@@ -493,13 +499,19 @@ const HomePage = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
               <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
-                Losing<br />1-20 lbs
+                Losing
+                <br />
+                1-20 lbs
               </button>
               <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
-                Losing<br />21-50 lbs
+                Losing
+                <br />
+                21-50 lbs
               </button>
               <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
-                Losing<br />51+ lbs
+                Losing
+                <br />
+                51+ lbs
               </button>
               <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
                 Not sure, I just want to lose the weight
@@ -507,7 +519,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

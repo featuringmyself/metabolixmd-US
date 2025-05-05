@@ -78,7 +78,7 @@ const FaqList = () => {
   ];
 
   return (
-    <div className="w-full mx-auto px-2 space-y-2 ">
+    <div className="w-full mx-auto px-2 space-y-2 pb-48 ">
       {faqs.map((faq, index) => (
         <FaqItem 
           key={index} 

@@ -200,27 +200,49 @@ const NavBar = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden relative z-10">
+            <div className="md:hidden relative z-10 flex items-center gap-3">
+              {!user && (
+                <button
+                  onClick={openSignUp}
+                  className="text-sm font-medium  bg-zinc-100 text-black px-3 py-1.5 rounded-full hover:bg-primary/90 transition-colors"
+                >
+                  Get Started
+                </button>
+              )}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 text-primary hover:text-primary/80 transition-colors"
               >
-                <motion.svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  animate={isOpen ? { rotate: 180 } : { rotate: 0 }}
-                  transition={{ duration: 0.3 }}
+                <motion.div
+                  initial={false}
+                  animate={isOpen ? "open" : "closed"}
+                  className="w-6 h-6 relative"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
+                  <motion.span
+                    variants={{
+                      closed: { rotate: 0, y: 0 },
+                      open: { rotate: 45, y: 8 }
+                    }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute w-6 h-0.5 bg-current block"
                   />
-                </motion.svg>
+                  <motion.span
+                    variants={{
+                      closed: { opacity: 1 },
+                      open: { opacity: 0 }
+                    }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute w-6 h-0.5 bg-current block top-2"
+                  />
+                  <motion.span
+                    variants={{
+                      closed: { rotate: 0, y: 0 },
+                      open: { rotate: -45, y: -8 }
+                    }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute w-6 h-0.5 bg-current block top-4"
+                  />
+                </motion.div>
               </button>
             </div>
 
@@ -233,7 +255,7 @@ const NavBar = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 bg-black/80 z-40"
+                    className="fixed inset-0 z-40"
                     onClick={() => setIsOpen(false)}
                     style={{ top: 0 }}
                   />
@@ -244,10 +266,10 @@ const NavBar = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="fixed inset-0 bg-black !important z-50 mt-[72px]"
+                    className="fixed inset-0  !important z-50 mt-[72px]"
                   >
                     {/* Close Button */}
-                    <motion.button
+                    {/* <motion.button
                       initial={{ opacity: 0, rotate: -45 }}
                       animate={{ opacity: 1, rotate: 0 }}
                       exit={{ opacity: 0, rotate: 45 }}
@@ -258,7 +280,7 @@ const NavBar = () => {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
-                    </motion.button>
+                    </motion.button> */}
 
                     {/* Centered Navigation Links */}
                     <motion.div 
@@ -266,7 +288,7 @@ const NavBar = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
                       transition={{ duration: 0.3, delay: 0.1 }}
-                      className="flex flex-col items-center justify-center min-h-[calc(100vh-72px)] gap-8 p-4 bg-black "
+                      className="flex flex-col items-center justify-center min-h-[calc(100vh-72px)] gap-8 p-4 bg-[#365D56] "
                     >
                       {/* Navigation Links */}
                       {[
@@ -294,7 +316,7 @@ const NavBar = () => {
                         </motion.div>
                       ))}
 
-                      {/* Logo below navigation */}
+                      {/* Logo below navigation
                       <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -308,10 +330,10 @@ const NavBar = () => {
                           height={40}
                           className="h-auto"
                         />
-                      </motion.div>
+                      </motion.div> */}
 
                       {/* Authentication Buttons */}
-                      <div className="mt-6 flex flex-col items-center gap-4">
+                      <div className="mt-2 flex flex-col items-center gap-4">
                         {!user ? (
                           <>
                             <button 
@@ -319,18 +341,9 @@ const NavBar = () => {
                                 openSignIn();
                                 setIsOpen(false);
                               }}
-                              className='w-full py-3 text-white px-4 text-base border-2 border-[#015c04] rounded-full text-center hover:text-[#015c04] hover:bg-white transition-colors'
+                              className='w-full py-1 text-white px-4 text-lg'
                             >
                               Sign In
-                            </button>
-                            <button 
-                              onClick={() => {
-                                openSignUp();
-                                setIsOpen(false);
-                              }}
-                              className='w-full py-2 px-4 text-base bg-[#365e65] rounded-full text-white text-center hover:bg-[#365e65]/90 transition-colors'
-                            >
-                              Get Started
                             </button>
                           </>
                         ) : (

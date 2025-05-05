@@ -20,8 +20,8 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const database = getDatabase(app);
 let messaging = null;
-if (typeof window !== 'undefined' && isSupported()) {
-  messaging = getMessaging(app);
-}
+// if (typeof window !== 'undefined' && isSupported()) {
+//   messaging = getMessaging(app);
+// }
 
 export { auth, googleProvider, database, messaging };
