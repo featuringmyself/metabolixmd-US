@@ -265,7 +265,7 @@ const HomePage = () => {
               <span className="text-[#2E2E2E] block">Journey Starts Here</span>
             </h1>
 
-            <p className="text-[#626262] text-lg md:max-w-[30%] max-w-[90%] md:my-10 my-5">
+            <p className="text-[#626262] text-lg md:max-w-[30%] max-w-[90%] md:my-6 my-5">
               Connect with our US-based physicians to receive tailored support
               on your weight loss journey. Experience a program designed just
               for you.
@@ -308,7 +308,7 @@ const HomePage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="font-montserrat mx-auto px-[8vw] md:py-40 py-20 md:rounded-t-[5vw] rounded-t-[10vw] bg-white relative z-20 md:-mt-28 -mt-8"
+          className="font-montserrat mx-auto px-[8vw] md:py-24 py-20 md:rounded-t-[5vw] rounded-t-[10vw] bg-white relative z-20 md:-mt-16 -mt-8"
         >
           {/* Step-by-Step Process heading and description */}
           <div className="  flex flex-col md:flex-row justify-between items-start mb-16 font-inter px-3 ">
@@ -382,7 +382,7 @@ const HomePage = () => {
                         <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-xs font-medium text-primary">
                           {index + 1}
                         </div>
-                        <span className="hidden md:inline font-medium pl-10">
+                        <span className="hidden md:inline font-medium pl-1">
                           {step.title}
                         </span>
                       </button>
@@ -400,10 +400,15 @@ const HomePage = () => {
         {/* Reviews Section */}
         <ReviewsSection />
 
-          {/* GLP-1 Information Section */}
-          <GLP1Section />
-        <div className="flex flex-col -mt-10 py-10" style={{ background: 'linear-gradient(180deg, #214E46 28.02%, rgba(97, 126, 122, 0) 100%)' }}>
-
+        {/* GLP-1 Information Section */}
+        <GLP1Section />
+        <div
+          className="flex flex-col -mt-10 py-10"
+          style={{
+            background:
+              "linear-gradient(180deg, #214E46 28.02%, rgba(97, 126, 122, 0) 100%)",
+          }}
+        >
           {/* Weight Loss Calculator Section */}
           <WeightLossCalculatorSection />
         </div>
@@ -519,7 +524,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <Footer />
+        <Footer paddingTop="pt-[500px] md:pt-[400px]" />
       </div>
     </div>
   );

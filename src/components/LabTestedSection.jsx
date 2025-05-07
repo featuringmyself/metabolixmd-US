@@ -18,7 +18,7 @@ const LabTestedSection = () => {
     >
       <motion.div 
         variants={fadeIn}
-        className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 py-6"
+        className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 py-6  "
       >
         <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-10">
           {/* Doctor Image */}

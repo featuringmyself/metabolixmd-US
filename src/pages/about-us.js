@@ -312,6 +312,18 @@ const AboutUs = () => {
   const [isMobile, setIsMobile] = useState(false);
   const sliderRef = useRef(null);
 
+  useEffect(() => {
+    const handleESC = (event) => {
+      if (event.key === "Escape") {
+        setShowOverlay(false);
+        setActiveExpert(null);
+      }
+    };
+    window.addEventListener("keydown", handleESC);
+    return () => {
+      window.removeEventListener("keydown", handleESC);
+    };
+  }, []);
   // Add effect to handle body scroll
   useEffect(() => {
     if (showOverlay) {
@@ -453,7 +465,7 @@ const AboutUs = () => {
             Our telehealth approach gives you direct access to GLP-1 medications
             with:
           </p>
-          <div className="mt-10 flex justify-evenly flex-wrap max-w-xl ">
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 ">
             <div className="flex flex-col text-center items-center justify-center">
               <svg
                 width="79"
@@ -552,6 +564,21 @@ const AboutUs = () => {
               </p>
             </div>
             <div className="flex flex-col text-center items-center justify-center">
+              <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="35" cy="35" r="33.5" fill="#ECF4F2" stroke="#004F41" stroke-width="3" />
+                <path d="M24.6273 43.8229L15.5191 51.3199M21.1784 31.3827C21.6058 26.9787 23.7651 22.9249 27.1813 20.113C30.5975 17.3011 34.9909 15.9614 39.3948 16.3888C43.7988 16.8161 47.8526 18.9754 50.6645 22.3916C53.4765 25.8079 54.8161 30.2012 54.3888 34.6052C53.9614 39.0091 51.8022 43.063 48.3859 45.8749C44.9697 48.6868 40.5763 50.0264 36.1724 49.5991C31.7684 49.1718 27.7146 47.0125 24.9027 43.5962C22.0908 40.18 20.7511 35.7867 21.1784 31.3827Z" stroke="#FD7823" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M41.638 29.4744C41.6055 27.1235 37.8504 25.564 35.2476 27.1072C31.9947 29.0338 32.6832 33.04 36.9125 32.8457C38.7945 32.7599 40.4132 32.398 41.6428 33.4967C42.8743 34.5952 43.6541 37.6222 40.4746 38.9811C37.2916 40.3422 33.6924 38.8142 33.4723 36.5467M36.9245 24.6965L37.0995 26.501M38.396 39.8626L38.5357 41.3017" stroke="#FD7823" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <line x1="11.0388" y1="9.91792" x2="61.0388" y2="57.9179" stroke="#004F41" stroke-width="3" />
+              </svg>
+
+
+              <p className="text-bold mt-1">
+                No Hidden
+                <br />
+                Costs
+              </p>
+            </div>
+            <div className="flex flex-col text-center items-center justify-center">
               <svg
                 width="79"
                 height="79"
@@ -616,8 +643,8 @@ const AboutUs = () => {
         <Image src={heroImg} width={674} height={843} className="rounded-[40px]" />
       </div>
 
-      <div className="bg-[#365D56] text-white flex flex-col items-center justify-center text-center md:px-96 px-5 md:py-32 py-20 md:rounded-[100px] rounded-[50px] -mt-14">
-        <h1 className="md:text-3xl text-2xl font-light">
+      <div className="bg-[#365D56] text-white flex flex-col items-center justify-center text-center md:px-32 px-5 md:py-32 py-20 md:rounded-[100px] rounded-[50px] -mt-14">
+        <h1 className="text-2xl font-light">
           <span className="font-extralight">Our mission</span> is to provide fast,
           efficient, and expert telehealth services focused exclusively on{" "}
           <span className="font-bold">Metabolic Health</span>. We're committed
@@ -872,10 +899,13 @@ const AboutUs = () => {
                         </h3>
                         {expert.mainRole || expert.designation ? (
                           <p className="text-sm text-[#004F41] font-light">
-                            {expert.mainRole && expert.designation
-                              ? `${expert.mainRole}, ${expert.designation}`
-                              : expert.mainRole || expert.designation}
+                            {expert.mainRole
+                              ? expert.designation
+                                ? `${expert.mainRole}, ${expert.designation}`
+                                : expert.mainRole
+                              : expert.designation}
                           </p>
+
                         ) : null}
                       </div>
                     </motion.div>
@@ -1053,10 +1083,12 @@ const AboutUs = () => {
               animate="visible"
               exit="exit"
               onClick={() => setShowOverlay(false)}
+              transition={{ duration: 0.3 }}
+
             />
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
               <motion.div
-                className="bg-white rounded-[32px] w-full max-w-[1200px] max-h-[60vh] overflow-y-auto relative"
+                className="bg-white rounded-[32px] w-full max-w-[1200px] max-h-full overflow-y-scroll relative"
                 variants={modalVariants}
                 initial="hidden"
                 animate="visible"
@@ -1328,7 +1360,7 @@ const AboutUs = () => {
           <Image
             src={scienceBehindResults}
             alt="science behind results"
-            className="max-h-screen relative z-0 rounded-b-[100px] hidden md:block"
+            className="max-h-screen relative z-0 rounded-b-[100px] hidden md:block object-cover"
           />
         </div>
       </div>
@@ -1340,7 +1372,7 @@ const AboutUs = () => {
           className=" relative z-0 rounded-b-[100px] block md:hidden"
         />
       </div>
-      <div className="relative z-30 flex justify-center mx-8 md:mx-0">
+      <div className="relative z-50 flex justify-center mx-8 md:mx-0">
         <div
           className=" 
             bg-[#365D56]
@@ -1353,11 +1385,11 @@ const AboutUs = () => {
             max-w-[70rem]
             w-full
             -mb-50
-            flex flex-col items-center
+            flex flex-col items-center 
           "
           style={{
             position: "absolute",
-            top: "-80px",
+            top: "-30px",
             backgroundImage: ` url(${bgVector.src})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
@@ -1391,7 +1423,7 @@ const AboutUs = () => {
 
       </div>
 
-      <Footer  />
+      <Footer paddingTop="pt-[650px] md:pt-[550px]" />
     </div>
   );
 };

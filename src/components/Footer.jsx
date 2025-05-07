@@ -3,12 +3,12 @@ import React from "react";
 import FloatingButton from "./FloatingButton";
 import { usePathname } from "next/navigation";
 
-const Footer = () => {
+const Footer = ({paddingTop = 'pt-0'}) => {
   const pathname = usePathname();
   return (
     <div className="-mt-24 ">
       <FloatingButton />
-      <section id="bottom-footer" className="bg-[#223C37] md:pt-[26vw] pt-[600px] pb-20 w-full">
+      <section id="bottom-footer" className={`bg-[#223C37] ${paddingTop} pb-20 w-full`}>
         <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {/* Mobile and Desktop Layout */}
           <div className="flex justify-between md:flex-row flex-col gap-8 mb-12">
