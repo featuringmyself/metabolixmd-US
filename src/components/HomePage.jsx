@@ -256,7 +256,7 @@ const HomePage = () => {
             variants={fadeIn}
             className="flex flex-col justify-evenly items-start z-10 md:mx-20 mx-0 "
           >
-            <h1 className="text-5xl md:text-7xl leading-[1.2] font-medium mb-6 ">
+            <h1 className="text-5xl md:text-7xl leading-[1.2] font-medium md:mb-6 mb-0 ">
               <span className="text-primary block">
                 Your Personalized
                 <br />
@@ -265,7 +265,7 @@ const HomePage = () => {
               <span className="text-[#2E2E2E] block">Journey Starts Here</span>
             </h1>
 
-            <p className="text-[#626262] text-lg md:max-w-[30%] max-w-[90%] md:my-6 my-5">
+            <p className="text-[#626262] text-base md:text-lg md:max-w-[30%] max-w-[90%] md:my-6 my-5">
               Connect with our US-based physicians to receive tailored support
               on your weight loss journey. Experience a program designed just
               for you.
@@ -394,12 +394,12 @@ const HomePage = () => {
           </div>
         </motion.section>
         
-                {/* Reviews section */}
-                <ReviewsSection />
 
         {/* Why Thousands Trust Us Section */}
         <TrustSection />
 
+                {/* Reviews section */}
+                <ReviewsSection />
 
         {/* GLP-1 Information Section */}
         <GLP1Section />
@@ -425,7 +425,7 @@ const HomePage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="w-full bg-[#ECF4F2] py-16 md:py-64 rounded-b-[100px] relative z-30"
+          className="w-full bg-[#ECF4F2] py-40  md:py-64 rounded-b-[100px] relative z-30 -mt-20"
         >
           <div className="max-w-[1600px] mx-auto px-4 md:px-6">
             <motion.div

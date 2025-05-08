@@ -159,7 +159,7 @@ const NavBar = () => {
                 <Link 
                   href="/admin" 
                   className={`cursor-pointer text-sm font-poppins tracking-wider text-red-500 font-bold hover:text-red-700 hover:font-bold ${
-                    router.pathname.startsWith("/admin") ? "font-semibold " : ''
+                    router.pathname.startsWith("/admin") ? "font-semibold underline underline-offset-8" : ''
                   }`}
                 >
                   Admin
@@ -167,32 +167,32 @@ const NavBar = () => {
               )}
               <Link 
                 href="/" 
-                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/" ? "font-semibold text-primary text-base" : ''
+                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#015c04] after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${
+                  router.pathname == "/" ? "font-semibold text-primary text-base after:scale-x-100" : ''
                 }`}
               >
                 Home
               </Link>
               <Link 
                 href="/about-us" 
-                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/about-us" ? "font-semibold text-primary text-base" : ''
+                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#015c04] after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${
+                  router.pathname == "/about-us" ? "font-semibold text-primary text-base after:scale-x-100" : ''
                 }`}
               >
                 About Us
               </Link>
               <Link 
-                href="/contact" 
-                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/contact" ? "font-semibold text-primary text-base" : ''
+                href="/contact-us" 
+                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#015c04] after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${
+                  router.pathname == "/contact" ? "font-semibold text-primary text-base after:scale-x-100" : ''
                 }`}
               >
                 Contact
               </Link>
               <Link 
                 href="/faq" 
-                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold ${
-                  router.pathname == "/faq" ? "font-semibold text-primary text-base" : ''
+                className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#015c04] after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${
+                  router.pathname == "/faq" ? "font-semibold text-primary text-base after:scale-x-100" : ''
                 }`}
               >
                 FAQ

@@ -13,7 +13,7 @@ import heroImg from "@/../public/images/aboutHeroImg.jpg";
 import scienceBehindResults from "@/../public/images/scienceBehindResults.png";
 import bgVector from "@/../public/images/metabolixmd-bg-vector.svg";
 import founder from "@/../public/images/founder.png"
-import founderSign from "@/../public/images/founder_sign.svg"
+import founderSign from "@/../public/images/founder_sign.webp"
 
 const expertDetails = [
   {
@@ -761,7 +761,7 @@ const AboutUs = () => {
           <p className="mt-10 text-[#000000CC] opacity-[80%]">
             We created MetabolixMD so others could access this life-changing treatment the same way I did—quickly, privately, and safely. That's when Ashley and I teamed up and launched this company together."
           </p>
-          <Image src={founderSign} width={400} height={100} className="md:mt-1 mt-10" />
+          <Image src={founderSign} width={150} height={150} className="md:mt-6 mt-10" />
           <p className="text-[#000000CC] opacity-[80%]">- Founder, Metabolixmd</p>
         </div>
       </div>
@@ -1033,7 +1033,7 @@ const AboutUs = () => {
               </defs>
             </svg>
 
-            <h1 className="mt-20 mb-10 text-5xl font-semibold text-[#2E2E2E] max-w-2xl text-center tracking-wide  leading-2">
+            <h1 className="mt-20 mb-10 text-5xl font-medium text-[#2E2E2E] max-w-3xl text-center tracking-wide  leading-2">
               <span className="text-[#365D56]">Who We Help</span>—and How We
               Make a Difference
             </h1>
@@ -1051,7 +1051,7 @@ const AboutUs = () => {
               to see if service is available in your area.
             </p>
 
-            <h1 className="text-4xl font-light my-16 text-[#365D56]">
+            <h1 className="text-4xl font-light my-10 text-[#365D56]">
               Results That Matter
             </h1>
 
@@ -1064,7 +1064,7 @@ const AboutUs = () => {
 
             <Link
               href="/get-started"
-              className="font-semibold px-6 py-3 bg-[#365D56] text-white rounded-full cursor-pointer mt-10"
+              className="font-semibold px-8 py-4 bg-[#365D56] text-white rounded-full cursor-pointer mt-10"
             >
               Get Started
             </Link>

@@ -26,7 +26,7 @@ const GLP1Section = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerChildren}
-      className="-mt-24 pt-32 bg-[#365D56] w-full  text-white shadow-lg transform transition-all duration-300 hover:shadow-xl rounded-b-[35px] relative -z-10"
+      className="-mt-24 pt-32 pb-12 bg-[#365D56] w-full  text-white shadow-lg transform transition-all duration-300 hover:shadow-xl relative -z-10"
     >
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}

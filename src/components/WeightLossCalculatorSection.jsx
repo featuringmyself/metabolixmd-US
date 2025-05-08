@@ -22,7 +22,7 @@ const WeightLossCalculatorSection = () => {
 
 
   return (
-    <div className=" -mt-40">
+    <div className=" -mt-48 min-h-[150vh]">
       <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-24 md:mb-32 px-4 md:px-0">
         {/* Weight Loss Calculator Card */}
         <motion.div
@@ -30,7 +30,7 @@ const WeightLossCalculatorSection = () => {
           className="bg-[#365D56] rounded-3xl text-white overflow-hidden shadow-lg w-full md:max-w-[450px] lg:max-w-[500px] z-10 md:hidden flex-col flex md:mt-0 mt-48"
         >
           <div className="p-6 md:p-8 lg:p-10">
-            <h2 className="text-4xl md:text-3xl lg:text-4xl font-light mb-6">
+            <h2 className="text-3xl md:text-3xl lg:text-4xl font-light mb-6">
               Lose 15-20% Body
               <br />
               Fat in a Year!
@@ -38,7 +38,7 @@ const WeightLossCalculatorSection = () => {
 
             <div className="my-12">
               <div className="flex items-start justify-between">
-                <span className="text-xl font-light md:text-lg  w-[40%]">
+                <span className="text-lg font-light md:text-lg  w-[40%]">
                   Select your Current Weight
                 </span>
                 <div className="flex items-end">
@@ -82,7 +82,7 @@ const WeightLossCalculatorSection = () => {
 
             <div className="mb-8 relative">
               <div className="flex items-start justify-start">
-                <span className="text-xl md:text-lg font-light w-[40%]">
+                <span className="text-lg md:text-lg font-light w-[40%]">
                   Weight you could lose (lbs):
                 </span>
                 <div className="flex items-end ml-8">
@@ -110,17 +110,17 @@ const WeightLossCalculatorSection = () => {
         viewport={{ once: true, margin: "-100px" }}
         className="relative w-full min-h-screen flex flex-col md:mt-12 mt-0"
       >
-        <div className="relative w-full  h-screen">
+        <div className="relative w-full  h-[150vh]">
           <Image
-            src="/images/weightloss_calculator.webp"
+            src="/images/weightloss_calculator.png"
             alt="Weight Loss Background"
             fill
-            className="object-cover w-screen h-full"
+            className="object-cover w-screen h-[150vh]"
             priority
           />
           <div className="absolute inset-0 bg-black/20" />
 
-          <div className="absolute inset-0 w-[90%] mx-auto px-4 md:px-6 flex flex-col justify-between py-8 md:py-12">
+          <div className="absolute inset-0 w-[90%] mx-auto px-0 md:px-6 flex flex-col justify-evenly py-8 md:py-12">
             <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-8 md:mb-10">
               {/* Weight Loss Calculator Card - Desktop */}
               <motion.div
@@ -211,7 +211,7 @@ const WeightLossCalculatorSection = () => {
             {/* Lab Tested & Certified Card */}
             <motion.div
               variants={fadeIn}
-              className="bg-white rounded-3xl overflow-hidden shadow-lg md:flex md:flex-row hidden justify-center items-center md:max-w-[60%] max-w-full  mx-auto z-10 relative pr-8"
+              className="bg-white rounded-3xl overflow-hidden shadow-lg md:flex md:flex-row hidden justify-between items-center w-[80%] max-w-full  mx-auto z-10 relative "
             >
               {/* Left: Image */}
               <div className="relative w-1/2 h-40 md:h-56 flex-shrink-0">
@@ -236,8 +236,7 @@ const WeightLossCalculatorSection = () => {
               {/* Badge: Overlapping both halves */}
               <div
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-                style={{ width: "90px", height: "90px" }}
-              >
+                style={{ width: "90px", height: "90px" }}>
                 <svg
                   width="90"
                   height="90"
@@ -282,7 +281,7 @@ const WeightLossCalculatorSection = () => {
             {/* Lab tested & certified card (Mobile card) */}
             <motion.div
               variants={fadeIn}
-              className="bg-[#F6F6F3] -bottom-20   absolute rounded-3xl overflow-hidden shadow-lg md:hidden flex-col flex justify-center items-center md:w-[60%] w-full mx-auto z-50 p-8"
+              className="bg-[#F6F6F3] -bottom-32   absolute rounded-3xl overflow-hidden shadow-lg md:hidden flex-col flex justify-center items-center md:w-[60%] w-full mx-auto z-[99] p-8"
             >
               <svg
                 width="97"

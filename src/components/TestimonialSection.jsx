@@ -25,7 +25,7 @@ function TestimonialSection() {
     setCurrent((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between  text-black min-h-[70vh] px-4 md:px-0 py-20 rounded-[80px] -mt-20 z-50 bg-black ">
+    <div className="flex flex-col md:flex-row items-center justify-between  text-black min-h-[70vh] md:px-0 md:py-5 py-0 pt-72 pb-10 z-50 md:rounded-[100px] rounded-[35px] -mt-32 bg-white relative px-10">
       {/* Mobile Title */}
       <div className="w-full text-center md:hidden mb-8">
         <h3 className="text-4xl font-medium leading-tight">
