@@ -41,6 +41,8 @@ const HomePage = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [currentWeight, setCurrentWeight] = useState(252);
   const [weightLoss, setWeightLoss] = useState(50);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [preloadedImages, setPreloadedImages] = useState({});
 
   const stepDetails = {
     consultation: {
@@ -234,6 +236,82 @@ const HomePage = () => {
     // Calculate 20% of current weight
     setWeightLoss(Math.round(weight * 0.2));
   };
+
+  // Preload images
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imagePromises = Object.values(stepDetails).map((step) => {
+        return new Promise((resolve, reject) => {
+          const img = new window.Image();
+          img.src = step.image;
+          img.onload = () => {
+            setPreloadedImages(prev => ({
+              ...prev,
+              [step.image]: true
+            }));
+            resolve();
+          };
+          img.onerror = reject;
+        });
+      });
+
+      try {
+        await Promise.all(imagePromises);
+        setImagesLoaded(true);
+      } catch (error) {
+        console.error('Error preloading images:', error);
+      }
+    };
+
+    preloadImages();
+  }, []);
+
+  // Modify the step image rendering section
+  const renderStepImage = () => (
+    <div className="relative md:h-[500px] h-[300px] rounded-3xl overflow-hidden">
+      {imagesLoaded && preloadedImages[stepDetails[activeStep].image] ? (
+        <Image
+          src={stepDetails[activeStep].image}
+          alt={stepDetails[activeStep].title}
+          fill
+          className="object-cover transition-opacity duration-300"
+          priority
+        />
+      ) : (
+        <div className="w-full h-full bg-gray-200 animate-pulse" />
+      )}
+
+      {/* Process steps overlay - positioned differently based on screen size */}
+      <div className="absolute inset-0 flex md:flex-col md:justify-center md:items-start p-6">
+        {/* Step buttons */}
+        <div className="md:space-y-3 flex md:flex-col flex-row gap-2 md:gap-0 absolute md:static bottom-4 left-0 right-0 justify-center md:justify-start">
+          {Object.entries(stepDetails).map(([key, step], index) => (
+            <button
+              key={key}
+              onClick={() => setActiveStep(key)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full ${
+                activeStep === key
+                  ? "bg-orange-500 text-white"
+                  : "bg-[#F6F6F3] text-zinc-800 hover:bg-[#F6F6F3]/80"
+              } transition-all duration-200 ${
+                index !== Object.entries(stepDetails).length - 1
+                  ? "md:mb-3"
+                  : ""
+              }`}
+            >
+              <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-xs font-medium text-primary">
+                {index + 1}
+              </div>
+              <span className="hidden md:inline font-medium pl-1">
+                {step.title}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="font-tt-hoves overflow-x-hidden">
       <div className="mx-auto">
@@ -352,44 +430,7 @@ const HomePage = () => {
             </div>
             {/* Right side: Image with process steps overlay */}
             <div className="flex-1">
-              <div className="relative md:h-[500px] h-[300px] rounded-3xl overflow-hidden">
-                {/* Main image */}
-                <Image
-                  src={stepDetails[activeStep].image}
-                  alt={stepDetails[activeStep].title}
-                  fill
-                  className="object-cover"
-                />
-
-                {/* Process steps overlay - positioned differently based on screen size */}
-                <div className="absolute inset-0 flex md:flex-col md:justify-center md:items-start p-6">
-                  {/* Step buttons */}
-                  <div className="md:space-y-3 flex md:flex-col flex-row gap-2 md:gap-0 absolute md:static bottom-4 left-0 right-0 justify-center md:justify-start ">
-                    {Object.entries(stepDetails).map(([key, step], index) => (
-                      <button
-                        key={key}
-                        onClick={() => setActiveStep(key)}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-full ${
-                          activeStep === key
-                            ? "bg-orange-500 text-white"
-                            : "bg-[#F6F6F3] text-zinc-800 hover:bg-[#F6F6F3]/80"
-                        } transition-all duration-200 ${
-                          index !== Object.entries(stepDetails).length - 1
-                            ? "md:mb-3"
-                            : ""
-                        }`}
-                      >
-                        <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-xs font-medium text-primary">
-                          {index + 1}
-                        </div>
-                        <span className="hidden md:inline font-medium pl-1">
-                          {step.title}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              {renderStepImage()}
             </div>
           </div>
         </motion.section>
