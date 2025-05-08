@@ -8,6 +8,7 @@ import GLP1Section from "./GLP1Section";
 import TrustSection from "./TrustSection";
 import ReviewsSection from "./ReviewsSection";
 import PricingSection from "./PricingSection";
+import TestimonialSection from "./TestimonialSection.jsx";
 import WeightLossCalculatorSection from "./WeightLossCalculatorSection";
 import bgVector from "@/../public/images/metabolixmd-bg-vector.svg";
 
@@ -73,8 +74,7 @@ const HomePage = () => {
       id: 1,
       name: "Sarah Johnson",
       image: "/images/testimonials/user1.webp",
-      review:
-        "The personalized approach and constant support from the medical team made all the difference in my weight loss journey.",
+      review: "The personalized approach and constant support from the medical team made all the difference in my weight loss journey.",
       rating: 5,
     },
     {
@@ -393,12 +393,13 @@ const HomePage = () => {
             </div>
           </div>
         </motion.section>
+        
+                {/* Reviews section */}
+                <ReviewsSection />
 
         {/* Why Thousands Trust Us Section */}
         <TrustSection />
 
-        {/* Reviews Section */}
-        <ReviewsSection />
 
         {/* GLP-1 Information Section */}
         <GLP1Section />
@@ -406,13 +407,15 @@ const HomePage = () => {
           className="flex flex-col -mt-10 py-10"
           style={{
             background:
-              "linear-gradient(180deg, #214E46 28.02%, rgba(97, 126, 122, 0) 100%)",
+            "linear-gradient(180deg, #214E46 28.02%, rgba(97, 126, 122, 0) 100%)",
           }}
         >
           {/* Weight Loss Calculator Section */}
           <WeightLossCalculatorSection />
         </div>
 
+        {/* Reviews Section */}
+        <TestimonialSection />
         {/* Pricing Section */}
         {/* <PricingSection /> */}
 

@@ -644,7 +644,7 @@ const AboutUs = () => {
       </div>
 
       <div className="bg-[#365D56] text-white flex flex-col items-center justify-center text-center md:px-32 px-5 md:py-32 py-20 md:rounded-[100px] rounded-[50px] -mt-14">
-        <h1 className="text-2xl font-light">
+        <h1 className="md:text-2xl text-xl font-light">
           <span className="font-extralight">Our mission</span> is to provide fast,
           efficient, and expert telehealth services focused exclusively on{" "}
           <span className="font-bold">Metabolic Health</span>. We're committed

@@ -109,7 +109,7 @@ const TrustSection = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerChildren}
-      className="py-16 md:py-24 px-4 bg-white"
+      className="py-16 md:py-24 px-4 bg-white z-50  rounded-b-[100px]"
     >
       <div className="max-w-[1400px] mx-auto  flex items-center justify-center flex-col">
         {/* Section Title */}

@@ -20,11 +20,9 @@ const WeightLossCalculatorSection = () => {
     setWeightLoss(Math.round(weight * 0.2));
   };
 
-  // Background pattern image path
-  const backgroundPattern = "/images/weightloss_calculator.webp";
 
   return (
-    <div className=" -mt-40  ">
+    <div className=" -mt-40">
       <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-24 md:mb-32 px-4 md:px-0">
         {/* Weight Loss Calculator Card */}
         <motion.div
@@ -123,11 +121,11 @@ const WeightLossCalculatorSection = () => {
           <div className="absolute inset-0 bg-black/20" />
 
           <div className="absolute inset-0 w-[90%] mx-auto px-4 md:px-6 flex flex-col justify-between py-8 md:py-12">
-            <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-8 md:mb-16">
+            <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-8 md:mb-10">
               {/* Weight Loss Calculator Card - Desktop */}
               <motion.div
                 variants={fadeIn}
-                className="bg-[#365D56] md:flex flex-col hidden text-white rounded-3xl overflow-hidden shadow-lg w-full md:w-[450px] lg:w-[500px] z-10"
+                className="bg-[#365D56] md:flex flex-col hidden text-white rounded-3xl overflow-hidden shadow-lg w-full md:w-[50vw] lg:w-[30vw] z-10"
               >
                 <div className="p-6 md:p-8 lg:p-10">
                   <h2 className="text-2xl md:text-3xl lg:text-4xl md:font-light font-bold mb-6 leading-tight">
@@ -213,7 +211,7 @@ const WeightLossCalculatorSection = () => {
             {/* Lab Tested & Certified Card */}
             <motion.div
               variants={fadeIn}
-              className="bg-white rounded-3xl overflow-hidden shadow-lg md:flex md:flex-row hidden justify-center items-center md:w-[60%] w-full mx-auto z-10 relative p-8"
+              className="bg-white rounded-3xl overflow-hidden shadow-lg md:flex md:flex-row hidden justify-center items-center md:max-w-[60%] max-w-full  mx-auto z-10 relative pr-8"
             >
               {/* Left: Image */}
               <div className="relative w-1/2 h-40 md:h-56 flex-shrink-0">
