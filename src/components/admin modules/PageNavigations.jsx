@@ -83,14 +83,14 @@ const PageNavigations = () => {
               d="M8 5.5V3C8 1.89543 8.89543 1 10 1H16C17.1046 1 18 1.89543 18 3V17C18 18.1046 17.1046 19 16 19H10C8.89543 19 8 18.1046 8 17V14.5"
               stroke="#ffffff"
               stroke-width="1.5"
-              stroke-linecap="round"
+              strokeLinecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M1 10.1349L3.96985 7.16504M1 10.1349L3.96985 13.1047M1 10.1349H11.4698"
               stroke="#ffffff"
               stroke-width="1.5"
-              stroke-linecap="round"
+              strokeLinecap="round"
               stroke-linejoin="round"
             />
           </svg>
