@@ -10,9 +10,11 @@ import Link from 'next/link';
 const OrdersList = () => {
   const [containerHeight, setContainerHeight] = useState(400);
   const [orderData, setOrderData] = useState([]);
+  const [allOrders, setAllOrders] = useState([]);
   const [status, setStatus] = useState("all");
   const [totalPages, setTotalPages] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(10);
+  const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
   const { page = 1 } = router.query;
   const [isView, setIsView] = useState(false);
@@ -72,6 +74,21 @@ const OrdersList = () => {
     return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
+  const getAllOrders = async (status) => {
+    let url = `/order?page=1&limit=1000`; // Fetch a large number of orders
+    if (status !== "all") {
+      url += `&status=${status}`;
+    }
+    try {
+      const res = await getMethod(url);
+      if (res?.data) {
+        setAllOrders(res.data.results);
+      }
+    } catch (error) {
+      console.error('Error fetching all orders:', error);
+    }
+  };
+
   const getOrderData = async (status, page, limit) => {
     let url = `/order?page=${page}&limit=${limit}`;
     if (status !== "all") {
@@ -99,6 +116,7 @@ const OrdersList = () => {
 
   useEffect(() => {
     getOrderData(status, page, usersPerPage);
+    getAllOrders(status);
   }, [status, page, usersPerPage]);
 
   useEffect(() => {
@@ -139,10 +157,25 @@ const OrdersList = () => {
 
       const res = await putMethod("/v1/order/updateorder", payload);
       if (res?.data) {
+        // Update the order in both orderData and allOrders
+        setOrderData(prevOrders => 
+          prevOrders.map(order => 
+            order._id === selectedOrder._id 
+              ? { ...order, status: newStatus }
+              : order
+          )
+        );
+        setAllOrders(prevOrders => 
+          prevOrders.map(order => 
+            order._id === selectedOrder._id 
+              ? { ...order, status: newStatus }
+              : order
+          )
+        );
+        
         setSelectedOrder(null);
         setNewStatus("");
         setIsStatusPopupOpen(false);
-        getOrderData(status, page, usersPerPage);
       }
     }
   };
@@ -188,6 +221,23 @@ const OrdersList = () => {
     }
   };
 
+  const filteredOrders = useMemo(() => {
+    if (!searchQuery) return orderData;
+    
+    const query = searchQuery.toLowerCase();
+    return allOrders.filter(order => {
+      const orderId = order._id?.toLowerCase() || '';
+      const userName = order.user?.name?.toLowerCase() || '';
+      const userPhone = order.user?.phone?.toLowerCase() || '';
+      const userEmail = order.user?.email?.toLowerCase() || '';
+      
+      return orderId.includes(query) || 
+             userName.includes(query) || 
+             userPhone.includes(query) ||
+             userEmail.includes(query);
+    });
+  }, [allOrders, searchQuery]);
+
   return (
     <AdminLayout>
       <div className="min-h-full">
@@ -195,22 +245,47 @@ const OrdersList = () => {
         
         <section className="p-6">
           <div className="bg-white rounded-lg p-4 mb-6 shadow-sm">
-            <div className="flex gap-2 overflow-x-auto">
-              {["all", "placed", "pending"].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => handleTabChange(tab)}
-                  className={`
-                    px-4 py-2 rounded-full text-sm font-medium transition-colors
-                    ${status === tab 
-                      ? 'bg-primary text-white shadow-sm' 
-                      : 'text-gray-600 hover:bg-gray-100'
-                    }
-                  `}
+            <div className="flex flex-col gap-4">
+              <div className="flex gap-2 overflow-x-auto">
+                {["all", "placed", "pending"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => handleTabChange(tab)}
+                    className={`
+                      px-4 py-2 rounded-full text-sm font-medium transition-colors
+                      ${status === tab 
+                        ? 'bg-primary text-white shadow-sm' 
+                        : 'text-gray-600 hover:bg-gray-100'
+                      }
+                    `}
+                  >
+                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  </button>
+                ))}
+              </div>
+              
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search by Order ID, Name, or Phone Number"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-colors"
+                />
+                <svg
+                  className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                </button>
-              ))}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
 
@@ -227,9 +302,28 @@ const OrdersList = () => {
             </div>
 
             <div className="divide-y divide-gray-200" style={{ maxHeight: containerHeight, overflowY: 'auto' }}>
-              {orderData.map((order) => (
+              {filteredOrders.map((order) => (
                 <div key={order._id} className="grid grid-cols-orderTable gap-4 p-4 items-center hover:bg-gray-50 transition-colors">
-                  <div className="text-sm font-medium text-gray-900">{order._id}</div>
+                  <div className="text-xs font-medium text-gray-900">
+                    <div className="flex items-center gap-2">
+                      <span id={`order-${order._id}`} className="truncate max-w-[100px]">{order._id}</span>
+                      <button
+                        onClick={() => {
+                          const element = document.getElementById(`order-${order._id}`);
+                          if (element) {
+                            element.classList.toggle('truncate');
+                            element.classList.toggle('max-w-[100px]');
+                          }
+                        }}
+                        className="text-gray-400 hover:text-gray-600"
+                        aria-label="Toggle order ID"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
                   
                   <div className="flex flex-col">
                     {order?.user ? (
@@ -344,28 +438,37 @@ const OrdersList = () => {
           </div>
 
           <div className="mt-6 bg-white rounded-lg p-4 shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <label htmlFor="usersPerPage" className="text-sm text-gray-600">
-                Items per page:
-              </label>
-              <select
-                id="usersPerPage"
-                value={usersPerPage}
-                onChange={handleSelect}
-                className="rounded-md border-gray-300 text-sm focus:border-primary focus:ring focus:ring-primary/20"
-              >
-                {[10, 15, 20, 25, 30].map((count) => (
-                  <option key={count} value={count}>{count}</option>
-                ))}
-              </select>
-            </div>
-            
-            {totalPages && (
-              <Pagination
-                currentPage={parseInt(page)}
-                totalPages={totalPages}
-                onPageChange={(newPage) => router.push(`/admin/orders?page=${newPage}`)}
-              />
+            {!searchQuery && (
+              <>
+                <div className="flex items-center gap-4">
+                  <label htmlFor="usersPerPage" className="text-sm text-gray-600">
+                    Items per page:
+                  </label>
+                  <select
+                    id="usersPerPage"
+                    value={usersPerPage}
+                    onChange={handleSelect}
+                    className="rounded-md border-gray-300 text-sm focus:border-primary focus:ring focus:ring-primary/20"
+                  >
+                    {[10, 15, 20, 25, 30].map((count) => (
+                      <option key={count} value={count}>{count}</option>
+                    ))}
+                  </select>
+                </div>
+                
+                {totalPages && (
+                  <Pagination
+                    currentPage={parseInt(page)}
+                    totalPages={totalPages}
+                    onPageChange={(newPage) => router.push(`/admin/orders?page=${newPage}`)}
+                  />
+                )}
+              </>
+            )}
+            {searchQuery && (
+              <div className="text-sm text-gray-600">
+                Found {filteredOrders.length} results
+              </div>
             )}
           </div>
         </section>

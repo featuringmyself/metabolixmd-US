@@ -78,7 +78,7 @@ const Footer = ({paddingTop = 'pt-0'}) => {
               <div className="text-white md:text-left mb-6">
                 <h3 className="font-light text-md mb-1">Address:</h3>
                 <p className="mb-12 text-sm">
-                 9808 Topeka Ave, Lubbock, Texas 79424
+                 4414 82nd St, Suite 212, Lubbock, TX 79424
                 </p>
 
                 <h3 className="font-light text-md mb-3">Contact:</h3>
