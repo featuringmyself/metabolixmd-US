@@ -71,6 +71,20 @@ export async function getMethod(url, payload) {
         }
 
         const response = await fetch(process.env.NEXT_PUBLIC_API_URL + url, requestOptions);
+        
+        // Check if the response is JSON
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            const text = await response.text();
+            console.error('Non-JSON response received:', {
+                url,
+                status: response.status,
+                contentType,
+                text: text.substring(0, 200) // Log first 200 chars of response
+            });
+            throw new Error(`Invalid response format. Expected JSON but got ${contentType}`);
+        }
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -79,7 +93,7 @@ export async function getMethod(url, payload) {
                 status: response.status,
                 data
             });
-            throw new Error(data.message || 'Request failed');
+            throw new Error(data.message || `Request failed with status ${response.status}`);
         }
 
         if (url.includes('/order')) {
@@ -95,7 +109,8 @@ export async function getMethod(url, payload) {
     } catch (e) {
         console.error('API request error:', {
             url,
-            error: e.message
+            error: e.message,
+            apiUrl: process.env.NEXT_PUBLIC_API_URL
         });
         toast.error(e.message);
         return null;
