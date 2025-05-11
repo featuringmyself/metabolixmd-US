@@ -168,7 +168,7 @@ const NavBar = () => {
               <Link 
                 href="/" 
                 className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#015c04] after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${
-                  router.pathname == "/" ? "font-semibold text-primary text-base after:scale-x-100" : ''
+                  router.pathname == "/" ? "font-semibold text-primary text-base after:scale-x-100 underline underline-offset-8" : ''
                 }`}
               >
                 Home
@@ -176,7 +176,7 @@ const NavBar = () => {
               <Link 
                 href="/about-us" 
                 className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#015c04] after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${
-                  router.pathname == "/about-us" ? "font-semibold text-primary text-base after:scale-x-100" : ''
+                  router.pathname == "/about-us" ? "font-semibold text-primary text-base after:scale-x-100 underline underline-offset-8" : ''
                 }`}
               >
                 About Us
@@ -184,7 +184,7 @@ const NavBar = () => {
               <Link 
                 href="/contact-us" 
                 className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#015c04] after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${
-                  router.pathname == "/contact" ? "font-semibold text-primary text-base after:scale-x-100" : ''
+                  router.pathname == "/contact-us" ? "font-semibold text-primary text-base after:scale-x-100 underline underline-offset-8" : ''
                 }`}
               >
                 Contact
