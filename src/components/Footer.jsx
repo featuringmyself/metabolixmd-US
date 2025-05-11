@@ -179,29 +179,14 @@ const Footer = ({paddingTop = 'pt-0'}) => {
                   Home
                 </Link>
                 <Link
-                  href="/how-it-works"
+                  href="/about-us"
                   className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
-                    pathname === "/how-it-works" ? "text-[#ff8c2c]" : ""
+                    pathname === "/about-us" ? "text-[#ff8c2c]" : ""
                   }`}
                 >
-                  How It Works
+                  About Us
                 </Link>
-                <Link
-                  href="/glp-1-information"
-                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
-                    pathname === "/glp-1-information" ? "text-[#ff8c2c]" : ""
-                  }`}
-                >
-                  GLP-1 Information
-                </Link>
-                <Link
-                  href="/pricing"
-                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
-                    pathname === "/pricing" ? "text-[#ff8c2c]" : ""
-                  }`}
-                >
-                  Pricing
-                </Link>
+               
                 <Link
                   href="/contact-us"
                   className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
@@ -209,6 +194,14 @@ const Footer = ({paddingTop = 'pt-0'}) => {
                   }`}
                 >
                   Contact Us
+                </Link>
+                <Link
+                  href="/safety-information"
+                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
+                    pathname === "/safety-information" ? "text-[#ff8c2c]" : ""
+                  }`}
+                >
+                  Safety Information
                 </Link>
               </div>
             </div>

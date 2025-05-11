@@ -13,7 +13,7 @@ import WeightLossCalculatorSection from "./WeightLossCalculatorSection";
 import bgVector from "@/../public/images/metabolixmd-bg-vector.svg";
 
 // Removing the auth token import
-// import { getAuthToken } from '@/services/API/apiHelper'
+import { getAuthToken } from '@/services/API/apiHelper'
 import Link from "next/link";
 import Footer from "./Footer";
 import ScrollProgressBar from "./ProgressBar";
@@ -467,6 +467,7 @@ const HomePage = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="w-full bg-[#ECF4F2] py-40  md:py-64 rounded-b-[100px] relative z-30 -mt-20"
+          id="faq"
         >
           <div className="max-w-[1600px] mx-auto px-4 md:px-6">
             <motion.div
@@ -547,24 +548,24 @@ const HomePage = () => {
               What's your weight loss goal?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
-              <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              <Link href="/get-started" className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
                 Losing
                 <br />
                 1-20 lbs
-              </button>
-              <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              </Link>
+              <Link href="/get-started" className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
                 Losing
                 <br />
                 21-50 lbs
-              </button>
-              <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              </Link>
+              <Link href="/get-started" className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
                 Losing
                 <br />
                 51+ lbs
-              </button>
-              <button className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              </Link>
+              <Link href="/get-started" className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
                 Not sure, I just want to lose the weight
-              </button>
+              </Link>
             </div>
           </div>
         </div>

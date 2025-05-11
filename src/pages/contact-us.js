@@ -117,7 +117,7 @@ const ContactUs = () => {
                         </div>
                         <div className="flex items-center gap-3 text-gray-700">
                             <FaMapMarkerAlt className="text-primary" />
-                            <p>9808 Topeka Ave, Lubbock, Texas 79424</p>
+                            <p>4414 82nd St, Suite 212, Lubbock, TX 79424</p>
                         </div>
                     </motion.section>
                 </div>
@@ -208,8 +208,8 @@ const ContactUs = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6 }}
             >
-                <Footer />
             </motion.div>
+            <Footer paddingTop='pt-20 mt-10 '/>
         </div>
     );
 };

@@ -190,9 +190,9 @@ const NavBar = () => {
                 Contact
               </Link>
               <Link 
-                href="/faq" 
+                href="/#faq" 
                 className={`cursor-pointer text-base font-poppins tracking-wider hover:text-[#015c04] hover:font-semibold relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-[#015c04] after:left-0 after:-bottom-1 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left ${
-                  router.pathname == "/faq" ? "font-semibold text-primary text-base after:scale-x-100" : ''
+                  router.pathname == "/#faq" ? "font-semibold text-primary text-base after:scale-x-100" : ''
                 }`}
               >
                 FAQ
@@ -295,7 +295,7 @@ const NavBar = () => {
                         { href: "/", label: "Home" },
                         { href: "/about-us", label: "About Us" },
                         { href: "/contact", label: "Contact" },
-                        { href: "/faq", label: "FAQ" },
+                        { href: "/#faq", label: "FAQ" },
                         ...(user?.__t === "Admin" ? [{ href: "/admin/users", label: "Admin" }] : [])
                       ].map((link, index) => (
                         <motion.div

@@ -133,59 +133,6 @@ const expertDetails = [
     ),
   },
   {
-    route: "about-mohit",
-    img: "/images/dr4.svg",
-    name: "Mohit Chawla",
-    subName: "MD",
-    isApproved: true,
-    mainRole: "",
-    designation: "Consultant",
-    detailedJob: "",
-    description: (
-      <div className="text-xs">
-        <p className="mt-3">
-          <b>Dr. Mohit Chawla, M.D.</b>, is an exceptional physician with
-          specialized expertise in geriatric care, general medicine, pain
-          management, and palliative care. Driven by a passion for
-          patient-centered care, Dr. Chawla has held key roles at respected
-          institutions, including the Pain Management Centers of America, Grand
-          Island Pain Relief Center, and St. Bernards Healthcare, where he
-          treated complex cases across multiple disciplines. His broad clinical
-          experience enables him to meet the nuanced needs of aging populations
-          while managing chronic pain and end-of-life care with empathy and
-          precision.
-        </p>
-        <p className="mt-3">
-          Dr. Chawla's educational background is extensive, marked by multiple
-          advanced fellowships. He completed his Hospice and Palliative Care
-          training at both Rush University and John H. Stroger, Jr. Hospital,
-          followed by a Geriatric Medicine Fellowship at the University of
-          Alabama at Birmingham. Prior to these, he completed his Family
-          Medicine Residency at Creighton University School of Medicine and
-          earned his MBBS from Manipal College of Medical Sciences, Nepal. These
-          achievements reflect his commitment to continuous learning and
-          clinical excellence.
-        </p>
-        <p className="mt-3">
-          As a consultant at <b>MetabolixMD</b>, Dr. Chawla leverages his vast
-          knowledge and hands-on experience to optimize patient outcomes, with a
-          focus on holistic well-being and quality of life. His ability to
-          integrate pain management, palliative care, and geriatrics allows him
-          to offer comprehensive, personalized solutions that address each
-          patient's unique needs.
-        </p>
-        <p className="mt-3">
-          Outside his professional life, Dr. Chawla enjoys traveling and
-          exploring new cultures, experiences that enrich his perspective and
-          contribute to his well-rounded approach to medicine. His diverse
-          interests, combined with his clinical expertise, make him a valuable
-          asset to the MetabolixMD team and a trusted partner in helping
-          patients achieve healthier, more fulfilling lives.
-        </p>
-      </div>
-    ),
-  },
-  {
     route: "about-joseph",
     img: "/images/dr3.svg",
     name: "Joseph Rizzo",
@@ -938,7 +885,7 @@ const AboutUs = () => {
         ) : (
           <motion.div
             variants={staggerContainer}
-            className="flex flex-wrap items-center justify-evenly gap-24 mx-auto"
+            className="grid grid-cols-2 gap-12 max-w-7xl mx-auto px-4"
           >
             {expertDetails
               .filter((expert) => expert.name)
