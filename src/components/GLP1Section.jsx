@@ -160,7 +160,7 @@ const GLP1Section = () => {
                       href="/safety-information"
                       className="inline-block text-sm md:px-2 md:py-2 py-0 text-black font-medium underline underline-offset-2"
                     >
-                      Important safety information
+                      Important Safety Information
                     </Link>
                   </div>
                 </div>
@@ -199,7 +199,7 @@ const GLP1Section = () => {
                       href="/safety-information"
                       className="inline-block text-sm md:px-2 px-0 md:py-2 py-0 text-white font-medium underline underline-offset-2"
                     >
-                      Important safety information
+                      Important Safety Information
                     </Link>
                   </div>
                 </div>

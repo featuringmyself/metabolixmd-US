@@ -709,7 +709,7 @@ const AboutUs = () => {
             We created MetabolixMD so others could access this life-changing treatment the same way I did—quickly, privately, and safely. That's when Ashley and I teamed up and launched this company together."
           </p>
           <Image src={founderSign} width={150} height={150} className="md:mt-6 mt-10" />
-          <p className="text-[#000000CC] opacity-[80%]">- Founder, Metabolixmd</p>
+          <p className="text-[#000000CC] opacity-[80%]">- Dr. Raj, Founder, MetabolixMD</p>
         </div>
       </div>
 
