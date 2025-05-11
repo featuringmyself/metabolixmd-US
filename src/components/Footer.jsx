@@ -3,12 +3,15 @@ import React from "react";
 import FloatingButton from "./FloatingButton";
 import { usePathname } from "next/navigation";
 
-const Footer = ({paddingTop = 'pt-0'}) => {
+const Footer = ({ paddingTop = "pt-0" }) => {
   const pathname = usePathname();
   return (
     <div className="-mt-24 ">
       <FloatingButton />
-      <section id="bottom-footer" className={`bg-[#223C37] ${paddingTop} pb-20 w-full`}>
+      <section
+        id="bottom-footer"
+        className={`bg-[#223C37] ${paddingTop} pb-20 w-full`}
+      >
         <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {/* Mobile and Desktop Layout */}
           <div className="flex justify-between md:flex-row flex-col gap-8 mb-12">
@@ -78,7 +81,7 @@ const Footer = ({paddingTop = 'pt-0'}) => {
               <div className="text-white md:text-left mb-6">
                 <h3 className="font-light text-md mb-1">Address:</h3>
                 <p className="mb-12 text-sm">
-                 4414 82nd St, Suite 212, Lubbock, TX 79424
+                  4414 82nd St, Suite 212, Lubbock, TX 79424
                 </p>
 
                 <h3 className="font-light text-md mb-3">Contact:</h3>
@@ -186,7 +189,7 @@ const Footer = ({paddingTop = 'pt-0'}) => {
                 >
                   About Us
                 </Link>
-               
+
                 <Link
                   href="/contact-us"
                   className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
@@ -203,6 +206,20 @@ const Footer = ({paddingTop = 'pt-0'}) => {
                 >
                   Safety Information
                 </Link>
+
+                <a
+                  href="https://www.legitscript.com/websites/?checker_keywords=metabolixmd.com"
+                  target="_blank"
+                  title="Verify LegitScript Approval for www.metabolixmd.com"
+                  className="flex justify-end items-center"
+                >
+                  <img
+                    src="https://static.legitscript.com/seals/38388756.png"
+                    alt="Verify Approval for www.metabolixmd.com"
+                    width="73"
+                    height="79"
+                  />
+                </a>
               </div>
             </div>
           </div>
