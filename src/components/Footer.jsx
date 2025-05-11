@@ -172,7 +172,7 @@ const Footer = ({ paddingTop = "pt-0" }) => {
 
             {/* Navigation Column - Right column for desktop, top for mobile */}
             <div className="text-white flex flex-col items-center md:items-end h-full order-1 md:order-3">
-              <div className="flex flex-col h-full justify-between md:justify-start md:space-y-6 py-6 md:py-0 md:mt-10 w-full px-12 md:px-0">
+              <div className="flex flex-col h-full justify-between md:justify-start md:space-y-6 md:mt-10 w-full px-12 md:px-0">
                 <Link
                   href="/"
                   className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
@@ -211,7 +211,7 @@ const Footer = ({ paddingTop = "pt-0" }) => {
                   href="https://www.legitscript.com/websites/?checker_keywords=metabolixmd.com"
                   target="_blank"
                   title="Verify LegitScript Approval for www.metabolixmd.com"
-                  className="flex justify-end items-center"
+                  className="flex md:justify-end justify-center items-center mt-10"
                 >
                   <img
                     src="https://static.legitscript.com/seals/38388756.png"
