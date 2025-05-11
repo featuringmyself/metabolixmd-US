@@ -57,7 +57,7 @@ const SearchAndSelectAllergies = ({ onNext, onBack }) => {
                         <input
                             className="relative w-full px-8 py-6 text-lg bg-white/90 backdrop-blur-sm border-2 border-gray-100 rounded-2xl focus:border-primary/30 focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 placeholder-gray-400 shadow-sm"
                             type="text"
-                            placeholder="Type an allergy and press Enter"
+                            placeholder="Type an allergy"
                             value={searchTerm}
                             onChange={handleSearchChange}
                             onKeyDown={handleAddCustomAllergy}
