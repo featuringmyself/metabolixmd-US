@@ -67,7 +67,9 @@ const ProfileDetails = () => {
         const processedOrders = res.data.map(order => ({
           ...order,
           paymentStatus: order.paymentStatus || 'pending',
-          paymentDate: order.paymentDate || null
+          paymentDate: order.paymentDate || null,
+          productName: order.orderItems?.[0]?.product?.name || 'N/A',
+          totalValue: order.totalValue || 0
         }));
         setUserOrders(processedOrders);
         console.log('Processed orders:', processedOrders);
@@ -294,7 +296,12 @@ const ProfileDetails = () => {
                       <div>
                         <p className="text-xs font-medium text-gray-900 mb-2 group-hover:text-primary transition-colors">
                           Order ID: {order._id}
+                          <br />
+                          Product: {order.productName || 'N/A'}
+                          <br />
+                          Price: ${order.totalValue || 'N/A'}
                         </p>
+                        
                         <div className="space-y-1">
                           <p className="text-gray-600">
                             Status: <span className="font-medium capitalize">{order.status}</span>
@@ -354,7 +361,7 @@ const ProfileDetails = () => {
             </AnimatePresence>
           </motion.div>
 
-          {/* Prescriptions Section */}
+          {/* Prescriptions Section
           <motion.div 
             className="bg-white backdrop-blur-lg bg-opacity-80 rounded-3xl shadow-xl p-8 border border-gray-100/50"
             variants={cardVariants}
@@ -412,8 +419,8 @@ const ProfileDetails = () => {
                   </motion.p>
                 )}
               </div>
-            </AnimatePresence>
-          </motion.div>
+            </AnimatePresence> */}
+          {/* </motion.div> */}
         </div>
       </motion.div>
       <Footer paddingTop="md:mt-10 mt-5 p-10 p-5"/>

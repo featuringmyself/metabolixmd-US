@@ -5,64 +5,64 @@ function ReviewsSection() {
     const testimonials = [
         {
           id: 1,
-          name: "Sarah Johnson",
+          name: "S J",
           image: "/images/testimonials/user1.webp",
           review:
-            "The personalized approach and constant support from the medical team made all the difference in my weight loss journey.",
+            "I've struggled with weight for years, but the semaglutide program through MetabolixMD was a game-changer. Easy online consultations, clear dosing guidance, and real accountability from my care team—highly recommend!",
         },
         {
           id: 2,
-          name: "Michael Chen",
-          image: "/images/testimonials/user1.webp",
+          name: "M C",
+          image: "/images/testimonials/user2.webp",
           review:
             "Quick appointments and efficient delivery of medications. The whole process was seamless and professional.",
         },
         {
           id: 3,
-          name: "Emily Rodriguez",
-          image: "/images/testimonials/user1.webp",
+          name: "E R",
+          image: "/images/testimonials/user3.webp",
           review:
             "I appreciate how thorough the medical team was in reviewing my health history before starting treatment.",
         },
         {
           id: 4,
-          name: "David Thompson",
-          image: "/images/testimonials/user1.webp",
+          name: "D T",
+          image: "/images/testimonials/user4.webp",
           review:
             "The ongoing support and regular check-ins helped me stay motivated throughout my weight loss journey.",
         },
         {
           id: 5,
-          name: "Lisa Martinez",
-          image: "/images/testimonials/user1.webp",
+          name: "L M",
+          image: "/images/testimonials/user5.webp",
           review:
             "Finally found a program that takes a scientific approach to weight loss. The results speak for themselves.",
         },
         {
           id: 6,
-          name: "James Wilson",
-          image: "/images/testimonials/user1.webp",
+          name: "J W",
+          image: "/images/testimonials/user6.webp",
           review:
             "The convenience of virtual consultations combined with quality medications made this program perfect for my busy schedule.",
         },
         {
           id: 7,
-          name: "Amanda Foster",
-          image: "/images/testimonials/user1.webp",
+          name: "A F",
+          image: "/images/testimonials/user7.webp",
           review:
             "Excellent communication from the medical team and great results with the prescribed medications.",
         },
         {
           id: 8,
-          name: "Robert Kim",
-          image: "/images/testimonials/user1.webp",
+          name: "R K",
+          image: "/images/testimonials/user8.webp",
           review:
             "Very impressed with the professionalism and knowledge of the physicians. They really understand GLP-1 medications.",
         },
         {
           id: 9,
-          name: "Patricia Lee",
-          image: "/images/testimonials/user1.webp",
+          name: "P L",
+          image: "/images/testimonials/user9.webp",
           review:
             "The personalized treatment plan was exactly what I needed. Great support throughout the entire process.",
         },
@@ -157,14 +157,15 @@ function ReviewsSection() {
                         className="flex-shrink-0 w-full px-4 flex flex-col items-center text-center"
                     >
                         <motion.div 
-                            className="w-24 h-24 rounded-full overflow-hidden mb-5"
+                            className="w-14 h-14 rounded-full overflow-hidden mb-5"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >
                             <img 
                                 src={testimonials[currentIndex].image} 
                                 alt={testimonials[currentIndex].name} 
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover select-none pointer-events-none"
+                                draggable="false"
                             />
                         </motion.div>
                         <div className="max-w-2xl mx-auto">

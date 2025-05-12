@@ -74,14 +74,14 @@ const HomePage = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah Johnson",
+      name: "S J",
       image: "/images/testimonials/user1.webp",
       review: "The personalized approach and constant support from the medical team made all the difference in my weight loss journey.",
       rating: 5,
     },
     {
       id: 2,
-      name: "Michael Chen",
+      name: "M C",
       image: "/images/testimonials/user2.webp",
       review:
         "Quick appointments and efficient delivery of medications. The whole process was seamless and professional.",
@@ -89,7 +89,7 @@ const HomePage = () => {
     },
     {
       id: 3,
-      name: "Emily Rodriguez",
+      name: "E R",
       image: "/images/testimonials/user3.webp",
       review:
         "I appreciate how thorough the medical team was in reviewing my health history before starting treatment.",
@@ -97,7 +97,7 @@ const HomePage = () => {
     },
     {
       id: 4,
-      name: "David Thompson",
+      name: "D T",
       image: "/images/testimonials/user4.webp",
       review:
         "The ongoing support and regular check-ins helped me stay motivated throughout my weight loss journey.",
@@ -105,7 +105,7 @@ const HomePage = () => {
     },
     {
       id: 5,
-      name: "Lisa Martinez",
+      name: "L M",
       image: "/images/testimonials/user5.webp",
       review:
         "Finally found a program that takes a scientific approach to weight loss. The results speak for themselves.",
@@ -113,7 +113,7 @@ const HomePage = () => {
     },
     {
       id: 6,
-      name: "James Wilson",
+      name: "J W",
       image: "/images/testimonials/user6.webp",
       review:
         "The convenience of virtual consultations combined with quality medications made this program perfect for my busy schedule.",
@@ -121,7 +121,7 @@ const HomePage = () => {
     },
     {
       id: 7,
-      name: "Amanda Foster",
+      name: "A F",
       image: "/images/testimonials/user7.webp",
       review:
         "Excellent communication from the medical team and great results with the prescribed medications.",

@@ -26,7 +26,7 @@ const GLP1Section = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerChildren}
-      className="-mt-32 pt-32 pb-12 bg-[#365D56] w-full  text-white shadow-lg transform transition-all duration-300 hover:shadow-xl relative -z-10"
+      className="-mt-32 pt-32 pb-12 bg-[#365D56] w-full  text-white shadow-lg transform transition-all duration-300 hover:shadow-xl relative z-10"
     >
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}
@@ -69,19 +69,14 @@ const GLP1Section = () => {
                 >
                   GLP-1 drugs help regulate blood sugar, slow digestion, and curb appetite. They trigger insulin production when needed, reduce the hormone that raises blood sugar, and keep food in the stomach longer, leading to increased fullness and lower calorie intake.
                 </motion.p>
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  <Link 
+                
+                  <a 
                     href="/get-started" 
-                    className="inline-block bg-[#365D56] text-white px-8 py-3 rounded-full hover:bg-[#2e4f49] transition-all duration-300 transform hover:scale-105 hover:shadow-md"
+                    className="inline-block bg-[#365D56] text-white px-8 py-3 rounded-full hover:bg-[#2e4f49] transition-all duration-300 hover:shadow-md hover:scale-105 relative z-50"
+                    style={{ position: 'relative' }}
                   >
                     Start your Journey
-                  </Link>
-                </motion.div>
+                  </a>
               </div>
               <div className="md:w-1/2 flex justify-center items-center relative">
                 {/* Container with floating effect */}
