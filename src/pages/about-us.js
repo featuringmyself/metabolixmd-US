@@ -183,8 +183,8 @@ const expertDetails = [
     name: "Kurt Springmann",
     subName: "MD, JD",
     isApproved: true,
-    mainRole: "",
-    designation: "Consultant, Chief Legal Officer",
+    mainRole: "Consultant",
+    designation: "Chief Legal Officer",
     detailedJob: "",
     description: (
       <div className="text-xs">
@@ -612,7 +612,7 @@ const AboutUs = () => {
               <path
                 d="M49.0844 30.54V61.5481H45.3295V34.4765H45.1478L37.5774 39.5032V35.6878L45.3295 30.54H49.0844Z"
                 fill="white"
-              />
+              />      
             </svg>
             <h5 className="text-4xl">Privacy</h5>
             <p className="max-w-xs opacity-70 ">
@@ -709,7 +709,7 @@ const AboutUs = () => {
             We created MetabolixMD so others could access this life-changing treatment the same way I did—quickly, privately, and safely. That's when Ashley and I teamed up and launched this company together."
           </p>
           <Image src={founderSign} width={150} height={150} className="md:mt-6 mt-10" />
-          <p className="text-[#000000CC] opacity-[80%]">- Dr. Raj, Founder, MetabolixMD</p>
+          <p className="text-[#000000CC] opacity-[80%]">- Raj Sabar, CEO, MetabolixMD</p>
         </div>
       </div>
 
@@ -848,7 +848,7 @@ const AboutUs = () => {
                           <p className="text-sm text-[#004F41] font-light">
                             {expert.mainRole
                               ? expert.designation
-                                ? `${expert.mainRole}, ${expert.designation}`
+                                ? `${expert.mainRole} ${expert.designation}`
                                 : expert.mainRole
                               : expert.designation}
                           </p>

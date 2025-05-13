@@ -202,12 +202,12 @@ const NavBar = () => {
             {/* Mobile Menu Button */}
             <div className="md:hidden relative z-10 flex items-center gap-3">
               {!user && (
-                <button
-                  onClick={openSignUp}
+                <Link
+                  href="/get-started"
                   className="text-sm font-medium  bg-zinc-100 text-black px-3 py-1.5 rounded-full hover:bg-primary/90 transition-colors"
                 >
                   Get Started
-                </button>
+                </Link>
               )}
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -349,10 +349,10 @@ const NavBar = () => {
                         ) : (
                           <div className="flex flex-col items-center justify-center w-full gap-4">
                             <div className="flex items-center gap-2 text-primary font-medium">
-                              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-medium">
+                              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-white font-medium">
                                 {getUserInitial(user?.name)}
                               </div>
-                              <span>{user?.name || 'User'}</span>
+                              <span className='text-white'>{user?.name || 'User'}</span>
                             </div>
                             <div className="flex flex-col w-full gap-2 mt-2">
                               <Link 
