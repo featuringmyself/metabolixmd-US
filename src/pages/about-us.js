@@ -1024,7 +1024,7 @@ const AboutUs = () => {
         {showOverlay && activeExpert && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black/50 z-40"
+              className="fixed bg-black/50 z-40"
               variants={overlayVariants}
               initial="hidden"
               animate="visible"
@@ -1033,9 +1033,9 @@ const AboutUs = () => {
               transition={{ duration: 0.3 }}
 
             />
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+            <div className="fixed inset-0 z-[99] flex items-center justify-center p-4 overflow-y-scroll">
               <motion.div
-                className="bg-white rounded-[32px] w-full max-w-[1200px] max-h-full overflow-y-scroll relative"
+                className="bg-white rounded-[32px] w-full md:max-w-[80vw] max-w-[90vw] max-h-full overflow-y-auto relative"
                 variants={modalVariants}
                 initial="hidden"
                 animate="visible"
@@ -1044,7 +1044,7 @@ const AboutUs = () => {
               >
                 <button
                   onClick={() => setShowOverlay(false)}
-                  className="sticky top-6 right-6 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 hover:bg-white transition-colors float-right border-2 border-[#50756E]"
+                  className="absolute top-6 right-6 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 hover:bg-white transition-colors float-right border-2 border-[#50756E]"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1106,7 +1106,7 @@ const AboutUs = () => {
                   </div>
                 </div>
 
-                <div className="px-12 pb-80">
+                <div className="px-12 pb-10">
                   <div className="max-w-none text-xs text-gray-600">
                     {activeExpert.description}
                   </div>
