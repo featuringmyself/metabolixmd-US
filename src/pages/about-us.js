@@ -1063,7 +1063,7 @@ const AboutUs = () => {
                 </button>
 
                 <div className="flex md:flex-row flex-col items-center gap-5 p-5">
-                  <div className="relative w-[300px] h-[300px] flex-shrink-0 bg-[#ECF4F2] rounded-[40px]">
+                  <div className="relative w-[200px] h-[200px] flex-shrink-0 bg-[#ECF4F2] rounded-[40px]">
                     <Image
                       src={activeExpert.img}
                       alt={activeExpert.name}
