@@ -26,9 +26,9 @@ const GLP1Section = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerChildren}
-      className="-mt-32 pt-32 pb-12 bg-[#365D56] w-full  text-white shadow-lg transform transition-all duration-300 hover:shadow-xl relative z-10"
+      className="-mt-32 pt-32 pb-12 bg-[#365D56]  max-w-screen  text-white shadow-lg transform transition-all duration-300 hover:shadow-xl relative z-10"
     >
-      <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-16 md:py-24">
+      <div className="max-w-[90%] mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}
         <motion.div 
           variants={fadeIn}
@@ -37,7 +37,7 @@ const GLP1Section = () => {
           <h2 className="text-4xl md:text-6xl font-medium mb-4 leading-tight">
             Understanding<br />GLP-1 Drugs
           </h2>
-          <p className="text-base opacity-90 md:w-[40%] leading-relaxed">
+          <p className="text-md opacity-90 md:w-[40%] leading-relaxed ">
             GLP-1 receptor agonists are transforming the way we approach weight management. These medications mimic a natural hormone in your body to regulate blood sugar, slow digestion, and reduce appetite. The result? Effective weight loss, improved metabolism, and even cardiovascular benefits. 
           </p>
         </motion.div>
@@ -72,7 +72,7 @@ const GLP1Section = () => {
                 
                   <a 
                     href="/get-started" 
-                    className="inline-block bg-[#365D56] text-white px-8 py-3 rounded-full hover:bg-[#2e4f49] transition-all duration-300 hover:shadow-md hover:scale-105 relative z-50"
+                    className="inline-block bg-[#365D56] text-white px-8 py-4 rounded-full hover:bg-[#2e4f49] transition-all duration-300 hover:shadow-md hover:scale-105 relative z-50"
                     style={{ position: 'relative' }}
                   >
                     Start your Journey
@@ -115,7 +115,7 @@ const GLP1Section = () => {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-[#626262] mb-12 w-[95%] md:w-[80%] md:text-center text-start leading-relaxed hidden md:block"
+              className="text-[#626262] mb-12 w-[95%] md:w-[70%] md:text-center text-start leading-relaxed hidden md:block"
             >
               GLP-1 medications come in different forms, but they all work toward the same goal - supporting weight management and metabolic health. These treatments are typically delivered through vials with syringes or auto-injectors and can be self-administered. Each method ensures effective absorption, allowing the medication to work efficiently in your body. During your consultation with one of our healthcare professionals, we will help determine the best option for you.
             </motion.p>

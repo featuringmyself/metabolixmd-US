@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const testimonials = [
   {
     name: "FZ",
-    text: 'I put my trust in Dr. Raj & MetabolixMD and they delivered, quite literally! I would recommend metabolixMD to anyone interested in getting healthier, happier, and improving their quality of life. You cannot put a price on happiness, but metabolixMD makes it more affordable. Take the first step, I promise you it will be worth it. My life has slowly been improving and I have their great team to thank! I’m so excited for what the future holds! You can always start today!',
+    text: '"I put my trust in Dr. Raj & MetabolixMD and they delivered, quite literally! I would recommend metabolixMD to anyone interested in getting healthier, happier, and improving their quality of life. You cannot put a price on happiness, but metabolixMD makes it more affordable. Take the first step, I promise you it will be worth it. My life has slowly been improving and I have their great team to thank! I’m so excited for what the future holds! You can always start today!"',
     beforeImg: "/images/FZ_testimonial_before.webp",
     afterImg: "/images/FZ_testimonial_after.webp", // Use same for demo, replace with real after image
   },
@@ -25,7 +25,7 @@ function TestimonialSection() {
     setCurrent((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between  text-black min-h-[70vh] md:px-0 md:py-5 py-0 pt-72 pb-10 z-50 md:rounded-[100px] rounded-[35px] -mt-32 bg-white relative px-10">
+    <div className="flex flex-col md:flex-row items-center justify-between  text-black min-h-[70vh] md:px-4 md:py-44 py-0 pt-54 pb-10 md:pb-40 z-50 md:rounded-[100px] rounded-[35px] -mt-32 bg-white relative px-10">
       {/* Mobile Title */}
       <div className="w-full text-center md:hidden mb-8">
         <h3 className="text-4xl font-medium leading-tight">
@@ -67,9 +67,9 @@ function TestimonialSection() {
 
       {/* Desktop Left Content */}
       <div className="hidden md:flex flex-col items-start max-w-[40%] ml-24">
-        <h3 className="text-6xl font-medium leading-tight mb-8">
+        <h3 className="text-7xl font-medium text-[#2E2E2E] tracking-tighter leading-[-9px] mb-8 max-w-[80%]">
           Real People,
-          <br />
+          
           Real Results
         </h3>
         <div className="flex items-center gap-4 mb-6">
@@ -96,7 +96,7 @@ function TestimonialSection() {
             ))}
           </div>
         </div>
-        <p className="text-sm mb-8 max-w-[90%] text-[#626262]">
+        <p className="text-base mb-8 max-w-[65%] text-[#626262]">
           {testimonial.text}
         </p>
         <span className="font-bold text-lg">{testimonial.name}</span>
@@ -109,7 +109,7 @@ function TestimonialSection() {
             <img
               src={testimonial.beforeImg}
               alt="Before"
-              className="object-cover w-full h-[340px]"
+              className="object-cover h-[32vw] w-[20vw]"
             />
             <span className="absolute bottom-6 left-6 bg-orange-500 text-black px-6 py-2 rounded-lg text-lg font-semibold">
               Before
@@ -119,7 +119,7 @@ function TestimonialSection() {
             <img
               src={testimonial.afterImg}
               alt="After"
-              className="object-cover w-full h-[340px]"
+              className="object-cover h-[32vw] w-[20vw]"
             />
             <span className="absolute bottom-6 left-6 bg-[#3B6252] text-white px-6 py-2 rounded-lg text-lg font-semibold">
               After

@@ -4,10 +4,10 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => {
   const contentRef = useRef(null);
 
   return (
-    <div className="border-b border-gray-300 py-4">
+    <div className="border-b py-4 bg-white p-10 rounded-3xl">
       <button
         onClick={onClick}
-        className="w-full gap-2 text-primary text-left flex justify-between items-center text-base md:text-lg focus:outline-none"
+        className="w-full gap-2 text-black text-left flex justify-between items-center text-base md:text-lg focus:outline-none"
       >
         <span className={`transition-all duration-300 ${isOpen ? 'text-primary font-semibold' : ''}`}>
           {question}
@@ -27,7 +27,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => {
           transform: isOpen ? 'translateY(0)' : 'translateY(-10px)'
         }}
       >
-        <div className="mt-4 text-gray-600 pl-4 border-l-2 border-primary/20">
+        <div className="mt-4 text-gray-600 pl-4 border-l-2 border-black/20">
           <p className="leading-relaxed">{answer}</p>
         </div>
       </div>
@@ -86,6 +86,7 @@ const FaqList = () => {
           answer={faq.answer}
           isOpen={openFaqIndex === index}
           onClick={() => handleFaqClick(index)}
+          
         />
       ))}
     </div>

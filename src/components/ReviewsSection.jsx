@@ -136,7 +136,7 @@ function ReviewsSection() {
     };
 
     return (
-        <div className="w-full overflow-hidden relative py-8 my-10 pb-32 bg-white select-none md:rounded-b-[100px] rounded-b-[40px] z-30">
+        <div className="w-full overflow-hidden relative py-16 my-10 pb-32 bg-white select-none md:rounded-b-[100px] rounded-b-[40px] z-30">
             <motion.div 
                 className="flex overflow-x-hidden touch-pan-x"
                 drag="x"
@@ -157,7 +157,7 @@ function ReviewsSection() {
                         className="flex-shrink-0 w-full px-4 flex flex-col items-center text-center"
                     >
                         <motion.div 
-                            className="w-14 h-14 rounded-full overflow-hidden mb-5"
+                            className="w-28 h-28 rounded-full overflow-hidden mb-5"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >
@@ -168,14 +168,14 @@ function ReviewsSection() {
                                 draggable="false"
                             />
                         </motion.div>
-                        <div className="max-w-2xl mx-auto">
+                        <div className="max-w-3xl mx-auto">
                             <motion.p 
-                                className="text-lg leading-relaxed text-gray-700 mb-5"
+                                className="text-3xl leading-relaxed text-gray-700 mb-5"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.2 }}
                             >
-                                {testimonials[currentIndex].review}
+                                {`"${testimonials[currentIndex].review}"`}
                             </motion.p>
                             <motion.p 
                                 className="font-bold text-lg text-gray-900 mb-2"

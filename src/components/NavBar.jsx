@@ -398,12 +398,12 @@ const NavBar = () => {
                   >
                     Sign In
                   </button>
-                  <button
-                    onClick={openSignUp}
+                  <Link
+                    href="/get-started"
                     className="text-base font-medium bg-primary text-white px-4 py-2   rounded-full hover:bg-primary/90 transition-colors"
                   >
                     Get Started
-                  </button>
+                  </Link>
                 </div>
               ) : (
                 <div className="relative">

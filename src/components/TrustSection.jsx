@@ -115,14 +115,14 @@ const TrustSection = () => {
         {/* Section Title */}
         <motion.h2 
           variants={fadeIn}
-          className="text-4xl md:text-5xl font-medium md:text-center max-w-full md:max-w-[50%] text-start mb-16 text-zinc-800"
+          className="text-4xl md:text-5xl font-medium tracking-tighter md:text-center max-w-full md:max-w-[50%] text-start mb-16 text-zinc-800"
         >
           Why Thousands Trust Us with
           Their Weight Loss Goals
         </motion.h2>
 
         {/* Trust Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-8">
           {trustFeatures.map((feature, index) => (
             <motion.div
               key={index}
@@ -132,7 +132,7 @@ const TrustSection = () => {
               <div className="relative w-12 h-12 flex items-center justify-center">
                 {feature.icon}
               </div>
-              <h3 className="text-lg font-medium mb-1 md:max-w-[45%] max-w-full">{feature.title}</h3>
+              <h3 className="text-lg font-medium mb-1 md:max-w-[48%] max-w-full">{feature.title}</h3>
             </motion.div>
           ))}
         </div>

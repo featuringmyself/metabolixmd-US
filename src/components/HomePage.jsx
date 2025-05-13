@@ -49,7 +49,7 @@ const HomePage = () => {
       title: "Consultation",
       description:
         "Answer a quick questionnaire about your health history and goals and a MetabolixMD provider will be in touch to review your options.",
-      image: "/images/consultation.webp",
+      image: "/images/consultation.jpg",
     },
     "rx approval": {
       title: "Rx Approval",
@@ -268,7 +268,7 @@ const HomePage = () => {
 
   // Modify the step image rendering section
   const renderStepImage = () => (
-    <div className="relative md:h-[500px] h-[300px] rounded-3xl overflow-hidden">
+    <div className="relative md:h-[30vw] h-[300px] rounded-3xl overflow-hidden">
       {imagesLoaded && preloadedImages[stepDetails[activeStep].image] ? (
         <Image
           src={stepDetails[activeStep].image}
@@ -289,9 +289,9 @@ const HomePage = () => {
             <button
               key={key}
               onClick={() => setActiveStep(key)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full ${
+              className={`flex items-center gap-1 px-4 py-2 rounded-full ${
                 activeStep === key
-                  ? "bg-orange-500 text-white"
+                  ? "bg-orange-500 text-black"
                   : "bg-[#F6F6F3] text-zinc-800 hover:bg-[#F6F6F3]/80"
               } transition-all duration-200 ${
                 index !== Object.entries(stepDetails).length - 1
@@ -321,29 +321,25 @@ const HomePage = () => {
           initial="hidden"
           animate="visible"
           variants={staggerChildren}
-          className="flex flex-col relative mt-10 pb-0 px-4 md:min-h-[80vh] min-h-[90vh]  justify-evenly  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
+          className="flex flex-col relative mt-10 pb-0 px-4 min-h-screen  justify-evenly  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
         >
           <Image
-            src="/images/hero-desktop.webp"
+            src="/images/hero-desktop.png"
             alt="Hero image"
             fill
-            className="object-cover object-center -scale-x-100 relative -z-20 hidden md:block"
+            className="object-cover object-center  relative -z-20 hidden md:block"
             priority
           />
           <motion.div
             variants={fadeIn}
             className="flex flex-col justify-evenly items-start z-10 md:mx-20 mx-0 "
           >
-            <h1 className="text-5xl md:text-7xl leading-[1.2] font-medium md:mb-6 mb-0 ">
-              <span className="text-primary block">
+            <h1 className="text-5xl md:text-7xl leading-[1.2] font-medium max-w-[60%] text-primary">
                 Your Personalized
-                <br />
-                Weight Loss
-              </span>
-              <span className="text-[#2E2E2E] block">Journey Starts Here</span>
+                Weight Loss <span className="text-[#2E2E2E] ">Journey Starts Here</span>
             </h1>
 
-            <p className="text-[#626262] text-base md:text-lg md:max-w-[30%] max-w-[90%] md:my-6 my-5">
+            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[90%] md:my-12 my-5">
               Connect with our US-based physicians to receive tailored support
               on your weight loss journey. Experience a program designed just
               for you.
@@ -386,7 +382,7 @@ const HomePage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="font-montserrat mx-auto px-[8vw] md:py-24 py-20 md:rounded-t-[5vw] rounded-t-[10vw] bg-white relative z-20 md:-mt-16 -mt-8"
+          className="font-montserrat mx-auto px-[8vw] md:py-36 py-20 md:rounded-t-[5vw] rounded-t-[10vw] bg-white relative z-20 md:-mt-16 -mt-8"
         >
           {/* Step-by-Step Process heading and description */}
           <div className="  flex flex-col md:flex-row justify-between items-start mb-16 font-inter px-3 ">
@@ -404,26 +400,26 @@ const HomePage = () => {
               </p>
               <Link
                 href="/get-started"
-                className="inline-block px-8 py-3 bg-white border border-zinc-200 text-zinc-800 rounded-full font-medium hover:bg-zinc-50 transition-colors"
+                className="inline-block px-8 py-3 bg-white border  text-[#365D56] border-1 border-[#365D56] rounded-full font-medium hover:bg-zinc-50 transition-colors"
               >
                 Start Your Journey Now
               </Link>
             </div>
           </div>
 
-          <div className="flex flex-col-reverse lg:flex-row gap-8 font-montserrat bg-[#F6F6F3] md:pl-16 pl-0 rounded-3xl">
+          <div className="flex flex-col-reverse lg:flex-row font-montserrat bg-[#F6F6F3] md:pl-28 pl-0 rounded-3xl">
             {/* Left side: Number, Title, description */}
             <div className="flex-1 flex flex-col justify-center ">
               {/* Orange numbered circle */}
-              <div className="bg-orange-500 text-white w-16 h-16 rounded-full items-center justify-center text-2xl font-medium mb-6 md:flex hidden">
+              <div className="bg-orange-500 text-black w-20 h-20 rounded-full items-center justify-center text-4xl font-sm md:flex hidden">
                 {Object.keys(stepDetails).indexOf(activeStep) + 1}
               </div>
 
-              <div className="mb-8 w-[80%] md:pl-0 pl-8">
-                <h2 className="text-4xl md:text-6xl text-zinc-800 font-medium">
+              <div className=" w-[80%] md:pl-0 pl-8">
+                <h2 className="text-4xl md:text-5xl text-zinc-800 font-medium my-8">
                   {stepDetails[activeStep].title}
                 </h2>
-                <p className="text-[#626262] mt-4 max-w-sm md:text-lg text-xs te">
+                <p className="text-[#626262] max-w-sm md:text-lg text-xs te">
                   {stepDetails[activeStep].description}
                 </p>
               </div>
