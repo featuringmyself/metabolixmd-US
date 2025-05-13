@@ -235,21 +235,19 @@ const Footer = ({ paddingTop = "pt-0" }) => {
               >
                 Privacy Policy
               </Link>
-              <span className="hidden md:inline">|</span>
               <Link
                 href="/terms-policy"
                 className="hover:text-white transition-colors"
               >
                 Terms of Service
               </Link>
-              <span className="hidden md:inline">|</span>
+
               <Link
                 href="/refund-policy"
                 className="hover:text-white transition-colors"
               >
                 Return & Refund Policy
               </Link>
-              <span className="hidden md:inline">|</span>
               <p
                 className="hover:text-white transition-colors"
               >

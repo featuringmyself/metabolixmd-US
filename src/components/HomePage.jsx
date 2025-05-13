@@ -462,44 +462,31 @@ const HomePage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="w-full bg-[#ECF4F2] py-40  md:py-64 rounded-b-[100px] relative z-30 -mt-20"
+          className="w-full bg-[#ECF4F2] py-40  md:py-44 rounded-b-[100px] relative z-30 -mt-20"
           id="faq"
         >
-          <div className="max-w-[1600px] mx-auto px-4 md:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-7xl font-medium leading-[1.1] mb-6">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-zinc-600 max-w-2xl mx-auto">
-                Get answers to the most common questions about GLP-1 medications
-                and our weight loss program.
-              </p>
-            </motion.div>
+          <div className="mx-auto px-4 md:px-1">
 
-            <div className="flex flex-col lg:flex-row gap-8 md:gap-16 ">
+            <div className="flex flex-col lg:flex-row justify-center gap-8 md:gap-32 ">
               <div className="lg:w-1/3">
                 <motion.div
                   variants={fadeInUp}
-                  className="bg-[#365D56] p-8 md:p-10 rounded-3xl text-white h-full"
+                className="p-8 md:p-10 rounded-3xl text-[#2E2E2E] h-full"
                 >
-                  <h3 className="text-2xl md:text-4xl font-medium mb-6">
-                    Still have questions?
+                  <h3 className="text-2xl md:text-7xl font-medium tracking-tight mb-6">
+                    Frequently Asked Questions
                   </h3>
-                  <p className="mb-8 opacity-90">
-                    Our team is here to help you with any questions you may have
-                    about our weight loss program or GLP-1 medications.
-                  </p>
                   <Link
-                    href="/contact-us"
-                    className="inline-block bg-white text-[#365D56] px-6 py-3 rounded-full hover:bg-gray-100 transition-colors font-medium"
+                    href="/sign-up"
+                    className="inline-block bg-[#365D56] text-white px-8 py-4 rounded-full hover:bg-[#365D56]/80 transition-colors font-medium"
                   >
-                    Contact Us
+                    Sign Up
+                  </Link>
+                  <Link
+                    href="/safety-information"
+                    className="inline-block ml-4 text-[#365D56] px-8 py-4 rounded-full hover:bg-[#365D56] hover:text-white ring-1 ring-[#365D56] transition-colors font-medium"
+                  >
+                    Safety Information
                   </Link>
                 </motion.div>
               </div>
@@ -538,34 +525,37 @@ const HomePage = () => {
               backgroundSize: "contain",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundSize: "80% 80%",
             }}
           >
             <h2 className="text-3xl md:text-4xl mb-8">
               What's your weight loss goal?
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto">
-              <Link href="/get-started" className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              <Link href="/get-started" className="bg-[#ECF4F2] text-black  rounded-3xl py-4 px-2 font-medium text-lg hover:bg-gray-100 transition">
                 Losing
                 <br />
                 1-20 lbs
               </Link>
-              <Link href="/get-started" className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              <Link href="/get-started" className="bg-[#ECF4F2] text-black  rounded-3xl py-4 px-2 font-medium text-lg hover:bg-gray-100 transition">
                 Losing
                 <br />
                 21-50 lbs
               </Link>
-              <Link href="/get-started" className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
+              <Link href="/get-started" className="bg-[#ECF4F2] text-black  rounded-3xl py-4 px-2 font-medium text-lg hover:bg-gray-100 transition">
                 Losing
                 <br />
                 51+ lbs
               </Link>
-              <Link href="/get-started" className="bg-white text-black rounded-3xl py-2 px-4 font-medium text-lg hover:bg-gray-100 transition">
-                Not sure, I just want to lose the weight
+              <Link href="/get-started" className="bg-[#ECF4F2] text-black  rounded-3xl py-4 px-2 font-medium text-lg hover:bg-gray-100 transition">
+                Not sure, <br />I just want to lose the weight
               </Link>
             </div>
           </div>
         </div>
-        <Footer paddingTop="pt-[500px] md:pt-[400px]" />
+        <Footer paddingTop="pt-[500px] md:pt-[30vw]" />
       </div>
     </div>
   );

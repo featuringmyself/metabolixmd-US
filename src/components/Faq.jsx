@@ -4,12 +4,12 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => {
   const contentRef = useRef(null);
 
   return (
-    <div className="border-b py-4 bg-white p-10 rounded-3xl">
+    <div className="py-8 bg-white p-10 rounded-3xl max-w-[80%]">
       <button
         onClick={onClick}
         className="w-full gap-2 text-black text-left flex justify-between items-center text-base md:text-lg focus:outline-none"
       >
-        <span className={`transition-all duration-300 ${isOpen ? 'text-primary font-semibold' : ''}`}>
+        <span className={`transition-all duration-300 font-medium `}>
           {question}
         </span>
         <span 
@@ -27,7 +27,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => {
           transform: isOpen ? 'translateY(0)' : 'translateY(-10px)'
         }}
       >
-        <div className="mt-4 text-gray-600 pl-4 border-l-2 border-black/20">
+        <div className="mt-4 text-[#626262] max-w-[80%] ">
           <p className="leading-relaxed">{answer}</p>
         </div>
       </div>
@@ -79,7 +79,7 @@ const FaqList = () => {
 
   return (
     <div className="w-full mx-auto px-2 space-y-2 pb-48 ">
-      {faqs.map((faq, index) => (
+      {faqs.map((faq, index) => (  
         <FaqItem 
           key={index} 
           question={faq.question} 
