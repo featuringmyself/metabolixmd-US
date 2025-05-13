@@ -929,6 +929,7 @@ const AboutUs = () => {
                     </h3>
                     {expert.mainRole || expert.designation ? (
                       <p className="text-sm text-[#004F41] font-light">
+                        <span>{expert.subName}<br /></span>
                         {expert.mainRole && expert.designation
                           ? `${expert.mainRole}, ${expert.designation}`
                           : expert.mainRole || expert.designation}

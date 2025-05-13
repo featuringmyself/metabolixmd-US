@@ -1,13 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import FloatingButton from "./FloatingButton";
 import { usePathname } from "next/navigation";
 
 const Footer = ({ paddingTop = "pt-0" }) => {
   const pathname = usePathname();
   return (
     <div className="-mt-24 ">
-      <FloatingButton />
       <section
         id="bottom-footer"
         className={`bg-[#223C37] ${paddingTop} pb-20 w-full`}

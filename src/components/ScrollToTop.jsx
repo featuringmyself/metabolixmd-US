@@ -38,7 +38,7 @@ const ScrollToTop = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={scrollToTop}
-                    className="fixed bottom-24 right-8 z-40 bg-white text-primary p-3 rounded-full shadow-soft hover:shadow-lg transition-all duration-300 border border-primary/10"
+                    className="fixed bottom-10 right-8 z-40 bg-white text-primary p-3 rounded-full shadow-soft hover:shadow-lg transition-all duration-300 border border-primary/10"
                 >
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
