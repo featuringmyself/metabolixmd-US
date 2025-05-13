@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const testimonials = [
   {
     name: "FZ",
-    text: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat."',
+    text: 'I put my trust in metabolixMD and they delivered, quite literally! I would recommend metabolixMD to anyone interested in getting healthier, happier, and improving their quality of life. You cannot put a price on happiness, but metabolixMD makes it more affordable. Take the first step, I promise you it will be worth it. My life has slowly been improving and I have their great team to thank! I’m so excited for what the future holds! You can always start today!',
     beforeImg: "/images/FZ_testimonial_before.webp",
     afterImg: "/images/FZ_testimonial_after.webp", // Use same for demo, replace with real after image
   },

@@ -81,7 +81,7 @@ const expertDetails = [
   {
     route: "about-gulrezguskhan",
     img: "/images/gulrez.svg",
-    name: "Gulrez Gus Kahn",
+    name: "Gulrez Gus Khan",
     subName: "MBA",
     isApproved: true,
     mainRole: "Chief Liaison Officer",
@@ -92,7 +92,7 @@ const expertDetails = [
         <p className="mt-3">
           MetabolixMD is proud to announce the appointment of distinguished
           healthcare entrepreneur and political leader{" "}
-          <strong>Dr. Gulrez Khan</strong> as its newest board director.
+          Gulrez Gus Khan as its newest board director.
           Affectionately known as "Gus" among his peers, Khan is the co-owner of
           the esteemed American Star Home Health & Hospice Care, Inc., based in
           Lubbock, Texas. With over 15 years of expertise in healthcare

@@ -8,7 +8,7 @@ function ReviewsSection() {
           name: "S J",
           image: "/images/testimonials/user1.webp",
           review:
-            "I've struggled with weight for years, but the semaglutide program through MetabolixMD was a game-changer. Easy online consultations, clear dosing guidance, and real accountability from my care team—highly recommend!",
+            "I've struggled with weight for years, but the semaglutide program through MetabolixMD was a game-changer.",
         },
         {
           id: 2,

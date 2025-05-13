@@ -103,7 +103,7 @@ const Terms = () => {
                     </div>
                 </div>
             </main>
-            <Footer />
+            <Footer paddingTop="md:mt-14 mt-5 pt-16 p-8"/>
         </div>
     )
 }
