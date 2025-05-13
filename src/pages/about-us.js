@@ -9,7 +9,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { motion, AnimatePresence } from "framer-motion";
-import heroImg from "@/../public/images/aboutHeroImg.jpg";
+import heroImg from "@/../public/images/aboutHeroImg.webp";
 import scienceBehindResults from "@/../public/images/scienceBehindResults.png";
 import bgVector from "@/../public/images/metabolixmd-bg-vector.svg";
 import founder from "@/../public/images/founder.png"
@@ -86,7 +86,7 @@ const expertDetails = [
     isApproved: true,
     mainRole: "Chief Liaison Officer",
     designation: "Board Member",
-    detailedJob: "Chief Liaison Officer ",
+    detailedJob: "",
     description: (
       <div className="text-xs">
         <p className="mt-3">
