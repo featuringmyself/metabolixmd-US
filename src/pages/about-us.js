@@ -138,8 +138,8 @@ const expertDetails = [
     name: "Joseph Rizzo",
     subName: "MD",
     isApproved: true,
-    mainRole: "",
-    designation: "Consultant",
+    mainRole: "Consultant",
+    designation: "",
     detailedJob: "",
     description: (
       <div className="text-xs">
@@ -709,7 +709,7 @@ const AboutUs = () => {
             We created MetabolixMD so others could access this life-changing treatment the same way I did—quickly, privately, and safely. That's when Ashley and I teamed up and launched this company together."
           </p>
           <Image src={founderSign} width={150} height={150} className="md:mt-6 mt-10" />
-          <p className="text-[#000000CC] opacity-[80%]">- Raj Sabar, CEO, MetabolixMD</p>
+          <p className="text-[#000000CC] opacity-[80%]">- Raj Sabar, MD, CEO, MetabolixMD</p>
         </div>
       </div>
 
@@ -846,12 +846,14 @@ const AboutUs = () => {
                         </h3>
                         {expert.mainRole || expert.designation ? (
                           <p className="text-sm text-[#004F41] font-light">
+                            <span>{expert.subName}<br /></span>
                             {expert.mainRole
                               ? expert.designation
                                 ? `${expert.mainRole} ${expert.designation}`
                                 : expert.mainRole
                               : expert.designation}
                           </p>
+                          
 
                         ) : null}
                       </div>
@@ -1024,7 +1026,7 @@ const AboutUs = () => {
         {showOverlay && activeExpert && (
           <>
             <motion.div
-              className="fixed bg-black/50 z-40"
+              className="fixed bg-black/50  z-40"
               variants={overlayVariants}
               initial="hidden"
               animate="visible"
@@ -1033,7 +1035,7 @@ const AboutUs = () => {
               transition={{ duration: 0.3 }}
 
             />
-            <div className="fixed inset-0 z-[99] flex items-center justify-center p-4 overflow-y-scroll">
+            <div className="fixed inset-0 z-[99]  flex items-center justify-center p-4 overflow-y-scroll">
               <motion.div
                 className="bg-white rounded-[32px] w-full md:max-w-[80vw] max-w-[90vw] max-h-full overflow-y-auto relative"
                 variants={modalVariants}
@@ -1062,7 +1064,7 @@ const AboutUs = () => {
                   </svg>
                 </button>
 
-                <div className="flex md:flex-row flex-col items-center gap-5 p-5">
+                <div className="flex md:flex-row flex-col items-center gap-5  p-5">
                   <div className="relative w-[200px] h-[200px] flex-shrink-0 bg-[#ECF4F2] rounded-[40px]">
                     <Image
                       src={activeExpert.img}

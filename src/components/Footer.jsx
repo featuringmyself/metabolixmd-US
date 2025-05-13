@@ -252,12 +252,11 @@ const Footer = ({ paddingTop = "pt-0" }) => {
                 Return & Refund Policy
               </Link>
               <span className="hidden md:inline">|</span>
-              <Link
-                href="/hipaa-policy"
+              <p
                 className="hover:text-white transition-colors"
               >
-                HIPAA Policy
-              </Link>
+                HIPAA Compliant
+              </p>
               
             </div>
           </div>
