@@ -334,12 +334,12 @@ const HomePage = () => {
             variants={fadeIn}
             className="flex flex-col md:justify-center md:min-h-[80vh] justify-start items-start z-10 md:mx-20 mx-0 "
           > 
-            <h1 className="text-5xl md:text-7xl leading-[1.2] font-medium md:max-w-[60%] max-w-full text-primary">
+            <h1 className="text-[2.5rem] md:text-7xl leading-[1.2] font-medium md:max-w-[60%] max-w-full text-primary">
                 Your Personalized
                 Weight Loss <span className="text-[#2E2E2E] ">Journey Starts Here</span>
             </h1>
 
-            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[95%] md:my-20 my-8">
+            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[95%] md:my-20 my-5">
               Connect with our US-based physicians to receive tailored support
               on your weight loss journey. Experience a program designed just
               for you.
@@ -419,7 +419,7 @@ const HomePage = () => {
                 <h2 className="text-4xl md:text-5xl text-zinc-800 font-medium md:my-8 my-5">
                   {stepDetails[activeStep].title}
                 </h2>
-                <p className="text-[#626262] max-w-sm md:text-lg text-xs md:pb-0">
+                <p className="text-[#626262] max-w-sm md:text-lg text-sm md:pb-0">
                   {stepDetails[activeStep].description}
                 </p>
               </div>

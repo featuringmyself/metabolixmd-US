@@ -22,7 +22,7 @@ const GLP1Section = () => {
           <div className="p-8 md:p-16 lg:p-24">
             <div className="relative flex flex-col-reverse md:flex-row gap-8 md:gap-12">
               <div className="md:w-1/2 w-full flex flex-col md:text-start text-center md:items-start md:justify-start items-center justify-center md:mt-0 mt-16">
-                <h3 className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 md:w-[90%] w-full tracking-tight">
+                <h3 className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 md:w-[90%] md:mt-0 mt-52 w-full tracking-tight">
                   How GLP-1 Drugs Works
                 </h3>
                 <p className="text-[#626262] mb-8 w-full md:w-[90%] leading-relaxed">
@@ -37,7 +37,7 @@ const GLP1Section = () => {
                   Start your Journey
                 </a>
               </div>
-              <div className="absolute top-32 right-72 w-full h-[300px] md:h-[35rem] md:w-full translate-x-1/2 -translate-y-1/2 z-[99]">
+              <div className="absolute md:top-32 md:right-72 top-[14%] right-[50%] w-full h-[30rem] md:h-[35rem] md:w-full translate-x-1/2 -translate-y-1/2 z-[99]">
                 <Image 
                   src="/images/tirzepatide-injection.png" 
                   alt="GLP-1 Drugs" 
@@ -59,8 +59,8 @@ const GLP1Section = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-5">
               {/* Vial & Syringe Option */}
-              <div className="relative bg-[#F98F4C] rounded-3xl overflow-hidden shadow-lg max-h-[500px] md:min-h-[10vh] min-h-[80vw]">
-                <div className="absolute md:right-0 right-4 top-4 w-[25vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[5%] z-[99]">
+              <div className="relative bg-[#F98F4C] rounded-3xl overflow-hidden shadow-lg max-h-[20rem] md:min-h-[10vh] min-h-[80vw]">
+                <div className="absolute md:right-0 right-4 top-2 w-[6rem] h-full md:w-[20rem] md:h-[20rem] transform translate-x-[10%] -translate-y-[5%] z-[99]">
                   <Image 
                     src="/images/41.webp" 
                     alt="Vial and Syringe" 
@@ -87,8 +87,8 @@ const GLP1Section = () => {
               </div>
               
               {/* Auto-Injectors Option */}
-              <div className="relative bg-[#365D56] rounded-3xl overflow-hidden shadow-lg min-h-[400px] md:min-h-[500px]">
-                <div className="absolute top-4 right-5 w-[60vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[5%] -translate-y-[10%]">
+              <div className="relative bg-[#365D56] rounded-3xl overflow-hidden shadow-lg max-h-[20rem] md:max-h-[10rem] min-h-[20rem]">
+                <div className="absolute md:top-4 md:right-5 -top-8 right-5 w-[60vw] h-full md:w-[20rem] md:h-[20rem] transform translate-x-[5%] -translate-y-[10%]">
                   <Image 
                     src="/images/42-inverted.webp" 
                     alt="Auto-Injector Pen" 
