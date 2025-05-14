@@ -465,7 +465,7 @@ const HomePage = () => {
           className="w-full bg-[#ECF4F2] py-40  md:py-44 rounded-b-[100px] relative z-30 -mt-20"
           id="faq"
         >
-          <div className="mx-auto px-4 md:px-1">
+          <div className="mx-auto px-4 md:px-10">
 
             <div className="flex flex-col lg:flex-row justify-center gap-8 md:gap-32 ">
               <div className="lg:w-1/3">
