@@ -5,13 +5,13 @@ import Link from 'next/link';
 const GLP1Section = () => {
   return (
     <section className="-mt-32 pt-32 pb-12 bg-[#365D56] max-w-screen text-white shadow-lg relative z-10">
-      <div className="max-w-[90%] mx-auto px-5 md:px-10 py-16 md:py-24">
+      <div className="md:max-w-[90%] max-w-full mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}
         <div className="mb-16 md:mb-20 flex md:items-center md:flex-row flex-col md:justify-between gap-6">
           <h2 className="text-4xl md:text-6xl font-medium mb-4 leading-tight">
             Understanding<br />GLP-1 Drugs
           </h2>
-          <p className="text-md opacity-90 md:w-[40%] leading-relaxed">
+          <p className="text-md opacity-90 md:w-[40%] md:leading-relaxed leading-normal">
             GLP-1 receptor agonists are transforming the way we approach weight management. These medications mimic a natural hormone in your body to regulate blood sugar, slow digestion, and reduce appetite. The result? Effective weight loss, improved metabolism, and even cardiovascular benefits. 
           </p>
         </div>
@@ -21,8 +21,8 @@ const GLP1Section = () => {
           {/* How GLP-1 Drugs Work Section */}
           <div className="p-8 md:p-16 lg:p-24">
             <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-12">
-              <div className="md:w-1/2 flex flex-col md:text-start text-center md:items-start md:justify-start items-center justify-center">
-                <h3 className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 w-[90%] tracking-tight">
+              <div className="md:w-1/2 w-full flex flex-col md:text-start text-center md:items-start md:justify-start items-center justify-center md:mt-0 mt-16">
+                <h3 className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 md:w-[90%] w-full tracking-tight">
                   How GLP-1 Drugs Works
                 </h3>
                 <p className="text-[#626262] mb-8 w-full md:w-[90%] leading-relaxed">
@@ -40,8 +40,8 @@ const GLP1Section = () => {
               <div className="md:w-1/2 flex justify-center items-center relative z-50">
                 {/* Container with floating effect */}
                 <div className="relative w-full max-w-none h-[200px] md:h-[300px]">
-                  {/* Floating medication image */}
-                  <div className="absolute md:-top-72 md:-right-20 top-0 right-0 w-[320px] h-[400px] md:w-[550px] md:h-[750px] z-50">
+                  {/* Floating medication image */} 
+                  <div className="absolute md:-top-72 md:-right-20 -top-20 -right-10 w-[320px] h-[400px] md:w-[550px] md:h-[750px] z-50">
                     <Image 
                       src="/images/tirzepatide-injection.png" 
                       alt="GLP-1 Medication" 
@@ -56,7 +56,7 @@ const GLP1Section = () => {
           </div>
 
           {/* Delivery Methods Section */}
-          <div className="p-8 md:p-0 text-start flex flex-col justify-center items-center">
+          <div className=" relative  p-8 md:p-0 text-start flex flex-col justify-center items-center">
             <h3 className="text-3xl md:text-5xl font-medium text-zinc-800 mb-6 leading-tight">
               GLP-1 Delivery Methods
             </h3>
@@ -66,8 +66,8 @@ const GLP1Section = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-5">
               {/* Vial & Syringe Option */}
-              <div className="relative bg-[#F98F4C] rounded-3xl overflow-hidden shadow-lg min-h-[400px] md:min-h-[500px]">
-                <div className="absolute md:right-[-2vw] -right-10 w-[60vw] h-[60vw] md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[5%]">
+              <div className="relative bg-[#F98F4C] rounded-3xl overflow-hidden shadow-lg max-h-[500px] min-h-[80vw]">
+                <div className="absolute md:right-[-2vw] right-4 w-[30vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[20%] z-[99]">
                   <Image 
                     src="/images/41.webp" 
                     alt="Vial and Syringe" 
@@ -76,9 +76,9 @@ const GLP1Section = () => {
                   />
                 </div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
-                  <div className="mt-auto">
+                  <div className="mt-auto max-w-[80%]">
                     <h4 className="md:text-2xl text-xl font-semibold text-black drop-shadow-sm">Vial & Syringe</h4>
-                    <p className="text-black/90 text-sm md:max-w-[80%] w-full leading-relaxed md:my-2 my-1">
+                    <p className="text-black/90 text-sm md:max-w-[80%] w-full  md:my-2 my-4">
                       A more traditional method, requiring manual dosage preparation before injection.
                     </p>
                   </div>
@@ -95,7 +95,7 @@ const GLP1Section = () => {
               
               {/* Auto-Injectors Option */}
               <div className="relative bg-[#365D56] rounded-3xl overflow-hidden shadow-lg min-h-[400px] md:min-h-[500px]">
-                <div className="absolute top-0 right-0 w-[60vw] h-[60vw] md:w-[350px] md:h-[350px] transform translate-x-[5%] -translate-y-[5%]">
+                <div className="absolute top-0 right-0 w-[60vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[5%] -translate-y-[20%]">
                   <Image 
                     src="/images/42-inverted.webp" 
                     alt="Auto-Injector Pen" 
@@ -104,9 +104,9 @@ const GLP1Section = () => {
                   />
                 </div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
-                  <div className="mt-auto">
+                  <div className="mt-auto max-w-[80%]">
                     <h4 className="md:text-2xl text-xl font-semibold text-white drop-shadow-sm">Auto-injectors</h4>
-                    <p className="text-white/90 text-sm md:max-w-[80%] w-full leading-relaxed md:my-2 my-1">
+                    <p className="text-white/90 text-sm md:max-w-[80%] w-full leading-relaxed md:my-2 my-4">
                       Designed for quick and seamless administration, often with a single-use format.
                     </p>
                   </div>

@@ -136,7 +136,7 @@ function ReviewsSection() {
     };
 
     return (
-        <div className="w-full overflow-hidden relative py-16 my-10 pb-32 bg-white select-none md:rounded-b-[100px] rounded-b-[40px] z-30">
+        <div className="w-full overflow-hidden relative py-16 my-10 pb-32 bg-white select-none md:rounded-b-[100px] rounded-b-[40px] z-30 ">
             <motion.div 
                 className="flex overflow-x-hidden touch-pan-x"
                 drag="x"
@@ -168,7 +168,7 @@ function ReviewsSection() {
                                 draggable="false"
                             />
                         </motion.div>
-                        <div className="max-w-2xl mx-auto mt-5">
+                        <div className="max-w-2xl mt-5 mx-5">
                             <motion.p 
                                 className="text-2xl leading-relaxed text-gray-700 mb-5"
                                 initial={{ opacity: 0 }}
