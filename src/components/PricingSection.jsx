@@ -29,7 +29,7 @@ const PricingSection = () => {
     const cardWidth = container.firstChild?.offsetWidth || 0;
     container.scrollTo({
       left: index * cardWidth,
-      behavior: 'smooth'
+      behavior: 'auto'
     });
     setActiveIndex(index);
   };

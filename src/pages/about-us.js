@@ -397,7 +397,7 @@ const AboutUs = () => {
       <div className="flex justify-between items-center bg-[#ECF4F2] mt-20 pb-16">
         <div className="md:max-w-5xl max-w-full text-semibold md:pl-40 pl-5 md:py-16 py-0 pt-10">
           <h1 className="text-2xl text-[#386057] mb-5 md:block hidden">About MetabolixMD</h1>
-          <h3 className="md:text-8xl text-5xl font-medium text-[#2E2E2E]">
+          <h3 className="md:text-6xl text-5xl font-medium text-[#2E2E2E]">
             <span className="text-[#004F41]">Your Trusted Partner In</span>{" "}
             Metabolic Health
           </h3>
@@ -583,7 +583,7 @@ const AboutUs = () => {
           </p>
         </div>
         <div className="md:block hidden">
-          <Image src={heroImg} width={674} height={843} className="rounded-tl-[80px] rounded-bl-[80px]" />
+          <Image src={heroImg} width={674} height={843} className="rounded-tl-[80px] h-full rounded-bl-[80px]" />
         </div>
       </div>
       <div className="pb-32 px-5 bg-[#ECF4F2] md:hidden block">

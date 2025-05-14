@@ -205,7 +205,7 @@ const HomePage = () => {
   const scrollToSafety = (e) => {
     e.preventDefault();
     const safetySection = document.getElementById("safety");
-    safetySection.scrollIntoView({ behavior: "smooth" });
+    safetySection.scrollIntoView({ behavior: "auto" });
   };
   useEffect(() => {
     const interval = setInterval(() => {
@@ -284,12 +284,12 @@ const HomePage = () => {
       {/* Process steps overlay - positioned differently based on screen size */}
       <div className="absolute inset-0 flex md:flex-col md:justify-center md:items-start p-6">
         {/* Step buttons */}
-        <div className="md:space-y-3 flex md:flex-col flex-row gap-2 md:gap-0 absolute md:static bottom-4 left-0 right-0 justify-center md:justify-start">
+        <div className=" flex md:flex-col flex-row gap-2 md:gap-2 absolute md:static bottom-4 left-0 right-0 justify-center md:justify-start">
           {Object.entries(stepDetails).map(([key, step], index) => (
             <button
               key={key}
               onClick={() => setActiveStep(key)}
-              className={`flex items-center gap-1 px-4 py-2 rounded-full ${
+              className={`flex items-center gap-1 px-6 py-3 rounded-full ${
                 activeStep === key
                   ? "bg-orange-500 text-black"
                   : "bg-[#F6F6F3] text-zinc-800 hover:bg-[#F6F6F3]/80"
@@ -299,7 +299,7 @@ const HomePage = () => {
                   : ""
               }`}
             >
-              <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-xs font-medium text-primary">
+              <div className="w-6 h-6 rounded-full bg-white ring-1 ring-black flex items-center justify-center text-xs font-medium text-black">
                 {index + 1}
               </div>
               <span className="hidden md:inline font-medium pl-1">
@@ -339,7 +339,7 @@ const HomePage = () => {
                 Weight Loss <span className="text-[#2E2E2E] ">Journey Starts Here</span>
             </h1>
 
-            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[90%] md:my-12 my-5">
+            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[90%] md:my-20 my-5">
               Connect with our US-based physicians to receive tailored support
               on your weight loss journey. Experience a program designed just
               for you.
@@ -387,7 +387,7 @@ const HomePage = () => {
           {/* Step-by-Step Process heading and description */}
           <div className="  flex flex-col md:flex-row justify-between items-start mb-16 font-inter px-3 ">
             <div className="md:max-w-[50%]">
-              <h2 className="text-4xl md:text-6xl font-semibold text-zinc-800">
+              <h2 className="text-4xl md:text-6xl font-medium text-zinc-800">
                 Step-by-Step <br />
                 Process
               </h2>
@@ -555,7 +555,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <Footer paddingTop="pt-[500px] md:pt-[30vw]" />
+        <Footer paddingTop="sm:pt-[20vw] md:pt-[35vw] lg:pt-[30vw]" />
       </div>
     </div>
   );

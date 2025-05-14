@@ -168,9 +168,9 @@ function ReviewsSection() {
                                 draggable="false"
                             />
                         </motion.div>
-                        <div className="max-w-3xl mx-auto">
+                        <div className="max-w-2xl mx-auto mt-5">
                             <motion.p 
-                                className="text-3xl leading-relaxed text-gray-700 mb-5"
+                                className="text-2xl leading-relaxed text-gray-700 mb-5"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.2 }}
