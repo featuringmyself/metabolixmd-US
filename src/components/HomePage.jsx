@@ -441,10 +441,12 @@ const HomePage = () => {
         {/* GLP-1 Information Section */}
         <GLP1Section />
         <div
-          className="flex flex-col -mt-10 py-10"
+          className="flex flex-col -mt-16 py-20"
           style={{
-            background:
-            "linear-gradient(180deg, #214E46 28.02%, rgba(97, 126, 122, 0) 100%)",
+            backgroundImage: "url(/images/weightLossBG.png)",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
         >
           {/* Weight Loss Calculator Section */}

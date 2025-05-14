@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const GLP1Section = () => {
   return (
-    <section className="-mt-32 pt-32 pb-12 bg-[#365D56] max-w-screen text-white shadow-lg relative z-10 rounded-b-[75px]">
+    <section className="-mt-32 pt-32 pb-12 bg-[#365D56] max-w-screen text-white shadow-lg relative z-10 md:rounded-b-[75px] rounded-b-[50px]">
       <div className="md:max-w-[90%] max-w-full mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}
         <div className="mb-16 md:mb-20 flex md:items-center md:flex-row flex-col md:justify-between gap-6">

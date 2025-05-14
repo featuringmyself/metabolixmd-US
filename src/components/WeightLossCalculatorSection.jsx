@@ -22,12 +22,12 @@ const WeightLossCalculatorSection = () => {
 
 
   return (
-    <div className=" mt-0 min-h-[150vh]">
+    <div className=" mt-0">
       <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-24 md:mb-32 px-4 md:px-0">
         {/* Weight Loss Calculator Card */}
         <motion.div
                 variants={fadeIn}
-                className="bg-[#365D56] md:flex flex-col  text-white rounded-3xl overflow-hidden shadow-lg w-full md:w-[50vw] lg:w-[30vw] z-10"
+                className="bg-[#365D56] flex flex-col md:hidden text-white rounded-3xl overflow-hidden shadow-lg w-full md:w-[50vw] lg:w-[30vw] z-10"
               >
                 <div className="p-6 md:p-8 lg:p-10">
                   <h2 className="text-2xl md:text-3xl lg:text-4xl md:font-light font-bold mb-6 leading-tight">
@@ -116,12 +116,12 @@ const WeightLossCalculatorSection = () => {
         viewport={{ once: true, margin: "-100px" }}
         className="relative w-full min-h-screen flex flex-col md:mt-12 mt-0"
       >
-        <div className="relative w-full  h-[150vh]">
+        <div className="relative w-full  min-h-screen flex flex-col">
           <Image
             src="/images/weightloss_calculator.png"
             alt="Weight Loss Background"
             fill
-            className="object-cover w-screen h-[150vh]"
+            className="object-cover w-screen"
             priority
           />
           <div className="absolute inset-0 bg-black/20" />
