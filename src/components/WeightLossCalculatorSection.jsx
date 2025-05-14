@@ -22,86 +22,92 @@ const WeightLossCalculatorSection = () => {
 
 
   return (
-    <div className=" -mt-48 min-h-[150vh]">
+    <div className=" mt-0 min-h-[150vh]">
       <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-24 md:mb-32 px-4 md:px-0">
         {/* Weight Loss Calculator Card */}
         <motion.div
-          variants={fadeIn}
-          className="bg-[#365D56] rounded-3xl text-white overflow-hidden shadow-lg w-full md:max-w-[450px] lg:max-w-[500px] z-10 md:hidden flex-col flex md:mt-0 mt-48"
-        >
-          <div className="p-6 md:p-8 lg:p-10">
-            <h2 className="text-3xl md:text-3xl lg:text-4xl font-light mb-6">
-              Lose 15-20% Body
-              <br />
-              Fat in a Year!
-            </h2>
+                variants={fadeIn}
+                className="bg-[#365D56] md:flex flex-col  text-white rounded-3xl overflow-hidden shadow-lg w-full md:w-[50vw] lg:w-[30vw] z-10"
+              >
+                <div className="p-6 md:p-8 lg:p-10">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl md:font-light font-bold mb-6 leading-tight">
+                    Lose 15-20% Body
+                    <br />
+                    Fat in a Year!
+                  </h2>
 
-            <div className="my-12">
-              <div className="flex items-start justify-between">
-                <span className="text-lg font-light md:text-lg  w-[40%]">
-                  Select your Current Weight
-                </span>
-                <div className="flex items-end">
-                  <span className="text-7xl md:text-7xl font-light">
-                    {currentWeight}
-                  </span>
-                  <span className="text-2xl  ml-2 align-top">lbs</span>
-                </div>
-              </div>
-              <div className="relative mt-4">
-                {/* Background track */}
-                <div className="w-full h-1 bg-white/20 rounded-full"></div>
-                {/* Filled track */}
-                <div
-                  className="absolute left-0 top-0 h-1 bg-white rounded-full"
-                  style={{ width: `${((currentWeight - 100) / 300) * 100}%` }}
-                ></div>
-                {/* Slider thumb */}
-                <div
-                  className="absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full border-4 border-white"
-                  style={{
-                    left: `${((currentWeight - 100) / 300) * 100}%`,
-                    boxShadow: "0px 0.5px 4px 0px #0000001F",
-                  }}
-                >
-                  <div
-                    className="w-full h-full bg-[#365D56] rounded-full"
-                    style={{ boxShadow: "0px 6px 13px 0px #0000001F" }}
-                  ></div>
-                </div>
-                <input
-                  type="range"
-                  min="100"
-                  max="400"
-                  value={currentWeight}
-                  onChange={handleWeightChange}
-                  className="absolute inset-0 w-full h-6 opacity-0 cursor-pointer z-10"
-                />
-              </div>
-            </div>
+                  <div className="my-12">
+                    <div className="flex items-start justify-between">
+                      <span className="text-xl md:text-xl font-extralight w-[40%]">
+                        Select your Current Weight
+                      </span>
+                      <div className="flex items-end">
+                        <span className="text-6xl md:text-7xl font-light">
+                          {currentWeight}
+                        </span>
+                        <span className="text-xl  ml-2 align-top">
+                          lbs
+                        </span>
+                      </div>
+                    </div>
+                    <div className="relative mt-4">
+                      {/* Background track */}
+                      <div className="w-full h-1 bg-white/20 rounded-full"></div>
+                      {/* Filled track */}
+                      <div
+                        className="absolute left-0 top-0 h-1 bg-white rounded-full"
+                        style={{
+                          width: `${((currentWeight - 100) / 300) * 100}%`,
+                        }}
+                      ></div>
+                      {/* Slider thumb */}
+                      <div
+                        className="absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full border-4 border-white"
+                        style={{
+                          left: `${((currentWeight - 100) / 300) * 100}%`,
+                          boxShadow: "0px 0.5px 4px 0px #0000001F",
+                        }}
+                      >
+                        <div
+                          className="w-full h-full bg-[#365D56] rounded-full"
+                          style={{ boxShadow: "0px 6px 13px 0px #0000001F" }}
+                        ></div>
+                      </div>
+                      <input
+                        type="range"
+                        min="100"
+                        max="400"
+                        value={currentWeight}
+                        onChange={handleWeightChange}
+                        className="absolute inset-0 w-full h-6 opacity-0 cursor-pointer z-10"
+                      />
+                    </div>
+                  </div>
 
-            <div className="mb-8 relative">
-              <div className="flex items-start justify-start">
-                <span className="text-lg md:text-lg font-light w-[40%]">
-                  Weight you could lose (lbs):
-                </span>
-                <div className="flex items-end ml-8">
-                  <span className="text-8xl md:text-8xl font-extralight">
-                    {weightLoss}
-                  </span>
-                  <span className="text-2xl ml-20 absolute top-0 right-0 font-light">lbs</span>
-                </div>
-              </div>
-            </div>
+                  <div className="mb-8 relative">
+                    <div className="flex items-start justify-between mr-10">
+                      <span className="text-xs md:text-xl  font-extralight w-[40%]">
+                        Weight you could lose (lbs)
+                      </span>
+                      <div className="flex items-end">
+                        <span className="text-7xl md:text-8xl ">
+                          {weightLoss}
+                        </span>
+                        <span className="absolute top-0 right-0 text-xl ml-2 align-top">
+                          lbs
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-            <Link
-              href="/get-started"
-              className="inline-block bg-transparent text-white border px-6 py-3 rounded-full hover:bg-white hover:text-[#365D56] transition-all duration-300 transform hover:scale-105 hover:shadow-md font-medium w-full text-center md:w-auto"
-            >
-              Start your journey
-            </Link>
-          </div>
-        </motion.div>
+                  <Link
+                    href="/get-started"
+                    className="inline-block bg-transparent text-white border px-6 py-3 rounded-full hover:bg-white hover:text-[#365D56] transition-all duration-300 transform hover:scale-105 hover:shadow-md font-medium w-full text-center md:w-auto"
+                  >
+                    Start your journey
+                  </Link>
+                </div>
+              </motion.div>
       </div>
 
       <motion.section
