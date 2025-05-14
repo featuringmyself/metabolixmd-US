@@ -555,7 +555,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <Footer paddingTop="pt-[150vw] md:pt-[35vw] lg:pt-[30vw]" />
+        <Footer paddingTop="pt-[160vw] md:pt-[35vw] lg:pt-[30vw]" />
       </div>
     </div>
   );
