@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const GLP1Section = () => {
   return (
-    <section className="-mt-32 pt-32 pb-12 bg-[#365D56] max-w-screen text-white shadow-lg relative z-10">
+    <section className="-mt-32 pt-32 pb-12 bg-[#365D56] max-w-screen text-white shadow-lg relative z-10 rounded-b-[75px]">
       <div className="md:max-w-[90%] max-w-full mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}
         <div className="mb-16 md:mb-20 flex md:items-center md:flex-row flex-col md:justify-between gap-6">
@@ -20,7 +20,7 @@ const GLP1Section = () => {
         <div className="bg-white text-black rounded-3xl overflow-hidden shadow-lg md:py-10 py-0">
           {/* How GLP-1 Drugs Work Section */}
           <div className="p-8 md:p-16 lg:p-24">
-            <div className="flex flex-col-reverse md:flex-row gap-8 md:gap-12">
+            <div className="relative flex flex-col-reverse md:flex-row gap-8 md:gap-12">
               <div className="md:w-1/2 w-full flex flex-col md:text-start text-center md:items-start md:justify-start items-center justify-center md:mt-0 mt-16">
                 <h3 className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 md:w-[90%] w-full tracking-tight">
                   How GLP-1 Drugs Works
@@ -37,26 +37,19 @@ const GLP1Section = () => {
                   Start your Journey
                 </a>
               </div>
-              <div className="md:w-1/2 flex justify-center items-center relative z-50">
-                {/* Container with floating effect */}
-                <div className="relative w-full max-w-none h-[200px] md:h-[300px]">
-                  {/* Floating medication image */} 
-                  <div className="absolute md:-top-72 md:-right-20 -top-20 -right-10 w-[320px] h-[400px] md:w-[550px] md:h-[750px] z-50">
-                    <Image 
-                      src="/images/tirzepatide-injection.png" 
-                      alt="GLP-1 Medication" 
-                      fill 
-                      className="object-contain"
-                      style={{ pointerEvents: 'none' }}
-                    />
-                  </div>
+              <div className="absolute top-32 right-72 w-full h-[300px] md:h-[35rem] md:w-full translate-x-1/2 -translate-y-1/2 z-[99]">
+                <Image 
+                  src="/images/tirzepatide-injection.png" 
+                  alt="GLP-1 Drugs" 
+                  fill 
+                  className="object-contain object-center"
+                />
                 </div>
-              </div>
             </div>
           </div>
 
           {/* Delivery Methods Section */}
-          <div className=" relative  p-8 md:p-0 text-start flex flex-col justify-center items-center">
+          <div className=" relative  p-8 md:p-0 text-start flex flex-col justify-center items-center mt-20">
             <h3 className="text-3xl md:text-5xl font-medium text-zinc-800 mb-6 leading-tight">
               GLP-1 Delivery Methods
             </h3>
@@ -66,8 +59,8 @@ const GLP1Section = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-5">
               {/* Vial & Syringe Option */}
-              <div className="relative bg-[#F98F4C] rounded-3xl overflow-hidden shadow-lg max-h-[500px] min-h-[80vw]">
-                <div className="absolute md:right-[-2vw] right-4 w-[25vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[20%] z-[99]">
+              <div className="relative bg-[#F98F4C] rounded-3xl overflow-hidden shadow-lg max-h-[500px] md:min-h-[10vh] min-h-[80vw]">
+                <div className="absolute md:right-0 right-4 top-4 w-[25vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[5%] z-[99]">
                   <Image 
                     src="/images/41.webp" 
                     alt="Vial and Syringe" 
@@ -95,7 +88,7 @@ const GLP1Section = () => {
               
               {/* Auto-Injectors Option */}
               <div className="relative bg-[#365D56] rounded-3xl overflow-hidden shadow-lg min-h-[400px] md:min-h-[500px]">
-                <div className="absolute top-0 right-0 w-[60vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[5%] -translate-y-[20%]">
+                <div className="absolute top-4 right-5 w-[60vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[5%] -translate-y-[10%]">
                   <Image 
                     src="/images/42-inverted.webp" 
                     alt="Auto-Injector Pen" 

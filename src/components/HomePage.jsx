@@ -321,7 +321,7 @@ const HomePage = () => {
           initial="hidden"
           animate="visible"
           variants={staggerChildren}
-          className="flex flex-col relative md:mt-10 pt-8 mt-10 pb-0 px-4 min-h-screen  justify-start  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
+          className="flex flex-col relative md:mt-10 pt-8 mt-10 pb-0 px-4 min-h-[90vh]  justify-start  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
         >
           <Image
             src="/images/hero-desktop.png"
@@ -555,7 +555,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <Footer paddingTop="pt-[160vw] md:pt-[35vw] lg:pt-[30vw]" />
+        <Footer paddingTop="pt-[160rem] md:pt-[35rem] lg:pt-[25rem]" />
       </div>
     </div>
   );
