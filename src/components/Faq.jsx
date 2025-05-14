@@ -4,7 +4,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => {
   const contentRef = useRef(null);
 
   return (
-    <div className="py-8 bg-white p-10 rounded-3xl max-w-[75%]">
+    <div className="py-8 bg-white p-10 rounded-3xl md:max-w-[75%] max-w-full">
       <button
         onClick={onClick}
         className="w-full gap-2 text-black text-left flex justify-between items-center text-base md:text-lg focus:outline-none"
@@ -27,7 +27,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => {
           transform: isOpen ? 'translateY(0)' : 'translateY(-10px)'
         }}
       >
-        <div className="mt-4 text-[#626262] max-w-[80%] ">
+        <div className="mt-4 text-[#626262] md:max-w-[80%] max-w-full ">
           <p className="leading-relaxed">{answer}</p>
         </div>
       </div>
@@ -78,7 +78,7 @@ const FaqList = () => {
   ];
 
   return (
-    <div className="w-full flex justify-between items-center flex-col gap-8 md:gap-3 py-10">
+    <div className="w-full flex justify-between items-center flex-col gap-4 md:gap-3 py-10">
       {faqs.map((faq, index) => (
         <FaqItem 
           key={index} 

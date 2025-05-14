@@ -26,12 +26,11 @@ function TestimonialSection() {
     setCurrent((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between  text-black min-h-[70vh] md:px-4 md:py-44 py-0 pt-54 pb-10 md:pb-40 z-50 md:rounded-[100px] rounded-[35px] -mt-32 bg-white relative px-10">
+    <div className="flex flex-col md:flex-row items-center justify-between  text-black min-h-[70vh] md:px-4 md:py-44 py-0 pt-54 pb-10 md:pb-40 z-50 md:rounded-[100px] rounded-[35px] -mt-32 bg-white relative px-4">
       {/* Mobile Title */}
-      <div className="w-full text-center md:hidden mb-8">
+      <div className="w-full text-center md:hidden mb-8 mt-72">
         <h3 className="text-4xl font-medium leading-tight">
           Real People,
-          <br />
           Real Results
         </h3>
       </div>
@@ -110,7 +109,7 @@ function TestimonialSection() {
             <img
               src={testimonial.beforeImg}
               alt="Before"
-              className="object-cover h-[32vw] w-[20vw]"
+              className="object-cover md:h-[32vw] h-full md:w-[20vw] w-full"
             />
             <span className="absolute bottom-6 left-6 bg-orange-500 text-black px-6 py-2 rounded-lg text-lg font-semibold">
               Before
@@ -120,7 +119,7 @@ function TestimonialSection() {
             <img
               src={testimonial.afterImg}
               alt="After"
-              className="object-cover h-[32vw] w-[20vw]"
+              className="object-cover md:h-[32vw] h-full md:w-[20vw] w-full"
             />
             <span className="absolute bottom-6 left-6 bg-[#3B6252] text-white px-6 py-2 rounded-lg text-lg font-semibold">
               After

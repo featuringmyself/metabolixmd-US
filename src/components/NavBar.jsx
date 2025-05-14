@@ -204,7 +204,7 @@ const NavBar = () => {
               {!user && (
                 <Link
                   href="/get-started"
-                  className="text-sm font-medium  bg-zinc-100 text-black px-3 py-1.5 rounded-full hover:bg-primary/90 transition-colors"
+                  className="text-sm font-medium  bg-white text-black px-3 py-1.5 rounded-full hover:bg-primary/90 transition-colors"
                 >
                   Get Started
                 </Link>

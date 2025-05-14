@@ -462,7 +462,7 @@ const HomePage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="w-full bg-[#ECF4F2] py-40  md:py-44 rounded-b-[100px] relative z-30 -mt-20"
+          className="w-full bg-[#ECF4F2] py-48  md:py-44 rounded-b-[100px] relative z-30 -mt-20"
           id="faq"
         >
           <div className="mx-auto px-4 md:px-10">
@@ -471,20 +471,20 @@ const HomePage = () => {
               <div className="lg:w-1/3">
                 <motion.div
                   variants={fadeInUp}
-                className="p-8 md:p-10 rounded-3xl text-[#2E2E2E] h-full"
+                className="p-5 md:p-10 rounded-3xl text-[#2E2E2E] h-full"
                 >
-                  <h3 className="text-2xl md:text-7xl font-medium tracking-tight mb-6">
+                  <h3 className="text-4xl md:text-7xl font-medium tracking-tight mb-6">
                     Frequently Asked Questions
                   </h3>
                   <Link
                     href="/sign-up"
-                    className="inline-block bg-[#365D56] text-white px-8 py-4 rounded-full hover:bg-[#365D56]/80 transition-colors font-medium"
+                    className="md:inline-block hidden bg-[#365D56] text-white px-8 py-4 rounded-full hover:bg-[#365D56]/80 transition-colors font-medium"
                   >
                     Sign Up
                   </Link>
                   <Link
                     href="/safety-information"
-                    className="inline-block ml-4 text-[#365D56] px-8 py-4 rounded-full hover:bg-[#365D56] hover:text-white ring-1 ring-[#365D56] transition-colors font-medium"
+                    className="inline-block md:ml-4 ml-0 text-[#365D56] md:px-8 px-6 md:py-4 py-3 rounded-full hover:bg-[#365D56] hover:text-white ring-1 ring-[#365D56] transition-colors font-medium"
                   >
                     Safety Information
                   </Link>
@@ -493,7 +493,7 @@ const HomePage = () => {
               <div className="lg:w-2/3">
                 <motion.div
                   variants={fadeInUp}
-                  className="p-8 md:p-10 rounded-3xl shadow-sm"
+                  className="p-1 md:p-10 rounded-3xl shadow-sm"
                 >
                   <FaqList />
                 </motion.div>
@@ -555,7 +555,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <Footer paddingTop="sm:pt-[20vw] md:pt-[35vw] lg:pt-[30vw]" />
+        <Footer paddingTop="pt-[150vw] md:pt-[35vw] lg:pt-[30vw]" />
       </div>
     </div>
   );
