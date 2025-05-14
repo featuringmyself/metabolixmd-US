@@ -339,7 +339,7 @@ const HomePage = () => {
                 Weight Loss <span className="text-[#2E2E2E] ">Journey Starts Here</span>
             </h1>
 
-            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[95%] md:my-20 my-4">
+            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[95%] md:my-20 my-10">
               Connect with our US-based physicians to receive tailored support
               on your weight loss journey. Experience a program designed just
               for you.
