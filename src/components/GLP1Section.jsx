@@ -37,7 +37,7 @@ const GLP1Section = () => {
                   Start your Journey
                 </a>
               </div>
-              <div className="absolute md:top-[-60%] md:right-72 top-[-50%] right-[50%] w-full h-[32rem] md:h-[45rem] md:w-full translate-x-1/2 -translate-y-[5%] z-[150]">
+              <div className="absolute md:top-[-60%] md:right-72 top-[-25%] right-[50%] w-full h-[32rem] md:h-[45rem] md:w-full translate-x-1/2 -translate-y-[5%] z-[150]">
                 <Image 
                   src="/images/tirzepatide-injection.png" 
                   alt="GLP-1 Drugs" 
@@ -49,7 +49,7 @@ const GLP1Section = () => {
           </div>
 
           {/* Delivery Methods Section */}
-          <div className=" relative  p-8 md:p-0 text-start flex flex-col justify-center items-center mt-20">
+          <div className=" relative  p-8 md:p-0 text-start flex flex-col justify-center items-center md:mt-20 mt-0">
             <h3 className="text-3xl md:text-5xl font-medium text-zinc-800 mb-6 leading-tight">
               GLP-1 Delivery Methods
             </h3>
@@ -59,18 +59,18 @@ const GLP1Section = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-5">
               {/* Vial & Syringe Option */}
-              <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[10vh] min-h-[100vw]">
-                <div className="absolute md:right-10 right-4 -top-4 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-[20rem] transform translate-x-[15%] -translate-y-[15%] z-[99]">
+              <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[10vh] min-h-[75vw]">
+                <div className="absolute md:right-10 right-0 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-[20rem] transform translate-x-[15%] -translate-y-[15%] z-[99]">
                   <Image 
                     src="/images/41.webp" 
                     alt="Vial and Syringe" 
                     fill 
-                    className="object-contain drop-shadow-lg scale-125"
+                    className="object-contain drop-shadow-lg md:scale-125 scale-75"
                   />
                 </div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto max-w-[80%]">
-                    <h4 className="md:text-2xl text-xl font-semibold text-black drop-shadow-sm">Vial & Syringe</h4>
+                    <h4 className="md:text-2xl text-2xl tracking-tighter font-medium text-black drop-shadow-sm">Vial & Syringe</h4>
                     <p className="text-black/90 text-sm w-full  md:my-2 my-4">
                       A more traditional method, requiring manual dosage preparation before injection.
                     </p>
@@ -88,17 +88,17 @@ const GLP1Section = () => {
               
               {/* Auto-Injectors Option */}
               <div className="relative bg-[#365D56] rounded-3xl shadow-lg max-h-[20rem] md:max-h-[10rem] min-h-[20rem]">
-                <div className="absolute md:top-[-10%] md:right-0 top-0 right-3 w-[60vw] h-[150%] md:w-[16rem] md:h-[16rem] rotate-[20deg]">
+                <div className="absolute md:top-[-10%] md:right-0 -top-40 -right-10 w-[60vw] h-[150%] md:w-[16rem] md:h-[16rem] rotate-[20deg]">
                   <Image 
                     src="/images/42-inverted.webp" 
                     alt="Auto-Injector Pen" 
                     fill 
-                    className="object-contain drop-shadow-lg scale-125"
+                    className="object-contain drop-shadow-lg scale-90 md:scale-125"
                   />
                 </div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto max-w-[80%]">
-                    <h4 className="md:text-2xl text-xl font-semibold text-white drop-shadow-sm">Auto-injectors</h4>
+                    <h4 className="md:text-2xl text-2xl font-semibold text-white drop-shadow-sm">Auto-injectors</h4>
                     <p className="text-white/90 text-sm md:max-w-[80%] w-full leading-relaxed md:my-2 my-4">
                       Designed for quick and seamless administration, often with a single-use format.
                     </p>
