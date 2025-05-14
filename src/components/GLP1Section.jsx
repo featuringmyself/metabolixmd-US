@@ -67,7 +67,7 @@ const GLP1Section = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-5">
               {/* Vial & Syringe Option */}
               <div className="relative bg-[#F98F4C] rounded-3xl overflow-hidden shadow-lg max-h-[500px] min-h-[80vw]">
-                <div className="absolute md:right-[-2vw] right-4 w-[30vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[20%] z-[99]">
+                <div className="absolute md:right-[-2vw] right-4 w-[25vw] h-full md:w-[350px] md:h-[350px] transform translate-x-[10%] -translate-y-[20%] z-[99]">
                   <Image 
                     src="/images/41.webp" 
                     alt="Vial and Syringe" 
