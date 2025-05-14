@@ -37,11 +37,11 @@ const GLP1Section = () => {
                   Start your Journey
                 </a>
               </div>
-              <div className="md:w-1/2 flex justify-center items-center relative">
+              <div className="md:w-1/2 flex justify-center items-center relative z-50">
                 {/* Container with floating effect */}
-                <div className="relative w-full max-w-none h-[400px] md:h-[600px]">
+                <div className="relative w-full max-w-none h-[200px] md:h-[300px]">
                   {/* Floating medication image */}
-                  <div className="absolute md:-top-80 md:-right-20 top-0 right-0 w-[320px] h-[400px] md:w-[650px] md:h-[750px] z-50">
+                  <div className="absolute md:-top-72 md:-right-20 top-0 right-0 w-[320px] h-[400px] md:w-[550px] md:h-[750px] z-50">
                     <Image 
                       src="/images/tirzepatide-injection.png" 
                       alt="GLP-1 Medication" 

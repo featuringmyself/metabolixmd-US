@@ -2,17 +2,18 @@ import React, { useState } from "react";
 
 const testimonials = [
   {
+    name: "A N",
+    text: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat."',
+    beforeImg: "/images/38.webp",
+    afterImg: "/images/39.webp", // Use same for demo, replace with real after image
+  },
+  {
     name: "FZ",
     text: '"I put my trust in Dr. Raj & MetabolixMD and they delivered, quite literally! I would recommend metabolixMD to anyone interested in getting healthier, happier, and improving their quality of life. You cannot put a price on happiness, but metabolixMD makes it more affordable. Take the first step, I promise you it will be worth it. My life has slowly been improving and I have their great team to thank! I’m so excited for what the future holds! You can always start today!"',
     beforeImg: "/images/FZ_testimonial_before.webp",
     afterImg: "/images/FZ_testimonial_after.webp", // Use same for demo, replace with real after image
   },
-  {
-    name: "Raj Sabar",
-    text: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat."',
-    beforeImg: "/images/38.webp",
-    afterImg: "/images/39.webp", // Use same for demo, replace with real after image
-  },
+  
 ];
 
 function TestimonialSection() {
