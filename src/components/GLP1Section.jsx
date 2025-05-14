@@ -57,15 +57,15 @@ const GLP1Section = () => {
               GLP-1 medications come in different forms, but they all work toward the same goal - supporting weight management and metabolic health. These treatments are typically delivered through vials with syringes or auto-injectors and can be self-administered. Each method ensures effective absorption, allowing the medication to work efficiently in your body. During your consultation with one of our healthcare professionals, we will help determine the best option for you.
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-10">
               {/* Vial & Syringe Option */}
               <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[10vh] min-h-[75vw]">
-                <div className="absolute md:right-10 right-0 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-[20rem] transform translate-x-[15%] -translate-y-[15%] z-[99]">
+                <div className="absolute md:right-10 right-0 md:-top-12 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-[20rem] transform translate-x-[15%] -translate-y-[15%] z-[99]">
                   <Image 
                     src="/images/41.webp" 
                     alt="Vial and Syringe" 
                     fill 
-                    className="object-contain drop-shadow-lg md:scale-125 scale-75"
+                    className="object-contain drop-shadow-lg md:scale-105 scale-75"
                   />
                 </div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
