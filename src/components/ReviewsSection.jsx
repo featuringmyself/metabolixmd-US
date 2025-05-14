@@ -157,7 +157,7 @@ function ReviewsSection() {
                         className="flex-shrink-0 w-full px-4 flex flex-col items-center text-center"
                     >
                         <motion.div 
-                            className="w-28 h-28 rounded-full overflow-hidden mb-5"
+                            className="w-24 h-24 rounded-full overflow-hidden mb-5"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >
