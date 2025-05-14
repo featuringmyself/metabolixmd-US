@@ -7,7 +7,7 @@ const GLP1Section = () => {
     <section className="-mt-32 pt-32 pb-12 bg-[#365D56] max-w-screen text-white shadow-lg relative z-10 md:rounded-b-[75px] rounded-b-[50px]">
       <div className="md:max-w-[90%] max-w-full mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}
-        <div className="mb-16 md:mb-20 flex md:items-center md:flex-row flex-col md:justify-between gap-6">
+        <div className="mb-16 md:mb-36 flex md:items-center md:flex-row flex-col md:justify-between gap-6">
           <h2 className="text-4xl md:text-6xl font-medium mb-4 leading-tight">
             Understanding<br />GLP-1 Drugs
           </h2>
@@ -17,7 +17,7 @@ const GLP1Section = () => {
         </div>
 
         {/* Main Content Card */}
-        <div className="bg-white text-black rounded-3xl overflow-hidden shadow-lg md:py-10 py-0">
+        <div className="bg-white text-black rounded-3xl shadow-lg md:py-10 py-0 relative">
           {/* How GLP-1 Drugs Work Section */}
           <div className="p-8 md:p-16 lg:p-24">
             <div className="relative flex flex-col-reverse md:flex-row gap-8 md:gap-12">
@@ -37,12 +37,12 @@ const GLP1Section = () => {
                   Start your Journey
                 </a>
               </div>
-              <div className="absolute md:top-32 md:right-72 top-[14%] right-[50%] w-full h-[30rem] md:h-[35rem] md:w-full translate-x-1/2 -translate-y-1/2 z-[99]">
+              <div className="absolute md:top-[-60%] md:right-72 top-[-50%] right-[50%] w-full h-[32rem] md:h-[45rem] md:w-full translate-x-1/2 -translate-y-[5%] z-[150]">
                 <Image 
                   src="/images/tirzepatide-injection.png" 
                   alt="GLP-1 Drugs" 
                   fill 
-                  className="object-contain object-center"
+                  className="object-contain object-center scale-105 drop-shadow-lg"
                 />
                 </div>
             </div>
@@ -59,19 +59,19 @@ const GLP1Section = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-5">
               {/* Vial & Syringe Option */}
-              <div className="relative bg-[#F98F4C] rounded-3xl overflow-hidden shadow-lg max-h-[20rem] md:min-h-[10vh] min-h-[100vw]">
-                <div className="absolute md:right-0 right-4 -top-16 w-[8rem] -rotate-40 h-full md:w-[20rem] md:h-[20rem] transform translate-x-[10%] -translate-y-[5%] z-[99]">
+              <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[10vh] min-h-[100vw]">
+                <div className="absolute md:right-10 right-4 -top-4 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-[20rem] transform translate-x-[15%] -translate-y-[15%] z-[99]">
                   <Image 
                     src="/images/41.webp" 
                     alt="Vial and Syringe" 
                     fill 
-                    className="object-contain drop-shadow-lg"
+                    className="object-contain drop-shadow-lg scale-125"
                   />
                 </div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto max-w-[80%]">
                     <h4 className="md:text-2xl text-xl font-semibold text-black drop-shadow-sm">Vial & Syringe</h4>
-                    <p className="text-black/90 text-sm md:max-w-[80%] w-full  md:my-2 my-4">
+                    <p className="text-black/90 text-sm w-full  md:my-2 my-4">
                       A more traditional method, requiring manual dosage preparation before injection.
                     </p>
                   </div>
@@ -87,13 +87,13 @@ const GLP1Section = () => {
               </div>
               
               {/* Auto-Injectors Option */}
-              <div className="relative bg-[#365D56] rounded-3xl overflow-hidden shadow-lg max-h-[20rem] md:max-h-[10rem] min-h-[20rem]">
-                <div className="absolute md:top-4 md:right-5 -top-8 right-3 w-[60vw] h-full md:w-[20rem] md:h-[20rem] transform translate-x-[5%] -translate-y-[10%]">
+              <div className="relative bg-[#365D56] rounded-3xl shadow-lg max-h-[20rem] md:max-h-[10rem] min-h-[20rem]">
+                <div className="absolute md:top-[-10%] md:right-0 top-0 right-3 w-[60vw] h-[150%] md:w-[16rem] md:h-[16rem] rotate-[20deg]">
                   <Image 
                     src="/images/42-inverted.webp" 
                     alt="Auto-Injector Pen" 
                     fill 
-                    className="object-contain drop-shadow-lg"
+                    className="object-contain drop-shadow-lg scale-125"
                   />
                 </div>
                 <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">

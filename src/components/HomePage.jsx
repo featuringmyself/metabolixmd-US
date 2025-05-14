@@ -321,7 +321,7 @@ const HomePage = () => {
           initial="hidden"
           animate="visible"
           variants={staggerChildren}
-          className="flex flex-col relative md:mt-10 pt-8 mt-10 pb-0 px-4 min-h-[90vh]  justify-start  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
+          className="flex flex-col relative md:mt-10 pt-8 mt-10 pb-0 px-4 min-h-[85vh]  justify-start  bg-[linear-gradient(360deg,_#d0d0da_0%,_rgba(208,_208,_218,_0)_100%)] sm:bg-none"
         >
           <Image
             src="/images/hero-desktop.png"
@@ -339,7 +339,7 @@ const HomePage = () => {
                 Weight Loss <span className="text-[#2E2E2E] ">Journey Starts Here</span>
             </h1>
 
-            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[95%] md:my-20 my-5">
+            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[95%] md:my-10 my-5">
               Connect with our US-based physicians to receive tailored support
               on your weight loss journey. Experience a program designed just
               for you.
@@ -440,15 +440,7 @@ const HomePage = () => {
 
         {/* GLP-1 Information Section */}
         <GLP1Section />
-        <div
-          className="flex flex-col -mt-16 py-20"
-          style={{
-            backgroundImage: "url(/images/weightLossBG.png)",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
-        >
+        <div className="flex flex-col -mt-16 md:bg bg-[url('/images/weightLossBG.png')]  bg-center bg-no-repeat bg-cover ">
           {/* Weight Loss Calculator Section */}
           <WeightLossCalculatorSection />
         </div>

@@ -22,7 +22,7 @@ const WeightLossCalculatorSection = () => {
 
 
   return (
-    <div className=" mt-0">
+    <div className=" ">
       <div className="flex flex-col md:flex-row gap-8 items-start justify-between max-w-6xl w-full mb-24 md:mb-32 px-4 md:px-0">
         {/* Weight Loss Calculator Card */}
         <motion.div
@@ -114,7 +114,7 @@ const WeightLossCalculatorSection = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="relative w-full min-h-screen flex flex-col md:mt-12 mt-0"
+        className="relative w-full min-h-screen flex flex-col md:mt-0 mt-0"
       >
         <div className="relative w-full  min-h-screen flex flex-col">
           <Image
