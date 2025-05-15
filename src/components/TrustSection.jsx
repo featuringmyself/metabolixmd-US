@@ -109,13 +109,13 @@ const TrustSection = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerChildren}
-      className="py-8 md:py-24 px-4 bg-white z-50  rounded-b-[100px]"
+      className="py-8 md:py-4 px-4 bg-white z-50  rounded-b-[100px]"
     >
       <div className="max-w-[1400px] mx-auto  flex md:items-center items-start justify-center flex-col">
         {/* Section Title */}
         <motion.h2 
           variants={fadeIn}
-          className="text-4xl md:text-5xl font-medium tracking-tighter md:text-center max-w-full md:max-w-[50%] text-start mb-16 text-zinc-800"
+          className="text-4xl md:text-6xl font-medium tracking-tighter md:text-center max-w-full md:max-w-[60%] text-start mb-16 text-zinc-800"
         >
           Why Thousands Trust Us with
           Their Weight Loss Goals

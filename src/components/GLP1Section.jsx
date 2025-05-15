@@ -22,10 +22,10 @@ const GLP1Section = () => {
           <div className="p-8 md:p-16 lg:p-24">
             <div className="relative flex flex-col-reverse md:flex-row gap-8 md:gap-12">
               <div className="md:w-1/2 w-full flex flex-col md:text-start text-center md:items-start md:justify-start items-center justify-center md:mt-0 mt-16">
-                <h3 className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 md:w-[90%] md:mt-0 mt-52 w-full tracking-tight">
-                  How GLP-1 Drugs Works
+                <h3 className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 md:w-[70%] md:mt-0 mt-52 w-full tracking-tighter">
+                  How GLP-1 Drugs Work
                 </h3>
-                <p className="text-[#626262] mb-8 w-full md:w-[90%] leading-relaxed">
+                <p className="text-[#626262] mb-8 w-full md:w-[80%] leading-relaxed">
                   GLP-1 drugs help regulate blood sugar, slow digestion, and curb appetite. They trigger insulin production when needed, reduce the hormone that raises blood sugar, and keep food in the stomach longer, leading to increased fullness and lower calorie intake.
                 </p>
                 
@@ -42,7 +42,7 @@ const GLP1Section = () => {
                   src="/images/tirzepatide-injection.png" 
                   alt="GLP-1 Drugs" 
                   fill 
-                  className="object-contain object-center scale-105 drop-shadow-lg"
+                  className="object-contain object-center scale-95 drop-shadow-lg"
                 />
                 </div>
             </div>
@@ -53,25 +53,25 @@ const GLP1Section = () => {
             <h3 className="text-3xl md:text-5xl font-medium text-zinc-800 mb-6 leading-tight">
               GLP-1 Delivery Methods
             </h3>
-            <p className="text-[#626262] mb-12 w-[95%] md:w-[70%] md:text-center text-start leading-relaxed hidden md:block">
+            <p className="text-[#626262] mb-28 w-[95%] md:w-[70%] md:text-center text-start leading-relaxed hidden md:block">
               GLP-1 medications come in different forms, but they all work toward the same goal - supporting weight management and metabolic health. These treatments are typically delivered through vials with syringes or auto-injectors and can be self-administered. Each method ensures effective absorption, allowing the medication to work efficiently in your body. During your consultation with one of our healthcare professionals, we will help determine the best option for you.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-10">
               {/* Vial & Syringe Option */}
-              <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[10vh] min-h-[75vw]">
-                <div className="absolute md:right-10 right-0 md:-top-12 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-[20rem] transform translate-x-[15%] -translate-y-[15%] z-[99]">
+              <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[45vh] min-h-[75vw]">
+                <div className="absolute md:right-16 right-0 md:-top-16 -top-20 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-full transform translate-x-[15%] -translate-y-[15%] z-[99]">
                   <Image 
                     src="/images/41.webp" 
-                    alt="Vial and Syringe" 
-                    fill 
-                    className="object-contain drop-shadow-lg md:scale-105 scale-75"
+                    alt="Vial and Syringe"
+                    fill
+                    className="object-contain drop-shadow-lg md:scale-125 scale-75"
                   />
                 </div>
-                <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
-                  <div className="mt-auto max-w-[80%]">
-                    <h4 className="md:text-2xl text-2xl tracking-tighter font-medium text-black drop-shadow-sm">Vial & Syringe</h4>
-                    <p className="text-black/90 text-sm w-full  md:my-2 my-4">
+                <div className="p-16 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
+                  <div className="mt-auto ">
+                    <h4 className="md:text-3xl text-2xl tracking-tight font-medium text-black drop-shadow-sm max-w-[80%]">Vial & Syringe</h4>
+                    <p className="text-black/90 text-md w-full  md:my-3 my-4 font-light text-md opacity-70">
                       A more traditional method, requiring manual dosage preparation before injection.
                     </p>
                   </div>
@@ -87,7 +87,7 @@ const GLP1Section = () => {
               </div>
               
               {/* Auto-Injectors Option */}
-              <div className="relative bg-[#365D56] rounded-3xl shadow-lg max-h-[20rem] md:max-h-[10rem] min-h-[20rem]">
+              <div className="relative bg-[#365D56] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[45vh] min-h-[75vw]">
                 <div className="absolute md:top-[-10%] md:right-0 -top-40 -right-10 w-[60vw] h-[150%] md:w-[16rem] md:h-[16rem] rotate-[20deg]">
                   <Image 
                     src="/images/42-inverted.webp" 
@@ -96,10 +96,10 @@ const GLP1Section = () => {
                     className="object-contain drop-shadow-lg scale-90 md:scale-125"
                   />
                 </div>
-                <div className="p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
+                <div className="p-16 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto max-w-[80%]">
-                    <h4 className="md:text-2xl text-2xl font-semibold text-white drop-shadow-sm">Auto-injectors</h4>
-                    <p className="text-white/90 text-sm md:max-w-[80%] w-full leading-relaxed md:my-2 my-4">
+                    <h4 className="md:text-3xl text-2xl font-medium text-white drop-shadow-sm">Auto-injectors</h4>
+                    <p className="text-white/90 text-sm md:max-w-full w-full leading-relaxed md:my-3 my-4 opacity-70">
                       Designed for quick and seamless administration, often with a single-use format.
                     </p>
                   </div>

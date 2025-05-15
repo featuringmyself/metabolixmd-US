@@ -334,7 +334,7 @@ const HomePage = () => {
             variants={fadeIn}
             className="flex flex-col md:justify-center md:min-h-[80vh] justify-start items-start z-10 md:mx-20 mx-0 "
           > 
-            <h1 className="text-[2.5rem] md:text-7xl leading-[1.2] font-medium md:max-w-[60%] max-w-full text-primary">
+            <h1 className="text-[2.5rem] md:text-7xl leading-[1.2] font-medium md:max-w-[58%] max-w-full text-primary">
                 Your Personalized
                 Weight Loss <span className="text-[#2E2E2E] ">Journey Starts Here</span>
             </h1>
@@ -440,8 +440,9 @@ const HomePage = () => {
 
         {/* GLP-1 Information Section */}
         <GLP1Section />
-        <div className="flex flex-col -mt-16 md:bg bg-[url('/images/weightLossBG.png')]  bg-center bg-no-repeat bg-cover ">
-          {/* Weight Loss Calculator Section */}
+
+        {/* Weight Loss Calculator Section */}
+        <div className="relative w-full">
           <WeightLossCalculatorSection />
         </div>
 
