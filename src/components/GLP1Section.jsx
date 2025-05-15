@@ -57,18 +57,18 @@ const GLP1Section = () => {
               GLP-1 medications come in different forms, but they all work toward the same goal - supporting weight management and metabolic health. These treatments are typically delivered through vials with syringes or auto-injectors and can be self-administered. Each method ensures effective absorption, allowing the medication to work efficiently in your body. During your consultation with one of our healthcare professionals, we will help determine the best option for you.
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-">
               {/* Vial & Syringe Option */}
               <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[45vh] min-h-[75vw]">
-                <div className="absolute md:right-16 right-0 md:-top-16 -top-20 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-full transform translate-x-[15%] -translate-y-[15%] z-[99]">
+                <div className="absolute md:right-16 right-0 md:-top-20 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-full transform translate-x-[15%] -translate-y-[15%] z-[99]">
                   <Image 
-                    src="/images/41.webp" 
+                    src="/images/41.png" 
                     alt="Vial and Syringe"
                     fill
-                    className="object-contain drop-shadow-lg md:scale-125 scale-75"
+                    className="object-contain drop-shadow-lg md:scale-[1.3] scale-75"
                   />
                 </div>
-                <div className="p-16 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
+                <div className="md:p-16 p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto ">
                     <h4 className="md:text-3xl text-2xl tracking-tight font-medium text-black drop-shadow-sm max-w-[80%]">Vial & Syringe</h4>
                     <p className="text-black/90 text-md w-full  md:my-3 my-4 font-light text-md opacity-70">
@@ -88,16 +88,16 @@ const GLP1Section = () => {
               
               {/* Auto-Injectors Option */}
               <div className="relative bg-[#365D56] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[45vh] min-h-[75vw]">
-                <div className="absolute md:top-[-10%] md:right-0 -top-40 -right-10 w-[60vw] h-[150%] md:w-[16rem] md:h-[16rem] rotate-[20deg]">
+                <div className="absolute md:top-[-10%] md:right-0 -top-36 -right-14 w-[60vw] h-[150%] md:w-[16rem] md:h-[16rem] rotate-[20deg]">
                   <Image 
                     src="/images/42-inverted.webp" 
                     alt="Auto-Injector Pen" 
                     fill 
-                    className="object-contain drop-shadow-lg scale-90 md:scale-125"
+                    className="object-contain drop-shadow-lg scale-75 md:scale-125"
                   />
                 </div>
-                <div className="p-16 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
-                  <div className="mt-auto max-w-[80%]">
+                <div className="md:p-16 p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
+                  <div className="mt-auto md:max-w-[80%] max-w-full">
                     <h4 className="md:text-3xl text-2xl font-medium text-white drop-shadow-sm">Auto-injectors</h4>
                     <p className="text-white/90 text-sm md:max-w-full w-full leading-relaxed md:my-3 my-4 opacity-70">
                       Designed for quick and seamless administration, often with a single-use format.
