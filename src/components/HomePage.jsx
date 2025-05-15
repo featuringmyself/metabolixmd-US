@@ -385,9 +385,9 @@ const HomePage = () => {
           className="font-montserrat mx-auto px-[8vw] md:py-36 py-20 md:rounded-t-[5vw] rounded-t-[10vw] bg-white relative z-20 md:-mt-16 -mt-8"
         >
           {/* Step-by-Step Process heading and description */}
-          <div className="  flex flex-col md:flex-row justify-between items-start md:mb-24 mb-10 font-inter px-3 ">
-            <div className="md:max-w-[50%]">
-              <h2 className="text-4xl md:text-6xl font-medium text-zinc-800">
+          <div className="  flex flex-col md:flex-row justify-around items-start md:mb-24 mb-10 font-inter px-0">
+            <div className="md:max-w-[100%]">
+              <h2 className="text-4xl md:text-7xl font-medium text-zinc-800">
                 Step-by-Step <br />
                 Process
               </h2>

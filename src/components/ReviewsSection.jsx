@@ -136,7 +136,7 @@ function ReviewsSection() {
     };
 
     return (
-        <div className="w-full overflow-hidden relative py-16 my-10 pb-32 bg-white select-none md:rounded-b-[100px] rounded-b-[40px] z-30 ">
+        <div className="w-full overflow-hidden relative py-16 my-16 pb-32 bg-white select-none md:rounded-b-[100px] rounded-b-[40px] z-30 ">
             <motion.div 
                 className="flex overflow-x-hidden touch-pan-x"
                 drag="x"

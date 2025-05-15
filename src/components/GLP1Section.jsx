@@ -49,7 +49,7 @@ const GLP1Section = () => {
           </div>
 
           {/* Delivery Methods Section */}
-          <div className=" relative  p-8 md:p-0 text-start flex flex-col justify-center items-center md:mt-20 mt-0">
+          <div className=" relative  p-8 md:p-0 text-start flex flex-col justify-center items-center md:mt-10 mt-0">
             <h3 className="text-3xl md:text-5xl font-medium text-zinc-800 mb-6 leading-tight">
               GLP-1 Delivery Methods
             </h3>
