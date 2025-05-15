@@ -5,13 +5,13 @@ import Link from 'next/link';
 const GLP1Section = () => {
   return (
     <section className="-mt-40 pt-32 pb-12 bg-[#365D56] max-w-screen text-white shadow-lg relative z-10 md:rounded-b-[75px] rounded-b-[50px]">
-      <div className="md:max-w-[90%] max-w-full mx-auto px-5 md:px-10 py-16 md:py-24">
+      <div className="md:max-w-[90%] max-w-full mx-auto px-5 md:px-10 py-16 md:py-32">
         {/* Header Section */}
         <div className="mb-16 md:mb-36 flex md:items-center md:flex-row flex-col md:justify-between gap-6">
-          <h2 className="text-4xl md:text-6xl font-medium mb-4 leading-tight">
+          <h2 className="text-4xl md:text-7xl font-medium mb-4 leading-tight tracking-tight">
             Understanding<br />GLP-1 Drugs
           </h2>
-          <p className="text-md opacity-90 md:w-[40%] md:leading-relaxed leading-normal">
+          <p className="text-md md:w-[50%] md:leading-relaxed leading-normal">
             GLP-1 receptor agonists are transforming the way we approach weight management. These medications mimic a natural hormone in your body to regulate blood sugar, slow digestion, and reduce appetite. The result? Effective weight loss, improved metabolism, and even cardiovascular benefits. 
           </p>
         </div>
@@ -22,7 +22,7 @@ const GLP1Section = () => {
           <div className="p-8 md:p-16 lg:p-24">
             <div className="relative flex flex-col-reverse md:flex-row gap-8 md:gap-12">
               <div className="md:w-1/2 w-full flex flex-col md:text-start text-center md:items-start md:justify-start items-center justify-center md:mt-0 mt-16">
-                <h3 className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 md:w-[70%] md:mt-0 mt-52 w-full tracking-tighter">
+                <h3 className="text-4xl md:text-5xl font-medium text-zinc-800 mb-6 md:w-[70%] md:mt-0 mt-52 w-full tracking-tight">
                   How GLP-1 Drugs Work
                 </h3>
                 <p className="text-[#626262] mb-8 w-full md:w-[80%] leading-relaxed">

@@ -387,7 +387,7 @@ const HomePage = () => {
           {/* Step-by-Step Process heading and description */}
           <div className="  flex flex-col md:flex-row justify-around items-start md:mb-24 mb-10 font-inter px-0">
             <div className="md:max-w-[100%]">
-              <h2 className="text-4xl md:text-7xl font-medium text-zinc-800">
+              <h2 className="text-4xl md:text-7xl font-medium text-zinc-800 tracking-tight">
                 Step-by-Step <br />
                 Process
               </h2>
@@ -407,7 +407,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="flex flex-col-reverse lg:flex-row font-montserrat bg-[#F6F6F3] md:pl-20 pl-0 rounded-3xl md:mx-20 mx-0">
+          <div className="flex flex-col-reverse lg:flex-row font-montserrat bg-[#F6F6F3] md:pl-20 pl-0 rounded-3xl md:mx-16 mx-0">
             {/* Left side: Number, Title, description */}
             <div className="flex-1 flex flex-col justify-center ">
               {/* Orange numbered circle */}

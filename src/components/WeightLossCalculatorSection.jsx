@@ -221,7 +221,7 @@ const WeightLossCalculatorSection = () => {
           </div>
          {/* Lab Testing & Certification Section */}
           {/* Lab Testing & Certification Section */}
-          <div className="relative bg-white rounded-3xl shadow-lg overflow-hidden mx-52">
+          <div className="relative bg-white rounded-3xl shadow-lg overflow-hidden mx-40">
             {/* Centered Seal */}
             <div className="absolute inset-0 z-20 pointer-events-none mt-10">
               <div className="relative w-full h-full flex items-center justify-center">
