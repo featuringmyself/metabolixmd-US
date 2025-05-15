@@ -334,7 +334,7 @@ const HomePage = () => {
             variants={fadeIn}
             className="flex flex-col md:justify-center md:min-h-[80vh] justify-start items-start z-10 md:mx-20 mx-0 "
           > 
-            <h1 className="text-[2.5rem] md:text-7xl leading-[1.2] font-medium md:max-w-[58%] max-w-full text-primary">
+            <h1 className="text-[3.5rem] md:text-7xl leading-[1.2] font-medium md:max-w-[58%] max-w-full text-primary">
                 Your Personalized
                 Weight Loss <span className="text-[#2E2E2E] ">Journey Starts Here</span>
             </h1>
@@ -407,7 +407,7 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="flex flex-col-reverse lg:flex-row font-montserrat bg-[#F6F6F3] md:pl-20 pl-0 rounded-3xl mx-20">
+          <div className="flex flex-col-reverse lg:flex-row font-montserrat bg-[#F6F6F3] md:pl-20 pl-0 rounded-3xl md:mx-20 mx-0">
             {/* Left side: Number, Title, description */}
             <div className="flex-1 flex flex-col justify-center ">
               {/* Orange numbered circle */}
@@ -442,7 +442,7 @@ const HomePage = () => {
         <GLP1Section />
 
         {/* Weight Loss Calculator Section */}
-        <div className="relative w-full">
+        <div className=" w-full">
           <WeightLossCalculatorSection />
         </div>
 

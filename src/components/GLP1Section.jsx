@@ -57,7 +57,7 @@ const GLP1Section = () => {
               GLP-1 medications come in different forms, but they all work toward the same goal - supporting weight management and metabolic health. These treatments are typically delivered through vials with syringes or auto-injectors and can be self-administered. Each method ensures effective absorption, allowing the medication to work efficiently in your body. During your consultation with one of our healthcare professionals, we will help determine the best option for you.
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mx-auto">
               {/* Vial & Syringe Option */}
               <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[45vh] min-h-[75vw]">
                 <div className="absolute md:right-12 right-0 md:-top-16 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-full transform translate-x-[15%] -translate-y-[15%] z-[99]">

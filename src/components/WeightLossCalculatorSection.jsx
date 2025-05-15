@@ -20,8 +20,8 @@ const WeightLossCalculatorSection = () => {
   };
 
   return (
-    <section className="relative w-full bg-white py-20 overflow-visible">
-      <div className="container mx-auto max-w-full px-4 md:px-0">
+    <section className="relative w-full min-h-screen bg-white overflow-visible flex items-center">
+      <div className="container mx-auto max-w-full px-4 md:px-0 py-8 md:py-0">
         {/* Mobile Calculator Card */}
         <motion.div
           variants={fadeIn}
@@ -114,9 +114,9 @@ const WeightLossCalculatorSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="relative w-full h-auto py-20 rounded-3xl -mt-20 md:mt-0"
+          className="relative w-full min-h-[150vh] -mt-20"
         >
-          <div className="absolute inset-0 overflow-hidden rounded-3xl">
+          <div className="absolute inset-0 overflow-hidden ">
             <Image
               src="/images/weightloss_calculator.png"
               alt="Weight Loss Background"
@@ -128,8 +128,8 @@ const WeightLossCalculatorSection = () => {
           </div>
 
           {/* Content container - ensuring content is above background */}
-          <div className="relative z-20">
-            <div className="container mx-auto max-w-7xl px-4 md:px-8 py-12">
+          <div className="relative z-20 min-h-screen flex items-center">
+            <div className="container mx-auto max-w-7xl px-4 md:px-8">
               <div className="flex flex-col items-start justify-center min-h-[500px]">
                 {/* Desktop Calculator Card */}
                 <motion.div
