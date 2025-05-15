@@ -37,7 +37,7 @@ const GLP1Section = () => {
                   Start your Journey
                 </a>
               </div>
-              <div className="absolute md:top-[-60%] md:right-72 top-[-25%] right-[50%] w-full h-[32rem] md:h-[45rem] md:w-full translate-x-1/2 -translate-y-[5%] z-[150]">
+              <div className="absolute md:top-[-68%] md:right-64 top-[-25%] right-[50%] w-full h-[32rem] md:h-[45rem] md:w-full translate-x-1/2 -translate-y-[5%] z-[150]">
                 <Image 
                   src="/images/tirzepatide-injection.png" 
                   alt="GLP-1 Drugs" 
@@ -60,12 +60,12 @@ const GLP1Section = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mx-auto">
               {/* Vial & Syringe Option */}
               <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[45vh] min-h-[75vw]">
-                <div className="absolute md:right-12 right-0 md:-top-16 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-full transform translate-x-[15%] -translate-y-[15%] z-[99]">
+                <div className="absolute md:right-6 right-0 md:-top-12 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-full transform translate-x-[15%] -translate-y-[15%] z-[99]">
                   <Image 
                     src="/images/41.png" 
                     alt="Vial and Syringe"
                     fill
-                    className="object-contain drop-shadow-lg md:scale-[1.2] scale-75"
+                    className="object-contain drop-shadow-lg md:scale-[2] scale-75"
                   />
                 </div>
                 <div className="md:p-16 md:pb-8 p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
@@ -118,6 +118,8 @@ const GLP1Section = () => {
               </p>
             </div>
           </div>
+
+          
         </div>
       </div>
     </section>

@@ -219,7 +219,47 @@ const WeightLossCalculatorSection = () => {
                     </div>
             </div>
           </div>
+         {/* Lab Testing & Certification Section */}
+          {/* Lab Testing & Certification Section */}
+          <div className="relative bg-white rounded-3xl shadow-lg overflow-hidden mx-52">
+            {/* Centered Seal */}
+            <div className="absolute inset-0 z-20 pointer-events-none mt-10">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <Image 
+                  src="/images/metabolixmd-seal.svg" 
+                  alt="Certification Seal" 
+                  width={120} 
+                  height={120}
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
+                />
+              </div>
+            </div>
+            
+            <div className="flex md:flex-row flex-col items-stretch justify-between w-full">
+              {/* Image Section */}
+              <div className="relative md:w-[50%] w-full">
+                <Image 
+                  src="/images/lab-test.webp" 
+                  alt="Lab Testing Professional" 
+                  fill 
+                  className="object-cover object-top  rounded"
+                  priority
+                />
+              </div>
+              
+              {/* Content Section */}
+              <div className="md:w-1/2 w-full  p-8 md:pl-20 md:p-16 flex flex-col items-start justify-center bg-white relative">
+                <h3 className="text-4xl md:text-3xl font-medium text-[#2E2E2E] mb-4">
+                  Lab tested & Certified
+                </h3>
+                <p className="text-[#626262] text-xl leading-relaxed">
+                  Filled and shipped same day as your appointment
+                </p>
+              </div>
+            </div>
+          </div>
         </motion.div>
+
 
         {/* Mobile Lab Tested Card */}
         <motion.div
