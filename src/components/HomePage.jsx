@@ -392,7 +392,7 @@ const HomePage = () => {
                 Process
               </h2>
             </div>
-            <div className="md:max-w-[40%] mt-6 md:mt-0">
+            <div className="md:max-w-[40%] mt-6 md:mt-2">
               <p className="text-[#626262] mb-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Suspendisse varius enim in eros elementum tristique. Duis
@@ -407,11 +407,11 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="flex flex-col-reverse lg:flex-row font-montserrat bg-[#F6F6F3] md:pl-28 pl-0 rounded-3xl">
+          <div className="flex flex-col-reverse lg:flex-row font-montserrat bg-[#F6F6F3] md:pl-20 pl-0 rounded-3xl mx-20">
             {/* Left side: Number, Title, description */}
             <div className="flex-1 flex flex-col justify-center ">
               {/* Orange numbered circle */}
-              <div className="bg-orange-500 text-black w-20 h-20 rounded-full items-center justify-center text-4xl font-sm md:flex hidden">
+              <div className="bg-orange-500 text-black w-20 h-20 rounded-full items-center justify-center text-4xl font-xs md:flex hidden">
                 {Object.keys(stepDetails).indexOf(activeStep) + 1}
               </div>
 

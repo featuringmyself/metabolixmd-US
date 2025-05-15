@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const GLP1Section = () => {
   return (
-    <section className="-mt-32 pt-32 pb-12 bg-[#365D56] max-w-screen text-white shadow-lg relative z-10 md:rounded-b-[75px] rounded-b-[50px]">
+    <section className="-mt-40 pt-32 pb-12 bg-[#365D56] max-w-screen text-white shadow-lg relative z-10 md:rounded-b-[75px] rounded-b-[50px]">
       <div className="md:max-w-[90%] max-w-full mx-auto px-5 md:px-10 py-16 md:py-24">
         {/* Header Section */}
         <div className="mb-16 md:mb-36 flex md:items-center md:flex-row flex-col md:justify-between gap-6">
@@ -60,15 +60,15 @@ const GLP1Section = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:max-w-4xl mt-">
               {/* Vial & Syringe Option */}
               <div className="relative bg-[#F98F4C] rounded-3xl shadow-lg max-h-[20rem] md:min-h-[45vh] min-h-[75vw]">
-                <div className="absolute md:right-16 right-0 md:-top-20 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-full transform translate-x-[15%] -translate-y-[15%] z-[99]">
+                <div className="absolute md:right-12 right-0 md:-top-16 -top-24 w-[10rem] -rotate-40 h-[150%] md:w-[10rem] md:h-full transform translate-x-[15%] -translate-y-[15%] z-[99]">
                   <Image 
                     src="/images/41.png" 
                     alt="Vial and Syringe"
                     fill
-                    className="object-contain drop-shadow-lg md:scale-[1.3] scale-75"
+                    className="object-contain drop-shadow-lg md:scale-[1.2] scale-75"
                   />
                 </div>
-                <div className="md:p-16 p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
+                <div className="md:p-16 md:pb-8 p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto ">
                     <h4 className="md:text-3xl text-2xl tracking-tight font-medium text-black drop-shadow-sm max-w-[80%]">Vial & Syringe</h4>
                     <p className="text-black/90 text-md w-full  md:my-3 my-4 font-light text-md opacity-70">
@@ -96,7 +96,7 @@ const GLP1Section = () => {
                     className="object-contain drop-shadow-lg scale-75 md:scale-125"
                   />
                 </div>
-                <div className="md:p-16 p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
+                <div className="md:p-16 md:pb-8 p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">
                   <div className="mt-auto md:max-w-[80%] max-w-full">
                     <h4 className="md:text-3xl text-2xl font-medium text-white drop-shadow-sm">Auto-injectors</h4>
                     <p className="text-white/90 text-sm md:max-w-full w-full leading-relaxed md:my-3 my-4 opacity-70">

@@ -21,7 +21,7 @@ const WeightLossCalculatorSection = () => {
 
   return (
     <section className="relative w-full bg-white py-20 overflow-visible">
-      <div className="container mx-auto max-w-7xl px-4 md:px-6">
+      <div className="container mx-auto max-w-full px-4 md:px-0">
         {/* Mobile Calculator Card */}
         <motion.div
           variants={fadeIn}
@@ -114,7 +114,7 @@ const WeightLossCalculatorSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="relative w-full min-h-[60vh] rounded-3xl"
+          className="relative w-full h-auto py-20 rounded-3xl -mt-20 md:mt-0"
         >
           <div className="absolute inset-0 overflow-hidden rounded-3xl">
             <Image
@@ -130,7 +130,7 @@ const WeightLossCalculatorSection = () => {
           {/* Content container - ensuring content is above background */}
           <div className="relative z-20">
             <div className="container mx-auto max-w-7xl px-4 md:px-8 py-12">
-              <div className="flex flex-col items-start justify-center min-h-[60vh]">
+              <div className="flex flex-col items-start justify-center min-h-[500px]">
                 {/* Desktop Calculator Card */}
                 <motion.div
                   variants={fadeIn}
@@ -224,7 +224,7 @@ const WeightLossCalculatorSection = () => {
         {/* Mobile Lab Tested Card */}
         <motion.div
           variants={fadeIn}
-          className="bg-[#F6F6F3] relative md:hidden rounded-3xl overflow-hidden shadow-lg flex flex-col justify-center items-center w-full mx-auto z-20 p-8 mt-8"
+          className="bg-[#F6F6F3] relative md:hidden rounded-3xl overflow-hidden shadow-lg flex flex-col justify-center items-center w-full mx-auto z-20 p-8 -mt-12"
         >
           <svg
             width="97"
