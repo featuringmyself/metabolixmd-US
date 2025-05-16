@@ -5,7 +5,7 @@ import { useAuthModalContext } from '@/contexts/AuthModalContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-const BlurOverlay = ({ children, blurIntensity = 8, formData,onBack }) => {
+const BlurOverlay = ({ children, blurIntensity = 8, formData, onBack }) => {
   const { isLoaded, isSignedIn, currentUser } = useAuth();
   const { openSignIn } = useAuthModalContext();
   const [mounted, setMounted] = useState(false);
@@ -26,14 +26,20 @@ const BlurOverlay = ({ children, blurIntensity = 8, formData,onBack }) => {
     return <div className="animate-pulse bg-gray-200 h-full w-full rounded"></div>;
   }
 
+  // Check if we're in the weight calculation step
+  const isWeightCalculation = window.location.pathname === "/get-started" && 
+                             (router.asPath.includes("weightCalculation") || 
+                              router.asPath.includes("userInfo") ||
+                              router.asPath.includes("goalSelection"));
+
   return (
     <div className="relative">
       <div className={`transition-all duration-500 ease-in-out ${
-        !isSignedIn ? 'filter blur-md pointer-events-none ' : ''
+        !isSignedIn && !isWeightCalculation ? 'filter blur-md pointer-events-none ' : ''
       }`}>
         {children}
       </div>
-      {mounted && !isSignedIn && (
+      {mounted && !isSignedIn && !isWeightCalculation && (
         <div className="fixed inset-0 flex items-center justify-center z-[40]">
           <div className="absolute inset-0 "></div>
           <div className="relative z-20 w-full max-w-md mx-4">

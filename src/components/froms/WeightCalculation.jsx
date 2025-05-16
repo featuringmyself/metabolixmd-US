@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import BlurOverlay from '../BlurOverlay';
-import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
@@ -60,7 +59,6 @@ const WeightCalculation = ({ data: initialData, onNext, onBack }) => {
     }
   }, [formData.weight]);
   const router = useRouter();
-  const { isSignedIn } = useAuth();
   const [lossCount, setLossCount] = useState(20);
   const [chartValue, setChartValue] = useState("");
   const [isChartReady, setIsChartReady] = useState(false);

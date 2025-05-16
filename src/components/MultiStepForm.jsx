@@ -86,7 +86,6 @@ const MultiStepForm = ({ initialForm }) => {
     // "prescriptionQuestion",
     "goalSelection",
     "userInfo",
-    "auth",
     "weightCalculation",
     "basicsUserInfo",
     "primaryCareConfirmation",
@@ -109,9 +108,8 @@ const MultiStepForm = ({ initialForm }) => {
   const handleNextForm = (nextForm, data) => {
     setFormData({ ...formData, ...data });
     
-    // If moving to basicsUserInfo and not authenticated, show auth form
-    // This allows users to complete the first two steps without authentication
-    if (activeForm === "weightCalculation" && !isAuthenticated && (!nextForm || nextForm === "basicsUserInfo")) {
+    // If moving to calendly and not authenticated, show auth form
+    if (activeForm === "beforeWrapUp" && !isAuthenticated && (!nextForm || nextForm === "uploadProfile")) {
       setActiveForm("auth");
       return;
     }
@@ -119,6 +117,9 @@ const MultiStepForm = ({ initialForm }) => {
     // If coming from auth form, update authentication status
     if (activeForm === "auth") {
       setIsAuthenticated(true);
+      // After authentication, continue to the form that was interrupted
+      setActiveForm("uploadProfile");
+      return;
     }
     
     setActiveForm(nextForm || getNextFormKey(activeForm));
@@ -173,16 +174,6 @@ const MultiStepForm = ({ initialForm }) => {
         setActiveForm('calendly');
       } else if (formOrder.includes(formParam)) {
         setActiveForm(formParam);
-      }
-    }
-    
-    // Existing authentication check logic
-    if (isSignedIn && formData.height && formData.height.feet > 0 && formData.weight > 0 && activeForm !== "weightCalculation") {
-      const currentIndex = formOrder.indexOf(activeForm);
-      const weightCalcIndex = formOrder.indexOf("weightCalculation");
-      
-      if (currentIndex <= formOrder.indexOf("auth")) {
-        setActiveForm("weightCalculation");
       }
     }
   }, [isSignedIn, formData, router.query]);
