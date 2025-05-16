@@ -26,7 +26,7 @@ const SafetyInformation = () => {
 
                 {/* Content Section */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                    <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                    <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 md:pb-8">
                         <section className="mb-16">
                             <div className="space-y-12">
                                 {/* Indications Section */}
@@ -145,7 +145,7 @@ const SafetyInformation = () => {
                                 </div>
 
                                 {/* Additional Information Section */}
-                                <div className="bg-gray-50 p-6 rounded-xl">
+                                <div className="bg-gray-50 p-6 pb-0 rounded-xl">
                                     <h3 className="text-2xl font-medium text-[#223D38] mb-4">Additional Important Information</h3>
                                     <div className="space-y-4 text-gray-700">
                                         <p>
@@ -170,7 +170,7 @@ const SafetyInformation = () => {
                     </div>
                 </div>
             </main>
-            <Footer paddingTop='md:pt-[2rem] mt-[6rem] pt-[3rem]'/>
+            <Footer paddingTop='md:pt-[3rem] mt-[6rem] pt-[3rem]'/>
         </div>
     )
 }
