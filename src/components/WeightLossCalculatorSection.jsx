@@ -21,13 +21,13 @@ const WeightLossCalculatorSection = () => {
 
   return (
     <section className="relative w-full min-h-screen bg-white overflow-visible flex items-center">
-      <div className="container mx-auto max-w-full px-4 md:px-0 py-8 md:py-0">
+      <div className="container mx-auto max-w-full px-0 md:px-0 py-0 md:py-0">
         {/* Mobile Calculator Card */}
         <motion.div
           variants={fadeIn}
           initial="hidden"
           animate="visible"
-          className="bg-[#365D56] flex flex-col md:hidden text-white rounded-3xl overflow-hidden shadow-lg w-full z-20 mb-8"
+          className="bg-[#365D56] flex flex-col md:hidden text-white overflow-hidden shadow-lg w-full z-30 absolute top-1/2 left-0 -translate-y-1/2"
         >
           <div className="p-6 md:p-8 lg:p-10">
             <h2 className="text-2xl md:text-3xl lg:text-4xl md:font-light font-bold mb-6 leading-tight">
@@ -221,7 +221,7 @@ const WeightLossCalculatorSection = () => {
           </div>
          {/* Lab Testing & Certification Section */}
           {/* Lab Testing & Certification Section */}
-          <div className="relative bg-white rounded-3xl shadow-lg overflow-hidden mx-40">
+          <div className="relative bg-white rounded-3xl shadow-lg hidden md:flex overflow-hidden mx-40">
             {/* Centered Seal */}
             <div className="absolute inset-0 z-20 pointer-events-none mt-10">
               <div className="relative w-full h-full flex items-center justify-center">

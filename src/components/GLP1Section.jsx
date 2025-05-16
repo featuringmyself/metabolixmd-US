@@ -37,12 +37,12 @@ const GLP1Section = () => {
                   Start your Journey
                 </a>
               </div>
-              <div className="absolute md:top-[-68%] md:right-64 top-[-25%] right-[50%] w-full h-[32rem] md:h-[45rem] md:w-full translate-x-1/2 -translate-y-[5%] z-[150]">
+              <div className="absolute md:top-[-68%] md:right-64 top-[-22%] right-[50%] w-full h-[32rem] md:h-[45rem] md:w-full translate-x-1/2 -translate-y-[5%] z-[150]">
                 <Image 
                   src="/images/tirzepatide-injection.png" 
                   alt="GLP-1 Drugs" 
                   fill 
-                  className="object-contain object-center scale-95 drop-shadow-lg"
+                  className="object-contain object-center md:scale-95 scale-125 drop-shadow-lg"
                 />
                 </div>
             </div>
