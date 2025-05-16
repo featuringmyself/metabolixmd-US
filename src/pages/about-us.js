@@ -1119,7 +1119,7 @@ const AboutUs = () => {
         )}
       </AnimatePresence>
       <div className="relative flex justify-between items-center bg-[#ECF4F2] md:pl-20 pl-5 md:py-0 py-20 md:rounded-b-[100px] rounded-none z-30 -mb-24">
-        <div className="md:max-w-[38%] max-w-full pb-20">
+        <div className="md:max-w-[38%] max-w-full pb-52">
           <h1 className="md:text-6xl text-5xl font-medium text-[#2E2E2E]">
             <span className="text-[#365D56]">The Science</span> Behind Your
             Results
@@ -1338,7 +1338,7 @@ const AboutUs = () => {
           "
           style={{
             position: "absolute",
-            top: "-30px",
+            top: "-100px",
             backgroundImage: ` url(${bgVector.src})`,
             backgroundSize: "contain",
             backgroundPosition: "center",
