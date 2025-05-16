@@ -394,9 +394,9 @@ const AboutUs = () => {
       </Head>
       <NavBar />
 
-      <div className="flex justify-evenly items-center bg-[#ECF4F2] mt-16 pb-16 pt-10">
+      <div className="flex justify-evenly items-center bg-[#ECF4F2] mt-10 pb-16 pt-10">
         <div className="md:max-w-[50%] max-w-full text-semibold md:pl-32 pl-5 md:py-16 py-0 pt-10">
-          <h1 className="text-2xl text-[#386057] mb-5 md:block hidden">About MetabolixMD</h1>
+          <h1 className="text-2xl text-[#386057] mb-5 md:block hidden font-extralight">About MetabolixMD</h1>
           <h3 className="md:text-7xl text-5xl font-medium text-[#2E2E2E]">
             <span className="text-[#004F41]">Your Trusted Partner In</span>{" "}
             Metabolic Health
@@ -412,7 +412,7 @@ const AboutUs = () => {
             Our telehealth approach gives you direct access to GLP-1 medications
             with:
           </p>
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 my-5">
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 my-5 mx-10">
             <div className="flex flex-col text-center items-center justify-center">
               <svg
                 width="95"
@@ -466,7 +466,7 @@ const AboutUs = () => {
                   stroke-width="3"
                 />
               </svg>
-              <p className="text-bold">
+              <p className="text-extralight mt-4">
                 No office
                 <br />
                 visits
@@ -504,14 +504,14 @@ const AboutUs = () => {
                 />
               </svg>
 
-              <p className="text-bold">
+              <p className="text-extralight mt-4">
                 No long wait
                 <br />
                 times
               </p>
             </div>
             <div className="flex flex-col text-center items-center justify-center">
-              <svg width="80" height="80" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="80" height="80" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="m-2">
                 <circle cx="35" cy="35" r="33.5" fill="#ECF4F2" stroke="#004F41" stroke-width="3" />
                 <path d="M24.6273 43.8229L15.5191 51.3199M21.1784 31.3827C21.6058 26.9787 23.7651 22.9249 27.1813 20.113C30.5975 17.3011 34.9909 15.9614 39.3948 16.3888C43.7988 16.8161 47.8526 18.9754 50.6645 22.3916C53.4765 25.8079 54.8161 30.2012 54.3888 34.6052C53.9614 39.0091 51.8022 43.063 48.3859 45.8749C44.9697 48.6868 40.5763 50.0264 36.1724 49.5991C31.7684 49.1718 27.7146 47.0125 24.9027 43.5962C22.0908 40.18 20.7511 35.7867 21.1784 31.3827Z" stroke="#FD7823" stroke-width="3" strokeLinecap="round" stroke-linejoin="round" />
                 <path d="M41.638 29.4744C41.6055 27.1235 37.8504 25.564 35.2476 27.1072C31.9947 29.0338 32.6832 33.04 36.9125 32.8457C38.7945 32.7599 40.4132 32.398 41.6428 33.4967C42.8743 34.5952 43.6541 37.6222 40.4746 38.9811C37.2916 40.3422 33.6924 38.8142 33.4723 36.5467M36.9245 24.6965L37.0995 26.501M38.396 39.8626L38.5357 41.3017" stroke="#FD7823" stroke-width="3" strokeLinecap="round" stroke-linejoin="round" />
@@ -519,7 +519,7 @@ const AboutUs = () => {
               </svg>
 
 
-              <p className="text-bold mt-1">
+              <p className="text-extralight mt-4">
                 No Hidden
                 <br />
                 Costs
@@ -567,7 +567,7 @@ const AboutUs = () => {
                 </defs>
               </svg>
 
-              <p className="text-bold">
+              <p className="text-extralight mt-4">
                 No Copays or
                 <br />
                 Member Fees
@@ -582,7 +582,7 @@ const AboutUs = () => {
             top-tier compounding pharmacies in the U.S.
           </p>
         </div>
-        <div className="md:block hidden h-full  w-full rounded-[40px] min-h-full pl-20">
+        <div className="md:block hidden rounded-[40px] pl-20">
           <Image src={heroImg} width={874} height={1043} className="rounded-tl-[80px] min-h-max rounded-bl-[80px] " />
         </div>
       </div>
@@ -590,14 +590,14 @@ const AboutUs = () => {
         <Image src={heroImg} width={874} height={1043} className="rounded-[40px]" />
       </div>
 
-      <div className="bg-[#365D56] text-white flex flex-col items-center justify-center text-center md:px-52 px-5 md:py-32 py-20 md:rounded-[100px] rounded-[50px] -mt-14">
-        <h1 className="md:text-4xl text-2xl font-extralight md:leading-[3rem] leading-0 text-center">
+      <div className="bg-[#365D56] text-white flex flex-col items-center justify-center text-center md:px-40 px-5 md:py-32 py-20 md:rounded-[100px] rounded-[50px] -mt-14">
+        <h1 className="md:text-3xl text-2xl font-extralight md:leading-[3rem] leading-0 text-center">
           <span className="font-bold">Our mission</span> is to provide fast,
           efficient, and expert telehealth services focused exclusively on{" "}
           <span className="font-bold">Metabolic Health</span>. We're committed
           to patient privacy, safety, and convenience—empowering you to take
           control of your health from the comfort of your home.
-        </h1>
+        </h1> 
 
         <div className="flex md:flex-row flex-col justify-evenly items-start my-10 mt-20 md:gap-28 gap-14">
           <div className="flex flex-col  gap-5 items-center justify-center">
@@ -615,7 +615,7 @@ const AboutUs = () => {
               />      
             </svg>
             <h5 className="text-5xl font-medium">Privacy</h5>
-            <p className="max-w-md opacity-70 text-xl">
+            <p className="max-w-lg opacity-70 text-md">
               We take your privacy seriously. Your health data is encrypted and
               stored securely, and all care is delivered with discretion and
               respect.
@@ -637,7 +637,7 @@ const AboutUs = () => {
             </svg>
 
             <h5 className="text-5xl font-medium">Safety</h5>
-            <p className="max-w-md opacity-70 text-xl">
+            <p className="max-w-lg opacity-70 text-md">
               Every prescription is filled by licensed U.S.-based compounding
               pharmacies that follow strict quality and safety protocols for
               stability, potency, and purity.
@@ -659,7 +659,7 @@ const AboutUs = () => {
             </svg>
 
             <h5 className="text-5xl font-medium">Convenience</h5>
-            <p className="max-w-md opacity-70 text-xl">
+            <p className="max-w-lg opacity-70 text-md">
               From virtual consults to doorstep delivery, our process is built
               for real life. No waiting rooms. No pharmacy runs. Just
               results—delivered to you.
@@ -669,19 +669,19 @@ const AboutUs = () => {
 
         <div className="h-0.5 w-full bg-[#FFFFFF59] opacity-35 my-12"></div>
 
-        <div className="max-w-7xl text-xl mx-auto text-center">
+        <div className="max-w-5xl text-md mx-auto text-center">
           <p className="">
             You're ready for a change—and we're here to help. MetabolixMD offers
             a modern, science-backed approach to weight loss that's tailored to
             your lifestyle. No more guesswork, no more waiting rooms—just
-            personalized care that works.
+            <span className="font-bold"> personalized care that works.</span>
           </p>
           <p className="mt-5 mb-16">
             Take the first step toward a healthier you.
           </p>
 
           <Link
-            className="ring-2 ring-[#FFFFFF] px-10 py-4 rounded-full"
+            className="ring-1 ring-[#FFFFFF] px-10 py-4 rounded-full"
             href="/get-started"
           >
             Get Started
@@ -693,19 +693,19 @@ const AboutUs = () => {
         <div className="max-w-lg">
           <Image src={founder} width={538} height={657} className="rounded-3xl" />
         </div>
-        <div className="md:max-w-xl max-w-full flex flex-col justify-start items-start mt-10">
+        <div className="md:max-w-xl max-w-full flex flex-col justify-start items-start ">
           <h4 className="text-[#004F41] md:text-6xl text-3xl font-medium tracking-tight">A Personal Journey:</h4>
           <h4 className="text-[#2E2E2E] md:text-6xl text-3xl font-medium tracking-tight">Our Founder's Story</h4>
-          <p className=" text-[#000000CC] mt-10 opacity-[80%] text-lg leading-6">	“The story of MetabolixMD is personal to me. I've struggled with weight my entire life—trying everything from exercise and dieting to fasting and fads. <span className="text-black">Nothing worked.</span> After studying GLP-1 medications for two years, I finally started treatment in September 2023. Since then...</p>
+          <p className=" text-[#000000CC] mt-10 opacity-[80%] text-base leading-6">	“The story of MetabolixMD is personal to me. I've struggled with weight my entire life—trying everything from exercise and dieting to fasting and fads. <span className="text-black">Nothing worked.</span> After studying GLP-1 medications for two years, I finally started treatment in September 2023. Since then...</p>
 
-          <ul className="list-disc list-inside mt-3 text-[#000000CC] opacity-[80%] leading-snug">
+          <ul className="list-disc list-inside text-[#000000CC] opacity-[80%] leading-snug my-6">
             <li>I've lost nearly 70 pounds.</li>
             <li>My asthma disappeared after one month.</li>
             <li>I no longer need medication for hypertension.</li>
-            <li>I sleep better, breathe better, and <span className="text-black  font-semibold">feel like I'm 20 again—at nearly 60 years old</span></li>
+            <li>I sleep better, breathe better, and <span className="text-black opacity-[80%]  font-bold">feel like I'm 20 again—at nearly 60 years old</span></li>
           </ul>
 
-          <p className="mt-10 text-[#000000CC] opacity-[80%] leading-tight text-lg">
+          <p className=" text-[#000000CC] opacity-[80%] leading-tight text-base">
             We created MetabolixMD so others could access this life-changing treatment the same way I did—quickly, privately, and safely. That's when Ashley and I teamed up and launched this company together."
           </p>
           <Image src={founderSign} width={150} height={150} className="md:mt-2 mt-10" />
@@ -789,7 +789,7 @@ const AboutUs = () => {
             </svg>
             Team
           </h1>
-          <p className="text-gray-600 max-w-4xl mx-auto font-poppins">
+          <p className=" max-w-4xl mx-auto font-poppins text-center opacity-[80%] text-black">
             At MetabolixMD, our strength lies in the expertise and dedication of
             our team. Each member— from our licensed providers to our support
             staff—shares a commitment to delivering personalized, science-backed
@@ -987,7 +987,7 @@ const AboutUs = () => {
               Make a Difference
             </h1>
 
-            <p className="text-lg max-w-5xl text-black/80 mx-auto">
+            <p className="text-lg max-w-4xl text-black/80 mx-auto">
               MetabolixMD is available to adults aged 18 and older. We currently
               serve patients in more than 20 states and are expanding every
               month.{" "}
@@ -1004,7 +1004,7 @@ const AboutUs = () => {
               Results That Matter
             </h1>
 
-            <p className="text-lg max-w-5xl text-black/80 mx-auto">
+            <p className="text-lg max-w-4xl text-black/80 mx-auto">
               We've already helped thousands of individuals achieve real,
               sustainable results. Our patients experience improvements not just
               in weight loss, but in overall health—including reduced blood
@@ -1013,7 +1013,7 @@ const AboutUs = () => {
 
             <Link
               href="/get-started"
-              className="font-semibold px-10 py-4 bg-[#365D56] text-white rounded-full cursor-pointer mt-10"
+              className="font-semibold px-10 py-4 bg-[#365D56] text-white rounded-full cursor-pointer my-10"
             >
               Get Started
             </Link>
@@ -1119,19 +1119,19 @@ const AboutUs = () => {
         )}
       </AnimatePresence>
       <div className="relative flex justify-between items-center bg-[#ECF4F2] md:pl-20 pl-5 md:py-0 py-20 md:rounded-b-[100px] rounded-none z-30 -mb-24">
-        <div className="md:max-w-[38%] max-w-full pb-52">
-          <h1 className="md:text-6xl text-5xl font-medium text-[#2E2E2E]">
+        <div className="md:max-w-[45%] max-w-full pb-52 pl-12 py-40">
+          <h1 className="md:text-6xl text-5xl font-medium text-[#2E2E2E] tracking-tighter">
             <span className="text-[#365D56]">The Science</span> Behind Your
             Results
           </h1>
-          <p className="text-lg text-black font-extralight opacity-70 mt-10">
+          <p className="text-md text-black font-extralight opacity-70 mt-10 leading-tight max-w-lg">
             MetabolixMD is built on evidence—not trends. Our protocols are
             guided by board-certified providers and grounded in clinical
             research. GLP-1 medications are proven to support weight loss and
             improve metabolic health.
           </p>
-          <div className="flex flex-col items-center gap-4 mt-12 max-w-md">
-            <div className="flex bg-white rounded-full items-center py-5 pl-10 gap-4 w-full">
+          <div className="flex flex-col items-center gap-4 mt-12 max-w-lg">
+            <div className="flex bg-white rounded-3xl items-center py-5 pl-10 gap-4 w-full">
               <svg
                 width="41"
                 height="41"
@@ -1154,10 +1154,10 @@ const AboutUs = () => {
                   stroke-linejoin="round"
                 />
               </svg>
-              <p className="text-lg font-medium">Evidence-based treatments</p>
+              <p className="text-lg font-medium tracking-tighter">Evidence-based treatments</p>
             </div>
 
-            <div className="flex bg-white rounded-full items-center py-5 pl-10 gap-4 w-full">
+            <div className="flex bg-white rounded-3xl items-center py-5 pl-10 gap-4 w-full">
               <svg
                 width="44"
                 height="51"
@@ -1221,11 +1221,11 @@ const AboutUs = () => {
                 />
               </svg>
 
-              <p className="text-lg font-medium">
+              <p className="text-lg font-medium tracking-tighter">
                 Uncompromising product safety
               </p>
             </div>
-            <div className="flex bg-white rounded-full items-center py-5 pl-10 gap-4 w-full">
+            <div className="flex bg-white rounded-3xl items-center py-5 pl-10 gap-4 w-full">
               <svg
                 width="42"
                 height="41"
@@ -1300,16 +1300,16 @@ const AboutUs = () => {
                 />
               </svg>
 
-              <p className="text-lg font-medium">Evidence-based treatments</p>
+              <p className="text-lg font-medium tracking-tighter">Evidence-based treatments</p>
             </div>
           </div>
         </div>
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#ECF4F2] to-transparent z-10 max-w-[40%]"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#ECF4F2] to-transparent z-10 max-w-[60%]"></div>
           <Image
             src={scienceBehindResults}
             alt="science behind results"
-            className="max-h-screen relative z-0 rounded-b-[100px] hidden md:block object-cover"
+            className=" relative z-0 rounded-b-[100px] hidden md:block object-cover"
           />
         </div>
       </div>
@@ -1372,7 +1372,7 @@ const AboutUs = () => {
 
       </div>
 
-      <Footer paddingTop="pt-[650px] md:pt-[550px]" />
+      <Footer paddingTop="pt-[40rem] md:pt-[33rem]" />
     </div>
   );
 };

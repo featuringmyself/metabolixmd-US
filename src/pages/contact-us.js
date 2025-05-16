@@ -209,7 +209,7 @@ const ContactUs = () => {
                 transition={{ duration: 0.6 }}
             >
             </motion.div>
-            <Footer paddingTop='pt-20 mt-10 '/>
+            <Footer paddingTop='pt-[3rem] mt-[8rem] '/>
         </div>
     );
 };

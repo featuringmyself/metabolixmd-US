@@ -95,7 +95,7 @@ const Footer = ({ paddingTop = "pt-0" }) => {
               {/* Social Media Icons */}
               <div className="flex justify-center md:justify-start gap-6 mb-6">
                 <Link
-                  href="https://www.facebook.com"
+                  href="https://www.facebook.com/metabolixmd"
                   target="_blank"
                   className="text-white hover:text-tertiary transition-colors"
                 >
