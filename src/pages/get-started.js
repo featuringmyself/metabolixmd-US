@@ -24,6 +24,10 @@ const GetStarted = () => {
     // Map URL parameter to form key
     if (formParamLower === 'calendlyform') {
       initialForm = 'calendly';
+    } else if (formParamLower === 'checkoutform') {
+      initialForm = 'checkout';
+    } else if (formParamLower === 'licensedProvider') {
+      initialForm = 'licensedProvider';
     }
   }
 

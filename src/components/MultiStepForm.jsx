@@ -172,6 +172,8 @@ const MultiStepForm = ({ initialForm }) => {
       // Map URL parameter to form key
       if (formParamLower === 'calendlyform') {
         setActiveForm('calendly');
+      } else if (formParamLower === 'checkoutform') {
+        setActiveForm('checkout');
       } else if (formOrder.includes(formParam)) {
         setActiveForm(formParam);
       }
@@ -183,8 +185,15 @@ const MultiStepForm = ({ initialForm }) => {
     const handleRouteChange = () => {
       const params = new URLSearchParams(window.location.search);
       const formParam = params.get('form');
-      if (formParam && formOrder.includes(formParam)) {
-        setActiveForm(formParam);
+      if (formParam) {
+        const formParamLower = formParam.toLowerCase();
+        if (formParamLower === 'calendlyform') {
+          setActiveForm('calendly');
+        } else if (formParamLower === 'checkoutform') {
+          setActiveForm('checkout');
+        } else if (formOrder.includes(formParam)) {
+          setActiveForm(formParam);
+        }
       }
     };
 

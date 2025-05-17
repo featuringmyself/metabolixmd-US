@@ -11,9 +11,9 @@ const LicensedProvider = ({onNext}) => {
                     A licensed provider will assess your health history and will reach out to you with your weight loss treatment plan.
                 </p>
               <div className='flex flex-wrap mt-5 justify-between gap-3'>
-                <div style={{backgroundImage:`url(/images/dr1.webp)`}} className='w-[150px] h-[150px] bg-cover bg-center bg-no-repeat bg-orange-400  rounded-lg overflow-hidden'></div>
-                <div style={{backgroundImage:`url(/images/dr2.webp)`}} className='w-[150px] h-[150px] bg-cover bg-center bg-no-repeat bg-orange-400  rounded-lg overflow-hidden'></div>
-                <div style={{backgroundImage:`url(/images/dr3.webp)`}} className='w-[150px] h-[150px] bg-cover bg-center bg-no-repeat bg-orange-400  rounded-lg overflow-hidden'></div>
+                <div style={{backgroundImage:`url(/images/dr1.svg)`}} className='w-[150px] h-[180px] bg-cover bg-center bg-no-repeat  rounded-lg overflow-hidden'></div>
+                <div style={{backgroundImage:`url(/images/dr2.svg)`}} className='w-[150px] h-[180px] bg-cover bg-center bg-no-repeat  rounded-lg overflow-hidden'></div>
+                <div style={{backgroundImage:`url(/images/dr3.svg)`}} className='w-[150px] h-[180px] bg-cover bg-center bg-no-repeat  rounded-lg overflow-hidden'></div>
               </div>
 
                 <div onClick={()=>onNext({},"stopProcess")} className='mt-6 p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary hover:bg-primary'>Continue</div>

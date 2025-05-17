@@ -93,23 +93,40 @@ const CheckOutForm = ({ onNext }) => {
                 <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                     <h1 className='text-3xl font-semibold mb-6 text-zinc-800 text-center'>Please fill out your shipping details</h1>
 
-                    <div className="flex gap-2">
-                        <div className="w-1/4">
-                            <label>Country Code</label>
-                            <input
-                                placeholder="+1"
-                                {...register('countryCode', { 
-                                    required: true,
-                                    pattern: {
-                                        value: /^\+\d{1,4}$/,
-                                        message: "Please enter a valid country code (e.g. +1)"
-                                    }
-                                })}
+                    <div className="flex gap-2 mt-20">
+                        <div className="w-2/5">
+                            <label>Country</label>
+                            <select
+                                {...register('countryCode', { required: true })}
                                 className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            />
+                                defaultValue="+1"
+                            >
+                                <option value="" disabled>Select</option>
+                                <option value="+1">+1 (USA/Canada)</option>
+                                <option value="+44">+44 (UK)</option>
+                                <option value="+91">+91 (India)</option>
+                                <option value="+61">+61 (Australia)</option>
+                                <option value="+81">+81 (Japan)</option>
+                                <option value="+49">+49 (Germany)</option>
+                                <option value="+33">+33 (France)</option>
+                                <option value="+971">+971 (UAE)</option>
+                                <option value="+86">+86 (China)</option>
+                                <option value="+92">+92 (Pakistan)</option>
+                                <option value="+880">+880 (Bangladesh)</option>
+                                <option value="+7">+7 (Russia)</option>
+                                <option value="+39">+39 (Italy)</option>
+                                <option value="+34">+34 (Spain)</option>
+                                <option value="+20">+20 (Egypt)</option>
+                                <option value="+62">+62 (Indonesia)</option>
+                                <option value="+82">+82 (South Korea)</option>
+                                <option value="+234">+234 (Nigeria)</option>
+                                <option value="+55">+55 (Brazil)</option>
+                                <option value="+27">+27 (South Africa)</option>
+                                {/* Add more as needed */}
+                            </select>
                             {errors.countryCode && <p className="text-red-500 text-xs">Valid country code required</p>}
                         </div>
-                        <div className="w-3/4">
+                        <div className="w-3/5">
                             <label>Phone Number</label>
                             <input
                                 placeholder="Enter your phone number"
