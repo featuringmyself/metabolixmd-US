@@ -109,9 +109,9 @@ const TrustSection = () => {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
       variants={staggerChildren}
-      className="py-8 md:py-4 px-4 bg-white z-50  rounded-b-[100px]"
+      className="py-8 md:py-4 px-8 bg-white z-50  rounded-b-[100px]"
     >
-      <div className="max-w-[1400px] mx-auto  flex md:items-center items-start justify-center flex-col">
+      <div className="max-w-screen mx-auto  flex md:items-center items-start justify-center flex-col">
         {/* Section Title */}
         <motion.h2 
           variants={fadeIn}
@@ -122,7 +122,7 @@ const TrustSection = () => {
         </motion.h2>
 
         {/* Trust Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-8 md:max-w-full max-w-[88%] ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-8 md:max-w-full  ">
           {/* Map through trust features and display them */}
           {trustFeatures.map((feature, index) => (
             <motion.div
