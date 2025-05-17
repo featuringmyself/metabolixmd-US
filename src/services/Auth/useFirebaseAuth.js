@@ -57,28 +57,43 @@ export default function useFirebaseAuth() {
             })
         }
     }
+
     const loginWithEmailAndPassword = async (email, password, redirect = "") => {
         try {
             const res = await signInWithEmailAndPassword(auth, email, password);
-            // if (!res.user.emailVerified && redirect != "") {
-            //     router.push(redirect)
-               
-            //     return { status: false };
-            // }
-            // Set up the cookie expiry time
-            const expiryTime = new Date(Date.now() + 3600 * 1000);
-            // Set the cookie
-            const token = auth.currentUser.accessToken;
+            if (!res.user) {
+                throw new Error('No user returned from authentication');
+            }
+
+            // Force token refresh to ensure we have the latest token
+            const token = await res.user.getIdToken(true);
+            const expiryTime = new Date(Date.now() + 3600 * 1000); // 1 hour expiry
+
+            // Validate token format
+            if (!token || typeof token !== 'string' || token.trim() === '') {
+                throw new Error('Invalid token received from authentication');
+            }
+
+            // Set the token in cookie and localStorage
             setToken(token, expiryTime);
             localStorage.setItem('token', token);
-            return { status: true, user: auth.currentUser, token: token, expiryTime: expiryTime };
-        }
-        catch (e) {
+
+            // Log success but not the actual token
+            console.log('Authentication successful for:', email);
+
+            return { 
+                status: true, 
+                user: res.user, 
+                token: token, 
+                expiryTime: expiryTime 
+            };
+        } catch (e) {
+            console.error('Login error:', e);
             const error = firebaseErrorFinder(e);
             toast.error(error, {
-                toastId: "firebase-error"
-            })
-            return { status: false, error: error }
+                toastId: "firebase-error-login"
+            });
+            return { status: false, error: error };
         }
     }
     const logOut = async () => {
@@ -126,17 +141,20 @@ export default function useFirebaseAuth() {
 
             // Set up the cookie expiry time
             const expiryTime = new Date(Date.now() + 3600 * 1000);
-            // Set the cookie
-            const token = auth.currentUser.accessToken;
+            // Always get a fresh ID token
+            const token = await user.getIdToken(true);
 
-            return { status: true, user: auth.currentUser, token: token, isFirstSignIn: isFirstSignIn, expiryTime: expiryTime };
-        }
-        catch (e) {
+            // Set the token in cookie and localStorage
+            setToken(token, expiryTime);
+            localStorage.setItem('token', token);
+
+            return { status: true, user: user, token: token, isFirstSignIn: isFirstSignIn, expiryTime: expiryTime };
+        } catch (e) {
             const error = firebaseErrorFinder(e);
             toast.error(error, {
                 toastId: "firebase-error"
-            })
-            return { status: false, error: error }
+            });
+            return { status: false, error: error };
         }
     }
 

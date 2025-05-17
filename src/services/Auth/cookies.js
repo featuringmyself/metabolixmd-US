@@ -4,16 +4,16 @@ const isClient = typeof window !== 'undefined';
 
 export const setToken = (token, expiry) => {
     if (!isClient) return;
-    cookies.set('token', JSON.stringify({ value: token, expiry }), {
-      expires: 7
+    cookies.set('token', token, {
+      expires: expiry ? new Date(expiry) : 7
     });
 };
 
 export const getToken = () => {
   if (!isClient) return null;
-  const cookie = cookies.get('token');
-  if (!cookie) return null;
-  return cookie;
+  const token = cookies.get('token');
+  if (!token) return null;
+  return token;
 };
 
 export const removeToken = () => {

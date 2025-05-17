@@ -61,7 +61,7 @@ const EthnicityForm = ({onNext, onBack}) => {
       console.error("Error updating selected ethnicities:", error);
     }
   };
-
+  
   const isButtonDisabled = selectedEthnicities.length === 0;
 
   return (

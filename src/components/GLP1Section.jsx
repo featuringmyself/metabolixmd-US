@@ -65,7 +65,7 @@ const GLP1Section = () => {
                     src="/images/41.png" 
                     alt="Vial and Syringe"
                     fill
-                    className="object-contain drop-shadow-lg md:scale-[2] scale-75"
+                    className="object-contain drop-shadow-lg md:scale-[2] scale-90  "
                   />
                 </div>
                 <div className="md:p-16 md:pb-8 p-8 pt-6 pb-8 flex flex-col h-full justify-end items-start text-start">

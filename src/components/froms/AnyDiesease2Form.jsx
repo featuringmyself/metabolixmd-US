@@ -149,9 +149,9 @@ const AnyDisease2Form = ({onNext, onBack}) => {
               }`}
               disabled={isButtonDisabled}
               onClick={handleContinue}
-              aria-label="Next"
+              aria-label="Continue"
             >
-              Next
+              Continue
             </button>
           </div>
         </form>

@@ -227,14 +227,14 @@ const MultiStepForm = ({ initialForm }) => {
         onBack={handlePrevForm}
         initialData={formData.height && formData.weight ? { height: formData.height, weight: formData.weight } : undefined}
         />
-      )}
-      {activeForm === "auth" && (
+      )}      {activeForm === "auth" && (
         <AuthForm 
+        mode="signup"
         onNext={(data, next) => handleNextForm(next, data)}
         />
       )}
       {activeForm === "weightCalculation" && (
-        <WeightCalculation data={formData} onNext={(data, next) => handleNextForm(next, data)} />
+        <WeightCalculation data={formData} onNext={(data, next) => handleNextForm(next, data)} onBack={handlePrevForm} />
       )}
       {activeForm === "basicsUserInfo" && (
         <BasicsUserInfo 
@@ -295,6 +295,7 @@ const MultiStepForm = ({ initialForm }) => {
       {activeForm === "glp1" && (
         <GLP1 
         onNext={(data, next) => handleNextForm(next, data)} 
+        onBack={handlePrevForm}
         initialData={formData.allergy_GLP_1 !== undefined ? { allergy_GLP_1: formData.allergy_GLP_1 } : undefined}
         />
       )}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /**
  * SearchAndSelectAllergies Component
@@ -12,7 +12,20 @@ import React, { useState } from 'react';
  */
 const SearchAndSelectAllergies = ({ onNext, onBack }) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedAllergies, setSelectedAllergies] = useState([]);
+    const [selectedAllergies, setSelectedAllergies] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const saved = localStorage.getItem('SearchAndSelectAllergies_allergies');
+            return saved ? JSON.parse(saved) : [];
+        }
+        return [];
+    });
+
+    useEffect(() => {
+        // Save to localStorage whenever allergies change
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('SearchAndSelectAllergies_allergies', JSON.stringify(selectedAllergies));
+        }
+    }, [selectedAllergies]);
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -95,18 +108,16 @@ const SearchAndSelectAllergies = ({ onNext, onBack }) => {
                         type="button"
                         className="group w-full sm:w-auto px-10 py-5 text-gray-700 bg-white border-2 border-gray-100 rounded-xl hover:bg-gray-50 hover:border-gray-200 transition-all duration-300 font-medium shadow-sm hover:shadow-md"
                         onClick={onBack}
-                    >
-                        <span className="relative flex items-center justify-center gap-2">
+                    >                        <span className="flex items-center justify-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>
                             Back
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gray-700 group-hover:w-full transition-all duration-300"></span>
                         </span>
                     </button>
                     
                     {selectedAllergies.length > 0 || searchTerm.trim() !== '' ? (
-                        <button
+                        <button 
                             type="button"
                             className="group w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-primary via-primary/90 to-primary text-white rounded-xl hover:from-primary/90 hover:via-primary hover:to-primary/90 transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:scale-[1.02]"
                             onClick={() => {
@@ -120,13 +131,11 @@ const SearchAndSelectAllergies = ({ onNext, onBack }) => {
                                 }
                                 onNext({ allergies: selectedAllergies }, "glp1");
                             }}
-                        >
-                            <span className="relative flex items-center justify-center gap-2">
+                        >                            <span className="flex items-center justify-center gap-2">
                                 Continue
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                 </svg>
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"></span>
                             </span>
                         </button>
                     ) : (
@@ -134,13 +143,11 @@ const SearchAndSelectAllergies = ({ onNext, onBack }) => {
                             type="button"
                             className="group w-full sm:w-auto px-10 py-5 text-gray-700 bg-white border-2 border-gray-100 rounded-xl hover:bg-gray-50 hover:border-gray-200 transition-all duration-300 font-medium shadow-sm hover:shadow-md"
                             onClick={() => onNext({}, "glp1")}
-                        >
-                            <span className="relative flex items-center justify-center gap-2">
+                        >                            <span className="flex items-center justify-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                                 I don&apos;t have any allergies
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gray-700 group-hover:w-full transition-all duration-300"></span>
                             </span>
                         </button>
                     )}

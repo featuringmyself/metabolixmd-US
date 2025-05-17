@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const BlurOverlay = ({ children, blurIntensity = 8, formData, onBack }) => {
   const { isLoaded, isSignedIn, currentUser } = useAuth();
-  const { openSignIn } = useAuthModalContext();
+  const { openSignIn, openSignUp } = useAuthModalContext();
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
@@ -27,10 +27,13 @@ const BlurOverlay = ({ children, blurIntensity = 8, formData, onBack }) => {
   }
 
   // Check if we're in the weight calculation step
+  const params = new URLSearchParams(window.location.search);
+  const currentForm = params.get('form');
   const isWeightCalculation = window.location.pathname === "/get-started" && 
-                             (router.asPath.includes("weightCalculation") || 
-                              router.asPath.includes("userInfo") ||
-                              router.asPath.includes("goalSelection"));
+                             (currentForm === "weightCalculation" || 
+                              currentForm === "userInfo" ||
+                              currentForm === "goalSelection" ||
+                              !currentForm);
 
   return (
     <div className="relative">
@@ -49,14 +52,22 @@ const BlurOverlay = ({ children, blurIntensity = 8, formData, onBack }) => {
               </div>
             ) : (
               <div className="bg-white rounded-xl shadow-2xl p-8 w-full transform transition-all">
-                <h2 className="text-2xl font-bold mb-4 text-center">Sign In Required</h2>
-                <p className="text-gray-600 mb-6 text-center">Please sign in to access this content</p>
+                <h2 className="text-2xl font-bold mb-4 text-center">Create Your Account</h2>
+                <p className="text-gray-600 mb-6 text-center">Please create an account to continue your journey</p>
                 <button 
-                  onClick={openSignIn}
+                  onClick={openSignUp}
                   className="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary/90 transition-colors w-full"
                 >
-                  Sign In
+                  Create Account
                 </button>
+                <p className="text-center text-gray-500 mt-4">Already have an account? 
+                  <button 
+                    onClick={openSignIn}
+                    className="text-primary hover:text-primary/90 ml-2 font-medium"
+                  >
+                    Sign In
+                  </button>
+                </p>
                 <div className="flex flex-col gap-3 mt-4">
                   
                   <Link 

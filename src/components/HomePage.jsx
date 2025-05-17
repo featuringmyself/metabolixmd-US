@@ -442,7 +442,7 @@ const HomePage = () => {
         <GLP1Section />
 
         {/* Weight Loss Calculator Section */}
-        <div className=" w-full">
+        <div className=" w-full" >
           <WeightLossCalculatorSection />
         </div>
 

@@ -35,21 +35,31 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
 
   const handleEmailAuth = async (e) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
 
     try {
       let result;
       if (mode === "signup") {
+        if (!email || !password) {
+          toast.error("Please fill in all required fields");
+          return;
+        }
         result = await createUserWithEmailMethod(email, password);
       } else {
+        if (!email || !password) {
+          toast.error("Please enter your email and password");
+          return;
+        }
         result = await loginWithEmailAndPassword(email, password);
       }
 
+      console.log("Auth result:", { ...result, token: "REDACTED" });
+
       if (result.status) {
-        let userType = "User"; // default user type
+        let userType = "User";
 
         try {
-          // Create user profile in backend if this is a new signup
           if (mode === "signup") {
             const onboardingResponse = await fetch(
               `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/onBoarding`,
@@ -67,7 +77,8 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
             );
 
             if (!onboardingResponse.ok) {
-              throw new Error("Failed to create user profile");
+              const errorData = await onboardingResponse.json();
+              throw new Error(errorData.message || "Failed to create user profile");
             }
           }
 
@@ -85,12 +96,21 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
             `${process.env.NEXT_PUBLIC_API_URL}/v1/auth/me`,
             requestOptions
           );
+
+          if (!resp.ok) {
+            const errorData = await resp.json();
+            console.error("Error fetching user type:", errorData);
+            throw new Error(errorData.message || "Failed to fetch user type");
+          }
+
           const userData = await resp.json();
           if (userData?.data?.__t) {
             userType = userData.data.__t;
           }
         } catch (error) {
-          console.error("Error:", error);
+          console.error("Error in user setup:", error);
+          // Don't block the sign-in process for these errors
+          toast.warn("Signed in successfully, but there was an issue setting up your profile");
         }
 
         setUser({
@@ -107,9 +127,11 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
             ? "Account created successfully!"
             : "Signed in successfully!"
         );
+        
         window.dispatchEvent(new Event("auth-state-changed"));
-        onNext({});
+        onNext(result);
       } else {
+        console.error("Authentication failed:", result.error);
         toast.error(
           result.error ||
             "Authentication failed. Please check your credentials."
@@ -182,7 +204,7 @@ const FirebaseAuthForm = ({ onNext, mode = "signin" }) => {
         toast.success("Signed in successfully!");
         console.log("User ID:", result.user.uid);
         window.dispatchEvent(new Event("auth-state-changed"));
-        onNext({});
+        onNext(result); // Pass the authentication result to parent
       }
     } catch (error) {
       console.error("Social authentication error:", error);
