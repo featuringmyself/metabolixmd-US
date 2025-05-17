@@ -332,14 +332,14 @@ const HomePage = () => {
           />
           <motion.div
             variants={fadeIn}
-            className="flex flex-col md:justify-center md:min-h-[80vh] justify-start items-start z-10 md:mx-20 mx-0 "
+            className="flex flex-col md:justify-center md:mt-0 mt-[8vh] md:min-h-[80vh] min-h-screen justify-start items-start z-10 md:mx-20 mx-1 "
           > 
-            <h1 className="text-[3.5rem] md:text-7xl leading-[1.2] font-medium md:max-w-[58%] max-w-full text-primary">
+            <h1 className="text-[11vw] md:text-7xl leading-[1.2] font-medium md:max-w-[58%] max-w-full text-primary">
                 Your Personalized
                 Weight Loss <span className="text-[#2E2E2E] ">Journey Starts Here</span>
             </h1>
 
-            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[95%] md:my-14 my-5">
+            <p className="text-[#626262] text-base md:text-lg md:max-w-[40%] max-w-[95%] md:my-14 my-[5vh]">
               Connect with our US-based physicians to receive tailored support
               on your weight loss journey. Experience a program designed just
               for you.
