@@ -487,7 +487,7 @@ const AboutUs = () => {
                   fill="#ECF4F2"
                   stroke="#004F41"
                   stroke-width="3"
-                />
+                /> 
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
@@ -841,12 +841,11 @@ const AboutUs = () => {
                         <div className="absolute inset-0" />
                       </div>
                       <div className="bg-[#F9FAFB] rounded-lg px-4 py-3 text-center font-bold  ">
-                        <h3 className="text-2xl font-bold font-montserrat text-[#004F41]">
-                          {expert.name}
+                        <h3 className="text-xl font-bold font-montserrat text-[#004F41]">
+                          {expert.name}, {expert.subName}
                         </h3>
                         {expert.mainRole || expert.designation ? (
                           <p className="text-sm text-[#004F41] font-light">
-                            <span>{expert.subName}<br /></span>
                             {expert.mainRole
                               ? expert.designation
                                 ? `${expert.mainRole} ${expert.designation}`
