@@ -395,7 +395,7 @@ const AboutUs = () => {
       <NavBar />
 
       <div className="flex justify-evenly items-center bg-[#ECF4F2] mt-10 pb-16 pt-10">
-        <div className="md:max-w-[50%] max-w-full text-semibold md:pl-32 pl-0 md:py-16 py-0 pt-10">
+        <div className="md:max-w-[50%] max-w-[85%] text-semibold md:pl-32 pl-0 md:py-16 py-0 pt-10">
           <h1 className="text-2xl text-[#386057] mb-5 md:block hidden font-extralight">About MetabolixMD</h1>
           <h3 className="md:text-7xl text-4xl font-medium text-[#2E2E2E]">
             <span className="text-[#004F41]">Your Trusted Partner In</span>{" "}
