@@ -395,28 +395,28 @@ const AboutUs = () => {
       <NavBar />
 
       <div className="flex justify-evenly items-center bg-[#ECF4F2] mt-10 pb-16 pt-10">
-        <div className="md:max-w-[50%] max-w-full text-semibold md:pl-32 pl-5 md:py-16 py-0 pt-10">
+        <div className="md:max-w-[50%] max-w-[85%] text-semibold md:pl-32 pl-0 md:py-16 py-0 pt-10">
           <h1 className="text-2xl text-[#386057] mb-5 md:block hidden font-extralight">About MetabolixMD</h1>
-          <h3 className="md:text-7xl text-5xl font-medium text-[#2E2E2E]">
+          <h3 className="md:text-7xl text-4xl font-medium text-[#2E2E2E]">
             <span className="text-[#004F41]">Your Trusted Partner In</span>{" "}
             Metabolic Health
           </h3>
-          <p className="mt-10 text-lg opacity-70">
+          <p className="mt-10 text-md opacity-70">
             At MetabolixMD, we believe in removing the barriers to effective,
             science-backed weight loss. Too many people struggle with weight
             loss due to lack of access, confusing health plans, or outdated
             treatment models.{" "}
             <span className="italic">We're changing that.</span>{" "}
           </p>
-          <p className="mt-10 text-lg opacity-70 max-w-[70%]">
+          <p className="mt-10 text-md opacity-70 md:max-w-[70%] max-w-full">
             Our telehealth approach gives you direct access to GLP-1 medications
             with:
           </p>
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 my-5 mx-10">
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 my-5 ">
             <div className="flex flex-col text-center items-center justify-center">
               <svg
-                width="95"
-                height="95"
+                width="80"
+                height="80"
                 viewBox="0 0 79 79"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -474,8 +474,8 @@ const AboutUs = () => {
             </div>
             <div className="flex flex-col text-center items-center justify-center">
               <svg
-                width="95"
-                height="95"
+                width="80"
+                height="80"
                 viewBox="0 0 79 79"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -511,7 +511,7 @@ const AboutUs = () => {
               </p>
             </div>
             <div className="flex flex-col text-center items-center justify-center">
-              <svg width="80" height="80" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="m-2">
+              <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" className="m-2">
                 <circle cx="35" cy="35" r="33.5" fill="#ECF4F2" stroke="#004F41" stroke-width="3" />
                 <path d="M24.6273 43.8229L15.5191 51.3199M21.1784 31.3827C21.6058 26.9787 23.7651 22.9249 27.1813 20.113C30.5975 17.3011 34.9909 15.9614 39.3948 16.3888C43.7988 16.8161 47.8526 18.9754 50.6645 22.3916C53.4765 25.8079 54.8161 30.2012 54.3888 34.6052C53.9614 39.0091 51.8022 43.063 48.3859 45.8749C44.9697 48.6868 40.5763 50.0264 36.1724 49.5991C31.7684 49.1718 27.7146 47.0125 24.9027 43.5962C22.0908 40.18 20.7511 35.7867 21.1784 31.3827Z" stroke="#FD7823" stroke-width="3" strokeLinecap="round" stroke-linejoin="round" />
                 <path d="M41.638 29.4744C41.6055 27.1235 37.8504 25.564 35.2476 27.1072C31.9947 29.0338 32.6832 33.04 36.9125 32.8457C38.7945 32.7599 40.4132 32.398 41.6428 33.4967C42.8743 34.5952 43.6541 37.6222 40.4746 38.9811C37.2916 40.3422 33.6924 38.8142 33.4723 36.5467M36.9245 24.6965L37.0995 26.501M38.396 39.8626L38.5357 41.3017" stroke="#FD7823" stroke-width="3" strokeLinecap="round" stroke-linejoin="round" />
@@ -527,8 +527,8 @@ const AboutUs = () => {
             </div>
             <div className="flex flex-col text-center items-center justify-center">
               <svg
-                width="95"
-                height="95"
+                width="80"
+                height="80"
                 viewBox="0 0 79 79"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -575,7 +575,7 @@ const AboutUs = () => {
             </div>
           </div>
 
-          <p className="opacity-70 mt-14 text-lg">
+          <p className="opacity-70 mt-14 text-md">
             Expert, licensed consultants are{" "}
             <span className="font-bold">available 24/7/365</span>, and if you
             qualify, medication is delivered straight to your doorstep from
