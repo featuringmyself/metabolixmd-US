@@ -291,8 +291,8 @@ const WeightLossCalculatorSection = () => {
           </linearGradient>
           </defs>
             </svg>
-            <h3 className="text-3xl px-14 font-semibold text-[#2E2E2E] mb-3 text-center">Lab tested & Certified</h3>
-            <p className="text-[#626262] text-base leading-relaxed text-center mt-3 px-6">Filled and shipped same day as your appointment</p>
+            <h3 className="text-3xl px-[2vw] font-semibold text-[#2E2E2E] mb-3 text-center">Lab tested & Certified</h3>
+            <p className="text-[#626262] text-base leading-relaxed text-center mt-3 px-[1vw]">Filled and shipped same day as your appointment</p>
           </div>
         </motion.div>
       </div>
