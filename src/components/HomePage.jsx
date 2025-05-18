@@ -550,7 +550,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <Footer paddingTop="pt-[37rem] md:pt-[35rem] lg:pt-[25rem]" />
+        <Footer paddingTop="pt-[37rem] md:pt-[35rem] lg:pt-[25rem]" address={false}/>
       </div>
     </div>
   );

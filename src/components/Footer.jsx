@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 
-const Footer = ({ paddingTop = "pt-0" }) => {
+const Footer = ({ paddingTop = "pt-0" }, {address = true}) => {
   const pathname = usePathname();
   return (
     <div className="-mt-24 ">
@@ -76,12 +76,16 @@ const Footer = ({ paddingTop = "pt-0" }) => {
               </Link>
 
               {/* Address & Contact */}
+            
               <div className="text-white md:text-left mb-6">
+                {address && (
+                  <>     
                 <h3 className="font-light text-md mb-1">Address:</h3>
                 <p className="mb-12 text-sm">
                   4414 82nd St, Suite 212, Lubbock, TX 79424
                 </p>
-
+                </>
+    )}
                 <h3 className="font-light text-md mb-3">Contact:</h3>
                 <p className="mb-2 text-sm">1-858-4MBLXMD</p>
                 <Link
@@ -248,11 +252,6 @@ const Footer = ({ paddingTop = "pt-0" }) => {
               >
                 Return & Refund Policy
               </Link>
-              <p
-                className="hover:text-white transition-colors"
-              >
-                HIPAA Compliant
-              </p>
               
             </div>
           </div>
