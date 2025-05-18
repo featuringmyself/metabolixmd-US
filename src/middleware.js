@@ -9,6 +9,8 @@ export default function middleware(request) {
     '/services',
     '/login',
     '/register',
+    '/contact-us',
+    '/safety-information',
     '/api/webhook',
     '/get-started',
     '/api/public(.*)' // Allow all routes under /api/public
