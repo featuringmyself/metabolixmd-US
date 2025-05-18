@@ -297,9 +297,14 @@ const ProfileDetails = () => {
                         <p className="text-xs font-medium text-gray-900 mb-2 group-hover:text-primary transition-colors">
                           Order ID: {order._id}
                           <br />
-                          Product: {order.productName || 'N/A'}
-                          <br />
-                          Price: ${order.totalValue || 'N/A'}
+                          {console.log(order)}
+                          {order.productName && (
+                            <>
+                              Product: {order.productName || 'Awaiting assignment'}
+                              <br />
+                              Price: ${order.totalValue || 'Awaiting assignment'}
+                            </>
+                          )}
                         </p>
                         
                         <div className="space-y-1">
