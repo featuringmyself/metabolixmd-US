@@ -423,7 +423,7 @@ const ProfileDetails = () => {
           {/* </motion.div> */}
         </div>
       </motion.div>
-      <Footer paddingTop="md:mt-10 mt-5 p-10 p-5"/>
+      <Footer paddingTop="md:mt-10 mt-5 md:p-10 p-5"/>
     </>
   );
 };
