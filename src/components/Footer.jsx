@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 
-const Footer = ({ paddingTop = "pt-0" }, {address = true}) => {
+const Footer = ({ paddingTop = "pt-0", address = true }) => {
   const pathname = usePathname();
   return (
     <div className="-mt-24 ">
