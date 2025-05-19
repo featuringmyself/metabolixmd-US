@@ -91,7 +91,7 @@ export function AuthModalProvider({ children }) {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900 text-center mb-4"
                   >
-                    {authMode === 'signin' ? 'Metabolixmd' : 'Create Account'}
+                    {authMode === 'signin' ? '' : ''}
                   </Dialog.Title>
                   
                   <button

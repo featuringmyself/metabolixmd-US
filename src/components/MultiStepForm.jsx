@@ -339,9 +339,7 @@ const MultiStepForm = ({ initialForm }) => {
         <LicensedProvider onNext={(data, next) => router.push('/profile-details')} />
       )}
       {activeForm === "checkout" && (
-        <CheckOutForm 
-        userdata={formData} 
-        onNext={(data, next) => handleNextForm("licensedProvider", data)} 
+        <CheckOutForm onNext={(data, next) => router.push('/get-started?form=licensedProvider')}
         />
       )}
       {activeForm === "success" && (
