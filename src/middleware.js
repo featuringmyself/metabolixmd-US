@@ -11,6 +11,9 @@ export default function middleware(request) {
     '/register',
     '/contact-us',
     '/safety-information',
+    '/privacy-policy',
+    '/terms-policy',
+    '/refund-policy',
     '/api/webhook',
     '/get-started',
     '/api/public(.*)' // Allow all routes under /api/public
