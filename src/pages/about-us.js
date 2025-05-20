@@ -1334,7 +1334,7 @@ const AboutUs = () => {
 
       </div>
 
-      <Footer paddingTop="pt-[40rem] md:pt-[33rem]" />
+      <Footer paddingTop="pt-[40rem] md:pt-[33rem]" address={false}/>
     </div>
   );
 };

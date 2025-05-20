@@ -170,7 +170,7 @@ const SafetyInformation = () => {
                     </div>
                 </div>
             </main>
-            <Footer paddingTop='md:pt-[3rem] mt-[6rem] pt-[3rem]'/>
+            <Footer paddingTop='md:pt-[3rem] mt-[6rem] pt-[3rem]' address={false} />
         </div>
     )
 }

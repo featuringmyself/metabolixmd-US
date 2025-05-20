@@ -251,10 +251,10 @@ const WeightLossCalculatorSection = () => {
               {/* Image Section */}
               <div className="relative md:w-[50%] w-full">
                 <Image 
-                  src="/images/lab-test.webp" 
+                  src="/images/lab-test.jpg" 
                   alt="Lab Testing Professional" 
                   fill 
-                  className="object-cover object-top  rounded"
+                  className="object-cover object-center  rounded"
                   priority
                 />
               </div>

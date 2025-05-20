@@ -394,9 +394,7 @@ const HomePage = () => {
             </div>
             <div className="md:max-w-[40%] mt-6 md:mt-2">
               <p className="text-[#626262] mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique. Duis
-                cursus, mi quis viverra
+              We make your weight-loss journey personalized, accessible, and stress-free. Our streamlined process is designed to get you everything you need - quickly, conveniently, and affordably - with full support every step of the way.
               </p>
               <Link
                 href="/get-started"
