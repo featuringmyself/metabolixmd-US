@@ -20,7 +20,7 @@ const WeightLossCalculatorSection = () => {
   };
 
   return (
-    <section className="mt-8   relative w-full min-h-screen bg-white overflow-visible flex items-center ">
+    <section className="mt-3  relative w-full min-h-screen bg-white overflow-visible flex items-center ">
       <div className="container mx-auto max-w-full px-0 md:px-0 py-0 md:py-0" 
       >
         {/* Mobile Calculator Card */}
