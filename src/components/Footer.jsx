@@ -14,9 +14,9 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
           {/* Mobile and Desktop Layout */}
           <div className="flex justify-between md:flex-row flex-col gap-8 mb-12">
             {/* Logo Column with Address, Contact and Social Icons */}
-            <div className="flex flex-col items-center md:items-start order-2 md:order-">
+            <div className="flex flex-col items-center md:items-start order-2 md:order-1">
               {/* SVG Logo */}
-              <Link href="/" className="cursor-pointer mb-10">
+              <Link href="/" className="cursor-pointer mb-6 md:mb-10">
                 <svg
                   width="190"
                   height="27"
@@ -76,17 +76,16 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
               </Link>
 
               {/* Address & Contact */}
-            
-              <div className="text-white md:text-left mb-6">
+              <div className="text-white md:text-left mb-4 md:mb-6">
                 {address && (
                   <>     
-                <h3 className="font-light text-md mb-1">Address:</h3>
-                <p className="mb-12 text-sm">
-                  4414 82nd St, Suite 212, Lubbock, TX 79424
-                </p>
-                </>
-    )}
-                <h3 className="font-light text-md mb-3">Contact:</h3>
+                    <h3 className="font-light text-md mb-1">Address:</h3>
+                    <p className="mb-6 md:mb-12 text-sm">
+                      4414 82nd St, Suite 212, Lubbock, TX 79424
+                    </p>
+                  </>
+                )}
+                <h3 className="font-light text-md mb-2 md:mb-3">Contact:</h3>
                 <p className="mb-2 text-sm">1-858-4MBLXMD</p>
                 <Link
                   href="mailto:consultant@metabolixmd.com"
@@ -97,7 +96,7 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
               </div>
 
               {/* Social Media Icons */}
-              <div className="flex justify-center md:justify-start gap-6 mb-6">
+              <div className="flex justify-center md:justify-start gap-4 md:gap-6 mb-4 md:mb-6">
                 <Link
                   href="https://www.facebook.com/metabolixmd"
                   target="_blank"
@@ -174,10 +173,10 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
 
             {/* Navigation Column - Right column for desktop, top for mobile */}
             <div className="text-white flex flex-col items-center md:items-end h-full order-1 md:order-3">
-              <div className="flex flex-col h-full justify-between md:justify-start md:space-y-6 md:mt-10 w-full px-12 md:px-0">
+              <div className="flex flex-col h-full justify-between md:justify-start md:space-y-6 md:mt-10 w-full px-4 md:px-0">
                 <Link
                   href="/"
-                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
+                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-3 md:mb-0 ${
                     pathname === "/" ? "text-[#ff8c2c]" : ""
                   }`}
                 >
@@ -185,7 +184,7 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
                 </Link>
                 <Link
                   href="/about-us"
-                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
+                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-3 md:mb-0 ${
                     pathname === "/about-us" ? "text-[#ff8c2c]" : ""
                   }`}
                 >
@@ -194,7 +193,7 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
 
                 <Link
                   href="/contact-us"
-                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
+                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-3 md:mb-0 ${
                     pathname === "/contact-us" ? "text-[#ff8c2c]" : ""
                   }`}
                 >
@@ -202,43 +201,43 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
                 </Link>
                 <Link
                   href="/safety-information"
-                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-4 md:mb-0 ${
+                  className={`text-sm tracking-widest hover:text-tertiary transition-colors uppercase mb-3 md:mb-0 ${
                     pathname === "/safety-information" ? "text-[#ff8c2c]" : ""
                   }`}
                 >
                   Safety Information
                 </Link>
 
-              <div className="flex items-center justify-center gap-2 my-12">
-                <div className="flex flex-col items-center justify-start">
-                  <img src="/images/ATA logo_R_CMYK.png" alt="ATA Logo" className="md:w-16 md:h-16 w-10 h-10 object-contain" />
-                  <p className="text-xs text-center mt-2 text-zinc-300 max-w-[150px] leading-[0.9rem]">American Telemedicine Association</p>
+                <div className="flex items-center justify-center gap-2 my-6 md:my-12">
+                  <div className="flex flex-col items-center justify-start">
+                    <img src="/images/ATA logo_R_CMYK.png" alt="ATA Logo" className="md:w-16 md:h-16 w-8 h-8 object-contain" />
+                    <p className="text-[10px] md:text-xs text-center mt-1 md:mt-2 text-zinc-300 max-w-[120px] md:max-w-[150px] leading-[0.9rem]">American Telemedicine Association</p>
+                  </div>
+                  <img src="/images/Quest-Diagnostics-RGB-gradient-removebg-preview.png" alt="Quest Diagnostics Logo" className="md:w-28 md:h-16 w-12 h-8 object-cover" />
+                  <a
+                    href="https://www.legitscript.com/websites/?checker_keywords=metabolixmd.com"
+                    target="_blank"
+                    title="Verify LegitScript Approval for www.metabolixmd.com"
+                    className="flex items-center justify-center"
+                  >
+                    <img
+                      src="https://static.legitscript.com/seals/38388756.png"
+                      alt="Verify Approval for www.metabolixmd.com"
+                      className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                    />
+                  </a>
                 </div>
-                <img src="/images/Quest-Diagnostics-RGB-gradient-removebg-preview.png" alt="Quest Diagnostics Logo" className="md:w-28 md:h-16 w-16 h-10 object-cover " />
-                <a
-                  href="https://www.legitscript.com/websites/?checker_keywords=metabolixmd.com"
-                  target="_blank"
-                  title="Verify LegitScript Approval for www.metabolixmd.com"
-                  className="flex items-center justify-center"
-                >
-                  <img
-                    src="https://static.legitscript.com/seals/38388756.png"
-                    alt="Verify Approval for www.metabolixmd.com"
-                    className="w-16 h-16 object-contain"
-                  />
-                </a>
-              </div>
               </div>
             </div>
           </div>
 
           {/* Copyright and Policy Links */}
-          <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
-            <p>
+          <div className="border-t border-gray-700 pt-4 md:pt-6 flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-gray-300">
+            <p className="mb-3 md:mb-0">
               &copy; {new Date().getFullYear()} MetabolixMD. All rights
               reserved.
             </p>
-            <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-4 md:mt-0 underline">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4 mt-2 md:mt-0 underline">
               <Link
                 href={"/privacy-policy"}
                 className="hover:text-white transition-colors"
@@ -246,19 +245,29 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
                 Privacy Policy
               </Link>
               <Link
+                href="/terms-and-conditions"
+                className="hover:text-white transition-colors"
+              >
+                Terms & Conditions
+              </Link>
+              <Link
+                href="/consumer-health-data-privacy"
+                className="hover:text-white transition-colors"
+              >
+                Consumer Health Data Privacy
+              </Link>
+              <Link
                 href="/terms-policy"
                 className="hover:text-white transition-colors"
               >
-                Terms of Service
+                Terms Policy
               </Link>
-
               <Link
                 href="/refund-policy"
                 className="hover:text-white transition-colors"
               >
                 Return & Refund Policy
               </Link>
-              
             </div>
           </div>
         </div>
