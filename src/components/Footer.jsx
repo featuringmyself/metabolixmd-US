@@ -212,7 +212,7 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
               <div className="flex items-center justify-center gap-8 my-12">
                 <div className="flex flex-col items-center justify-start">
                   <img src="/images/ATA logo_R_CMYK.png" alt="ATA Logo" className="md:w-16 md:h-16 w-10 h-10 object-contain" />
-                  <p className="text-xs text-center mt-2 text-zinc-300 max-w-[150px]">American Telemedicine Association</p>
+                  <p className="text-xs text-center mt-2 text-zinc-300 max-w-[150px] leading-[0.9rem]">American Telemedicine Association</p>
                 </div>
                 <img src="/images/Quest-Diagnostics-RGB-gradient-removebg-preview.png" alt="Quest Diagnostics Logo" className="md:w-26 md:h-16 w-16 h-10 object-cover " />
                 <a
