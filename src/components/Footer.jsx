@@ -209,19 +209,25 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
                   Safety Information
                 </Link>
 
+              <div className="flex items-center justify-center gap-8 my-12">
+                <div className="flex flex-col items-center justify-start">
+                  <img src="/images/ATA logo_R_CMYK.png" alt="ATA Logo" className="w-16 h-16 object-contain" />
+                  <p className="text-xs text-center mt-2 text-zinc-300 max-w-[150px]">American Telemedicine Association</p>
+                </div>
+                <img src="/images/Quest-Diagnostics-RGB-gradient-removebg-preview.png" alt="Quest Diagnostics Logo" className="w-26 h-16 object-cover " />
                 <a
                   href="https://www.legitscript.com/websites/?checker_keywords=metabolixmd.com"
                   target="_blank"
                   title="Verify LegitScript Approval for www.metabolixmd.com"
-                  className="flex md:justify-end justify-center items-center mt-10"
+                  className="flex items-center justify-center"
                 >
                   <img
                     src="https://static.legitscript.com/seals/38388756.png"
                     alt="Verify Approval for www.metabolixmd.com"
-                    width="73"
-                    height="79"
+                    className="w-16 h-16 object-contain"
                   />
                 </a>
+              </div>
               </div>
             </div>
           </div>
