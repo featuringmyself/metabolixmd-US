@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import FormNavigationButtons from './FormNavigationButtons';
 
 /**
  * EthnicityForm Component
@@ -64,10 +65,14 @@ const EthnicityForm = ({onNext, onBack}) => {
   
   const isButtonDisabled = selectedEthnicities.length === 0;
 
+  const handleContinue = () => {
+    onNext({describe_yourself: selectedEthnicities}, "beforeWrapUp");
+  };
+
   return (
     <div className="w-full p-5 md:p-6 lg:p-8 mx-auto max-w-screen-md">
       <div className="w-full max-w-[500px] mx-auto">
-        <h2 className="text-xl sm:text-2xl md:text-3xl mb-4 md:mb-6 text-zinc-700 text-center font-medium" 
+        <h2 className="text-xl sm:text-2xl md:text-3xl mb-4 md:mb-6 text-zinc-700 text-center font-semibold" 
             id="ethnicity-heading">
           How would you describe yourself?
         </h2>
@@ -98,36 +103,15 @@ const EthnicityForm = ({onNext, onBack}) => {
             ))}
           </div>
 
-          {/* Button Container */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full mt-6 md:mt-8">
-            {/* Back Button */}
-            <button
-              type="button"
-              className="w-full sm:flex-1 py-3 hover:bg-gray-200 rounded-full text-gray-700 font-semibold border border-gray-300 transition-colors duration-300 shadow-sm hover:shadow-md"
-              onClick={onBack}
-              aria-label="Back"
-            >
-              Back
-            </button>
-            {/* Next Button */}
-            <button
-              type="button"
-              className={`w-full sm:flex-1 py-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md ${
-                isButtonDisabled
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-primary hover:bg-primary/90 transform hover:scale-[1.02]"
-              }`}
-              disabled={isButtonDisabled}
-              onClick={() => onNext({describe_yourself:selectedEthnicities}, "beforeWrapUp")}
-              aria-label="Next"
-            >
-              Next
-            </button>
-          </div>
+          <FormNavigationButtons
+            onBack={onBack}
+            onContinue={handleContinue}
+            isContinueDisabled={isButtonDisabled}
+            continueText="Next"
+          />
         </form>
       </div>
     </div>
-     
   );
 };
 

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import AnimatedButton from "../AnimatedButton";
 import AnimatedCheckbox from "../AnimatedCheckbox";
 import { toast } from "react-toastify";
+import FormNavigationButtons from './FormNavigationButtons';
 
 const HeartDiseaseForm = ({ onNext, onBack, initialData }) => {
   const [selectedGoals, setSelectedGoals] = useState(() => {
@@ -79,7 +80,6 @@ const HeartDiseaseForm = ({ onNext, onBack, initialData }) => {
   ];
 
   // Handle checkbox change
-  // Handle checkbox change with animation feedback
   const handleCheckboxChange = (goal) => {
     // Add haptic feedback if available
     if (window.navigator && window.navigator.vibrate) {
@@ -185,43 +185,12 @@ const HeartDiseaseForm = ({ onNext, onBack, initialData }) => {
             </AnimatePresence>
           </motion.div>
 
-          {/* Button Container */}
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full mt-6 md:mt-8"
-            variants={itemVariants}
-          >
-            {/* Back Button */}
-            <AnimatedButton
-              type="secondary"
-              onClick={onBack}
-              ariaLabel="Back"
-              className="w-full sm:flex-1"
-            >
-              Back
-            </AnimatedButton>
-            
-            {/* Continue button */}
-            <AnimatedButton
-              type="primary"
-              disabled={isButtonDisabled || isSubmitting}
-              onClick={handleNext}
-              ariaLabel="Continue"
-              className="w-full sm:flex-1"
-            >
-              {isSubmitting ? (
-                <span className="flex items-center justify-center">
-                  <motion.div
-                    className="w-5 h-5 mr-2 border-2 border-white border-t-transparent rounded-full"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  />
-                  Submitting...
-                </span>
-              ) : (
-                "Continue"
-              )}
-            </AnimatedButton>
-          </motion.div>
+          <FormNavigationButtons
+            onBack={onBack}
+            onContinue={handleNext}
+            isContinueDisabled={isButtonDisabled}
+            isSubmitting={isSubmitting}
+          />
         </form>
       </div>
     </motion.div>

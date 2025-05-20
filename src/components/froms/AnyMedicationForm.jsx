@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FormNavigationButtons from './FormNavigationButtons';
 
 /**
  * AnyMedicationForm Component
@@ -138,29 +139,12 @@ const AnyMedicationForm = ({onNext, onBack}) => {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full mt-6 md:mt-8">
-            <button
-              type="button"
-              className="w-full sm:flex-1 py-3 hover:bg-gray-200 rounded-full text-gray-700 font-semibold border border-gray-300 transition-colors duration-300 shadow-sm hover:shadow-md"
-              onClick={onBack}
-              aria-label="Back"
-            >              
-              Back
-            </button>
-            <button
-              type="button"
-              className={`w-full sm:flex-1 py-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md ${
-                isButtonDisabled
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-primary hover:bg-primary/90 transform hover:scale-[1.02]"
-              }`}
-              disabled={isButtonDisabled}
-              onClick={handleContinue}
-              aria-label="Next"
-            >
-              Next
-            </button>
-          </div>
+          <FormNavigationButtons
+            onBack={onBack}
+            onContinue={handleContinue}
+            isContinueDisabled={isButtonDisabled}
+            continueText="Next"
+          />
         </form>
       </div>
     </div>

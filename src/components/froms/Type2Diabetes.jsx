@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import FormNavigationButtons from './FormNavigationButtons'
 
 const Type2Diabetes = ({ onNext, onBack }) => {
     const [activeTab, setActiveTab] = useState(() => {
-  const savedTab = localStorage.getItem('Type2Diabetes_activeTab');
-  return savedTab ? JSON.parse(savedTab) : "";
-})
+        const savedTab = localStorage.getItem('Type2Diabetes_activeTab');
+        return savedTab ? JSON.parse(savedTab) : "";
+    })
 
     const handleTab = (e) => {
         const tab = e.currentTarget.id;
-  setActiveTab(tab);
-  localStorage.setItem('Type2Diabetes_activeTab', JSON.stringify(tab))
+        setActiveTab(tab);
+        localStorage.setItem('Type2Diabetes_activeTab', JSON.stringify(tab))
     }
 
     const handleContinue = () => {
@@ -86,35 +87,11 @@ const Type2Diabetes = ({ onNext, onBack }) => {
                         ))}
                     </div>
 
-                    <div className="flex gap-4 mt-8">
-                        <motion.button
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            type="button"
-                            className="flex-1 p-3 border border-primary text-primary hover:bg-primary/10 font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md"
-                            onClick={onBack}
-                            aria-label='Back'
-                        >
-                            Back
-                        </motion.button>
-                        <motion.button
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6 }}
-                            whileHover={{ scale: isButtonDisabled ? 1 : 1.02, backgroundColor: isButtonDisabled ? "" : "#2e4f49" }}
-                            whileTap={{ scale: isButtonDisabled ? 1 : 0.98 }}
-                            type="button"
-                            className={`flex-1 p-3 text-white font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md ${isButtonDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-primary"}`}
-                            onClick={handleContinue}
-                            disabled={isButtonDisabled}
-                            aria-label='Continue'
-                        >
-                            Continue
-                        </motion.button>
-                    </div>
+                    <FormNavigationButtons
+                        onBack={onBack}
+                        onContinue={handleContinue}
+                        isContinueDisabled={isButtonDisabled}
+                    />
                 </div>
             </AnimatePresence>
         </motion.div>
