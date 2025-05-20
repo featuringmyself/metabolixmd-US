@@ -214,12 +214,12 @@ const AuthForm = ({ onNext, initialMode = 'signup' }) => {
       <div className="w-full md:w-[30vw] space-y-8 bg-white p-8 rounded-2xl shadow-lg">
         <div>
           <h2 className="mt-2 text-center text-3xl font-extrabold text-gray-900 tracking-tight">
-            {mode === "signin" ? "Welcome back" : "Create your account"}
+            {mode === "signin" ? "Welcome back" : "Great news, you’re eligible!"}
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-4 text-center text-xs text-gray-600">
             {mode === "signin" 
               ? "Sign in to access your account" 
-              : "Join us to get started"}
+              : "Once your account is created, you’re just a few quick steps away from a free appointment with a provider"}
           </p>
         </div>
 
