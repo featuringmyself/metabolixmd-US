@@ -15,7 +15,7 @@ const SafetyInformation = () => {
                 {/* Hero Section */}
                 <div className="bg-[#223D38] py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
+                        <h1 className="text-3xl md:text-5xl font-bold text-white text-center">
                             Important Safety Information
                         </h1>
                         <p className="mt-4 text-lg text-gray-200 text-center max-w-3xl mx-auto">
@@ -25,8 +25,8 @@ const SafetyInformation = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                    <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12 md:pb-8">
+                <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-16">
+                    <div className="bg-white rounded-2xl shadow-lg p-4 md:p-12 md:pb-8">
                         <section className="mb-16">
                             <div className="space-y-12">
                                 {/* Indications Section */}
