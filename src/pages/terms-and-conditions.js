@@ -156,7 +156,7 @@ const TermsAndConditions = () => {
                     </div>
                 </div>
             </main>
-            <Footer paddingTop="md:mt-14 mt-12 pt-10 p-8" address={false}/>
+            <Footer paddingTop="md:mt-14 mt-12p pt-10 p-8" address={false}/>
         </div>
     )
 }
