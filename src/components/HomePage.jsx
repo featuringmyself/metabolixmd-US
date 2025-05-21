@@ -13,10 +13,9 @@ import WeightLossCalculatorSection from "./WeightLossCalculatorSection";
 import bgVector from "@/../public/images/metabolixmd-bg-vector.svg";
 
 // Removing the auth token import
-import { getAuthToken } from '@/services/API/apiHelper'
+// import { getAuthToken } from '@/services/API/apiHelper'
 import Link from "next/link";
 import Footer from "./Footer";
-import ScrollProgressBar from "./ProgressBar";
 import { getMethod } from "@/services/API/ApiMethod";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";

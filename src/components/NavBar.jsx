@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
-import ScrollProgressBar from './ProgressBar'
+// import ScrollProgressBar from './ProgressBar'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuthModalContext } from '@/contexts/AuthModalContext'
 import { toast } from 'react-toastify'
@@ -446,7 +446,7 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
-      <ScrollProgressBar />
+      {/* <ScrollProgressBar /> */}
     </div>
   )
 }
