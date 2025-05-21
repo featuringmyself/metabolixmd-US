@@ -14,8 +14,8 @@ const Terms = () => {
             <main className="flex-grow pt-24">
                 {/* Hero Section */}
                 <div className="bg-[#223D38] py-16">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
+                    <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                        <h1 className="text-3xl md:text-5xl font-bold text-white text-center">
                             Terms of Service
                         </h1>
                         <p className="mt-4 text-lg text-gray-200 text-center max-w-3xl mx-auto">
@@ -25,16 +25,16 @@ const Terms = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                    <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-16">
+                    <div className="bg-white rounded-2xl shadow-lg p-2 md:p-12">
                         <section className="mb-16">
-                            <h2 className="text-3xl font-semibold text-[#223D38] mb-8 border-b border-gray-200 pb-4">
+                            <h2 className="text-lg font-semibold text-[#223D38] mb-4 border-b border-gray-200 pb-4">
                                 Informed Consent | Semaglutide
                             </h2>
                             
                             <div className="space-y-12">
                                 {/* Indications Section */}
-                                <div className="bg-gray-50 p-6 rounded-xl">
+                                <div className="bg-gray-50 p-2 rounded-xl">
                                     <h3 className="text-2xl font-medium text-[#223D38] mb-4">Indications and Limitations of Use</h3>
                                     <div className="space-y-4 text-gray-700">
                                         <p>
@@ -103,7 +103,7 @@ const Terms = () => {
                     </div>
                 </div>
             </main>
-            <Footer paddingTop="md:mt-14 mt-5 pt-16 p-8" address={false}/>
+            <Footer paddingTop="md:mt-14 mt-12 pt-10 p-8" address={false}/>
         </div>
     )
 }

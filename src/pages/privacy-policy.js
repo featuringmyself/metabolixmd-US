@@ -250,7 +250,7 @@ const PrivacyPolicy = () => {
                 </div>
             </motion.div>
 
-            <Footer paddingTop="md:mt-14 mt-5 pt-16 p-8" address={false}/>
+            <Footer paddingTop="md:mt-14 mt-20 pt-16 p-8" address={false}/>
         </div>
     );
 };

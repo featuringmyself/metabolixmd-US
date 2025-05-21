@@ -15,7 +15,7 @@ const ConsumerHealthDataPrivacy = () => {
                 {/* Hero Section */}
                 <div className="bg-[#223D38] py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
+                        <h1 className="text-3xl md:text-5xl font-bold text-white text-center">
                             Consumer Health Data Privacy Policy
                         </h1>
                         <p className="mt-4 text-lg text-gray-200 text-center max-w-3xl mx-auto">
@@ -25,8 +25,8 @@ const ConsumerHealthDataPrivacy = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                    <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-16">
+                    <div className="bg-white rounded-2xl shadow-lg p-4 md:p-12">
                         <div className="prose prose-lg max-w-none">
                             <p className="text-gray-700 mb-8">
                                 This Consumer Health Data Privacy Policy ("Policy") supplements the MetabolixMD Privacy Policy and applies to personal data defined as "consumer health data" ("CHD") under applicable U.S. state laws, including the Washington My Health My Data Act (MHMDA), Nevada's Consumer Health Data Privacy Law, and Connecticut's Data Privacy Act (CTDPA). It outlines our practices regarding the collection, use, and sharing of CHD.
@@ -119,7 +119,7 @@ const ConsumerHealthDataPrivacy = () => {
                     </div>
                 </div>
             </main>
-            <Footer paddingTop="md:mt-14 mt-5 pt-16 p-8" address={false}/>
+            <Footer paddingTop="md:mt-14 mt-12 pt-10 p-8" address={false}/>
         </div>
     )
 }

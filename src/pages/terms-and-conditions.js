@@ -15,7 +15,7 @@ const TermsAndConditions = () => {
                 {/* Hero Section */}
                 <div className="bg-[#223D38] py-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
+                        <h1 className="text-3xl md:text-5xl font-bold text-white text-center">
                             Terms and Conditions of Use
                         </h1>
                         <p className="mt-4 text-lg text-gray-200 text-center max-w-3xl mx-auto">
@@ -25,8 +25,8 @@ const TermsAndConditions = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-                    <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-16">
+                    <div className="bg-white rounded-2xl shadow-lg p-4 md:p-12">
                         <div className="prose prose-lg max-w-none">
                             <p className="text-gray-700 mb-8">
                                 Welcome to MetabolixMD.com. These Terms and Conditions of Use ("Terms") establish the legal agreement between you and MetabolixMD ("we," "us," or "our") regarding your access to and use of our website, mobile applications, and associated services. By accessing or using our platform, you agree to be bound by these Terms, along with our Privacy Policy and any supplemental terms provided for specific services.
@@ -156,7 +156,7 @@ const TermsAndConditions = () => {
                     </div>
                 </div>
             </main>
-            <Footer paddingTop="md:mt-14 mt-5 pt-16 p-8" address={false}/>
+            <Footer paddingTop="md:mt-14 mt-12 pt-10 p-8" address={false}/>
         </div>
     )
 }
