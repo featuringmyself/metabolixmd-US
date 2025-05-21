@@ -243,14 +243,14 @@ const PrivacyPolicy = () => {
                             </div>
                             <div className="flex items-center gap-3 text-gray-800">
                                 <span className="font-serif">Address:</span>
-                                <span>9808 Topeka Ave, Lubbock, Texas 79424</span>
+                                <span>4414 82nd St, Suite 212, Lubbock, TX 79424</span>
                             </div>
                         </div>
                     </motion.section>
                 </div>
             </motion.div>
 
-            <Footer paddingTop="md:mt-14 mt-20 pt-16 p-8" address={false}/>
+            <Footer paddingTop="md:mt-20 mt-20 pt-16 md:pt-8 p-8" address={false}/>
         </div>
     );
 };

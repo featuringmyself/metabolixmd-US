@@ -150,7 +150,7 @@ const RefundPolicy = () => {
                             </div>
                             <div className="flex items-center gap-3 text-gray-800">
                                 <span className="font-serif">Address:</span>
-                                <span>9808 Topeka Ave, Lubbock, Texas 79424</span>
+                                <span>4414 82nd St, Suite 212, Lubbock, TX 79424</span>
                             </div>
                         </div>
                         <p className="text-gray-800 mt-8">
