@@ -26,7 +26,7 @@ const PrivacyPolicy = () => {
                         Privacy Policy
                     </h1>
                     <p className="text-center text-gray-600 mt-4 font-serif">
-                        Effective Date: January 13, 2025
+                        Effective Date: Feb 1, 2025
                     </p>
                 </div>
             </motion.div>
@@ -42,208 +42,144 @@ const PrivacyPolicy = () => {
                     {/* Introduction */}
                     <motion.section variants={fadeIn} className="mb-12">
                         <p className="text-gray-800 leading-relaxed">
-                            MetabolixMD ("we," "our," or "us") is dedicated to safeguarding your privacy and ensuring the security of your Protected Health Information (PHI). This Privacy Policy outlines how we collect, use, disclose, and protect your information when you visit our website [www.metabolixmd.com] and utilize our telehealth services. By accessing or using our services, you agree to the terms outlined in this policy.
+                            At MetabolixMD, we are committed to maintaining the privacy and security of your personal, health, and sensitive information. This Privacy Policy outlines how we collect, use, disclose, and protect your information when you interact with our services, including telehealth consultations, wellness tools, pharmacy services, and digital content.
+                        </p>
+                        <p className="text-gray-800 leading-relaxed mt-4">
+                            This policy is designed in accordance with applicable privacy laws, including but not limited to the California Consumer Privacy Act (CCPA), the Washington My Health My Data Act (MHMDA), and other relevant state and federal regulations.
                         </p>
                     </motion.section>
 
-                    {/* Information Collection */}
+                    {/* Your Rights and Choices */}
                     <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-serif text-gray-900 mb-6">1. Information We Collect</h2>
+                        <h2 className="text-2xl font-serif text-gray-900 mb-6">Your Rights and Choices</h2>
+                        <p className="text-gray-800 mb-4">
+                            Depending on your state of residence, you may have specific legal rights with regard to your personal and health-related data. These may include:
+                        </p>
                         <div className="space-y-6">
                             <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">1.1 Personal Information</h3>
-                                <ul className="list-disc pl-6 text-gray-800 space-y-2">
-                                    <li>Name, address, email</li>
-                                    <li>Phone number</li>
-                                    <li>Date of birth</li>
-                                    <li>Payment details</li>
-                                </ul>
+                                <h3 className="text-lg font-serif text-gray-900 mb-3">Right to Know:</h3>
+                                <p className="text-gray-800">
+                                    You have the right to request information regarding the categories and specific pieces of personal information we have collected, the purposes for which we have used it, the sources of that information, and third parties with whom it has been shared.
+                                </p>
                             </div>
                             
                             <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">1.2 Health Information</h3>
-                                <ul className="list-disc pl-6 text-gray-800 space-y-2">
-                                    <li>Medical history</li>
-                                    <li>Treatment plans</li>
-                                    <li>Prescriptions</li>
-                                    <li>Health-related data</li>
-                                </ul>
+                                <h3 className="text-lg font-serif text-gray-900 mb-3">Right to Access:</h3>
+                                <p className="text-gray-800">
+                                    You may request access to your personal information collected and maintained by MetabolixMD.
+                                </p>
                             </div>
 
                             <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">1.3 Technical Data</h3>
-                                <ul className="list-disc pl-6 text-gray-800 space-y-2">
-                                    <li>IP address</li>
-                                    <li>Browser type</li>
-                                    <li>Access times</li>
-                                    <li>Pages viewed</li>
-                                </ul>
+                                <h3 className="text-lg font-serif text-gray-900 mb-3">Right to Deletion:</h3>
+                                <p className="text-gray-800">
+                                    You may request that we delete your personal information, subject to legal exceptions (such as information necessary to fulfill our legal or contractual obligations).
+                                </p>
+                            </div>
+                            
+                            <div className="border-l-4 border-gray-200 pl-4">
+                                <h3 className="text-lg font-serif text-gray-900 mb-3">Right to Correct:</h3>
+                                <p className="text-gray-800">
+                                    You may request corrections to inaccurate or outdated personal information maintained by us.
+                                </p>
+                            </div>
+                            
+                            <div className="border-l-4 border-gray-200 pl-4">
+                                <h3 className="text-lg font-serif text-gray-900 mb-3">Right to Opt-Out of Sale or Sharing:</h3>
+                                <p className="text-gray-800">
+                                    If applicable, you may opt out of the sale or cross-context behavioral sharing of your personal information.
+                                </p>
+                            </div>
+                            
+                            <div className="border-l-4 border-gray-200 pl-4">
+                                <h3 className="text-lg font-serif text-gray-900 mb-3">Right to Limit Use of Sensitive Personal Data:</h3>
+                                <p className="text-gray-800">
+                                    If we collect sensitive personal information, you may request that we limit its use to essential service functions only.
+                                </p>
+                            </div>
+                            
+                            <div className="border-l-4 border-gray-200 pl-4">
+                                <h3 className="text-lg font-serif text-gray-900 mb-3">Right to Non-Discrimination:</h3>
+                                <p className="text-gray-800">
+                                    We will not discriminate against you for exercising any of your privacy rights.
+                                </p>
                             </div>
                         </div>
                     </motion.section>
 
-                    {/* How We Use Information */}
+                    {/* How to Exercise Your Rights */}
                     <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-serif text-gray-900 mb-6">2. How We Use Your Information</h2>
-                        <div className="space-y-6">
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">2.1 Healthcare Services</h3>
-                                <ul className="list-disc pl-6 text-gray-800 space-y-2">
-                                    <li>Deliver telehealth consultations</li>
-                                    <li>Process prescriptions</li>
-                                    <li>Manage appointments</li>
-                                </ul>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">2.2 Communication</h3>
-                                <ul className="list-disc pl-6 text-gray-800 space-y-2">
-                                    <li>Send appointment reminders</li>
-                                    <li>Provide health tips</li>
-                                    <li>Respond to inquiries</li>
-                                </ul>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">2.3 Compliance</h3>
-                                <ul className="list-disc pl-6 text-gray-800 space-y-2">
-                                    <li>Adhere to legal obligations</li>
-                                    <li>Follow HIPAA regulations</li>
-                                    <li>Maintain compliance records</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </motion.section>
-
-                    {/* Disclosure Section */}
-                    <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-serif text-gray-900 mb-6">3. Disclosure of Your Information</h2>
-                        <div className="space-y-6">
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">3.1 Healthcare Partners</h3>
-                                <p className="text-gray-800">Such as CASA Pharma RX and GAP (Grand Ave Pharmacy) for prescription fulfillment.</p>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">3.2 Service Providers</h3>
-                                <p className="text-gray-800">Entities that assist with payment processing, IT support, and other operational services.</p>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">3.3 Legal Requirements</h3>
-                                <p className="text-gray-800">When required by law or to protect our rights.</p>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">3.4 Authorization</h3>
-                                <p className="text-gray-800">With your explicit written authorization, where required under HIPAA.</p>
-                            </div>
-                        </div>
-                    </motion.section>
-
-                    {/* Data Security */}
-                    <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-serif text-gray-900 mb-6">4. Data Security</h2>
-                        <p className="text-gray-800 mb-6">
-                            We implement administrative, physical, and technical safeguards to protect your information, including:
+                        <h2 className="text-2xl font-serif text-gray-900 mb-6">How to Exercise Your Rights</h2>
+                        <p className="text-gray-800 mb-4">
+                            You may exercise your rights by contacting us at:
                         </p>
-                        <div className="space-y-6">
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">4.1 Technical Safeguards</h3>
-                                <ul className="list-disc pl-6 text-gray-800 space-y-2">
-                                    <li>Data encryption</li>
-                                    <li>Secure servers</li>
-                                    <li>Firewalls</li>
-                                </ul>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">4.2 Administrative Safeguards</h3>
-                                <ul className="list-disc pl-6 text-gray-800 space-y-2">
-                                    <li>Access controls</li>
-                                    <li>Staff training</li>
-                                    <li>Regular audits</li>
-                                </ul>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">4.3 Physical Safeguards</h3>
-                                <ul className="list-disc pl-6 text-gray-800 space-y-2">
-                                    <li>Secure facilities</li>
-                                    <li>Monitored access</li>
-                                    <li>Backup systems</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p className="text-gray-800 mt-6">
-                            Our services are hosted on Amazon Web Services (AWS), which complies with HIPAA regulations to ensure the confidentiality, integrity, and availability of your PHI.
-                        </p>
-                    </motion.section>
-
-                    {/* Your Rights */}
-                    <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-serif text-gray-900 mb-6">5. Your Rights</h2>
-                        <div className="space-y-6">
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">5.1 Access</h3>
-                                <p className="text-gray-800">Request access to your personal and health information.</p>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">5.2 Correction</h3>
-                                <p className="text-gray-800">Request corrections to any inaccurate or incomplete information.</p>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">5.3 Deletion</h3>
-                                <p className="text-gray-800">Request the deletion of your information, subject to legal constraints.</p>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">5.4 Accounting of Disclosures</h3>
-                                <p className="text-gray-800">Request a record of certain disclosures of your PHI as permitted under HIPAA.</p>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">5.5 Restrictions</h3>
-                                <p className="text-gray-800">Request restrictions on how we use or disclose your PHI for certain purposes.</p>
-                            </div>
-                            <div className="border-l-4 border-gray-200 pl-4">
-                                <h3 className="text-lg font-serif text-gray-900 mb-3">5.6 Confidential Communications</h3>
-                                <p className="text-gray-800">Request communications through alternative means or locations.</p>
-                            </div>
-                        </div>
-                    </motion.section>
-
-                    {/* Cookies and Tracking */}
-                    <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-serif text-gray-900 mb-6">6. Cookies and Tracking Technologies</h2>
                         <p className="text-gray-800">
-                            We use cookies to enhance user experience. You can adjust your browser settings to refuse cookies; however, this may affect the functionality of our website.
+                            Email: <a href="mailto:consultant@metabolixmd.com" className="text-blue-600 hover:underline">consultant@metabolixmd.com</a>
+                        </p>
+                        <p className="text-gray-800 mt-4">
+                            We may need to verify your identity before fulfilling your request to ensure the security of your data. If an authorized agent is submitting the request on your behalf, we may require proof of written authorization.
                         </p>
                     </motion.section>
 
-                    {/* Third-Party Links */}
+                    {/* Opt-Out and Communication Preferences */}
                     <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-serif text-gray-900 mb-6">7. Third-Party Links</h2>
-                        <p className="text-gray-800">
-                            Our website may contain links to third-party sites. We are not responsible for their privacy practices.
-                        </p>
+                        <h2 className="text-2xl font-serif text-gray-900 mb-6">Opt-Out and Communication Preferences</h2>
+                        <div className="space-y-6">
+                            <div className="border-l-4 border-gray-200 pl-4">
+                                <h3 className="text-lg font-serif text-gray-900 mb-3">Email Communication:</h3>
+                                <p className="text-gray-800">
+                                    You may unsubscribe from our promotional emails at any time by clicking the "unsubscribe" link within the email or contacting us directly.
+                                </p>
+                            </div>
+                            
+                            <div className="border-l-4 border-gray-200 pl-4">
+                                <h3 className="text-lg font-serif text-gray-900 mb-3">Online Tracking:</h3>
+                                <p className="text-gray-800">
+                                    You may manage cookies and online tracking technologies through your browser settings. We also honor Global Privacy Control (GPC) signals sent from supported browsers.
+                                </p>
+                            </div>
+                        </div>
                     </motion.section>
 
-                    {/* Changes to Policy */}
+                    {/* Data Retention */}
                     <motion.section variants={fadeIn} className="mb-12">
-                        <h2 className="text-2xl font-serif text-gray-900 mb-6">8. Changes to This Privacy Policy</h2>
+                        <h2 className="text-2xl font-serif text-gray-900 mb-6">Data Retention</h2>
                         <p className="text-gray-800">
-                            We may update this policy periodically. We will notify you of significant changes by posting the new policy on our website.
+                            We retain your personal information only as long as reasonably necessary to fulfill the purposes outlined in this policy, including legal, regulatory, accounting, or contractual requirements.
                         </p>
                     </motion.section>
 
-                    {/* Contact Section */}
+                    {/* Security Measures */}
+                    <motion.section variants={fadeIn} className="mb-12">
+                        <h2 className="text-2xl font-serif text-gray-900 mb-6">Security Measures</h2>
+                        <p className="text-gray-800">
+                            MetabolixMD employs industry-standard technical, physical, and administrative safeguards to protect your personal information from unauthorized access, disclosure, or misuse. While we strive for complete security, no system is entirely immune from breach or compromise.
+                        </p>
+                    </motion.section>
+
+                    {/* Policy Updates */}
+                    <motion.section variants={fadeIn} className="mb-12">
+                        <h2 className="text-2xl font-serif text-gray-900 mb-6">Policy Updates</h2>
+                        <p className="text-gray-800">
+                            We may revise this Privacy Policy periodically. Any changes will be posted on this page with an updated effective date. We encourage you to review this policy periodically to stay informed about how we are protecting your data.
+                        </p>
+                    </motion.section>
+
+                    {/* Contact Us */}
                     <motion.section variants={fadeIn} className="border-t border-gray-200 pt-12">
-                        <h2 className="text-2xl font-serif text-gray-900 mb-6">9. Contact Us</h2>
+                        <h2 className="text-2xl font-serif text-gray-900 mb-6">Contact Us</h2>
                         <p className="text-gray-800 mb-6">
-                            For questions about our privacy practices or to exercise your rights:
+                            For questions, requests, or concerns related to this Privacy Policy or your personal data, please contact us at:
                         </p>
                         <div className="space-y-4">
+                            <div className="flex items-start gap-3 text-gray-800">
+                                <span className="font-serif">MetabolixMD</span>
+                            </div>
                             <div className="flex items-center gap-3 text-gray-800">
                                 <span className="font-serif">Email:</span>
                                 <a href="mailto:consultant@metabolixmd.com" className="text-blue-600 hover:underline">
                                     consultant@metabolixmd.com
                                 </a>
-                            </div>
-                            <div className="flex items-center gap-3 text-gray-800">
-                                <span className="font-serif">Address:</span>
-                                <span>4414 82nd St, Suite 212, Lubbock, TX 79424</span>
                             </div>
                         </div>
                     </motion.section>

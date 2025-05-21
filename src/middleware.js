@@ -12,6 +12,7 @@ export default function middleware(request) {
     '/contact-us',
     '/safety-information',
     '/privacy-policy',
+    '/hipaa-policy',
     '/terms-policy',
     '/refund-policy',
     '/consumer-health-data-privacy',

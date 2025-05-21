@@ -239,6 +239,12 @@ const Footer = ({ paddingTop = "pt-0", address = true }) => {
             </p>
             <div className="flex flex-wrap justify-center gap-3 md:gap-4 mt-2 md:mt-0 underline">
               <Link
+                href={"/hipaa-policy"}
+                className="hover:text-white transition-colors"
+              >
+                Hipaa Policy
+              </Link>
+              <Link
                 href={"/privacy-policy"}
                 className="hover:text-white transition-colors"
               >
