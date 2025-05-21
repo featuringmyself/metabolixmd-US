@@ -14,6 +14,8 @@ export default function middleware(request) {
     '/privacy-policy',
     '/terms-policy',
     '/refund-policy',
+    '/consumer-health-data-privacy',
+    '/terms-and-conditions',
     '/api/webhook',
     '/get-started',
     '/api/public(.*)' // Allow all routes under /api/public
