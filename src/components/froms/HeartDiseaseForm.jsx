@@ -67,7 +67,6 @@ const HeartDiseaseForm = ({ onNext, onBack, initialData }) => {
   
   // Heart condition options
   const goals = [
-    "Not diagnosed with any",
     "Atrial fibrillation or flutter",
     "Tachycardia (episodes of rapid heart rate)",
     "Heart failure",
@@ -77,6 +76,7 @@ const HeartDiseaseForm = ({ onNext, onBack, initialData }) => {
     "Hypertension (high blood pressure)",
     "Hyperlipidemia (high cholesterol)",
     "Hypertriglyceridemia (high triglycerides)",
+    "Not diagnosed with any",
   ];
 
   // Handle checkbox change
