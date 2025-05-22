@@ -254,7 +254,7 @@ const WeightLossCalculatorSection = () => {
                   src="/images/lab-test.jpg" 
                   alt="Lab Testing Professional" 
                   fill 
-                  className="object-cover object-center  rounded"
+                  className="object-cover object-top  rounded"
                   priority
                 />
               </div>
