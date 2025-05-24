@@ -89,45 +89,29 @@ const expertDetails = [
     detailedJob: "",
     description: (
       <div className="text-xs">
+        
         <p className="mt-3">
-          MetabolixMD is proud to announce the appointment of distinguished
-          healthcare entrepreneur and political leader{" "}
-          Gulrez Gus Khan as its newest board director.
-          Affectionately known as "Gus" among his peers, Khan is the co-owner of
-          the esteemed American Star Home Health & Hospice Care, Inc., based in
-          Lubbock, Texas. With over 15 years of expertise in healthcare
-          management, development, operations, and entrepreneurship, he brings a
-          wealth of knowledge and leadership to our organization.
+We're thrilled to welcome Gulrez "Gus" Khan to the MetaboliXMD Board of Directors. Gus brings a wealth of experience and expertise to our team.
+
+       </p>
+        <p className="mt-1">
+          With an MBA in Human Resources, Gus has developed a deep understanding of organizational dynamics and leadership. His business acumen will be invaluable as we continue to grow and innovate in the telehealth space.
+
+ 
         </p>
-        <p className="mt-3">
-          Beyond his business success, Khan is an influential figure in the
-          Republican Party, currently serving as a precinct chair and chairman
-          of the Resolutions Committee for the Lubbock County GOP. Earlier this
-          year, he was honored as an invitee to President Donald J. Trump's
-          inauguration ceremony. In 2024, he ran in the Republican primary for
-          U.S. Congress in Texas District 32 and was elected as a National
-          Delegate to the Republican National Convention in Milwaukee. He also
-          campaigned for Mayor of Lubbock in 2022.
+        <p className="mt-1">
+          Beyond his professional achievements, Gus is a dedicated community leader. His active involvement in Texas politics showcases his passion for creating positive change.
+
+
         </p>
-        <p className="mt-3">
-          Khan is deeply committed to philanthropy, having played a pivotal role
-          in fundraising efforts for organizations such as the American Heart
-          Association, Ronald McDonald House Charities, Lubbock Monterey AMBUCS,
-          and Boys &amp; Girls Clubs of America. His dedication extends to
-          serving on several nonprofit boards and committees, including the
-          Lubbock Pediatric Cancer Association, South Plains Food Bank, Center
-          for Global Understanding, United States Global Leadership Coalition,
-          American Premier League, Premium Aussies, and Being Sportsman.
+        <p className="mt-1">
+         Gus enjoys staying active on the golf course and relishing the outdoors. A former competitive cricketer in India, he brings a winning mindset and team spirit to everything he does.
+
+
         </p>
-        <p className="mt-3">
-          In addition to his work in healthcare, politics, and philanthropy,
-          "Gus" is a published author with multiple books available on Amazon,
-          inspiring readers worldwide.
-        </p>
-        <p className="mt-3">
-          We are thrilled to welcome Gulrez Khan to MetabolixMD and are
-          confident that his leadership and vision will drive our organization
-          to new heights.
+        <p className="mt-1">
+         We're honored to have Gus join our board and look forward to leveraging his insights, expertise, and energy to drive MetaboliXMD's mission.
+
         </p>
       </div>
     ),
@@ -696,9 +680,14 @@ const AboutUs = () => {
         <div className="md:max-w-xl max-w-full flex flex-col justify-start items-start ">
           <h4 className="text-[#004F41] md:text-6xl text-3xl font-medium tracking-tight">A Personal Journey:</h4>
           <h4 className="text-[#2E2E2E] md:text-6xl text-3xl font-medium tracking-tight">Our Founder's Story</h4>
-          <p className=" text-[#000000CC] mt-10 opacity-[80%] text-base leading-6">	“The story of MetabolixMD is personal to me. I've struggled with weight my entire life—trying everything from exercise and dieting to fasting and fads. <span className="text-black">Nothing worked.</span> After studying GLP-1 medications for two years, I finally started treatment in September 2023. Since then...</p>
+          <p className=" text-[#000000CC] mt-10 opacity-[80%] text-base leading-6">	At MetaboliXMD, we're driven by a personal mission to transform lives through exceptional metabolic health and weight loss solutions. Our journey began with Dr. Raj's own struggles with weight loss. Despite trying every fad diet, intense workout routines, intermittent fasting for over 25 years, he couldn't achieve lasting results. That was until he discovered the power of GLP-1 medication. In just two years, Dr. Raj lost nearly 80 pounds, eliminated blood pressure and asthma medications, and regained his health.</p>
 
-          <ul className="list-disc list-inside text-[#000000CC] opacity-[80%] leading-snug my-6">
+ <p className=" text-[#000000CC] mt-2 opacity-[80%] text-base leading-6">	This personal triumph sparked a professional passion. Dr. Raj teamed up with a longtime friend, Ashley Donalson, FNP, a seasoned healthcare expert and accomplished athlete who has run the Boston Marathon and competed in numerous triathlons. Together, they recognized an opportunity to leverage GLP-1 medication and comprehensive care to help others achieve similar breakthroughs.
+</p> <p className=" text-[#000000CC] mt-2 opacity-[80%] text-base leading-6">	
+Our mission is simple: to provide personalized, evidence-based weight loss and metabolic health solutions from the comfort and privacy of your own home. We believe everyone deserves a second chance at a healthier, happier life. With MetaboliXMD, you're not just getting a treatment plan – you're getting a dedicated partnership with experts who understand the complexities of weight loss.
+</p> <p className=" text-[#000000CC] mt-2 opacity-[80%] text-base leading-6">	
+We're committed to helping you achieve your goals and live your best life. Welcome to MetaboliXMD – where transformation begins.</p>
+          {/* <ul className="list-disc list-inside text-[#000000CC] opacity-[80%] leading-snug my-6">
             <li>I've lost nearly 70 pounds.</li>
             <li>My asthma disappeared after one month.</li>
             <li>I no longer need medication for hypertension.</li>
@@ -710,7 +699,8 @@ const AboutUs = () => {
           </p>
           <Image src={founderSign} width={150} height={150} className="md:mt-2 mt-10" />
           <p className="text-[#000000] opacity-[80%]">- Raj Sabar, MD, CEO, MetabolixMD</p>
-        </div>
+          */}
+        </div> 
       </div>
 
       <motion.div
