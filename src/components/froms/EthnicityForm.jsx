@@ -78,7 +78,7 @@ const EthnicityForm = ({onNext, onBack}) => {
         </h2>
         <p className="my-3 md:my-5 font-semibold text-zinc-500 text-sm md:text-base">Select all that apply</p>
         <form aria-labelledby="ethnicity-heading">
-          <div className="space-y-3 md:space-y-4" role="group" aria-label="Ethnicity options">
+          <div className="space-y-3 md:space-y-4 bg-white p-10 rounded-3xl" role="group" aria-label="Ethnicity options" >
             {ethnicities.map((ethnicity, index) => (
               <label
                 key={index}

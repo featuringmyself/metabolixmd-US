@@ -39,12 +39,12 @@ const UploadProfile = ({ onSubmit, loading, img, setImg, onNext }) => {
     return (
         <div className="w-full p-4 sm:p-5 md:p-0 md:max-w-fit mx-auto">
             <div className="w-full max-w-full sm:max-w-[450px] md:w-[500px] flex flex-col justify-center items-center">
-                <h1 className='text-center text-sm text-gray-600'>To meet telehealth requirements we require your picture. This will only be viewed by your provider and is used for verification purposes.</h1>
-                <div onClick={() => fileInputRef.current.click()} className="h-[200px] w-full max-w-[250px] sm:max-w-[300px] md:h-[250px] md:w-[350px] cursor-pointer border border-zinc-100 rounded-lg flex items-center justify-center">
+                <h1 className='text-center text-sm text-gray-600 mb-5'>To meet telehealth requirements we require your picture. This will only be viewed by your provider and is used for verification purposes.</h1>
+                <div onClick={() => fileInputRef.current.click()} className="h-[200px] w-full max-w-[250px] sm:max-w-[300px] md:h-[250px] md:w-[350px] cursor-pointer border border-zinc-100 rounded-lg flex items-center justify-center bg-white my-10">
 
                     {
                         preUrl ?
-                            <div style={{ backgroundImage: `url(${preUrl})` }} className="w-full min-h-full cursor-pointer bg-cover bg-no-repeat bg-center ">
+                            <div style={{ backgroundImage: `url(${preUrl})` }} className="w-full min-h-full cursor-pointer bg-cover bg-no-repeat bg-center rounded-xl">
 
                             </div>
                             :

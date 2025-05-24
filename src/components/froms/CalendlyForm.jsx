@@ -1,74 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { postMethod } from '@/services/API/ApiMethod';
-import { toast } from 'react-toastify';
+import React from 'react';
+import { InlineWidget, useCalendlyEventListener } from 'react-calendly';
+
+const fetchEventDetails = async (eventUri) => {
+  try {
+    const response = await fetch(eventUri, {
+      headers: {
+        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CALENDLY_API_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+    });
+    const data = await response.json();
+    console.log("Event Start time: ", data.resource.start_time);
+    console.log("Event End time: ", data.resource.end_time);
+    
+  } catch (error) {
+    console.error('Error fetching event details:', error);
+  }
+};
 
 const CalendlyForm = ({ onNext, onBack }) => {
-  const [isMeetingScheduled, setIsMeetingScheduled] = useState(false);
-  const [meetingDetails, setMeetingDetails] = useState(null);
-
-  useEffect(() => {
-    // Load Calendly widget script
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    // Add event listener for Calendly scheduling
-    window.addEventListener('message', function(e) {
-      if (e.data.event && e.data.event === 'calendly.event_scheduled') {
-        // When event is scheduled, store the meeting details
-        console.log('Full Calendly event data:', e.data);
-        
-        // Extract the event data from the correct path
-        const eventData = e.data.payload;
-        console.log('Event data:', eventData);
-        const details = {
-          meetLink: eventData.event.uri,
-        };
-        
-        console.log('Extracted meeting details:', details);
-        setMeetingDetails(details);
-        setIsMeetingScheduled(true);
-      }
-    });
-
-    return () => {
-      // Cleanup script on component unmount
-      document.body.removeChild(script);
-      window.removeEventListener('message', function(e) {
-        if (e.data.event && e.data.event === 'calendly.event_scheduled') {
-          const details = {
-            meetLink: e.data.payload.event.uri,
-          };
-          setMeetingDetails(details);
-          setIsMeetingScheduled(true);
-        }
-      });
-    };
-  }, []);
-
-  const handleContinue = async () => {
-    if (!meetingDetails) {
-      toast.error("Please schedule a meeting first");
-      return;
+  useCalendlyEventListener({
+    onEventScheduled: (e) => {
+      const eventUri = e.data.payload.event.uri;
+      const inviteUri = e.data.payload.invitee.uri;
+      console.log(eventUri, inviteUri);
+      fetchEventDetails(eventUri);
     }
-
-    try {
-      // Create a new meeting using the new endpoint
-      console.log('Sending meeting details:', meetingDetails);
-      const meetingRes = await postMethod("/v1/meeting", {
-        meetLink: meetingDetails.meetLink,
-        type: "consultation"
-      });
-      console.log('Meeting response:', meetingRes);
-      if (meetingRes?.data) {
-        onNext({}, "checkout");
-      }
-    } catch (error) {
-      toast.error("Failed to save meeting details. Please try again.");
-      console.error("Error saving meeting details:", error);
-    }
-  };
+  });
 
   return (
     <div className="w-full p-4 sm:p-5 md:p-0 md:max-w-fit mx-auto">
@@ -79,12 +37,18 @@ const CalendlyForm = ({ onNext, onBack }) => {
         <p className="text-lg font-normal mb-6">
           Please select a convenient time for your consultation with our healthcare provider.
         </p>
-        
-        <div 
-          className="calendly-inline-widget bg-white rounded-xl p-4" 
-          data-url="https://calendly.com/ashleydonaldson-metabolixmd/new-weight-loss-consult?primary_color=365d56" 
-          style={{ minWidth: '320px', height: '700px' }}
-        />
+
+        <div className="bg-white rounded-xl p-4">
+          <InlineWidget
+            url="https://calendly.com/ashleydonaldson-metabolixmd/new-weight-loss-consult"
+            styles={{ minWidth: '320px', height: '700px' }}
+            pageSettings={{
+              primaryColor: "#365d56",
+              hideEventTypeDetails: true,
+              hideLandingPageDetails: true,
+            }}
+          />
+        </div>
 
         <div className="flex gap-4 mt-6">
           <button
@@ -96,19 +60,8 @@ const CalendlyForm = ({ onNext, onBack }) => {
           </button>
           <button
             type="button"
-            className={`p-3 text-white w-full text-center py-3 font-semibold rounded-full ${
-              isMeetingScheduled 
-                ? 'bg-primary hover:bg-primary/90 cursor-pointer' 
-                : 'bg-gray-400 hover:bg-primary/90 cursor-pointer'
-            }`}
-            onClick={() => {
-              if (!isMeetingScheduled) {
-                console.warn("Development mode: Proceeding without scheduling a meeting.");
-                onNext({}, "checkout");
-              } else {
-                handleContinue();
-              }
-            }}
+            className="p-3 text-white w-full text-center py-3 font-semibold rounded-full bg-primary hover:bg-primary/90 cursor-pointer"
+            onClick={() => onNext({}, "checkout")}
           >
             Continue
           </button>
