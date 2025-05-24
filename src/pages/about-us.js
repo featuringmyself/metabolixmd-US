@@ -680,14 +680,35 @@ const AboutUs = () => {
         <div className="md:max-w-xl max-w-full flex flex-col justify-start items-start ">
           <h4 className="text-[#004F41] md:text-6xl text-3xl font-medium tracking-tight">A Personal Journey:</h4>
           <h4 className="text-[#2E2E2E] md:text-6xl text-3xl font-medium tracking-tight">Our Founder's Story</h4>
-          <p className=" text-[#000000CC] mt-10 opacity-[80%] text-base leading-6">	At MetaboliXMD, we're driven by a personal mission to transform lives through exceptional metabolic health and weight loss solutions. Our journey began with Dr. Raj's own struggles with weight loss. Despite trying every fad diet, intense workout routines, intermittent fasting for over 25 years, he couldn't achieve lasting results. That was until he discovered the power of GLP-1 medication. In just two years, Dr. Raj lost nearly 80 pounds, eliminated blood pressure and asthma medications, and regained his health.</p>
+<section className="max-w-3xl mx-auto mt-5 text-[#000000CC] opacity-[80%] text-base leading-6 md:space-y-3 space-y-6">
+  <p>
+    At MetaboliXMD, we’re driven by a <strong>personal mission to transform lives</strong> through exceptional 
+    <em>metabolic health and weight loss solutions</em>. Our journey began with Dr. Raj’s own struggles with 
+    weight loss. Despite trying every fad diet, intense workout routines, intermittent fasting for over 25 years, 
+    he couldn’t achieve lasting results. That was until he discovered the power of <strong>GLP-1 medication</strong>. 
+    In just two years, Dr. Raj lost nearly 80 pounds, eliminated blood pressure and asthma medications, and regained his health.
+  </p>
 
- <p className=" text-[#000000CC] mt-2 opacity-[80%] text-base leading-6">	This personal triumph sparked a professional passion. Dr. Raj teamed up with a longtime friend, Ashley Donalson, FNP, a seasoned healthcare expert and accomplished athlete who has run the Boston Marathon and competed in numerous triathlons. Together, they recognized an opportunity to leverage GLP-1 medication and comprehensive care to help others achieve similar breakthroughs.
-</p> <p className=" text-[#000000CC] mt-2 opacity-[80%] text-base leading-6">	
-Our mission is simple: to provide personalized, evidence-based weight loss and metabolic health solutions from the comfort and privacy of your own home. We believe everyone deserves a second chance at a healthier, happier life. With MetaboliXMD, you're not just getting a treatment plan – you're getting a dedicated partnership with experts who understand the complexities of weight loss.
-</p> <p className=" text-[#000000CC] mt-2 opacity-[80%] text-base leading-6">	
-We're committed to helping you achieve your goals and live your best life. Welcome to MetaboliXMD – where transformation begins.</p>
-          {/* <ul className="list-disc list-inside text-[#000000CC] opacity-[80%] leading-snug my-6">
+  <p>
+    This <em>personal triumph</em> sparked a professional passion. Dr. Raj teamed up with a longtime friend, 
+    <strong>Ashley Donalson, FNP</strong>, a seasoned healthcare expert and accomplished athlete who has run the 
+    Boston Marathon and competed in numerous triathlons. Together, they recognized an opportunity to leverage GLP-1 
+    medication and comprehensive care to help others achieve similar breakthroughs.
+  </p>
+
+  <p>
+    Our mission is simple: to provide <strong>personalized, evidence-based weight loss and metabolic health solutions</strong> 
+    from the comfort and privacy of your own home. We believe everyone deserves a second chance at a healthier, 
+    happier life. With MetaboliXMD, you’re not just getting a treatment plan – you’re getting a dedicated partnership 
+    with experts who understand the complexities of weight loss.
+  </p>
+
+  <p>
+    We’re committed to helping you achieve your goals and live your best life. 
+    <strong>Welcome to MetaboliXMD – where transformation begins.</strong>
+  </p>
+</section>
+       {/* <ul className="list-disc list-inside text-[#000000CC] opacity-[80%] leading-snug my-6">
             <li>I've lost nearly 70 pounds.</li>
             <li>My asthma disappeared after one month.</li>
             <li>I no longer need medication for hypertension.</li>
