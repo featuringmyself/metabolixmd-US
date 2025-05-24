@@ -1081,11 +1081,18 @@ const AboutUs = () => {
                   </div>
                 </div>
 
-                <div className="px-12 pb-10">
+                <div className="px-12 pb-3">
                   <div className="max-w-none text-xs text-gray-600">
                     {activeExpert.description}
                   </div>
                 </div>
+              <div className="flex justify-end items-end mr-4 mb-2 md:hidden">
+                <button
+                  onClick={() => setShowOverlay(false)} className="text-xs text-gray-500 border-2 py-1 px-2 rounded-full"> 
+                  
+                    Close
+                  </button>
+                  </div>
               </motion.div>
             </div>
           </>
